@@ -40,14 +40,40 @@ npm run build
 
 ```text
 assets/
-  scss/        # Bootstrap-Sass + Custom (_custom.scss)
-  js/modules/  # ES-Module (z. B. contact-form.*.js)
+├─ css/                       # generiertes CSS (Build-Output aus Sass)
+├─ img/                       # optimierte Bilder
+│  ├─ contact/
+│  ├─ home/
+│  ├─ icons/
+│  ├─ library/
+│  └─ logo/
+├─ js/
+│  ├─ modules/                # ES-Module (z. B. contact-form.*.js)
+│  │  ├─ contact-form.de.js
+│  │  └─ contact-form.en.js
+│  ├─ site.de.js
+│  └─ site.en.js
+├─ scss/                      # Bootstrap-Sass + Custom (_custom.scss)
+│  ├─ _custom.scss
+│  └─ styles.scss
+└─ vendor/                    # externe Libraries (lokal gehostet)
+   ├─ bootstrap/
+   ├─ googlefonts/
+   └─ jquery/
+
 includes/
-  header.php   # SEO-Meta, Preloads, Theme-Handling
-  env.php      # einfacher .env Loader
+├─ env.php                    # einfacher .env Loader
+├─ footer.php                 # JS-Includes, Closing Tags
+└─ header.php                 # SEO-Meta, Preloads, Theme-Handling
+
 kontakt/
-  index.php        # Formular (mit Honeypot)
-  kontakt.de.php   # Handler (JSON, mail())
+├─ index.php                  # Formular
+├─ kontakt.de.php             # Handler (JSON, mail())
+└─ kontakt.en.php             # (analog)
+
+projekte/
+index.php
+
 ```
 
 ## Kontaktformular (Privacy by Design)
@@ -89,4 +115,4 @@ MAIL_FROM=info@weng.eu
 
 -   Karsten Weng · Berlin
 -   Mail: info@weng.eu
-    · LinkedIn: /in/kweng/
+-   LinkedIn: /in/kweng/
