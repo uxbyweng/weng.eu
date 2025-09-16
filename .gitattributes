@@ -1,9 +1,16 @@
-﻿* text=auto
+﻿# Basis: Alle Textdateien normalisieren
+* text=auto
+
+# Erzwinge LF für Skripte/CI-Dateien (nie CRLF auschecken)
 *.sh  text eol=lf
 *.bash text eol=lf
 *.yml  text eol=lf
 *.yaml text eol=lf
+
+# Windows-PowerShell-Skripte dürfen CRLF behalten
 *.ps1 text eol=crlf
+
+# Markiere Binärdateien (keine Zeilenenden-Konvertierung, keine Diffs)
 *.png  binary
 *.jpg  binary
 *.jpeg binary
@@ -16,4 +23,6 @@
 *.pdf  binary
 *.psd  binary
 *.ai   binary
+
+# Lockfiles (als Text, aber oft große Diffs vermeiden):
 package-lock.json text
