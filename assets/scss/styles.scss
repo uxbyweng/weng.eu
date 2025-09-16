@@ -1,0 +1,4 @@
+@use "bootstrap/scss/functions";
+@use "bootstrap/scss/mixins";
+@use "./_custom" as *;
+@use "bootstrap/scss/bootstrap" as *; // simplest & robust

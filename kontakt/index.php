@@ -1,0 +1,205 @@
+<?php 
+require $_SERVER['DOCUMENT_ROOT'].'/includes/lang.php'; 
+require $_SERVER['DOCUMENT_ROOT'].'/includes/header.php';
+?>
+
+<main class="page-wrapper" id="startMainContent">
+
+    <!-- ### BREADCRUMB ### -->  
+    <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/breadcrumb.php'; ?>
+
+    <!-- ### STAGE ### -->    
+    <section class="px-3 px-md-0 pt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-5 col-md-7 order-2">
+                    <h1>
+                        Just say  <span class="font-accent">hi</span>!
+                    </h1>
+                </div>
+                <div class="col-5 offset-md-1 col-md-4 text-center order-1 order-md-3 p-4 mt-30 mt-100-md">
+                    <picture>
+                        <!-- Desktop (≥ 56.25em ≈ 900px): 200×200 -->
+                        <source media="(min-width:56.25em)" srcset="/assets/img/contact/img-contact.webp" type="image/webp">
+                        <source media="(min-width:56.25em)" srcset="/assets/img/contact/img-contact.jpg"  type="image/jpeg">
+                        <!-- Mobile (< 56.25em): 100×100 -->
+                        <source srcset="/assets/img/contact/img-contact_xs.webp" type="image/webp">
+                        <!-- Fallback (Browser ohne <picture> oder ohne WebP): mobile-Datei -->
+                        <img
+                            src="/assets/img/contact/img-contact_xs.jpg"
+                            alt="Karsten Weng"
+                            class="contact-photo"
+                            width="200" height="200"
+                            loading="lazy" decoding="async">
+                    </picture>
+                </div>
+                <div class="col-12 col-md-7 order-3 order-md-2">
+                    <p class="fs-24 lh-1-3 my-3">
+                        <?php if ($sprache === 'en'): ?>
+                        <em>Drop me a line at <a href="mailto:info@weng.eu">info@weng.eu</a> or use the form below.</em>
+                        <?php else: ?>
+                        <em>Schreib mir per E-Mail an <a href="mailto:info@weng.eu"><u>info@weng.eu</u></a> oder über folgendes Formular.</em>
+                        <?php endif; ?>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT FORM -->
+    <section class="px-3 px-md-0 py-5 py-md-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-7 order-1 pe-5 pb-5">
+                    <?php if ($sprache === 'en'): ?>
+                    <form action="/kontakt/kontakt.en.php" method="post" id="contact-form" novalidate>
+                    <?php else: ?>
+                    <form action="/kontakt/kontakt.de.php" method="post" id="contact-form" novalidate>
+                    <?php endif; ?>
+                        <div class="messages"></div>
+                        <div class="form-group">
+                            <label for="cf-name" class="form-label">Name*</label>
+                            <input
+                            id="cf-name"
+                            name="name"
+                            type="text"
+                            class="form-control"
+                            placeholder="<?php if ($sprache === 'en'): ?>Name<?php else: ?>Name<?php endif; ?>"
+                            required
+                            pattern="^[A-Za-zÀ-ÖØ-öø-ÿ](?:[A-Za-zÀ-ÖØ-öø-ÿ'’\- ]*[A-Za-zÀ-ÖØ-öø-ÿ])$"
+                            autocomplete="name"
+                            inputmode="text"
+                            autocapitalize="words">
+                        </div>
+                        <div class="form-group">
+                            <label for="cf-email" class="form-label">
+                            <?php if ($sprache === 'en'): ?>Email Address*<?php else: ?>E-Mail-Adresse*<?php endif; ?>
+                            </label>
+                            <input
+                            id="cf-email"
+                            name="email"
+                            type="email"
+                            class="form-control"
+                            placeholder="<?php if ($sprache === 'en'): ?>Email Address*<?php else: ?>E-Mail-Adresse*<?php endif; ?>"
+                            required
+                            pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$"
+                            autocomplete="email"
+                            inputmode="email">
+                            <input
+                            type="text"
+                            class="email"
+                            name="repeat_email"
+                            placeholder="<?php if ($sprache === 'en'): ?>Repeat Email Address*<?php else: ?>E-Mail Adresse wiederholen*<?php endif; ?>"
+                            autocomplete="off"
+                            tabindex="-1"
+                            aria-hidden="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="cf-message" class="form-label">
+                            <?php if ($sprache === 'en'): ?>Message*<?php else: ?>Nachricht*<?php endif; ?>
+                            </label>
+                            <textarea
+                            id="cf-message"
+                            name="message"
+                            class="form-control"
+                            rows="3"
+                            placeholder="<?php if ($sprache === 'en'): ?>Message*<?php else: ?>Nachricht*<?php endif; ?>"
+                            required
+                            autocomplete="off"></textarea>
+                        </div>
+                        <div class="form-group terms" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
+                            <input type="checkbox" name="terms" tabindex="-1" aria-hidden="true" autocomplete="off">
+                        </div>
+                        <div class="form-group privacy">
+                            <label>
+                            <input
+                                type="checkbox"
+                                name="privacy"
+                                required
+                                value="checked"
+                                autocomplete="off">
+                            <?php if ($sprache === 'en'): ?>
+                                I have read the <a href="/datenschutz/"><u>Privacy Policy</u></a> and I agree to be contacted by email.
+                            <?php else: ?>
+                                Ich habe die <a href="/datenschutz/"><u>Datenschutzerklärung</u></a> gelesen und bin damit einverstanden, dass ich per E-Mail kontaktiert werde.
+                            <?php endif; ?>
+                            </label>
+                        </div>
+                        <button class="btn btn-primary pull-right-sm">
+                            <?php if ($sprache === 'en'): ?>Send Message<?php else: ?>Nachricht senden<?php endif; ?>
+                        </button>
+                    </form>
+
+                </div>
+                <aside class="col-12 offset-md-2 col-md-3 order-2 pe-5">
+                    <section class="pb-3 border-bottom">
+                        <h2 class="fs-20 font-gray8 text-uppercase">
+                            <?php if ($sprache === 'en'): ?>
+                                <strong>Contact</strong>
+                            <?php else: ?>
+                                <strong>Kontakt</strong>
+                            <?php endif; ?>
+                        </h2>
+                        <p>
+                            Karsten Weng<br>
+                        </p>
+                        <p>
+                            Berlin, Germany
+                        </p>
+                        <p>
+                            <a href="mailto:info@weng.eu"><u>info@weng.eu</u></a>
+                        </p>
+                    </section>
+                    <section class="py-3 border-bottom mb-5">
+                        <h2 class="fs-20 font-gray8 text-uppercase">
+                            <strong>Networks</strong>
+                        </h2>
+                        <ul class="style-none">
+                            <li>
+                                <a href="https://www.linkedin.com/in/kweng/" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+                                    <i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i> LinkedIn
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" title="Instagram">
+                                    <i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i> Instagram
+                                </a>
+                            </li>
+                        </ul>
+                    </section>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+
+
+<!-- FOR DEBUGGING / FORMULAR-WERTE IN CONSOLE AUSGEBEN */ -->
+<script>
+    (function() {
+        function updateLiveData() {
+            var name = document.querySelector('input[name="name"]').value;
+            var email = document.querySelector('input[name="email"]').value;
+            var repeat_email = document.querySelector('input[name="repeat_email"]').value;
+            var message = document.querySelector('textarea[name="message"]').value;
+            var terms = document.querySelector('input[name="terms"]').checked;
+            var privacy = document.querySelector('input[name="privacy"]').checked;
+
+            console.clear();
+            console.log("Name:", name);
+            console.log("Email:", email);
+            console.log("Repeat Email:", repeat_email);
+            console.log("Message:", message);
+            console.log("Terms Checkbox:", terms ? 'Checked' : 'Not Checked');
+            console.log("Privacy Checkbox:", privacy ? 'Checked' : 'Not Checked');
+        }
+        document.querySelector('input[name="name"]').addEventListener('input', updateLiveData);
+        document.querySelector('input[name="email"]').addEventListener('input', updateLiveData);
+        document.querySelector('input[name="repeat_email"]').addEventListener('input', updateLiveData);
+        document.querySelector('textarea[name="message"]').addEventListener('input', updateLiveData);
+        document.querySelector('input[name="terms"]').addEventListener('change', updateLiveData);
+        document.querySelector('input[name="privacy"]').addEventListener('change', updateLiveData);
+    })();
+</script> 
+
+<?php include( $_SERVER[ "DOCUMENT_ROOT" ] . "/includes/footer.php" ); ?>

@@ -1,0 +1,42 @@
+# .htaccess (non-versioned assets)
+RewriteEngine On
+
+# Eigene Fehlerseiten
+ErrorDocument 404 /error/404/
+ErrorDocument 500 /error/500/
+
+### WebP, wenn Browser es akzeptiert und .webp existiert
+RewriteCond %{HTTP_ACCEPT} image/webp
+RewriteCond %{REQUEST_URI} \.(jpe?g|png)$ [NC]
+RewriteCond %{REQUEST_FILENAME}\.webp -f
+RewriteRule ^(.+)\.(jpe?g|png)$ $1.webp [T=image/webp,E=accept:1,L]
+
+# === CACHING (robust, ohne Expires-Module) ===
+<IfModule mod_headers.c>
+  # a) Statische Assets: 7 Tage, Revalidation möglich
+  <FilesMatch "\.(?:css|js|mjs|png|jpe?g|gif|webp|avif|svg|ico|woff2?|ttf|eot)$">
+    Header always set Cache-Control "public, max-age=31536000, stale-while-revalidate=86400"
+    Header always set Expires "Thu, 31 Dec 2037 23:55:55 GMT" 
+    # Expires fix gesetzt, aber Cache-Control steuert die effektive TTL
+  </FilesMatch>
+
+  # b) HTML & PHP: nicht cachen
+  <FilesMatch "\.(?:html?|php)$">
+    Header always set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header always set Pragma "no-cache"
+    Header always set Expires "0"
+  </FilesMatch>
+
+  # c) JSON/XML (falls genutzt): kurzlebig
+  <FilesMatch "\.(?:json|xml)$">
+    Header always set Cache-Control "private, max-age=60, must-revalidate"
+  </FilesMatch>
+
+  # d) Vary für WebP bleibt (von deinem Block)
+  Header append Vary Accept env=REDIRECT_accept
+</IfModule>
+
+# Korrekte MIME-Typen (hilfreich für einige Hosts)
+AddType font/woff2 .woff2
+AddType font/woff  .woff
+AddType image/webp .webp

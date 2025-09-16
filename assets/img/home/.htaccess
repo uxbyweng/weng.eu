@@ -1,0 +1,17 @@
+# WebP-Support aktivieren, wenn vom Browser unterstützt
+RewriteEngine On
+
+# Nur Bilder mit bestimmter Endung behandeln
+RewriteCond %{HTTP_ACCEPT} image/webp
+RewriteCond %{REQUEST_FILENAME} \.(jpe?g|png)$
+RewriteCond %{REQUEST_FILENAME}.webp -f
+RewriteRule ^(.*)\.(jpe?g|png)$ $1.$2.webp [T=image/webp,E=accept:1]
+
+# Vary-Header setzen für Caching
+<IfModule mod_headers.c>
+  Header append Vary Accept env=REDIRECT_accept
+</IfModule>
+
+# WebP-Typ definieren
+AddType image/webp .webp
+

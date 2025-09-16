@@ -1,0 +1,26 @@
+{
+    "name": "weng-eu",
+    "version": "1.0.0",
+    "private": true,
+    "description": "Build-Setup für Bootstrap via Sass + Autoprefixer",
+    "scripts": {
+        "dev": "sass --load-path=node_modules --embed-source-map --quiet-deps assets/scss/styles.scss assets/css/styles.css --watch",
+        "build:sass": "sass --load-path=node_modules --style=compressed --quiet-deps assets/scss/styles.scss assets/css/styles.css",
+        "build:css": "postcss assets/css/styles.css --replace --map",
+        "build": "npm run build:sass && npm run build:css"
+    },
+    "browserslist": [
+        ">0.5%",
+        "last 2 versions",
+        "not dead"
+    ],
+    "devDependencies": {
+        "autoprefixer": "^10.4.20",
+        "postcss": "^8.4.47",
+        "postcss-cli": "^11.0.0",
+        "sass": "^1.80.0"
+    },
+    "dependencies": {
+        "bootstrap": "^5.3.3"
+    }
+}
