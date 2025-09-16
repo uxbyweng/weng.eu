@@ -28,7 +28,7 @@ $privacyRaw     = $_POST['privacy']             ?? null; // 'checked' etc.
 session_start(); // Session starten, um Honeypot-Feldnamen zu lesen
 $csrfOk = isset($_POST['csrf'], $_SESSION['csrf']) && hash_equals($_SESSION['csrf'], $_POST['csrf']);
 if (!$csrfOk) {
-    out(['ok'=>false,'type'=>'danger','message'=>'Ungültiges Formular-Token. Bitte neu laden.']);
+    out(['ok'=>false,'type'=>'danger','message'=>'Invalid form token. Please reload.']);
 }
 $hpKey          = $_SESSION['hp_name']          ?? null;
 $honeypot       = $hpKey ? trim($_POST[$hpKey]  ?? '') : '';
