@@ -6,6 +6,9 @@ header('Content-Type: application/json; charset=UTF-8');
 header('Cache-Control: no-store');
 ini_set('display_errors', '0'); // no notices in output
 
+// Env-Funktion laden
+require_once __DIR__ . '/../includes/env.php';
+
 // Helper: output JSON and exit
 function out(array $data) {
     echo json_encode($data, JSON_UNESCAPED_UNICODE);
@@ -18,12 +21,18 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
 }
 
 // Collect fields
-$name        = trim($_POST['name']    ?? '');
-$email       = trim($_POST['email']   ?? '');
-$message     = trim($_POST['message'] ?? '');
-$privacyRaw  = $_POST['privacy']      ?? null; // 'checked' etc.
-$honeypot    = trim($_POST['repeat_email'] ?? '');
-$terms       = isset($_POST['terms']); // should stay empty → bot trap
+$name           = trim($_POST['name']           ?? '');
+$email          = trim($_POST['email']          ?? '');
+$message        = trim($_POST['message']        ?? '');
+$privacyRaw     = $_POST['privacy']             ?? null; // 'checked' etc.
+session_start(); // Session starten, um Honeypot-Feldnamen zu lesen
+$csrfOk = isset($_POST['csrf'], $_SESSION['csrf']) && hash_equals($_SESSION['csrf'], $_POST['csrf']);
+if (!$csrfOk) {
+    out(['ok'=>false,'type'=>'danger','message'=>'Ungültiges Formular-Token. Bitte neu laden.']);
+}
+$hpKey          = $_SESSION['hp_name']          ?? null;
+$honeypot       = $hpKey ? trim($_POST[$hpKey]  ?? '') : '';
+$terms          = isset($_POST['terms']); // should stay empty → bot trap
 
 // Validation
 $fieldErrors = [];
@@ -74,13 +83,13 @@ if ($isSilentSpam) {
 }
 
 // === Mail sending (kept simple)
-$to       = 'info@weng.eu';
-$from     = 'info@weng.eu';
-$subject  = 'Inquiry ' . date('Ymd\THi');
-$body     = "Sent via weng.eu/contact/\r\n\r\n"
-          . "Name:    {$name}\r\n"
-          . "Email:   {$email}\r\n\r\n"
-          . "Message:\r\n{$message}\r\n";
+$to         = env('MAIL_TO', 'info@weng.eu');
+$from       = env('MAIL_FROM', 'info@weng.eu');
+$subject    = 'Inquiry ' . date('Ymd\THi');
+$body       = "Sent via weng.eu/contact/\r\n\r\n"
+            . "Name:    {$name}\r\n"
+            . "Email:   {$email}\r\n\r\n"
+            . "Message:\r\n{$message}\r\n";
 
 $headers  = "MIME-Version: 1.0\r\n";
 $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";

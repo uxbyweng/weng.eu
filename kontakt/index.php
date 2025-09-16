@@ -1,6 +1,18 @@
 <?php 
+session_start();
+
 require $_SERVER['DOCUMENT_ROOT'].'/includes/lang.php'; 
 require $_SERVER['DOCUMENT_ROOT'].'/includes/header.php';
+
+// Honeypot-Feldnamen generieren
+if (empty($_SESSION['hp_name'])) {
+  $_SESSION['hp_name'] = 'hp_' . bin2hex(random_bytes(6));
+}
+$hpName = $_SESSION['hp_name'];
+if (empty($_SESSION['csrf'])) {
+  $_SESSION['csrf'] = bin2hex(random_bytes(32));
+}
+$csrf = $_SESSION['csrf'];
 ?>
 
 <main class="page-wrapper" id="startMainContent">
@@ -85,14 +97,14 @@ require $_SERVER['DOCUMENT_ROOT'].'/includes/header.php';
                             pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$"
                             autocomplete="email"
                             inputmode="email">
-                            <input
-                            type="text"
-                            class="email"
-                            name="repeat_email"
-                            placeholder="<?php if ($sprache === 'en'): ?>Repeat Email Address*<?php else: ?>E-Mail Adresse wiederholen*<?php endif; ?>"
-                            autocomplete="off"
-                            tabindex="-1"
+                            <input 
+                            type="text" 
+                            name="<?= htmlspecialchars($hpName, ENT_QUOTES) ?>" 
+                            class="visually-hidden" 
+                            tabindex="-1" 
+                            autocomplete="off" 
                             aria-hidden="true">
+                            <input type="hidden" name="csrf" value="<?= htmlspecialchars($csrf, ENT_QUOTES) ?>">
                         </div>
                         <div class="form-group">
                             <label for="cf-message" class="form-label">
@@ -172,34 +184,5 @@ require $_SERVER['DOCUMENT_ROOT'].'/includes/header.php';
         </div>
     </section>
 
-
-
-<!-- FOR DEBUGGING / FORMULAR-WERTE IN CONSOLE AUSGEBEN */ -->
-<script>
-    (function() {
-        function updateLiveData() {
-            var name = document.querySelector('input[name="name"]').value;
-            var email = document.querySelector('input[name="email"]').value;
-            var repeat_email = document.querySelector('input[name="repeat_email"]').value;
-            var message = document.querySelector('textarea[name="message"]').value;
-            var terms = document.querySelector('input[name="terms"]').checked;
-            var privacy = document.querySelector('input[name="privacy"]').checked;
-
-            console.clear();
-            console.log("Name:", name);
-            console.log("Email:", email);
-            console.log("Repeat Email:", repeat_email);
-            console.log("Message:", message);
-            console.log("Terms Checkbox:", terms ? 'Checked' : 'Not Checked');
-            console.log("Privacy Checkbox:", privacy ? 'Checked' : 'Not Checked');
-        }
-        document.querySelector('input[name="name"]').addEventListener('input', updateLiveData);
-        document.querySelector('input[name="email"]').addEventListener('input', updateLiveData);
-        document.querySelector('input[name="repeat_email"]').addEventListener('input', updateLiveData);
-        document.querySelector('textarea[name="message"]').addEventListener('input', updateLiveData);
-        document.querySelector('input[name="terms"]').addEventListener('change', updateLiveData);
-        document.querySelector('input[name="privacy"]').addEventListener('change', updateLiveData);
-    })();
-</script> 
 
 <?php include( $_SERVER[ "DOCUMENT_ROOT" ] . "/includes/footer.php" ); ?>
