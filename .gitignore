@@ -6,6 +6,7 @@ pnpm-debug.log*
 package-lock.json
 
 # CSS Sourcemaps / Build-Output
+assets/css/
 assets/css/*.map
 
 # Design / Raw assets (nicht ins Code-Repo)
