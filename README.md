@@ -46,16 +46,6 @@ projekte/           # projects
 
 ```
 
-## Contact Form
-
-Client-side validation, mirrored server checks, honeypot, CSRF token.
-Configured via .env (not in repo):
-
-```dotenv
-MAIL_TO=info@weng.eu
-MAIL_FROM=info@weng.eu
-```
-
 ## License
 
 -   Code: MIT
