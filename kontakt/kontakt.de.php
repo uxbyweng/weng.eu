@@ -1,45 +1,62 @@
-<?php header('X-Content-Type-Options: nosniff');
-// kontakt.php — simple mode
-
-// Immer JSON liefern (und nichts anderes)
+<?php
+header('X-Content-Type-Options: nosniff');
 header('Content-Type: application/json; charset=UTF-8');
 header('Cache-Control: no-store');
-ini_set('display_errors', '0'); // keine Notices im Output
+ini_set('display_errors','0');
+// error_reporting(E_ALL);
 
-// Env-Funktion laden
-require_once __DIR__ . '/../includes/env.php';
+/* Session & Helpers laden */
+define('NEED_SESSION', true);
+require_once $_SERVER['DOCUMENT_ROOT'].'/includes/session.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/includes/helpers.php';
 
-// Helper: JSON raus und beenden
+/* Env laden (sicherer Pfad über Document-Root) */
+$envPath = $_SERVER['DOCUMENT_ROOT'].'/includes/env.php';
+if (is_file($envPath)) {
+    require_once $envPath;
+} else {
+    function env($k,$d=null){ return $d; }
+}
+
+/* JSON-Antwort Helper */
 function out(array $data) {
     echo json_encode($data, JSON_UNESCAPED_UNICODE);
     exit;
 }
 
-// Nur POST
+/* Nur POST zulassen */
 if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
     out(['ok' => false, 'type' => 'danger', 'message' => 'Ungültige Anfragemethode.']);
 }
 
-// Felder holen
+/* Einheitliche Form-ID wie auf der Seite */
+$formId = 'contact';
 
-$name           = trim($_POST['name']       ?? '');
-$email          = trim($_POST['email']      ?? '');
-$message        = trim($_POST['message']    ?? '');
-$privacyRaw     = $_POST['privacy']         ?? null; // 'checked' o. ä.
-session_start(); // Session starten, um Honeypot-Feldnamen zu lesen
-$csrfOk = isset($_POST['csrf'], $_SESSION['csrf']) && hash_equals($_SESSION['csrf'], $_POST['csrf']);
-if (!$csrfOk) {
+/* CSRF prüfen */
+if (!verify_csrf($_POST['csrf'] ?? null, $formId)) {
     out(['ok'=>false,'type'=>'danger','message'=>'Ungültiges Formular-Token. Bitte neu laden.']);
 }
-$hpKey          = $_SESSION['hp_name']      ?? null;
-$honeypot       = $hpKey ? trim($_POST[$hpKey] ?? '') : '';
-$terms          = isset($_POST['terms']); // soll leer bleiben → Bot-Falle
 
-// Validierung
+/* Honeypot prüfen (Silent-OK bei Bot) */
+if (is_honeypot_triggered($_POST, $formId)) {
+    out(['ok' => true, 'type' => 'success', 'message' => 'OK']);
+}
+
+/* Lock lösen – ab hier keine Session nötig */
+session_write_close();
+
+/* === Felder holen === */
+$name       = trim($_POST['name']    ?? '');
+$email      = trim($_POST['email']   ?? '');
+$message    = trim($_POST['message'] ?? '');
+$privacyRaw = $_POST['privacy']      ?? null;
+$terms      = isset($_POST['terms']); // unsichtbar, Bot-Falle
+
+/* === Validierung === */
 $fieldErrors = [];
 
 if ($name === '') {
-    $fieldErrors['name'] = 'Bitte einen Namen eingebn.';
+    $fieldErrors['name'] = 'Bitte einen Namen eingeben.';
 }
 if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $fieldErrors['email'] = 'Bitte eine gültige E-Mail-Adresse eingeben.';
@@ -53,16 +70,13 @@ if ($message === '') {
         $fieldErrors['message'] = 'Bitte mindestens 3 Wörter schreiben.';
     }
 }
+
+/* Datenschutz-Checkbox prüfen */
 $trueVals = ['checked','on','1','true','yes'];
 if (!in_array(strtolower((string)$privacyRaw), $trueVals, true)) {
-    // frontend erzwingt es – server prüft zusätzlich
     $fieldErrors['privacy'] = 'Bitte die Datenschutzerklärung akzeptieren.';
 }
 
-// Silent Spam (Bot) → „ok:true“ zurück, aber nichts senden
-$isSilentSpam = ($honeypot !== '') || $terms;
-
-// Bei Fehlern
 if ($fieldErrors) {
     out([
         'ok'          => false,
@@ -72,35 +86,29 @@ if ($fieldErrors) {
     ]);
 }
 
-// Erfolgstext vorbereiten
+/* === Erfolgstext === */
 $successHtml = 'Hallo ' . htmlspecialchars($name, ENT_QUOTES, 'UTF-8') . ',<br><br>'
              . 'Vielen Dank für die Nachricht! Die Nachricht wurde erfolgreich übermittelt. '
              . 'Ich werde mich in Kürze melden.<br><br>'
              . 'Viele Grüße,<br>Karsten Weng';
 
-// Bei Bot: nicht senden
-if ($isSilentSpam) {
-    out(['ok' => true, 'type' => 'success', 'message' => $successHtml]);
-}
-
-// === Mailversand (einfach gehalten)
-$to         = env('MAIL_TO', 'info@weng.eu');
-$from       = env('MAIL_FROM', 'info@weng.eu');
-$subject    = 'Anfrage ' . date('Ymd\THi');
-$body       = "Gesendet über weng.eu/kontakt/\r\n\r\n"
-            . "Name:    {$name}\r\n"
-            . "Email:   {$email}\r\n\r\n"
-            . "Nachricht:\r\n{$message}\r\n";
+/* === Mailversand === */
+$to       = env('MAIL_TO', 'info@weng.eu');
+$from     = env('MAIL_FROM', 'info@weng.eu');
+$subject  = 'Anfrage ' . date('Ymd\THi');
+$body     = "Gesendet über weng.eu/kontakt/\r\n\r\n"
+          . "Name:    {$name}\r\n"
+          . "Email:   {$email}\r\n\r\n"
+          . "Nachricht:\r\n{$message}\r\n";
 
 $headers  = "MIME-Version: 1.0\r\n";
 $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
 $headers .= "From: {$from}\r\n";
 $headers .= "Reply-To: {$email}\r\n";
 
-// Senden (ohne -f Envelope, um Hosting-Sperren zu vermeiden)
 $sent = @mail($to, $subject, $body, $headers);
 
-// Optional: Bestätigung an Absender – schlank
+/* Optionale Bestätigung an Absender */
 if ($sent && filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $confirmSubj = 'Anfrage erhalten ' . date('Ymd\THi');
     $confirmBody = "Hallo {$name},\r\n\r\nvielen Dank für die Nachricht. "

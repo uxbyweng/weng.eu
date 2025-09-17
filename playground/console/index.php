@@ -1,211 +1,223 @@
-<?php 
-require $_SERVER['DOCUMENT_ROOT'].'/includes/lang.php'; 
-require $_SERVER['DOCUMENT_ROOT'].'/includes/header.php';
+<?php
+require_once $_SERVER['DOCUMENT_ROOT'].'/includes/helpers.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/includes/head.php';
+
+$meta = [
+  'title' => 'WENG.EU - JavaScript Console',
+  'desc'  => 'A simple JavaScript console for testing and debugging.',
+  'og_image' => '',
+];
+$cspNonce = $_SERVER['CSP_NONCE'] ?? null;
+
+echo render_head($meta, $cspNonce);
 ?>
-<style>
-    :root {
-        --bg: #0f1220;
-        --panel: #2a444c;
-        --fg: #e6e8f0;
-        --muted: #a6adbb;
-        --accent: #777;
-        --ok: #9ae6b4;
-        --warn: #f6ad55;
-        --err: #f87171;
-        --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-        --radius: 14px;
-        --console: #00ff00;
-        --console-error: #ff3300;
-    }
-    [data-bs-theme="dark"] {
-        --bg: #f6f8ff;
-        --panel: #d9d9d9;
-        --fg: #1a2233;
-        --muted: #4b5563;
-        --accent: #2a444c;
-        --ok: #047857;
-        --warn: #b45309;
-        --err: #b91c1c;
-        --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-        --console: #094b09;
-        --console-error: #d72b00;
-    }
 
-    html,
-    body {
-        height: 100%;
-    }
-    body {
-        margin: 0;
-        /* background: radial-gradient(1200px 600px at 10% -10%, rgba(138, 180, 255, 0.12), transparent 60%),
-            radial-gradient(1200px 600px at 110% 10%, rgba(138, 180, 255, 0.12), transparent 60%), var(--bg); 
-        color: var(--fg);
-        font: 16px/1.45 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-        */
-    }
+<body>
+    <style>
+        :root {
+            --bg: #0f1220;
+            --panel: #2a444c;
+            --fg: #e6e8f0;
+            --muted: #a6adbb;
+            --accent: #777;
+            --ok: #9ae6b4;
+            --warn: #f6ad55;
+            --err: #f87171;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+            --radius: 14px;
+            --console: #00ff00;
+            --console-error: #ff3300;
+        }
+        [data-bs-theme="dark"] {
+            --bg: #f6f8ff;
+            --panel: #d9d9d9;
+            --fg: #1a2233;
+            --muted: #4b5563;
+            --accent: #2a444c;
+            --ok: #047857;
+            --warn: #b45309;
+            --err: #b91c1c;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --console: #094b09;
+            --console-error: #d72b00;
+        }
 
-    .wrap {
-        max-width: 960px;
-        margin: 32px auto;
-        padding: 0 16px;
-    }
+        html,
+        body {
+            height: 100%;
+        }
+        body {
+            margin: 0;
+            /* background: radial-gradient(1200px 600px at 10% -10%, rgba(138, 180, 255, 0.12), transparent 60%),
+                radial-gradient(1200px 600px at 110% 10%, rgba(138, 180, 255, 0.12), transparent 60%), var(--bg); 
+            color: var(--fg);
+            font: 16px/1.45 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+            */
+        }
 
-    .sub {
-        color: var(--muted);
-        margin-bottom: 16px;
-    }
+        .wrap {
+            max-width: 960px;
+            margin: 32px auto;
+            padding: 0 16px;
+        }
 
-    .panel {
-        background: var(--panel);
-        border-radius: var(--radius);
-        /* box-shadow: var(--shadow); */
-        overflow: hidden;
-    }
+        .sub {
+            color: var(--muted);
+            margin-bottom: 16px;
+        }
 
-    .topbar {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 10px;
-    }
-    .topbar .dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-    }
-    .topbar .dot.red {
-        background: #ff5f56;
-    }
-    .topbar .dot.yellow {
-        background: #ffbd2e;
-    }
-    .topbar .dot.green {
-        background: #27c93f;
-    }
-    .topbar .title {
-        margin-left: 8px;
-        color: var(--muted);
-        font-size: 13px;
-    }
+        .panel {
+            background: var(--panel);
+            border-radius: var(--radius);
+            /* box-shadow: var(--shadow); */
+            overflow: hidden;
+        }
 
-    .output {
-        color: var(--fg);
-        height: 20vh;
-        padding: 16px;
-        overflow: auto;
-        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-    }
+        .topbar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px;
+        }
+        .topbar .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        .topbar .dot.red {
+            background: #ff5f56;
+        }
+        .topbar .dot.yellow {
+            background: #ffbd2e;
+        }
+        .topbar .dot.green {
+            background: #27c93f;
+        }
+        .topbar .title {
+            margin-left: 8px;
+            color: var(--muted);
+            font-size: 13px;
+        }
 
-    .entry {
-        display: grid;
-        align-items: start;
-        gap: 10px;
-        padding: 6px 8px;
-        border-radius: 10px;
-    }
-    .entry + .entry {
-        margin-top: 6px;
-    }
-    .label {
-        font-size: 12px;
-        color: var(--muted);
-        user-select: none;
-        padding-top: 4px;
-    }
-    .payload {
-        white-space: pre-wrap;
-        word-break: break-word;
-        font-size: 14px;
-    }
-    .payload code {
-        font-family: inherit;
-    }
+        .output {
+            color: var(--fg);
+            height: 20vh;
+            padding: 16px;
+            overflow: auto;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+        }
 
-    .entry.log .label {
-        color: var(--fg);
-    }
-    .entry.info .label {
-        color: var(--accent);
-    }
-    .entry.warn .label {
-        color: var(--warn);
-    }
-    .entry.error .label {
-        color: var(--err);
-    }
-    .entry.result .label {
-        color: var(--ok);
-    }
-    .timestamp {
-        color: var(--muted);
-        font-size: 11px;
-        margin-left: 8px;
-    }
+        .entry {
+            display: grid;
+            align-items: start;
+            gap: 10px;
+            padding: 6px 8px;
+            border-radius: 10px;
+        }
+        .entry + .entry {
+            margin-top: 6px;
+        }
+        .label {
+            font-size: 12px;
+            color: var(--muted);
+            user-select: none;
+            padding-top: 4px;
+        }
+        .payload {
+            white-space: pre-wrap;
+            word-break: break-word;
+            font-size: 14px;
+        }
+        .payload code {
+            font-family: inherit;
+        }
 
-    .editor {
-        padding: 12px;
-        background: linear-gradient(0deg, rgba(0, 0, 0, 0.05), transparent);
-    }
-    .controls {
-        display: flex;
-        gap: 8px;
-        align-items: center;
-        margin-bottom: 8px;
-    }
+        .entry.log .label {
+            color: var(--fg);
+        }
+        .entry.info .label {
+            color: var(--accent);
+        }
+        .entry.warn .label {
+            color: var(--warn);
+        }
+        .entry.error .label {
+            color: var(--err);
+        }
+        .entry.result .label {
+            color: var(--ok);
+        }
+        .timestamp {
+            color: var(--muted);
+            font-size: 11px;
+            margin-left: 8px;
+        }
 
-    .hint {
-        color: var(--muted);
-        font-size: 12px;
-    }
-    input {
-        color: var(--fg);
-        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-        transition: border-color 0.2s ease, background 0.2s ease;
-    }
-    textarea {
-        color: var(--fg);
-        width: 100%;
-        height: 200px;
-        resize: vertical;
-        border-radius: 12px;
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        background: rgba(0, 0, 0, 0.15);
-        padding: 12px 12px 12px 14px;
-        outline: none;
-        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-        transition: border-color 0.2s ease, background 0.2s ease;
-    }
-    textarea:focus {
-        border-color: var(--accent);
-        background: rgba(0, 0, 0, 0.22);
-    }
+        .editor {
+            padding: 12px;
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.05), transparent);
+        }
+        .controls {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-bottom: 8px;
+        }
 
-    .footer {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px 16px;
-        color: var(--muted);
-        font-size: 12px;
-    }
-    .kbd {
-        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Courier New", monospace;
-        background: rgba(255, 255, 255, 0.08);
-        padding: 2px 6px;
-        border-radius: 6px;
-        color: var(--fg);
-    }
+        .hint {
+            color: var(--muted);
+            font-size: 12px;
+        }
+        input {
+            color: var(--fg);
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            transition: border-color 0.2s ease, background 0.2s ease;
+        }
+        textarea {
+            color: var(--fg);
+            width: 100%;
+            height: 200px;
+            resize: vertical;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(0, 0, 0, 0.15);
+            padding: 12px 12px 12px 14px;
+            outline: none;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            transition: border-color 0.2s ease, background 0.2s ease;
+        }
+        textarea:focus {
+            border-color: var(--accent);
+            background: rgba(0, 0, 0, 0.22);
+        }
 
-    code.console {
-        color: var(--console);
-    }
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 16px;
+            color: var(--muted);
+            font-size: 12px;
+        }
+        .kbd {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Courier New", monospace;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 2px 6px;
+            border-radius: 6px;
+            color: var(--fg);
+        }
 
-    code.console.error {
-        color: var(--console-error);
-    }
-</style>
+        code.console {
+            color: var(--console);
+        }
 
-<main class="page-wrapper" id="startMainContent">
+        code.console.error {
+            color: var(--console-error);
+        }
+    </style>
+    <?php include $_SERVER['DOCUMENT_ROOT'].'/includes/header_neu.php'; ?>
+
+    <main class="page-wrapper" id="startMainContent">
 
     <!-- ### BREADCRUMB ### -->  
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/breadcrumb.php'; ?>

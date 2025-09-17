@@ -3,8 +3,8 @@
   function e($s){ return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8'); }
 
   // Sprache aus deiner Session/Cookie-Logik
-  $currentLang = $_SESSION['sprache'] ?? $_COOKIE['sprache'] ?? 'de';
-  $isEN = ($currentLang === 'en');
+  $sprache = $_SESSION['sprache'] ?? $_COOKIE['sprache'] ?? 'de';
+  $isEN = ($sprache === 'en');
 
   // Defaults, falls eine Seite nichts setzt
   $defaults = [
@@ -95,55 +95,8 @@
         <meta name="theme-color" content="#ffffff">
 
         <!-- CSS -->
-        <style>
-            :root {
-                --bg-body:#f5f7f1;
-                --bs-body-bg:#f5f7f1;
-                --bs-body-color:#333;
-                --header-bg:#ffffffcc;
-            }
-            [data-bs-theme="dark"] {
-                --bg-body:#212529;
-                --bs-body-bg:#212529;
-                --bs-body-color:#eee;
-                --header-bg:#1a1a1a99;
-            }
-            html,body {
-                font-family:"Noto",sans-serif;
-                color:var(--bs-body-color);
-                line-height:1.6;
-                margin:0;
-                padding:0;
-            }
-            header {
-                position:sticky; top:0; z-index:1000;
-                backdrop-filter:blur(10px);
-                -webkit-backdrop-filter:blur(10px);
-                transition:background-color .3s ease, backdrop-filter .3s ease;
-            }
-            .bg-header { 
-                background-color:var(--header-bg); 
-            }
-            .custom-toggler .navbar-toggler-icon {
-                background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(33,37,41,0.75)' stroke-linecap='round' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-            }
-            .custom-toggler:not(.collapsed) .navbar-toggler-icon {
-                background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(33,37,41,0.75)' stroke-linecap='round' stroke-width='2' d='M6 6L24 24M24 6L6 24'/%3e%3c/svg%3e");
-            }
-            [data-bs-theme="dark"] .custom-toggler .navbar-toggler-icon {
-                background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255,255,255,0.55)' stroke-linecap='round' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-            }
-            [data-bs-theme="dark"] .custom-toggler:not(.collapsed) .navbar-toggler-icon {
-                background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255,255,255,0.55)' stroke-linecap='round' stroke-width='2' d='M6 6L24 24M24 6L6 24'/%3e%3c/svg%3e");
-            }
-            .nav-link { 
-                font-weight:600;
-            }
-            .logo-img { 
-                width:100px; 
-                height:auto;
-            }
-        </style>
+        <style><?php readfile($_SERVER['DOCUMENT_ROOT'].'/assets/css/critical.css'); ?></style>
+
         <link rel="preload" href="/assets/vendor/bootstrap/bootstrap-icons/bootstrap-icons.min.css" as="style" onload="this.rel='stylesheet'">
         <noscript><link rel="stylesheet" href="/assets/vendor/bootstrap/bootstrap-icons/bootstrap-icons.min.css"></noscript>
         <link rel="preload" href="/assets/css/styles.css" as="style" onload="this.rel='stylesheet'">
@@ -214,9 +167,9 @@
                                     </a>
                                 </li>
                                 <li class="nav-item lang-switch d-flex align-items-center gap-1" aria-label="<?php if ($sprache === 'en'): ?>Language Selection<?php else: ?>Sprachauswahl<?php endif; ?>">
-                                    <a href="#" data-lang="de" class="nav-link pe-0 <?= ($currentLang==='de' ? 'active' : '') ?>" aria-current="<?= ($currentLang==='de' ? 'true' : 'false') ?>">de</a>
+                                    <a href="#" data-lang="de" class="nav-link pe-0 <?= ($sprache==='de' ? 'active' : '') ?>" aria-current="<?= ($sprache==='de' ? 'true' : 'false') ?>">de</a>
                                     <span class="text-body-secondary">/</span>
-                                    <a href="#" data-lang="en" class="nav-link ps-0 <?= ($currentLang==='en' ? 'active' : '') ?>" aria-current="<?= ($currentLang==='en' ? 'true' : 'false') ?>">en</a>
+                                    <a href="#" data-lang="en" class="nav-link ps-0 <?= ($sprache==='en' ? 'active' : '') ?>" aria-current="<?= ($sprache==='en' ? 'true' : 'false') ?>">en</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="/leichte-sprache/" id="easyLanguageIconLink" title="<?php if ($sprache === 'en'): ?>Easy Language<?php else: ?>Zur Website in Leichter Sprache<?php endif; ?>">
@@ -272,9 +225,9 @@
                             </a>
                         </li>
                         <li class="nav-item fs-22 border-bottom border-1 border-secondary py-2 lang-switch d-flex align-items-center gap-1" aria-label="<?php if ($sprache === 'en'): ?>Language Selection<?php else: ?>Sprachauswahl<?php endif; ?>">
-                            <a href="#" data-lang="de" class="nav-link pe-0 <?= ($currentLang==='de' ? 'active' : '') ?>" aria-current="<?= ($currentLang==='de' ? 'true' : 'false') ?>">Deutsch</a>
+                            <a href="#" data-lang="de" class="nav-link pe-0 <?= ($sprache==='de' ? 'active' : '') ?>" aria-current="<?= ($sprache==='de' ? 'true' : 'false') ?>">Deutsch</a>
                             <span class="text-body-secondary">/</span>
-                            <a href="#" data-lang="en" class="nav-link ps-0 <?= ($currentLang==='en' ? 'active' : '') ?>" aria-current="<?= ($currentLang==='en' ? 'true' : 'false') ?>">Englisch</a>
+                            <a href="#" data-lang="en" class="nav-link ps-0 <?= ($sprache==='en' ? 'active' : '') ?>" aria-current="<?= ($sprache==='en' ? 'true' : 'false') ?>">Englisch</a>
                         </li>
                         <li class="nav-item fs-22 border-bottom border-1 border-secondary py-2">
                             <a class="nav-link" href="/leichte-sprache/" id="easyLanguageIconLinkMobile" data="[data-no-autoclose]">

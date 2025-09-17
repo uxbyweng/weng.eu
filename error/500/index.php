@@ -1,10 +1,21 @@
 <?php
-require $_SERVER['DOCUMENT_ROOT'].'/includes/lang.php'; 
-$use_isotope = true;
-require $_SERVER['DOCUMENT_ROOT'].'/includes/header.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/includes/helpers.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/includes/head.php';
+
+$meta = [
+  'title' => 'WENG.EU - Error 500 / Fehler 500',
+  'desc'  => 'An internal server error occurred.',
+  'og_image' => '',
+];
+$cspNonce = $_SERVER['CSP_NONCE'] ?? null;
+
+echo render_head($meta, $cspNonce);
 ?>
 
-<main class="page-wrapper" id="startMainContent">
+<body> 
+    <?php include $_SERVER['DOCUMENT_ROOT'].'/includes/header_neu.php'; ?>
+
+    <main class="page-wrapper" id="startMainContent">
 
     <!-- ### BREADCRUMB ### -->  
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/breadcrumb.php'; ?>
@@ -30,9 +41,9 @@ require $_SERVER['DOCUMENT_ROOT'].'/includes/header.php';
                 <div class="col-12 col-md-7 order-3 order-md-2"> 
                     <p class="fs-20 lh-1-5 my-3">
                         <?php if ($sprache === 'en'): ?>
-                            <em>We respect your privacy. Below we inform you about which personal data we collect, for what purposes we process it, and what rights you have.</em>
+                            <em>An internal server error occurred.</em>
                         <?php else: ?>
-                            <em>Wir respektieren Ihre Privatsphäre. Im Folgenden informieren wir Sie darüber, welche personenbezogenen Daten wir erheben, zu welchen Zwecken wir diese verarbeiten und welche Rechte Ihnen zustehen.</em>
+                            <em>Ein interner Serverfehler ist aufgetreten.</em>
                         <?php endif; ?>
                     </p>
                 </div>

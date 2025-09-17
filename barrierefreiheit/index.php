@@ -1,24 +1,21 @@
 <?php
+require_once $_SERVER['DOCUMENT_ROOT'].'/includes/helpers.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/includes/head.php';
+
 $meta = [
-  'title'    => 'WENG.EU | Erklärung zur Barrierefreiheit',
-  'desc'     => 'Diese Erklärung beschreibt den aktuellen Stand der Barrierefreiheit von weng.eu, die angestrebten Standards, bekannte Einschränkungen sowie Ihre Kontakt- und Rückmeldemöglichkeiten.',
+  'title' => '',
+  'desc'  => '',
   'og_image' => '',
-  'robots'   => 'index, follow' 
 ];
-require $_SERVER['DOCUMENT_ROOT'].'/includes/lang.php'; 
-require $_SERVER['DOCUMENT_ROOT'].'/includes/header.php';
+$cspNonce = $_SERVER['CSP_NONCE'] ?? null;
 
-
-// === Konfiguration der Barrierefreiheitsseite ===
-$lastUpdate    = "2025-09-11"; // YYYY-MM-DD
-$isPublicBody  = false;        // auf true setzen, wenn öffentliche Stelle (BGG/BITV) -> Schlichtungsstelle anzeigen
-$contactName   = "Karsten Weng";
-$contactStreet = "Berlin, Germany";
-$contactMail   = "info@weng.eu";
-$contactTel    = "+49 176 12345678";
+echo render_head($meta, $cspNonce);
 ?>
 
-<main class="page-wrapper" id="startMainContent">
+<body>
+    <?php include $_SERVER['DOCUMENT_ROOT'].'/includes/header_neu.php'; ?>
+
+    <main class="page-wrapper" id="startMainContent">
 
   <!-- ### BREADCRUMB ### -->
   <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/breadcrumb.php'; ?>
@@ -38,9 +35,9 @@ $contactTel    = "+49 176 12345678";
         </div>
 
         <div class="col-12 col-md-5 text-center order-2 order-md-3 p-4 mt-150-md">
-          <img src="/assets/img/accessibility/undraw_accessibility.svg"
+          <!--img src="/assets/img/accessibility/undraw_accessibility.svg"
                alt="<?php echo ($sprache==='en'?'Accessibility visual':'Illustration Barrierefreiheit'); ?>"
-               width="500" height="500" class="img-fluid">
+               width="500" height="500" class="img-fluid"-->
         </div>
 
         <div class="col-12 col-md-7 order-3 order-md-2">
@@ -103,10 +100,9 @@ $contactTel    = "+49 176 12345678";
         <h2 class="font-nidorina fs-30 pb-3">Feedback and contact</h2>
         <p>If you encounter accessibility barriers on this website, please contact:</p>
         <p>
-          <strong><?php echo htmlspecialchars($contactName); ?></strong><br>
-          <?php echo htmlspecialchars($contactStreet); ?><br>
-          Tel: <?php echo htmlspecialchars($contactTel); ?><br>
-          E-mail: <a href="mailto:<?php echo htmlspecialchars($contactMail); ?>"><?php echo htmlspecialchars($contactMail); ?></a>
+          <strong>Karsten Weng</strong><br>
+          10999 Berlin, Germany<br>
+          E-mail: <a href="mailto:info@weng.eu">info@weng.eu</a>
         </p>
 
         <?php if ($isPublicBody): ?>
@@ -121,16 +117,15 @@ $contactTel    = "+49 176 12345678";
         <?php endif; ?>
 
         <hr class="my-4">
-        <p class="mb-4"><small>Last updated: <?php echo date('F j, Y', strtotime($lastUpdate)); ?></small></p>
+        <p class="mb-4"><small>Last updated: 09/2025</small></p>
 
       <?php else: ?>
 
         <hr class="my-4">
         <h2 class="font-nidorina fs-30 pb-3">Grundlage dieser Erklärung</h2>
         <p>
-          Die Bewertung beruht auf einer Selbstprüfung aus <?php echo strftime('%B %Y', strtotime($lastUpdate)); ?> anhand der
-          <strong>WCAG&nbsp;2.2 AA</strong> sowie der <strong>EN&nbsp;301&nbsp;549</strong>. Diese Erklärung wurde zuletzt am
-          <strong><?php echo strftime('%d.%m.%Y', strtotime($lastUpdate)); ?></strong> aktualisiert.
+          Die Bewertung beruht auf einer Selbstprüfung aus 09/2025 anhand der <strong>WCAG&nbsp;2.2 AA</strong> sowie der <strong>EN&nbsp;301&nbsp;549</strong>. Diese Erklärung wurde zuletzt am
+          <strong>09/2025</strong> aktualisiert.
         </p>
 
         <hr class="my-4">
@@ -167,25 +162,13 @@ $contactTel    = "+49 176 12345678";
         <h2 class="font-nidorina fs-30 pb-3">Kontakt und Feedback</h2>
         <p>Wenn Ihnen Barrieren auf dieser Website auffallen, kontaktieren Sie uns bitte:</p>
         <p>
-          <strong><?php echo htmlspecialchars($contactName); ?></strong><br>
-          <?php echo htmlspecialchars($contactStreet); ?><br>
-          Tel: <?php echo htmlspecialchars($contactTel); ?><br>
-          E-Mail: <a href="mailto:<?php echo htmlspecialchars($contactMail); ?>"><?php echo htmlspecialchars($contactMail); ?></a>
+          <strong>Karsten Weng</strong><br>
+          10999 Berlin, Germany<br>
+          E-Mail: <a href="mailto:info@weng.eu">info@weng.eu</a>
         </p>
 
-        <?php if ($isPublicBody): ?>
-          <hr class="my-4">
-          <h2 class="font-nidorina fs-30 pb-3">Durchsetzungsverfahren</h2>
-          <p>
-            Sollten Sie innerhalb angemessener Frist keine zufriedenstellende Antwort erhalten, können Sie sich an die
-            Schlichtungsstelle nach dem Behindertengleichstellungsgesetz (BGG) wenden:
-            <br>
-            Schlichtungsstelle BGG, Mauerstraße&nbsp;53, 10117 Berlin — <a href="https://www.schlichtungsstelle-bgg.de" target="_blank" rel="noopener">www.schlichtungsstelle-bgg.de</a>
-          </p>
-        <?php endif; ?>
-
         <hr class="my-4">
-        <p class="mb-4"><small>Stand: <?php echo strftime('%d.%m.%Y', strtotime($lastUpdate)); ?></small></p>
+        <p class="mb-4"><small>Stand: 09/2025</small></p>
 
       <?php endif; ?>
     </div>

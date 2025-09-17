@@ -1,8 +1,22 @@
 <?php
-require $_SERVER['DOCUMENT_ROOT'].'/includes/lang.php';
-require $_SERVER['DOCUMENT_ROOT'].'/includes/header.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/includes/helpers.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/includes/head.php';
+
+$meta = [
+  'title' => 'WENG.EU - Projekt: Park-Klinik Birkenwerder – Web Development & Betreuung',
+  'desc'  => 'Web Development & laufende Betreuung der Park-Klinik Birkenwerder. Fokus: Barrierearme UX, Performance, saubere SEO-Grundlagen und effiziente Pflege mit PHP-Includes.',
+  'og_image' => '',
+];
+$cspNonce = $_SERVER['CSP_NONCE'] ?? null;
+
+echo render_head($meta, $cspNonce);
 ?>
-<main class="page-wrapper" id="startMainContent">
+
+<body>
+
+    <?php include $_SERVER['DOCUMENT_ROOT'].'/includes/header_neu.php'; ?>
+
+    <main class="page-wrapper" id="startMainContent">
 
     <!-- ### BREADCRUMB ### -->
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/breadcrumb.php'; ?>

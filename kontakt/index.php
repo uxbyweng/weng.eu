@@ -1,21 +1,33 @@
-<?php 
-session_start();
+<?php
+header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+header('Pragma: no-cache');
 
-require $_SERVER['DOCUMENT_ROOT'].'/includes/lang.php'; 
-require $_SERVER['DOCUMENT_ROOT'].'/includes/header.php';
+define('NEED_SESSION', true);
+require_once $_SERVER['DOCUMENT_ROOT'].'/includes/session.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/includes/helpers.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/includes/head.php';
 
-// Honeypot-Feldnamen generieren
-if (empty($_SESSION['hp_name'])) {
-  $_SESSION['hp_name'] = 'hp_' . bin2hex(random_bytes(6));
-}
-$hpName = $_SESSION['hp_name'];
-if (empty($_SESSION['csrf'])) {
-  $_SESSION['csrf'] = bin2hex(random_bytes(32));
-}
-$csrf = $_SESSION['csrf'];
+$sprache = current_lang();   // aus helpers.php
+
+/* Tokens generieren (Form-ID: 'contact') */
+$hpName = get_honeypot_name('contact');
+$csrf   = get_csrf_token('contact');
+session_write_close();
+
+$meta = [
+  'title' => 'WENG.EU - Kontakt / Contact',
+  'desc'  => 'Get in touch.',
+  'og_image' => '',
+];
+$cspNonce = $_SERVER['CSP_NONCE'] ?? null;
+
+echo render_head($meta, $cspNonce);
 ?>
 
-<main class="page-wrapper" id="startMainContent">
+<body> 
+    <?php include $_SERVER['DOCUMENT_ROOT'].'/includes/header_neu.php'; ?>
+
+    <main class="page-wrapper" id="startMainContent">
 
     <!-- ### BREADCRUMB ### -->  
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/breadcrumb.php'; ?>
@@ -97,14 +109,8 @@ $csrf = $_SESSION['csrf'];
                             pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$"
                             autocomplete="email"
                             inputmode="email">
-                            <input 
-                            type="text" 
-                            name="<?= htmlspecialchars($hpName, ENT_QUOTES) ?>" 
-                            class="visually-hidden" 
-                            tabindex="-1" 
-                            autocomplete="off" 
-                            aria-hidden="true">
-                            <input type="hidden" name="csrf" value="<?= htmlspecialchars($csrf, ENT_QUOTES) ?>">
+                            <input type="text" name="<?= e($hpName) ?>" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
+                            <input type="hidden" name="csrf" value="<?= e($csrf) ?>">
                         </div>
                         <div class="form-group">
                             <label for="cf-message" class="form-label">

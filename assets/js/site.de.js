@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const form = document.querySelector("#contact-form");
         if (form) {
-            const { initContactForm } = await import("./modules/contact-form.en.js");
+            const { initContactForm } = await import("./modules/contact-form.de.js");
             initContactForm();
         }
     });

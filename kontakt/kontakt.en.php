@@ -1,44 +1,63 @@
 <?php
-// kontakt.php — simple mode (EN)
-
-// Always return JSON (and nothing else)
+header('X-Content-Type-Options: nosniff');
 header('Content-Type: application/json; charset=UTF-8');
 header('Cache-Control: no-store');
-ini_set('display_errors', '0'); // no notices in output
+ini_set('display_errors','0');
+// error_reporting(E_ALL);
 
-// Env-Funktion laden
-require_once __DIR__ . '/../includes/env.php';
+/* Session & Helpers laden */
+define('NEED_SESSION', true);
+require_once $_SERVER['DOCUMENT_ROOT'].'/includes/session.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/includes/helpers.php';
 
-// Helper: output JSON and exit
+/* Env laden (sicherer Pfad über Document-Root) */
+$envPath = $_SERVER['DOCUMENT_ROOT'].'/includes/env.php';
+if (is_file($envPath)) {
+    require_once $envPath;
+} else {
+    // Fallback, falls env() nicht vorhanden ist
+    function env($k, $default=null){ return $default; }
+}
+
+/* JSON-Antwort Helper */
 function out(array $data) {
     echo json_encode($data, JSON_UNESCAPED_UNICODE);
     exit;
 }
 
-// POST only
+/* Nur POST zulassen */
 if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
     out(['ok' => false, 'type' => 'danger', 'message' => 'Invalid request method.']);
 }
 
-// Collect fields
-$name           = trim($_POST['name']           ?? '');
-$email          = trim($_POST['email']          ?? '');
-$message        = trim($_POST['message']        ?? '');
-$privacyRaw     = $_POST['privacy']             ?? null; // 'checked' etc.
-session_start(); // Session starten, um Honeypot-Feldnamen zu lesen
-$csrfOk = isset($_POST['csrf'], $_SESSION['csrf']) && hash_equals($_SESSION['csrf'], $_POST['csrf']);
-if (!$csrfOk) {
+/* Einheitliche Form-ID wie auf der Seite */
+$formId = 'contact';
+
+/* CSRF prüfen */
+if (!verify_csrf($_POST['csrf'] ?? null, $formId)) {
     out(['ok'=>false,'type'=>'danger','message'=>'Invalid form token. Please reload.']);
 }
-$hpKey          = $_SESSION['hp_name']          ?? null;
-$honeypot       = $hpKey ? trim($_POST[$hpKey]  ?? '') : '';
-$terms          = isset($_POST['terms']); // should stay empty → bot trap
 
-// Validation
+/* Honeypot prüfen (Silent-OK bei Bot) */
+if (is_honeypot_triggered($_POST, $formId)) {
+    out(['ok' => true, 'type' => 'success', 'message' => 'OK']);
+}
+
+/* Lock lösen – ab hier keine Session nötig */
+session_write_close();
+
+/* === Felder holen === */
+$name       = trim($_POST['name']    ?? '');
+$email      = trim($_POST['email']   ?? '');
+$message    = trim($_POST['message'] ?? '');
+$privacyRaw = $_POST['privacy']      ?? null;
+$terms      = isset($_POST['terms']); // unsichtbar, Bot-Falle
+
+/* === Validierung === */
 $fieldErrors = [];
 
 if ($name === '') {
-    $fieldErrors['name'] = 'Please enter your name.';
+    $fieldErrors['name'] = 'Please enter a name.';
 }
 if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     $fieldErrors['email'] = 'Please enter a valid email address.';
@@ -52,63 +71,54 @@ if ($message === '') {
         $fieldErrors['message'] = 'Please write at least 3 words.';
     }
 }
+
+/* Datenschutz-Checkbox prüfen */
 $trueVals = ['checked','on','1','true','yes'];
 if (!in_array(strtolower((string)$privacyRaw), $trueVals, true)) {
-    // frontend enforces it – server double-checks
     $fieldErrors['privacy'] = 'Please accept the privacy policy.';
 }
 
-// Silent spam (bot) → return ok:true but do not send
-$isSilentSpam = ($honeypot !== '') || $terms;
-
-// On errors
 if ($fieldErrors) {
     out([
         'ok'          => false,
         'type'        => 'danger',
-        'message'     => 'Please review your entries.',
+        'message'     => 'Please check your input.',
         'fieldErrors' => $fieldErrors
     ]);
 }
 
-// Success message (HTML)
+/* === Erfolgstext === */
 $successHtml = 'Hello ' . htmlspecialchars($name, ENT_QUOTES, 'UTF-8') . ',<br><br>'
-             . 'Thank you for your message! Your message was sent successfully. '
+             . 'Thank you for your message! The message was sent successfully. '
              . 'I will get back to you shortly.<br><br>'
-             . 'Kind regards,<br>Karsten Weng';
+             . 'Best regards,<br>Karsten Weng';
 
-// Bot: do not send
-if ($isSilentSpam) {
-    out(['ok' => true, 'type' => 'success', 'message' => $successHtml]);
-}
-
-// === Mail sending (kept simple)
-$to         = env('MAIL_TO', 'info@weng.eu');
-$from       = env('MAIL_FROM', 'info@weng.eu');
-$subject    = 'Inquiry ' . date('Ymd\THi');
-$body       = "Sent via weng.eu/contact/\r\n\r\n"
-            . "Name:    {$name}\r\n"
-            . "Email:   {$email}\r\n\r\n"
-            . "Message:\r\n{$message}\r\n";
+/* === Mailversand === */
+$to       = env('MAIL_TO', 'info@weng.eu');
+$from     = env('MAIL_FROM', 'info@weng.eu');
+$subject  = 'Anfrage ' . date('Ymd\THi');
+$body     = "Gesendet über weng.eu/kontakt/\r\n\r\n"
+          . "Name:    {$name}\r\n"
+          . "Email:   {$email}\r\n\r\n"
+          . "Nachricht:\r\n{$message}\r\n";
 
 $headers  = "MIME-Version: 1.0\r\n";
 $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
 $headers .= "From: {$from}\r\n";
 $headers .= "Reply-To: {$email}\r\n";
 
-// Send (without -f envelope to avoid hosting restrictions)
 $sent = @mail($to, $subject, $body, $headers);
 
-// Optional: confirmation to sender — simple
+/* Optionale Bestätigung an Absender */
 if ($sent && filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    $confirmSubj = 'Inquiry received ' . date('Ymd\THi');
+    $confirmSubj = 'Request received ' . date('Ymd\THi');
     $confirmBody = "Hello {$name},\r\n\r\nThank you for your message. "
-                 . "I will contact you shortly.\r\n\r\nKind regards,\r\nKarsten Weng\r\n";
+                 . "I will get back to you shortly.\r\n\r\nBest regards,\r\nKarsten Weng\r\n";
     @mail($email, $confirmSubj, $confirmBody, "From: {$from}\r\nContent-Type: text/plain; charset=UTF-8\r\n");
 }
 
 if ($sent) {
     out(['ok' => true, 'type' => 'success', 'message' => $successHtml]);
 } else {
-    out(['ok' => false, 'type' => 'danger', 'message' => 'Email could not be sent. Please try again later.']);
+    out(['ok' => false, 'type' => 'danger', 'message' => 'E-Mail konnte nicht gesendet werden. Bitte später erneut versuchen.']);
 }

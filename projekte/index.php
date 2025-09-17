@@ -1,10 +1,21 @@
 <?php
-require $_SERVER['DOCUMENT_ROOT'].'/includes/lang.php'; 
-$use_isotope = true;
-require $_SERVER['DOCUMENT_ROOT'].'/includes/header.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/includes/helpers.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/includes/head.php';
+
+$meta = [
+  'title' => 'WENG.EU - Projekte, Arbeiten & Experimente',
+  'desc'  => 'Eine Auswahl an Projekten, Arbeiten und Konzepten, die ich umgesetzt habe – oder aktuell begleite.',
+  'og_image' => '',
+];
+$cspNonce = $_SERVER['CSP_NONCE'] ?? null;
+
+echo render_head($meta, $cspNonce);
 ?>
 
-<main class="page-wrapper" id="startMainContent">
+<body>
+    <?php include $_SERVER['DOCUMENT_ROOT'].'/includes/header_neu.php'; ?>
+
+    <main class="page-wrapper" id="startMainContent">
 
     <!-- ### BREADCRUMB ### -->  
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/breadcrumb.php'; ?>
