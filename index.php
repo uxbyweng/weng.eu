@@ -57,7 +57,7 @@ echo render_head($meta, $cspNonce);
                                 <?php if ($sprache === 'en'): ?>
                                 Make contact
                                 <?php else: ?>
-                                Kontakt aufnehmen
+                                Kontakt aufnehmen 
                                 <?php endif; ?>
                                 <i class="fa-solid fa-arrow-right"></i>
                             </a>
