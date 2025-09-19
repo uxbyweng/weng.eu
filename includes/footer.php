@@ -4,11 +4,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <h2 class="font-handwriting font-accent fs-30 text-center text-xl-start d-none d-md-block">
-                            <?php if ($sprache === 'en'): ?>
-                                From design to code – web experiences built for users.
-                            <?php else: ?>  
-                                Von Design bis Code – User Experience, die funktioniert. 
-                            <?php endif; ?>
+                            Thanks for stopping by
                         </h2>
                         <p class="footer-color font-handwriting d-flex flex-wrap justify-content-center justify-content-xl-start mt-3 mt-md-5">
                             <?php if ($sprache === 'en'): ?>
