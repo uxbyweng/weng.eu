@@ -37,7 +37,7 @@
                                 </a>
                             </li>
                             <li class="px-1">
-                                <a class="social-btn" href="https://www.youtube.com/@BerlinStreetView36" target="_blank"  rel="nofollow noopener" aria-label="YouTube">
+                                <a class="social-btn" href="https://www.youtube.com/@BerlinStreetView36/" target="_blank"  rel="nofollow noopener" aria-label="YouTube">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 21" width="50" height="50" role="img" aria-hidden="true" focusable="false">
                                         <path fill="currentColor" fill-rule="evenodd" d="M26.113.764a3.57 3.57 0 0 1 2.515 2.531c.594 2.233.594 6.891.594 6.891s0 4.659-.594 6.891c-.327 1.232-1.291 2.162-2.515 2.49-2.218.599-11.113.599-11.113.599s-8.895 0-11.113-.598c-1.224-.33-2.188-1.26-2.515-2.49-.594-2.233-.594-6.892-.594-6.892s0-4.658.594-6.89A3.57 3.57 0 0 1 3.887.763C6.105.166 15 .166 15 .166s8.895 0 11.113.598M12.091 5.957v8.459l7.434-4.23z" clip-rule="evenodd"/>
                                     </svg>
@@ -45,7 +45,7 @@
                                 </a>
                             </li>
                             <li class="px-1">
-                                <a class="social-btn" href="https://github.com/papaweng" target="_blank"  rel="nofollow noopener" aria-label="GitHub">
+                                <a class="social-btn" href="https://github.com/uxbyweng/" target="_blank"  rel="nofollow noopener" aria-label="GitHub">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="40" height="40" role="img" aria-hidden="true" focusable="false">
                                         <path fill="currentColor" d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.757-1.333-1.757-1.089-.744.084-.729.084-.729 1.205.084 1.84 1.236 1.84 1.236 1.07 1.835 2.807 1.305 3.492.998.108-.776.418-1.305.762-1.605-2.665-.3-5.466-1.334-5.466-5.93 0-1.311.469-2.381 1.236-3.221-.123-.303-.536-1.523.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.24 2.873.118 3.176.77.84 1.235 1.91 1.235 3.221 0 4.609-2.807 5.625-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .322.216.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
                                     </svg>
