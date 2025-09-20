@@ -1,19 +1,19 @@
 <?php
+require_once $_SERVER['DOCUMENT_ROOT'].'/includes/lang.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/includes/helpers.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/includes/head.php';
-
 $meta = [
-  'title' => '',
-  'desc'  => '',
-  'og_image' => '',
+    'title' => '',  
+    'desc'  => '',  
+    'og_image' => '',
 ];
 $cspNonce = $_SERVER['CSP_NONCE'] ?? null;
-
 echo render_head($meta, $cspNonce);
+$isEn = is_en();
 ?>
 
 <body>
-    <?php include $_SERVER['DOCUMENT_ROOT'].'/includes/header_neu.php'; ?>
+    <?php include $_SERVER['DOCUMENT_ROOT'].'/includes/header.php'; ?>
 
     <main class="page-wrapper" id="startMainContent">
 
@@ -41,7 +41,7 @@ echo render_head($meta, $cspNonce);
                     <div class="col-12 col-md-7 order-3 order-md-2"> 
                         <p class="fs-20 lh-1-5 my-3">
                             <em>
-                            <?php if ($sprache === 'en'): ?>
+                            <?php if (is_en()): ?>
                                 Websites that not only work, but impress.
                                 Fast. Accessible. SEO-optimized. Responsive.
                                 Developed with clean code and impactful design.
@@ -54,7 +54,7 @@ echo render_head($meta, $cspNonce);
                         </p>
                         <div class="text-center text-md-start">
                             <a href="/kontakt/" class="btn btn-secondary d-inline-flex align-items-center gap-2 my-4 px-4 py-2">
-                                <?php if ($sprache === 'en'): ?>
+                                <?php if (is_en()): ?>
                                 Make contact
                                 <?php else: ?>
                                 Kontakt aufnehmen 
@@ -87,9 +87,6 @@ echo render_head($meta, $cspNonce);
                             </div>
                             <div class="text-wrapper pt-2">
                                 <a href="/projekte/strato/">
-                                    <p>
-                                        Shopfrontend
-                                    </p>
                                     <h3>
                                         STRATO 
                                     </h3>
@@ -109,15 +106,8 @@ echo render_head($meta, $cspNonce);
                             </div>
                             <div class="text-wrapper pt-2">
                                 <a href="/projekte/lisa/">
-                                    <p>
-                                        <?php if ($sprache === 'en'): ?>
-                                            Web Design, Web Development
-                                        <?php else: ?>
-                                            Webdesign, Webentwicklung
-                                        <?php endif; ?>
-                                    </p>
                                     <h3 class="fs-24">
-                                        Website Prof. Dr. Lisa Yashodhara Haller 
+                                        Website Prof. Dr. Lisa Y. Haller 
                                     </h3>
                                 </a>
                             </div>
@@ -135,13 +125,6 @@ echo render_head($meta, $cspNonce);
                             </div>
                             <div class="text-wrapper pt-2">
                                 <a href="/projekte/park-klinik/">
-                                    <p>
-                                        <?php if ($sprache === 'en'): ?>
-                                            Web Design, Web Development
-                                        <?php else: ?>
-                                            Webdesign, Webentwicklung
-                                        <?php endif; ?>
-                                    </p>
                                     <h3 class="fs-24">
                                         Website Park-Klinik Birkenwerder
                                     </h3>
@@ -149,36 +132,10 @@ echo render_head($meta, $cspNonce);
                             </div>
                         </article>
                     </div>
-                    <!--div class="col-lg-4">
-                        <article>
-                            <div class="image-wrapper box-shadow"> 
-                                <a href="/projekte/pangolin-doxx/">
-                                    <picture>
-                                        <source srcset="/assets/img/projects/pangolin-doxx/screen-startseite-pangolin-doxx_xs.webp" type="image/webp">
-                                        <img src="/assets/img/projects/pangolin-doxx/screen-startseite-pangolin-doxx_xs.jpg" class="img-fluid screen-img" alt="Screen: Website Pangolin-Doxx" width="600" height="400" loading="lazy">
-                                    </picture>
-                                </a>
-                            </div>
-                            <div class="text-wrapper pt-2">
-                                <a href="/projekte/pangolin-doxx/">
-                                    <p>
-                                        <?php if ($sprache === 'en'): ?>
-                                            Web Design, Web Development
-                                        <?php else: ?>
-                                            Webdesign, Webentwicklung
-                                        <?php endif; ?>
-                                    </p>
-                                    <h3 class="fs-24">
-                                        Website Pangolin-Doxx
-                                    </h3>
-                                </a>
-                            </div>
-                        </article>
-                    </div-->
                 </div>
                 <div class="text-center">
                     <a href="/projekte/" class="btn btn-secondary d-inline-flex align-items-center gap-2 m-4">
-                        <?php if ($sprache === 'en'): ?>
+                        <?php if (is_en()): ?>
                             View all projects
                         <?php else: ?>
                             Alle Projekte ansehen
@@ -207,7 +164,7 @@ echo render_head($meta, $cspNonce);
                     <li>
                         <a href="/service-details" style="cursor: none">
                             <h3>
-                                <?php if ($sprache === 'en'): ?>
+                                <?php if (is_en()): ?>
                                     Web Design
                                 <?php else: ?>
                                     Webdesign
@@ -252,7 +209,7 @@ echo render_head($meta, $cspNonce);
                     <div class="row justify-content-center text-white">
                         <div class="col-xl-10">
                             <p class="font-handwriting display-6 fw-light">
-                                <?php if ($sprache === 'en'): ?>
+                                <?php if (is_en()): ?>
                                     “Good web development means communication on equal terms with solutions that work for people – not just in code.”
                                 <?php else: ?>
                                     “Gute Webentwicklung bedeutet Kommunikation auf Augenhöhe mit Lösungen, die für Menschen funktionieren – nicht nur im Code.”

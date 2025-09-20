@@ -31,7 +31,20 @@ if (isset($_SESSION['sprache']) && in_array($_SESSION['sprache'], $allowed, true
     $pref = substr(strtolower($_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? ''), 0, 2);
     $sprache = in_array($pref, $allowed, true) ? $pref : 'de';
     $_SESSION['sprache'] = $sprache;
+
+    // Cookie auch ohne POST beim ersten Besuch setzen
+    if (empty($_COOKIE['sprache'])) {
+        setcookie('sprache', $sprache, [
+            'expires'  => time() + 86400 * 30,
+            'path'     => '/',
+            'secure'   => !empty($_SERVER['HTTPS']),
+            'httponly' => false,
+            'samesite' => 'Lax',
+        ]);
+    }
 }
 
 // Optional: Helper fürs <html lang="">
 function htmlLang(): string { return $_SESSION['sprache'] ?? 'de'; }
+
+

@@ -1,15 +1,15 @@
 <?php
+require_once $_SERVER['DOCUMENT_ROOT'].'/includes/lang.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/includes/helpers.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/includes/head.php';
-
 $meta = [
   'title' => 'WENG.EU - JavaScript Console',
   'desc'  => 'A simple JavaScript console for testing and debugging.',
   'og_image' => '',
 ];
 $cspNonce = $_SERVER['CSP_NONCE'] ?? null;
-
 echo render_head($meta, $cspNonce);
+$isEn = is_en();
 ?>
 
 <body>
@@ -215,7 +215,7 @@ echo render_head($meta, $cspNonce);
             color: var(--console-error);
         }
     </style>
-    <?php include $_SERVER['DOCUMENT_ROOT'].'/includes/header_neu.php'; ?>
+    <?php include $_SERVER['DOCUMENT_ROOT'].'/includes/header.php'; ?>
 
     <main class="page-wrapper" id="startMainContent">
 

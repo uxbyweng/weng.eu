@@ -1,19 +1,19 @@
 <?php
+require_once $_SERVER['DOCUMENT_ROOT'].'/includes/lang.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/includes/helpers.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/includes/head.php';
-
 $meta = [
-  'title' => 'WENG.EU - Privacy Policy / Datenschutzerklärung',
-  'desc'  => 'Privacy Policy / Datenschutzerklärung of WENG.EU. We respect your privacy. Here you can find out which personal data we collect, for what purposes we process it, and what rights you have.',
-  'og_image' => '',
+    'title' => 'WENG.EU - Privacy Policy / Datenschutzerklärung',
+    'desc'  => 'Privacy Policy / Datenschutzerklärung of WENG.EU. We respect your privacy. Here you can find out which personal data we collect, for what purposes we process it, and what rights you have.',
+    'og_image' => '',
 ];
 $cspNonce = $_SERVER['CSP_NONCE'] ?? null;
-
 echo render_head($meta, $cspNonce);
+$isEn = is_en();
 ?>
 
 <body> 
-    <?php include $_SERVER['DOCUMENT_ROOT'].'/includes/header_neu.php'; ?>
+    <?php include $_SERVER['DOCUMENT_ROOT'].'/includes/header.php'; ?>
 
     <main class="page-wrapper" id="startMainContent">
 

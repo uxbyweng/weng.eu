@@ -3,11 +3,15 @@ declare(strict_types=1);
 
 function e(string $s): string { return htmlspecialchars($s, ENT_QUOTES, 'UTF-8'); }
 
-// Sprache ohne Session-Abhängigkeit
+// Sprache bestimmen
 function current_lang(): string {
+  if (session_status() === PHP_SESSION_ACTIVE && !empty($_SESSION['sprache'])) {
+    return $_SESSION['sprache'];
+  }
   return $_COOKIE['sprache'] ?? 'de';
 }
 function is_en(): bool { return current_lang() === 'en'; }
+
 
 function abs_url(string $path): string {
   if (preg_match('#^https?://#', $path)) return $path;

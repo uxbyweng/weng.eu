@@ -1,31 +1,31 @@
 <?php
 header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
 header('Pragma: no-cache');
-
 define('NEED_SESSION', true);
 require_once $_SERVER['DOCUMENT_ROOT'].'/includes/session.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/includes/lang.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/includes/helpers.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/includes/head.php';
 
+// vorübergehend, bis alle sprachswitcher auf die neue schreibweise umgestellt sind
 $sprache = current_lang();   // aus helpers.php
 
 /* Tokens generieren (Form-ID: 'contact') */
 $hpName = get_honeypot_name('contact');
 $csrf   = get_csrf_token('contact');
 session_write_close();
-
 $meta = [
   'title' => 'WENG.EU - Kontakt / Contact',
   'desc'  => 'Get in touch.',
   'og_image' => '',
 ];
 $cspNonce = $_SERVER['CSP_NONCE'] ?? null;
-
 echo render_head($meta, $cspNonce);
+$isEn = is_en();
 ?>
 
 <body> 
-    <?php include $_SERVER['DOCUMENT_ROOT'].'/includes/header_neu.php'; ?>
+    <?php include $_SERVER['DOCUMENT_ROOT'].'/includes/header.php'; ?>
 
     <main class="page-wrapper" id="startMainContent">
 

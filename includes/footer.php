@@ -33,7 +33,7 @@
                                 </a>
                             </li>
                             <li class="px-1">
-                                <a class="social-btn" href="https://www.youtube.com/@BerlinStreetView36/" target="_blank"  rel="nofollow noopener" aria-label="YouTube">
+                                <a class="social-btn" href="https://www.youtube.com/@karstenweng5940" target="_blank"  rel="nofollow noopener" aria-label="YouTube">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 21" width="50" height="50" role="img" aria-hidden="true" focusable="false">
                                         <path fill="currentColor" fill-rule="evenodd" d="M26.113.764a3.57 3.57 0 0 1 2.515 2.531c.594 2.233.594 6.891.594 6.891s0 4.659-.594 6.891c-.327 1.232-1.291 2.162-2.515 2.49-2.218.599-11.113.599-11.113.599s-8.895 0-11.113-.598c-1.224-.33-2.188-1.26-2.515-2.49-.594-2.233-.594-6.892-.594-6.892s0-4.658.594-6.89A3.57 3.57 0 0 1 3.887.763C6.105.166 15 .166 15 .166s8.895 0 11.113.598M12.091 5.957v8.459l7.434-4.23z" clip-rule="evenodd"/>
                                     </svg>
@@ -114,7 +114,8 @@
             <div class="container">
                 <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
                     <div class="text-center font-gray10 mt-3 mt-md-0">
-                        <p class="footer-color">©&nbsp;<?php echo date("Y"); ?>&nbsp;weng.eu |
+                        <p class="footer-color">
+                            ©&nbsp;<?php echo date("Y"); ?>&nbsp;Karsten&nbsp;Weng. All&nbsp;rights&nbsp;reserved. |
                             <?php if ($sprache === 'en'): ?>
                                 <a href="/datenschutz/#no-tracking-en" class="footer-color px-2">
                                     No&nbsp;Tracking
