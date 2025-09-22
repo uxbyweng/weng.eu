@@ -49,97 +49,101 @@ $isEn = is_en();
 
     <!-- ### PROJEKTE ### --> 
     <section class="px-3 px-md-0 py-5 border-bottom">
-        <div class="portfolio-gallery">
-            <div class="container">
-                <div id="gallery-wrapper" class="row g-4">
-                    <div class="grid-sizer"></div> 
+        <div class="container">
+            <h2 class="font-nidorina mt-0 mb-4">
+                <?php if (is_en()): ?>
+                    Web Projects
+                <?php else: ?>
+                    Web Projekte
+                <?php endif; ?>
+            </h2>
+            <div class="row g-4">
 
-                    <!-- Shopfrontend: STRATO --> 
-                    <div class="col-lg-4 website">
-                        <article>
-                            <div class="image-wrapper box-shadow">
-                                <a href="/projekte/strato/">
-                                    <img class="img-fluid" src="/assets/img/projects/strato/screen-startseite-strato-april-2024.jpg" alt="STRATO" loading="lazy">
-                                </a>
-                            </div>
-                            <div class="text-wrapper pt-2">
-                                <a href="/projekte/strato/">
-                                    <p>
-                                        Shopfrontend
-                                    </p>
-                                    <h3>
-                                        STRATO 
-                                    </h3>
-                                </a>
-                            </div>
-                        </article>
-                    </div>
-
-                    <!-- Website: Lisa Yasodhara Haller -->
-                    <div class="col-lg-4 website">
-                        <article>
-                            <div class="image-wrapper box-shadow">
-                                <a href="/projekte/lisa/">
-                                    <img class="img-fluid screen-img" src="/assets/img/projects/lisa/screen-startseite-lisa-yashodhara-haller.jpg" alt="Prof. Dr. Lisa Yashodhara Haller" loading="lazy">
-                                </a>
-                            </div>
-                            <div class="text-wrapper pt-2">
-                                <a href="/projekte/lisa/">
-                                    <p>
-                                        Website 
-                                    </p>
-                                    <h3>
-                                        Prof. Dr. Lisa Yashodhara Haller 
-                                    </h3>
-                                </a>
-                            </div>
-                        </article>
-                    </div>
-
-                     <!-- Website: Park-Klinik -->
-                    <div class="col-lg-4 website">
-                        <article>
-                            <div class="image-wrapper box-shadow">
-                                <a href="/projekte/park-klinik/">
-                                    <img class="img-fluid" src="/assets/img/projects/park-klinik/screen-startseite-park-klinik-birkenwerder.jpg" alt="Park-Klinik Birkenwerder" loading="lazy">
-                                </a>
-                            </div>
-                            <div class="text-wrapper pt-2">
-                                <a href="/projekte/park-klinik/">
-                                    <p>
-                                        Website
-                                    </p>
-                                    <h3>
-                                        Park-Klinik Birkenwerder
-                                    </h3>
-                                </a>
-                            </div>
-                        </article>
-                    </div>
-
-                    <!-- Website: Pangolin-Doxx -->
-                    <div class="col-lg-4 website">
-                        <article>
-                            <div class="image-wrapper box-shadow">
-                                <a href="/projekte/pangolin-doxx/"> 
-                                    <img class="img-fluid" src="/assets/img/projects/pangolin-doxx/screen-startseite-pangolin-doxx.jpg" alt="Pangolin-Doxx" loading="lazy">
-                                </a>
-                            </div>
-                            <div class="text-wrapper pt-2">
-                                <a href="/projekte/pangolin-doxx/">
-                                    <p>
-                                        Website
-                                    </p>
-                                    <h3>
-                                        Pangolin-Doxx
-                                    </h3>
-                                </a>
-                            </div>
-                        </article>
-                    </div>
-                    
+                <!-- Shopfrontend: STRATO --> 
+                <div class="col-lg-4 website">
+                    <article>
+                        <div class="image-wrapper box-shadow">
+                            <a href="/projekte/strato/">
+                                <img class="img-fluid" src="/assets/img/projects/strato/screen-startseite-strato-april-2024.jpg" alt="STRATO" loading="lazy">
+                            </a>
+                        </div>
+                        <div class="text-wrapper pt-2">
+                            <a href="/projekte/strato/">
+                                <p>
+                                    Shopfrontend
+                                </p>
+                                <h3>
+                                    STRATO 
+                                </h3>
+                            </a>
+                        </div>
+                    </article>
                 </div>
-            </div> 
+
+                <!-- Website: Lisa Yasodhara Haller -->
+                <div class="col-lg-4 website">
+                    <article>
+                        <div class="image-wrapper box-shadow">
+                            <a href="/projekte/lisa/">
+                                <img class="img-fluid screen-img" src="/assets/img/projects/lisa/screen-startseite-lisa-yashodhara-haller.jpg" alt="Prof. Dr. Lisa Yashodhara Haller" loading="lazy">
+                            </a>
+                        </div>
+                        <div class="text-wrapper pt-2">
+                            <a href="/projekte/lisa/">
+                                <p>
+                                    Website 
+                                </p>
+                                <h3>
+                                    Prof. Dr. Lisa Yashodhara Haller 
+                                </h3>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+
+                    <!-- Website: Park-Klinik -->
+                <div class="col-lg-4 website">
+                    <article>
+                        <div class="image-wrapper box-shadow">
+                            <a href="/projekte/park-klinik/">
+                                <img class="img-fluid" src="/assets/img/projects/park-klinik/screen-startseite-park-klinik-birkenwerder.jpg" alt="Park-Klinik Birkenwerder" loading="lazy">
+                            </a>
+                        </div>
+                        <div class="text-wrapper pt-2">
+                            <a href="/projekte/park-klinik/">
+                                <p>
+                                    Website
+                                </p>
+                                <h3>
+                                    Park-Klinik Birkenwerder
+                                </h3>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Website: Pangolin-Doxx -->
+                <div class="col-lg-4 website">
+                    <article>
+                        <div class="image-wrapper box-shadow">
+                            <a href="/projekte/pangolin-doxx/"> 
+                                <img class="img-fluid" src="/assets/img/projects/pangolin-doxx/screen-startseite-pangolin-doxx.jpg" alt="Pangolin-Doxx" loading="lazy">
+                            </a>
+                        </div>
+                        <div class="text-wrapper pt-2">
+                            <a href="/projekte/pangolin-doxx/">
+                                <p>
+                                    Website
+                                </p>
+                                <h3>
+                                    Pangolin-Doxx
+                                </h3>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+                
+            </div>
         </div> 
     </section>
 

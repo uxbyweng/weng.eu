@@ -33,7 +33,7 @@ $isEn = is_en();
                 </div>
 
                 <div class="col-12 col-md-5 text-center order-2 order-md-3 p-4 mt-150-md">
-                    <img src="/assets/img/projects/strato/screen-strato-mobile-menu-2024.jpg" alt="Screen: STRATO Mobile Menu 2024" class="img-fluid box-shadow" loading="lazy">
+                    <img src="/assets/img/projects/strato/screen-startseite-strato-april-2024.jpg" alt="Screen: STRATO Startseite 2024" class="img-fluid box-shadow" loading="lazy">
                 </div>
 
                 <div class="col-12 col-md-7 order-3 order-md-2">
@@ -50,9 +50,28 @@ $isEn = is_en();
         <div class="container">
             <div class="row">
 
-                <div class="col-12 col-md-8 order-1 pe-5">
-                    <aricle>
-                        <img src="/assets/img/projects/strato/screen-startseite-strato-april-2024.jpg" alt="Screen: STRATO Startseite 2024" class="img-fluid box-shadow mb-5" loading="lazy">
+                <div class="col-12 col-md-8 order-1 pe-2 pe-md-5">
+
+                    <div class="ref-viewport" role="region" aria-label="Scrollable reference screen" tabindex="0">
+                        <figure>
+                            <picture>
+                                <source srcset="/assets/img/projects/strato/screen_strato_woocommerce_full_page_mai_2024.webp" type="image/webp">
+                                <img
+                                    src="/assets/img/projects/strato/screen_strato_woocommerce_full_page_mai_2024.jpg"
+                                    class="screen-img"
+                                    alt="STRATO WooCommerce – vollständiger Seiten-Screenshot, Stand Mai 2024"
+                                    loading="lazy"
+                                    decoding="async"
+                                    sizes="(min-width: 992px) 800px, 100vw"
+                                >
+                            </picture>
+                            <figcaption>Screen: STRATO WooCommerce Full Page Mai 2024 — <a href="/assets/img/projects/strato/screen_strato_woocommerce_full_page_mai_2024.jpg" target="_blank" rel="noopener">In neuem Tab öffnen</a></figcaption>
+                        </figure>
+                    </div>
+
+
+                    <!--aricle>
+                        <img src="/assets/img/projects/strato/screen-strato-mobile-menu-2024.jpg" alt="Screen: STRATO Mobile Menu 2024" class="img-fluid box-shadow mb-5" loading="lazy">
                     </aricle>
                     <aricle>
                         <img src="/assets/img/projects/screen-strato-windows-v-server-filtertabelle.jpg" alt="Screen: Filterbare Windows V-Server Tabelle" class="img-fluid mb-5" loading="lazy">
@@ -72,7 +91,7 @@ $isEn = is_en();
                                 <img src="/assets/img/projects/strato/faireinfacht_2020.svg" alt="Illustration: STRATO #FAIREINFACHT" class="img-fluid" loading="lazy">
                             </div>
                         </div>
-                    </aricle>
+                    </aricle-->
                 </div>
 
                 <aside class="col-12 col-md-4 order-2 pt-5 pt-md-0 pe-5">
