@@ -72,7 +72,7 @@
                                 <a href="/library/" title="Pattern Library">Pattern Library</a>
                             </li>
                             <li>
-                                <a href="/console/" title="JavaScript Console">JS Console</a>
+                                <a href="/playground/console/" title="JavaScript Console">JS Console</a>
                             </li>
                         </ul>
                     </div>
