@@ -11,7 +11,10 @@ $cspNonce = $_SERVER['CSP_NONCE'] ?? null;
 echo render_head($meta, $cspNonce);
 $isEn = is_en();
 ?>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/go.min.js"></script>
+<script>hljs.highlightAll();</script>
 <body>
     <style>
         :root {
@@ -27,19 +30,49 @@ $isEn = is_en();
             --radius: 14px;
             --console: #00ff00;
             --console-error: #ff3300;
+            --btn-primary-hover-bg-color: #fff;
+            --btn-primary-hover-border-color: #d03241;
+            --btn-primary-hover-color: #d03241;
+            --btn-secondary-color: #d03241;
+            --btn-secondary-border-color: #d03241;
+            --btn-secondary-hover-bg-color: #fff;
+            --btn-secondary-hover-border-color: #d03241;
+            --btn-secondary-hover-color: #d03241;
+            --btn-secondary-disabled-color: #d03241;
+            --bs-btn-color: #d03241 !important;
+            --bs-btn-bg: rgba(0, 0, 0, 0) !important;
+            --bs-btn-border-color: #d03241 !important;
+            --bs-btn-hover-color: #d03241 !important;
+            --bs-btn-hover-bg: #fff !important;
+            --bs-btn-hover-border-color: #d03241 !important;
         }
         [data-bs-theme="dark"] {
             --bg: #f6f8ff;
-            --panel: #d9d9d9;
-            --fg: #1a2233;
+            --panel: #282c34;
+            --fg: #e6e8f0;
             --muted: #4b5563;
             --accent: #2a444c;
             --ok: #047857;
             --warn: #b45309;
             --err: #b91c1c;
             --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            --console: #094b09;
+            --console: #00ff00;
             --console-error: #d72b00;
+            --btn-primary-hover-bg-color: #fff;
+            --btn-primary-hover-border-color: #d03241;
+            --btn-primary-hover-color: #ff3300;
+            --btn-secondary-color: #ff3300;
+            --btn-secondary-border-color: #ff3300;
+            --btn-secondary-hover-bg-color: #fff;
+            --btn-secondary-hover-border-color: #ff3300;
+            --btn-secondary-hover-color: #ff3300;
+            --btn-secondary-disabled-color: #ff3300;
+            --bs-btn-color: #ff3300 !important;
+            --bs-btn-bg: rgba(0, 0, 0, 0) !important;
+            --bs-btn-border-color: #ff3300 !important;
+            --bs-btn-hover-color: #ff3300 !important;
+            --bs-btn-hover-bg: #fff !important;
+            --bs-btn-hover-border-color: #ff3300 !important;
         }
 
         html,
@@ -209,6 +242,7 @@ $isEn = is_en();
 
         code.console {
             color: var(--console);
+            font-size: 1.5rem;
         }
 
         code.console.error {
@@ -242,20 +276,12 @@ $isEn = is_en();
                         <div class="topbar" aria-hidden="true">
                             <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
                             <span class="title">mini-console</span>
-                        </div>
+                        </div> 
                         <div class="editor">
-                            <textarea id="code" spellcheck="false" placeholder="// Paste JavaScript code here..."></textarea>
+                            <textarea id="code" class="language-javascript" spellcheck="false" placeholder="// Paste JavaScript code here..."></textarea>
                             <div class="controls mt-3">
                                 <button id="runBtn" class="btn btn-primary" title="Ausführen (Ctrl/⌘+Enter)">Ausführen</button>
                                 <button id="clearBtn" class="btn btn-secondary" title="Ausgabe löschen">Löschen</button>
-
-                                <!--button type="submit" class="btn btn-secondary d-inline-flex align-items-center gap-2 mt-2 mb-5 px-4 py-2">
-                                    <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
-                                    Mitteilung senden
-                                    <i class="fa-solid fa-arrow-right"></i>
-                                </button-->
-
-
                                 <span class="hint px-5">Shortcuts: <span class="kbd">Ctrl/⌘+Enter</span> ausführen, <span class="kbd">Shift+Enter</span> neue Zeile, <span class="kbd">↑/↓</span> Verlauf</span>
                             </div>
                         </div>
@@ -275,7 +301,7 @@ $isEn = is_en();
             </div>
         </div>
     </section>
-
+    
     <script>
         // === Utility formatting ===
         const escapeHTML = (s) => String(s).replace(/[&<>\"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\\':'\\'}[c]));
@@ -401,7 +427,7 @@ $isEn = is_en();
             // Nur console.*-Logs ausgeben
             for (const l of logs) {
                 const formatted = l.args
-                .map(a => `<code class="console">${escapeHTML(stringifyArg(a))}</code>`)
+                .map(a => `<code class="console language-javascript">${escapeHTML(stringifyArg(a))}</code>`)
                 .join(' ');
                 appendEntry(formatted);
             }
@@ -416,18 +442,18 @@ $isEn = is_en();
         clearBtn.addEventListener('click', () => { out.innerHTML = ''; codeEl.focus(); });
 
         // Save-as-HTML (downloads the current page as a single file)
-        dlBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const blob = new Blob([document.documentElement.outerHTML], { type: 'text/html' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'mini-js-console.html';
-        document.body.appendChild(a);
-        a.click();
-        a.remove();
-        URL.revokeObjectURL(url);
-        });
+        // dlBtn.addEventListener('click', (e) => {
+        // e.preventDefault();
+        // const blob = new Blob([document.documentElement.outerHTML], { type: 'text/html' });
+        // const url = URL.createObjectURL(blob);
+        // const a = document.createElement('a');
+        // a.href = url;
+        // a.download = 'mini-js-console.html';
+        // document.body.appendChild(a);
+        // a.click();
+        // a.remove();
+        // URL.revokeObjectURL(url);
+        // });
 
         // Keyboard: Ctrl/Cmd+Enter to run, Shift+Enter newline, Tab to indent, Up/Down to browse history
         codeEl.addEventListener('keydown', (e) => {
@@ -473,6 +499,7 @@ $isEn = is_en();
     </script>
     
 </main>
+
 
 <?php
 include( $_SERVER[ "DOCUMENT_ROOT" ] . "/includes/footer.php" );
