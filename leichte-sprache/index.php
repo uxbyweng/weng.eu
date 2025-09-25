@@ -130,7 +130,7 @@ $isEn = is_en();
                             <?php endif; ?>
                         </p>
                         <p class="fs-20 my-3">
-                            <a href="https://www.strato.de" rel="nofollow">www.strato.de</a>
+                            <a href="https://www.strato.de" rel="nofollow" target="_blank">strato.de</a>
                         </p>
                         <a href="/projekte/strato/" class="btn btn-secondary d-inline-flex align-items-center gap-2 my-3 px-4 py-2">
                             <?php if ($sprache === 'en'): ?>
@@ -150,7 +150,7 @@ $isEn = is_en();
             <article class="col-lg-12 row g-0">
                 <div class="col-lg-6 p-4">
                     <div class="box-shadow">
-                        <img class="img-fluid" src="/assets/img/projects/screen-lisa-haller.jpg" alt="Website von Prof. Dr. Lisa Yashodhara Haller" loading="lazy">
+                        <img class="img-fluid" src="/assets/img/projects/lisa/screen-startseite-lisa-yashodhara-haller.jpg" alt="Website von Prof. Dr. Lisa Yashodhara Haller" loading="lazy">
                     </div>
                 </div>
                 <div class="col-lg-6 p-4">
@@ -166,7 +166,7 @@ $isEn = is_en();
                             <?php endif; ?>
                         </p>
                         <p class="fs-20 my-3">
-                            <a href="https://www.lisa-yashodhara-haller.de/" rel="nofollow">www.lisa-yashodhara-haller.de</a>
+                            <a href="https://www.lisa-yashodhara-haller.de/" rel="nofollow" target="_blank">lisa-yashodhara-haller.de</a>
                         </p>
                         <a href="/projekte/lisa/" class="btn btn-secondary d-inline-flex align-items-center gap-2 my-3 px-4 py-2">
                             <?php if ($sprache === 'en'): ?>
@@ -202,7 +202,7 @@ $isEn = is_en();
                             <?php endif; ?>
                         </p>
                         <p class="fs-20 my-3">
-                            <a href="https://www.park-klinik-birkenwerder.de/" rel="nofollow">www.park-klinik-birkenwerder.de</a>
+                            <a href="https://www.park-klinik-birkenwerder.de/" rel="nofollow" target="_blank">park-klinik-birkenwerder.de</a>
                         </p>
                         <a href="/projekte/park-klinik/" class="btn btn-secondary d-inline-flex align-items-center gap-2 my-3 px-4 py-2">
                             <?php if ($sprache === 'en'): ?>
@@ -222,7 +222,7 @@ $isEn = is_en();
             <article class="col-lg-12 row g-0">
                 <div class="col-lg-6 p-4">
                     <div class="box-shadow">
-                        <img class="img-fluid" src="/assets/img/projects/park-klinik/screen-startseite-park-klinik-birkenwerder.jpg" alt="Screen: Startseite der Park-Klinik Birkenwerder" loading="lazy">
+                        <img class="img-fluid" src="/assets/img/projects/pangolin-doxx/screen-startseite-pangolin-doxx.jpg" alt="Screen: Startseite von Pangolin-Doxx" loading="lazy">
                     </div>
                 </div>
                 <div class="col-lg-6 p-4">
@@ -232,45 +232,25 @@ $isEn = is_en();
                         </h3>
                         <p class="fs-20 my-3">
                             <?php if ($sprache === 'en'): ?>
-                                Long-term support since 2015: Conception, design, frontend & backend (PHP) with a focus on stability, performance, and easy maintenance. Logo redesign included, bilingual DE/EN structure, and a lightweight blog system based on PHP/SQLite.
+                                Complete relaunch of the website – including website conception, design, responsive frontend, and technical implementation. Focus: Accessibility, performance, and a clearly structured appearance.
                             <?php else: ?>
                                 Langfristige Betreuung seit 2015: Konzeption, Design, Frontend & Backend (PHP) mit Fokus auf Stabilität, Performance und einfacher Pflege. Logo-Redesign inklusive, zweisprachige DE/EN-Struktur und ein leichtgewichtiges Blog-System auf PHP/SQLite-Basis.
                             <?php endif; ?>
                         </p>
                         <p class="fs-20 my-3">
-                            <a href="https://www.park-klinik-birkenwerder.de/" rel="nofollow">www.park-klinik-birkenwerder.de</a>
+                            <a href="https://www.pangolin-doxx.com/" rel="nofollow" target="_blank">pangolin-doxx.com</a>
                         </p>
                         <a href="/projekte/park-klinik/" class="btn btn-secondary d-inline-flex align-items-center gap-2 my-3 px-4 py-2">
                             <?php if ($sprache === 'en'): ?>
-                            More info about Project Park-Klinik
+                            More info about Project Pangolin-Doxx
                             <?php else: ?>
-                            Mehr Infos zum Projekt Park-Klinik
+                            Mehr Infos zum Projekt Pangolin-Doxx
                             <?php endif; ?>
                             <i class="fa-solid fa-arrow-right"></i>
                         </a>
                     </div>
                 </div>
             </article>
-
-            <!-- Pangolin-Doxx -->
-            <div class="col-lg-6">
-                <article class="h-100">
-                <div class="image-wrapper box-shadow">
-                    <img class="img-fluid" 
-                        src="/assets/img/projects/pangolin-doxx_440_675.jpg" 
-                        alt="Website Pangolin-Doxx" loading="lazy">
-                </div>
-                <div class="text-wrapper pt-3">
-                    <h3 class="fs-24 mb-2">Pangolin-Doxx – Website</h3>
-                    <ul class="mb-2">
-                    <li>Klare Startseite. Kurze Wege</li>
-                    <li>Einfacher Zugang zu Inhalten</li>
-                    <li>Leicht und schnell</li>
-                    </ul>
-                    <p class="mb-0"><strong>Leistungen:</strong> Webdesign, Umsetzung</p>
-                </div>
-                </article>
-            </div>
 
         </div>
     </div>

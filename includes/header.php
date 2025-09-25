@@ -25,17 +25,17 @@
                     <nav style="float:left;" aria-label="<?= $isEn ? 'Main navigation' : 'Hauptnavigation' ?>">
                         <ul class="nav justify-content-end">
                             <li class="nav-item">
-                                <a class="nav-link <?= active_class('/', false) ?>" href="/" title="<?= $isEn ? 'To the homepage' : 'Zur Startseite' ?>">
+                                <a class="nav-link <?= active_class('/', false) ?>" href="/" title="<?= $isEn ? 'To the homepage' : 'Zur Startseite' ?>" <?= aria_current('/', false) ?>>
                                     Home
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link <?= active_class('/projekte/', true) ?>" href="/projekte/" title="<?= $isEn ? 'To the project overview' : 'Zur Projektübersicht' ?>">
+                                <a class="nav-link <?= active_class('/projekte/', true) ?>" href="/projekte/" title="<?= $isEn ? 'To the project overview' : 'Zur Projektübersicht' ?>" <?= aria_current('/projekte/', true) ?>>
                                     <?= $isEn ? 'Projects' : 'Projekte' ?>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link <?= active_class('/kontakt/', false) ?>" href="/kontakt/">
+                                <a class="nav-link <?= active_class('/kontakt/', false) ?>" href="/kontakt/" <?= aria_current('/kontakt/', false) ?>>
                                     <?= $isEn ? 'Contact' : 'Kontakt' ?>
                                 </a>
                             </li>
@@ -49,10 +49,10 @@
                                 <?= $isEn ? 'aria-current="page"' : '' ?>>en</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link <?= active_class('/leichte-sprache/', false) ?>" href="/leichte-sprache/" id="easyLanguageIconLink" title="<?= $isEn ? 'Easy Language' : 'Zur Website in Leichter Sprache' ?>">
+                                <a class="nav-link" href="/leichte-sprache/" id="easyLanguageIconLink" title="<?= $isEn ? 'Easy Language' : 'Link zur Website in Leichter Sprache' ?>" <?= aria_current('/leichte-sprache/', false) ?>>
                                     <i class="bi bi-translate"></i> 
                                 </a>
-                                <a class="nav-link d-none" href="/" id="alltagsSpracheLink" title="<?= $isEn ? 'To the page in Everyday Language' : 'Zur Website in Alltags-Sprache' ?>">
+                                <a class="nav-link d-none" href="/" id="alltagsSpracheLink" title="<?= $isEn ? 'To the page in Everyday Language' : 'Link zur Website in Alltags-Sprache' ?>">
                                     <?= $isEn ? 'Page in Everyday Language' : 'Seite in Alltags-Sprache' ?>
                                 </a>
                             </li>

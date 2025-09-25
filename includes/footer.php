@@ -53,14 +53,14 @@
                     <div class="col-6 col-md-2 offset-md-1 mt-3 mt-md-0" id="contact">
                         <ul class="list-unstyled gap-2 d-flex flex-column fs-22 fs-18-md">
                             <li>
-                                <a href="/leichte-sprache/" id="easyLanguageFooterLink" title="<?php if ($sprache === 'en'): ?>Easy Language<?php else: ?>Zur Website in 'Leichter Sprache'<?php endif; ?>">
+                                <a href="/leichte-sprache/" id="easyLanguageFooterLink" class="<?= active_class('/leichte-sprache/', false) ?>" title="<?php if ($sprache === 'en'): ?>Easy Language<?php else: ?>Zur Website in 'Leichter Sprache'<?php endif; ?>">
                                     <?php if ($sprache === 'en'): ?>
                                         Easy Language
                                     <?php else: ?>
                                         Leichte Sprache
                                     <?php endif; ?>
                                 </a>
-                                <a class="d-none" href="/" id="alltagsSpracheFooterLink" title="<?php if ($sprache === 'en'): ?>To the page in 'Everyday Language'<?php else: ?>Zur Website in 'Alltags-Sprache'<?php endif; ?>">
+                                <a class="d-none" href="/" id="alltagsSpracheFooterLink" class="<?= active_class('/leichte-sprache/', false) ?> title="<?php if ($sprache === 'en'): ?>To the page in 'Everyday Language'<?php else: ?>Zur Website in 'Alltags-Sprache'<?php endif; ?>">
                                     <?php if ($sprache === 'en'): ?>
                                         Everyday Language
                                     <?php else: ?>
