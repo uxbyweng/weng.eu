@@ -8,14 +8,14 @@
                     $segmentCount = count($segments);
 
                     // Startseite
-                    echo '<a href="/" class="text-decoration-none' . (empty($segments) ? ' active' : '') . '">home</a>';
+                    echo '<a href="/" class="' . (empty($segments) ? ' active' : '') . '">home</a>';
 
                     // Breadcrumb generieren
                     $url = '';
                     foreach ($segments as $index => $segment) {
                         $url .= '/' . $segment;
                         $isLast = ($index === array_key_last($segments));
-                        $class = 'text-decoration-none' . ($isLast ? ' active' : '');
+                        $class = ($isLast ? ' active' : '');
 
                         // Wenn letzter Pfad → kein Link mehr
                         if ($isLast) {

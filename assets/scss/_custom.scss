@@ -55,8 +55,8 @@
     --font-handwriting: "Nothing You Could Do";
     --header-bg: #ffffffcc; /* Weiß ~80% */
     --header-backdrop: saturate(180%) blur(40px);
-    --bg-color-blob1: #bbff0066;
-    --bg-color-blob2: #ffee0066;
+    --bg-color-blob1: rgb(255, 255, 255);
+    --bg-color-blob2: rgb(255, 255, 255);
     --bg-body: #f5f7f1;
     --bg-footer: #212529;
     --footer-color: #aeaeae;
@@ -284,9 +284,18 @@ button#toggleTheme:hover {
     text-decoration: underline;
 }
 
+code {
+    color: white !important;
+}
+code a {
+    color: white !important;
+    text-decoration: none !important;
+}
 code a.active,
 code span.active {
-    color: var(--bs-code-color) !important;
+    color: white !important;
+    text-decoration: underline !important;
+    text-underline-offset: 0.2em;
 }
 
 .screen-reader-text {
