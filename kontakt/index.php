@@ -152,7 +152,7 @@ $isEn = is_en();
                 <aside class="col-12 offset-md-2 col-md-3 order-2 pe-5">
                     <section class="pb-3 border-bottom">
                         <h2 class="fs-20 font-gray8 text-uppercase">
-                            <?php if (is_en()): ?>
+                            <?php if (is_en()): ?>gi
                                 <strong>Contact</strong>
                             <?php else: ?>
                                 <strong>Kontakt</strong>

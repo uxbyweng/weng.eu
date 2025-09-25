@@ -117,3 +117,35 @@ function is_honeypot_triggered(array $post, string $formId = 'default'): bool {
   if (!$hp) return true; // wenn es keinen Namen gibt, lieber blocken
   return !empty($post[$hp] ?? '');
 }
+
+/** Liefert den aktuellen Pfad ohne Querystring, ohne trailing Slash (außer "/"). */
+function current_path(): string {
+  $path = parse_url(page_url(), PHP_URL_PATH) ?? '/';
+  $path = rtrim($path, '/');
+  return $path === '' ? '/' : $path;
+}
+
+/**
+ * Prüft, ob $href aktiv ist.
+ * $prefix=true: auch Unterpfade zählen (z. B. /projekte/ und /projekte/xyz/)
+ */
+function is_active(string $href, bool $prefix = false): bool {
+  $target = parse_url($href, PHP_URL_PATH) ?? '/';
+  $target = rtrim($target, '/');
+  $target = $target === '' ? '/' : $target;
+
+  $path = current_path();
+
+  if ($prefix) {
+    return $path === $target || ($target !== '/' && str_starts_with($path, $target . '/'));
+  }
+  return $path === $target;
+}
+
+/** Convenience-Ausgaben für Markup */
+function active_class(string $href, bool $prefix = false): string {
+  return is_active($href, $prefix) ? ' active' : '';
+}
+function aria_current(string $href, bool $prefix = false): string {
+  return is_active($href, $prefix) ? ' aria-current="page"' : '';
+}

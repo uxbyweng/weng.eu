@@ -390,6 +390,12 @@ a.btn-secondary.is-checked {
     font-weight: 600;
 }
 
+a.nav-link.active {
+    color: var(--bs-accent);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+}
+
 /* Logo */
 .logo-img {
     width: 100px;
