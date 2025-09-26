@@ -98,8 +98,8 @@ $isEn = is_en();
                     Legal basis: Art. 6 (1) (f) GDPR.<br>
                     Storage period: max. 7 days, followed by deletion or anonymization.
                 </p>
-                <hr class="my-4">
-                <h2 class="font-nidorina fs-30 pb-3" id="no-tracking-en">
+                <hr class="my-4" id="no-tracking-en">
+                <h2 class="font-nidorina fs-30 pb-3">
                     4. Cookies (no tracking)
                 </h2>
                 <ul>
@@ -239,8 +239,8 @@ $isEn = is_en();
                     Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO.<br>
                     Speicherdauer: max. 7 Tage, anschließend Löschung oder Anonymisierung.
                 </p>
-                <hr class="my-4">
-                <h2 class="font-nidorina fs-30 pb-3" id="no-tracking-de">
+                <hr class="my-4" id="no-tracking-de">
+                <h2 class="font-nidorina fs-30 pb-3">
                     4. Cookies (ohne Tracking)
                 </h2>
                 <ul>
