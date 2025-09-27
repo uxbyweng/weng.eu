@@ -135,20 +135,19 @@ function meta_tags(array $meta): string {
 
   ob_start(); ?>
   <title><?= e($m['title']) ?></title>
-  <meta name="description" content="<?= e($m['desc']) ?>">
-  <meta name="robots" content="<?= e($m['robots']) ?>">
-
-  <meta property="og:title" content="<?= e($m['title']) ?>">
-  <meta property="og:description" content="<?= e($m['desc']) ?>">
-  <meta property="og:site_name" content="WENG.EU">
-  <meta property="og:type" content="article">
-  <meta property="og:image" content="<?= e($ogImg) ?>">
-  <meta property="og:url" content="<?= e($url) ?>">
-  <meta property="og:updated_time" content="<?= e($updated) ?>">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="<?= e($m['title']) ?>">
-  <meta name="twitter:description" content="<?= e($m['desc']) ?>">
-  <meta name="twitter:image" content="<?= e($ogImg) ?>">
+    <meta name="description" content="<?= e($m['desc']) ?>">
+    <meta name="robots" content="<?= e($m['robots']) ?>">
+    <meta property="og:title" content="<?= e($m['title']) ?>">
+    <meta property="og:description" content="<?= e($m['desc']) ?>">
+    <meta property="og:site_name" content="WENG.EU">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="<?= e($ogImg) ?>">
+    <meta property="og:url" content="<?= e($url) ?>">
+    <meta property="og:updated_time" content="<?= e($updated) ?>">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="<?= e($m['title']) ?>">
+    <meta name="twitter:description" content="<?= e($m['desc']) ?>">
+    <meta name="twitter:image" content="<?= e($ogImg) ?>">
   <?php
   return trim((string)ob_get_clean());
 }

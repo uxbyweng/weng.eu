@@ -86,6 +86,9 @@
     --btn-secondary-hover-border-color: #d03241;
     --btn-secondary-hover-color: #d03241;
     --btn-secondary-disabled-color: #d03241;
+
+    --bs-btn-hover-color: #ff3300 !important;
+
     --nidorina-gradient: linear-gradient(to right, #669999, #22373f);
     --cc-background-color: #101c38;
     --cc-msg-color: #fff;
@@ -123,8 +126,17 @@
     --btn-secondary-border-color: #ff3300;
     --btn-secondary-hover-bg-color: #fff;
     --btn-secondary-hover-border-color: #ff3300;
-    --btn-secondary-hover-color: #ff3300;
+    --btn-secondary-hover-color: #ff3300 !important;
     --btn-secondary-disabled-color: #ff3300;
+
+    --bs-btn-hover-color: #ff3300 !important;
+    --bs-btn-secondary-color: #ff3300;
+    --bs-btn-secondary-border-color: #ff3300;
+    --bs-btn-secondary-hover-bg-color: #fff;
+    --bs-btn-secondary-hover-border-color: #ff3300;
+    --bs-btn-secondary-hover-color: #ff3300 !important;
+    --bs-btn-secondary-disabled-color: #ff3300;
+
     --nidorina-gradient: linear-gradient(to right, #669999, #22373f);
     --cc-background-color: #101c38;
     --cc-msg-color: #fff;
@@ -365,6 +377,12 @@ a.btn-secondary.is-checked {
     transform: translateX(5px);
     transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
     /* kein delay */
+}
+
+.btn:hover {
+    color: var(--bs-btn-hover-color);
+    background-color: var(--bs-btn-hover-bg);
+    border-color: var(--bs-btn-hover-border-color);
 }
 
 /* Bewegung reduzieren respektieren */

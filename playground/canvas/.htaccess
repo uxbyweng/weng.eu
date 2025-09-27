@@ -1,0 +1,10 @@
+RewriteEngine On
+RewriteBase /playground/canvas/
+
+# /playground/canvas/20250927120550-eye  ->  /playground/canvas/index.php?v=20250927120550-eye
+RewriteRule ^([0-9]{14}(?:-[a-z0-9_-]+)?(?:-\d+)?)$ index.php?v=$1 [L,QSA]
+
+# Dateien & Unterordner direkt durchlassen
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule .* - [L]

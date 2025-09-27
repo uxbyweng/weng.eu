@@ -1,4 +1,5 @@
 <?php
+require_once $_SERVER['DOCUMENT_ROOT'].'/includes/lang.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/includes/helpers.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/includes/head.php';
 $meta = [
@@ -33,7 +34,21 @@ $isEn = is_en();
                 </div>
 
                 <div class="col-12 col-md-5 text-center order-2 order-md-3 p-4 mt-150-md">
-                    <img src="/assets/img/test/tdd-cycle-edited.webp" alt="TDD">
+                    <p>CSS Rating</p>
+                    <span class="star-rating" style="--rating: 3;"></span>
+
+                    <style>
+                        .star-rating::after {
+                            content: '★ ★ ★ ★ ★';
+                            --rating-percent: calc(var(--rating) / 5 * 100%);
+                            background: linear-gradient(90deg,
+                            red var(--rating-percent),
+                            grey var(--rating-percent));
+                            background-clip: text;
+                            white-space: nowrap;
+                            color: transparent;
+                        }
+                    </style>
                 </div>
 
                 <div class="col-12 col-md-7 order-3 order-md-2"> 
@@ -83,20 +98,7 @@ $isEn = is_en();
             </div>
         </div>
     </section> 
-    <span class="star-rating" style="--rating: 3;"></span>
-
-    <style>
-        .star-rating::after {
-            content: '★ ★ ★ ★ ★';
-            --rating-percent: calc(var(--rating) / 5 * 100%);
-            background: linear-gradient(90deg,
-            red var(--rating-percent),
-            grey var(--rating-percent));
-            background-clip: text;
-            white-space: nowrap;
-            color: transparent;
-        }
-    </style>
+    
 
 
 
