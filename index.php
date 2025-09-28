@@ -59,7 +59,7 @@ $isEn = is_en();
                                 <?php else: ?>
                                 Kontakt aufnehmen 
                                 <?php endif; ?>
-                                <i class="fa-solid fa-arrow-right"></i>
+                                <i class="bi bi-arrow-right"></i>
                             </a>
                         </div>
                     </div>
@@ -141,7 +141,6 @@ $isEn = is_en();
                             Alle Projekte ansehen
                         <?php endif; ?>
                         <i class="bi bi-arrow-right"></i>
-                        <!--i class="fa-solid fa-arrow-right"></i-->
                     </a>
                 </div>
             </div>

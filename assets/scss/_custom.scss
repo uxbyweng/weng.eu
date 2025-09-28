@@ -327,8 +327,8 @@ code span.active {
 
 /* ===== WENG Button ====================================================== */
 :root {
-    --wng-btn-bg: #cc0000;
-    --wng-btn-bg-hover: #ff0000;
+    --wng-btn-bg: #990000;
+    --wng-btn-bg-hover: #cc0000;
     --wng-btn-fg: #fff;
     --wng-btn-radius: 6px;
     --wng-btn-font-size: 16px;
@@ -423,7 +423,7 @@ code span.active {
 .wng-btn > svg,
 .wng-btn > i {
     width: 1em;
-    height: 1em;
+    /* height: 1em; */
     flex: 0 0 auto;
 }
 
