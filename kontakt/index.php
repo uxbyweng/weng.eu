@@ -57,10 +57,10 @@ $isEn = is_en();
     </section>
 
     <!-- CONTACT FORM -->
-    <section class="px-3 px-md-0 py-5 py-md-5">
+    <section class="px-3 px-md-0 py-5">
         <div class="container">
             <div class="row">
-                <div class="col-12 col-md-7 order-1 pe-5 pb-5">
+                <div class="col-12 col-md-7 order-1 pb-5">
                     <?php if (is_en()): ?>
                     <form action="/kontakt/kontakt.en.php" method="post" id="contact-form" novalidate>
                     <?php else: ?>
@@ -83,14 +83,14 @@ $isEn = is_en();
                         </div>
                         <div class="form-group">
                             <label for="cf-email" class="form-label">
-                            <?php if (is_en()): ?>Email Address<?php else: ?>E-Mail-Adresse<?php endif; ?>
+                            <?php if (is_en()): ?>Email Address*<?php else: ?>E-Mail-Adresse*<?php endif; ?>
                             </label>
                             <input
                             id="cf-email"
                             name="email"
                             type="email"
                             class="form-control"
-                            placeholder="<?php if (is_en()): ?>Email Address*<?php else: ?>E-Mail-Adresse*<?php endif; ?>"
+                            placeholder="<?php if (is_en()): ?>Email Address<?php else: ?>E-Mail-Adresse<?php endif; ?>"
                             required
                             pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$"
                             autocomplete="email"
@@ -100,14 +100,14 @@ $isEn = is_en();
                         </div>
                         <div class="form-group">
                             <label for="cf-message" class="form-label">
-                            <?php if (is_en()): ?>Message<?php else: ?>Nachricht<?php endif; ?>
+                            <?php if (is_en()): ?>Message*<?php else: ?>Nachricht*<?php endif; ?>
                             </label>
                             <textarea
                             id="cf-message"
                             name="message"
                             class="form-control"
                             rows="3"
-                            placeholder="<?php if (is_en()): ?>Message*<?php else: ?>Nachricht*<?php endif; ?>"
+                            placeholder="<?php if (is_en()): ?>Message<?php else: ?>Nachricht<?php endif; ?>"
                             required
                             autocomplete="off"></textarea>
                         </div>

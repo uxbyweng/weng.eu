@@ -523,7 +523,7 @@ a.btn-secondary.is-checked {
 }
 
 /* Normalzustand – definiert den Rückweg (raus aus dem Hover) */
-.btn.btn-secondary .fa-arrow-right {
+.wng-btn .bi-arrow-right {
     display: inline-block;
     transform: translateX(0);
     transition: transform 260ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -532,8 +532,8 @@ a.btn-secondary.is-checked {
 }
 
 /* Hover/Fokus – rein animieren und dort bleiben */
-.btn.btn-secondary:hover .fa-arrow-right,
-.btn.btn-secondary:focus-visible .fa-arrow-right {
+.wng-btn:hover .bi-arrow-right,
+.wng-btn:focus-visible .bi-arrow-right {
     transform: translateX(5px);
     transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
     /* kein delay */

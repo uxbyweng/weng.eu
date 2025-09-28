@@ -53,7 +53,7 @@ $isEn = is_en();
                             </em>
                         </p>
                         <div class="text-center text-md-start">
-                            <a href="/kontakt/" class="btn btn-secondary d-inline-flex align-items-center gap-2 my-4 px-4 py-2">
+                            <a href="/kontakt/" class="wng-btn d-inline-flex align-items-center gap-2 my-4 px-4 py-2">
                                 <?php if (is_en()): ?>
                                 Make contact
                                 <?php else: ?>
@@ -134,13 +134,14 @@ $isEn = is_en();
                     </div>
                 </div>
                 <div class="text-center">
-                    <a href="/projekte/" class="btn btn-secondary d-inline-flex align-items-center gap-2 m-4">
+                    <a href="/projekte/" class="wng-btn d-inline-flex align-items-center gap-2 m-4">
                         <?php if (is_en()): ?>
                             View all projects
                         <?php else: ?>
                             Alle Projekte ansehen
                         <?php endif; ?>
-                        <i class="fa-solid fa-arrow-right"></i>
+                        <i class="bi bi-arrow-right"></i>
+                        <!--i class="fa-solid fa-arrow-right"></i-->
                     </a>
                 </div>
             </div>
