@@ -33,15 +33,15 @@ $isEn = is_en();
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/breadcrumb.php'; ?>
 
     <!-- ### STAGE ### -->    
-    <section class="px-3 px-md-0 pt-5">
+    <section class="px-3 px-md-0 pt-3">
         <div class="container">
             <div class="row">
-                <div class="col-5 col-md-7 order-2">
+                <div class="col-md-7 order-2 mt-3">
                     <h1>
-                        Just say  <span class="font-accent">hi</span>!
+                        Just say <span class="font-accent">hello</span> and drop me a line.
                     </h1>
                 </div>
-                <div class="col-5 offset-md-1 col-md-4 text-center order-1 order-md-3 p-4 mt-30 mt-100-md">
+                <div class="offset-md-1 col-md-4 text-center order-1 order-md-3">
                     <picture>
                         <!-- Desktop (≥ 56.25em ≈ 900px): 200×200 -->
                         <source media="(min-width:56.25em)" srcset="/assets/img/contact/img-contact.webp" type="image/webp">
@@ -49,22 +49,8 @@ $isEn = is_en();
                         <!-- Mobile (< 56.25em): 100×100 -->
                         <source srcset="/assets/img/contact/img-contact_xs.webp" type="image/webp">
                         <!-- Fallback (Browser ohne <picture> oder ohne WebP): mobile-Datei -->
-                        <img
-                            src="/assets/img/contact/img-contact_xs.jpg"
-                            alt="Karsten Weng"
-                            class="contact-photo"
-                            width="200" height="200"
-                            loading="lazy" decoding="async">
+                        <img src="/assets/img/contact/img-contact_xs.jpg" alt="Karsten Weng" class="contact-photo" width="200" height="200" loading="lazy" decoding="async">
                     </picture>
-                </div>
-                <div class="col-12 col-md-7 order-3 order-md-2">
-                    <p class="fs-24 lh-1-3 my-3">
-                        <?php if (is_en()): ?>
-                        <em>Drop me a line at <a href="mailto:info@weng.eu" target="_blank">info@weng.eu</a> or use the form below.</em>
-                        <?php else: ?>
-                        <em>Schreib mir eine Nachricht an <a href="mailto:info@weng.eu" target="_blank">E-Mail</a> oder nutze folgendes Kontaktformular.</em>
-                        <?php endif; ?>
-                    </p>
                 </div>
             </div>
         </div>
@@ -97,7 +83,7 @@ $isEn = is_en();
                         </div>
                         <div class="form-group">
                             <label for="cf-email" class="form-label">
-                            <?php if (is_en()): ?>Email Address*<?php else: ?>E-Mail-Adresse*<?php endif; ?>
+                            <?php if (is_en()): ?>Email Address<?php else: ?>E-Mail-Adresse<?php endif; ?>
                             </label>
                             <input
                             id="cf-email"
@@ -114,7 +100,7 @@ $isEn = is_en();
                         </div>
                         <div class="form-group">
                             <label for="cf-message" class="form-label">
-                            <?php if (is_en()): ?>Message*<?php else: ?>Nachricht*<?php endif; ?>
+                            <?php if (is_en()): ?>Message<?php else: ?>Nachricht<?php endif; ?>
                             </label>
                             <textarea
                             id="cf-message"
@@ -147,12 +133,11 @@ $isEn = is_en();
                             <?php if (is_en()): ?>Send Message<?php else: ?>Nachricht senden<?php endif; ?>
                         </button>
                     </form>
-
                 </div>
                 <aside class="col-12 offset-md-2 col-md-3 order-2 pe-5">
-                    <section class="pb-3 border-bottom">
+                    <section class="py-3 border-bottom">
                         <h2 class="fs-20 font-gray8 text-uppercase">
-                            <?php if (is_en()): ?>gi
+                            <?php if (is_en()): ?>
                                 <strong>Contact</strong>
                             <?php else: ?>
                                 <strong>Kontakt</strong>
@@ -160,11 +145,7 @@ $isEn = is_en();
                         </h2>
                         <p>
                             Karsten Weng<br>
-                        </p>
-                        <p>
-                            Berlin, Germany
-                        </p>
-                        <p>
+                            Berlin, Germany<br>
                             <a href="mailto:info@weng.eu"><u>info@weng.eu</u></a>
                         </p>
                     </section>

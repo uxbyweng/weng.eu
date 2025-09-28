@@ -80,6 +80,41 @@ $isEn = is_en();
                   <section class="py-5 border-bottom" id="section-buttons">
                     <div class="container">
                       <h2 class="font-nidorina mt-0 mb-5">Buttons</h2>
+                      <div class="row g-4 py-3">
+                        <div class="col-md-4">
+                            <!-- Button -->
+                             <button class="wng-btn">Button Standard</button>
+                        </div>
+                        <div class="col-md-4">
+                            <!-- Link als Button -->
+                             <a class="wng-btn" href="/download" role="button">Link als Button</a>
+                        </div>
+                        <div class="col-md-4">
+                          <!-- Immer volle Breite -->
+                           <button class="wng-btn wng-btn--block">fullwidth</button>
+                        </div>
+                      </div>
+                      <div class="row g-4 py-3">
+                        <div class="col-md-4">
+                            <!-- Mobil volle Breite, Desktop normal -->
+                            <a class="wng-btn wng-btn--mobile-full" href="#" role="button">fullwidth mobile</a>
+                        </div>
+                        <div class="col-md-4">
+
+                        </div>
+                        <div class="col-md-4">
+
+
+                           
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+
+                  <!-- Buttons -->
+                  <section class="py-5 border-bottom" id="section-buttons">
+                    <div class="container">
+                      <h2 class="font-nidorina mt-0 mb-5">Buttons</h2>
                       <div class="row g-4">
                         <div class="col-md-4">
                             <a href="/kontakt/" class="btn btn-secondary d-inline-flex align-items-center gap-2 px-4 py-2">

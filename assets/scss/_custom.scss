@@ -287,8 +287,8 @@ footer a {
     color: #fff;
 }
 
-a:not(.btn):hover,
-a:not(.btn):focus,
+/*a:not(.btn):hover,
+a:not(.btn):focus,*/
 button.easyspeach:hover,
 button.easyspeach:focus,
 button#toggleTheme:hover {
@@ -324,7 +324,167 @@ code span.active {
 }
 
 /* COMPONENTS */
-/* === components.css === */
+
+/* ===== WENG Button ====================================================== */
+:root {
+    --wng-btn-bg: #cc0000;
+    --wng-btn-bg-hover: #ff0000;
+    --wng-btn-fg: #fff;
+    --wng-btn-radius: 6px;
+    --wng-btn-font-size: 16px;
+    --wng-btn-font-weight: 400;
+    --wng-btn-line-height: 24px;
+    --wng-btn-pad-y: 8px;
+    --wng-btn-pad-x: 24px;
+    --wng-btn-border: 1px;
+}
+
+/* Basis: funktioniert für <button> und <a> */
+.wng-btn {
+    /* resets, ohne all:unset (behaltet z. B. type=submit Verhalten) */
+    -webkit-appearance: none;
+    appearance: none;
+    box-sizing: border-box;
+    border: var(--wng-btn-border) solid var(--wng-btn-bg);
+    background: var(--wng-btn-bg);
+    color: var(--wng-btn-fg);
+    border-radius: var(--wng-btn-radius);
+    font-size: var(--wng-btn-font-size);
+    font-weight: var(--wng-btn-font-weight);
+    line-height: var(--wng-btn-line-height);
+    padding: var(--wng-btn-pad-y) var(--wng-btn-pad-x);
+    text-align: center;
+    text-decoration: none; /* wichtig für <a> */
+    vertical-align: middle;
+    display: inline-flex; /* zentriert Inhalt sicher */
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* Link-Pseudoklassen: stelle sicher, dass <a> nicht lila/blau wird */
+.wng-btn:link,
+.wng-btn:visited {
+    color: var(--wng-btn-fg);
+    text-decoration: none;
+}
+
+/* Hover/Active/Focus: gleiche Optik */
+.wng-btn:hover,
+.wng-btn:active,
+.wng-btn:focus {
+    background: var(--wng-btn-bg-hover);
+    border-color: var(--wng-btn-bg-hover);
+    color: var(--wng-btn-fg);
+    text-decoration: none;
+}
+
+/* Tastaturfokus sichtbar & barrierearm */
+.wng-btn:focus-visible {
+    outline: 2px solid color-mix(in srgb, var(--wng-btn-bg-hover) 65%, white);
+    outline-offset: 2px;
+}
+
+/* Disabled-Zustände für <button disabled>, <a aria-disabled="true">, Utility-Klasse */
+.wng-btn:disabled,
+.wng-btn[disabled],
+.wng-btn[aria-disabled="true"],
+.wng-btn.is-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* ===== Varianten ======================================================== */
+
+/* Immer volle Breite */
+.wng-btn--block {
+    display: flex;
+    width: 100%;
+}
+
+/* Nur mobil (≤ 576px) volle Breite */
+.wng-btn--mobile-full {
+    display: inline-flex;
+    width: auto;
+}
+@media (max-width: 576px) {
+    .wng-btn--mobile-full {
+        display: flex;
+        width: 100%;
+    }
+}
+
+/* (Optional) Icon-Größe angleichen, falls SVG/Icons im Button sind */
+.wng-btn > svg,
+.wng-btn > i {
+    width: 1em;
+    height: 1em;
+    flex: 0 0 auto;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .wng-btn {
+        transition: none;
+    }
+}
+/* --- Fix for <a class="wng-btn"> hover/visited/link states --- */
+
+/* Basis: Farbe + keine Unterstreichung in allen Link-Zuständen */
+.wng-btn,
+a.wng-btn:link,
+a.wng-btn:visited {
+    color: var(--wng-btn-fg);
+    text-decoration: none;
+}
+
+/* Hover/Active/Focus: gleiche Farbe, keine Unterstreichung */
+a.wng-btn:hover,
+a.wng-btn:active,
+a.wng-btn:focus {
+    color: var(--wng-btn-fg);
+    text-decoration: none;
+}
+
+/* Basis: Button ist NICHT vollbreit auf Desktop */
+a.wng-btn {
+    display: inline-flex; /* überschreibt z. B. .pg-nav a {display:block} */
+    width: auto;
+    max-width: 100%;
+}
+
+/* Immer volle Breite (gewollt) */
+.wng-btn--block {
+    display: flex;
+    width: 100%;
+}
+
+/* Nur mobil volle Breite (≤ 576px), Desktop normal */
+.wng-btn--mobile-full,
+.wng-input--mobile-full {
+    display: inline-flex; /* Desktop: normal */
+    width: 200px; /* max 285px breit auf Desktop */
+}
+@media (max-width: 576px) {
+    .wng-btn--mobile-full,
+    .wng-input--mobile-full {
+        display: flex;
+        width: 100%;
+    }
+}
+
+/* Optional: Tastaturfokus sichtbar lassen, aber ohne Unterstreichung */
+a.wng-btn:focus-visible {
+    outline: 2px solid color-mix(in srgb, var(--wng-btn-bg-hover) 65%, white);
+    outline-offset: 2px;
+    text-decoration: none;
+}
+
 /* Buttons */
 .btn-primary {
     background-color: var(--bs-accent);
