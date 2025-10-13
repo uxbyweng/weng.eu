@@ -219,6 +219,7 @@ html,
 body {
     font-family: var(--font-body);
     color: var(--bs-body-color);
+    background-color: var(--bg-body) !important;
     font-weight: 500;
     line-height: 1.6;
     margin: 0;
@@ -1049,7 +1050,7 @@ article:hover svg {
 }
 
 .font-primary {
-    color: var(--bs-primary) !important;
+    color: var(--bs-accent) !important;
 }
 
 .font-secondary {

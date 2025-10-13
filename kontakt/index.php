@@ -102,9 +102,16 @@ $isEn = is_en();
                             <label for="cf-message" class="form-label">
                             <?php if (is_en()): ?>Message*<?php else: ?>Nachricht*<?php endif; ?>
                             </label>
+                            <style>
+                            ::spelling-error {
+                                color: red;
+                                text-decoration: 2px underline solid crimson;
+                            }
+                            </style>
                             <textarea
                             id="cf-message"
                             name="message"
+                            spellcheck="true"
                             class="form-control"
                             rows="3"
                             placeholder="<?php if (is_en()): ?>Message<?php else: ?>Nachricht<?php endif; ?>"

@@ -69,7 +69,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="/library/" title="Pattern Library">Pattern Library</a>
+                                <a href="/playground/library/" title="Pattern Library">Pattern Library</a>
                             </li>
                             <li>
                                 <a href="/playground/console/" title="JavaScript Console">JS Console</a>
