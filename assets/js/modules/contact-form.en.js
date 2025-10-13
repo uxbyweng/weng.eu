@@ -18,7 +18,6 @@ export function initContactForm() {
     const $submitBtn = $form.find('[type="submit"]');
     const $name = $form.find('[name="name"]');
     const $email = $form.find('[name="email"]');
-    const $privacy = $form.find('[name="privacy"]');
     const $messageFld = $form.find('[name="message"]');
 
     // --- Helper für Feldfehler ---
@@ -90,12 +89,9 @@ export function initContactForm() {
         const $name = $form.find('[name="name"]');
         const $email = $form.find('[name="email"]');
         const $messageField = $form.find('[name="message"]');
-        const $privacy = $form.find('[name="privacy"]');
-
         const nameVal = ($name.val() || "").trim();
         const emailVal = ($email.val() || "").trim();
         const messageVal = ($messageField.val() || "").trim();
-        const privacyVal = $privacy.prop("checked");
 
         let hasErr = false;
 
@@ -127,13 +123,6 @@ export function initContactForm() {
                 setErr($messageField, "Links are not allowed in the message.");
                 hasErr = true;
             }
-        }
-
-        if (!privacyVal) {
-            const $grp = $form.find(".form-group.privacy");
-            $grp.find(".invalid-feedback").remove();
-            $grp.append('<div class="invalid-feedback d-block">Please accept the privacy policy.</div>');
-            hasErr = true;
         }
 
         if (hasErr) {

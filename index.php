@@ -1,10 +1,10 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'].'/includes/lang.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/includes/helpers.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/includes/head.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/lang.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/helpers.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/head.php';
 $meta = [
-    'title' => '',  
-    'desc'  => '',  
+    'title' => '',
+    'desc'  => '',
     'og_image' => '',
 ];
 $cspNonce = $_SERVER['CSP_NONCE'] ?? null;
@@ -13,57 +13,53 @@ $isEn = is_en();
 ?>
 
 <body>
-    <?php include $_SERVER['DOCUMENT_ROOT'].'/includes/header.php'; ?>
+    <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php'; ?>
 
     <main class="page-wrapper" id="startMainContent">
 
-        <!-- ### BREADCRUMB ### -->  
+        <!-- ### BREADCRUMB ### -->
         <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/breadcrumb.php'; ?>
 
-        <!-- ### STAGE ### -->    
+        <!-- ### STAGE ### -->
         <section class="px-3 px-md-0 py-2 py-md-5">
             <div class="container">
                 <div class="row">
-
                     <div class="col-12 col-md-7 order-1">
                         <h1>
                             UX/UI Web Design — <br>
                             <span class="font-accent">Built for People.</span>
                         </h1>
                     </div>
-
                     <div class="col-12 col-md-5 text-center position-relative order-2 order-md-3 p-4 mh-200 mt-150-md">
                         <div id="blob1" class="position-absolute"></div>
                         <div id="blob2" class="position-absolute"></div>
                         <img src="/assets/img/home/undraw_user-flow_d1ya.svg" alt="User Flow Illustration" width="500" height="254" fetchpriority="high" decoding="async" class="img-fluid" style="position:absolute; left:0rem;z-index:3;">
                     </div>
-
-                    <div class="col-12 col-md-7 order-3 order-md-2"> 
+                    <div class="col-12 col-md-7 order-3 order-md-2">
                         <p class="fs-20 lh-1-5 my-3">
                             <em>
-                            <?php if (is_en()): ?>
-                                Websites that not only work, but impress.
-                                Fast. Accessible. SEO-optimized. Responsive.
-                                Developed with clean code and impactful design.
-                            <?php else: ?>
-                                Websites, die nicht nur funktionieren, sondern überzeugen.
-                                Schnell. Barrierefrei. SEO-optimiert. Responsiv.
-                                Entwickelt mit sauberem Code und Design mit Wirkung.
-                            <?php endif; ?>
+                                <?php if (is_en()): ?>
+                                    Websites that not only work, but impress.
+                                    Fast. Accessible. SEO-optimized. Responsive.
+                                    Developed with clean code and impactful design.
+                                <?php else: ?>
+                                    Websites, die nicht nur funktionieren, sondern überzeugen.
+                                    Schnell. Barrierefrei. SEO-optimiert. Responsiv.
+                                    Entwickelt mit sauberem Code und Design mit Wirkung.
+                                <?php endif; ?>
                             </em>
                         </p>
                         <div class="text-center text-md-start">
                             <a href="/kontakt/" class="wng-btn d-inline-flex align-items-center gap-2 my-4 px-4 py-2">
                                 <?php if (is_en()): ?>
-                                Make contact
+                                    Make contact
                                 <?php else: ?>
-                                Kontakt aufnehmen 
+                                    Kontakt aufnehmen
                                 <?php endif; ?>
                                 <i class="bi bi-arrow-right"></i>
                             </a>
                         </div>
                     </div>
-
                 </div>
             </div>
         </section>
@@ -71,7 +67,7 @@ $isEn = is_en();
         <!-- ### PROJECTS ### -->
         <section class="px-3 px-md-0 py-5">
             <div class="container">
-                <h2 class="font-nidorina mt-0 mb-4">
+                <h2 class="font-primary mt-0 mb-4">
                     Latest Projects
                 </h2>
                 <div class="row g-5">
@@ -86,11 +82,9 @@ $isEn = is_en();
                                 </a>
                             </div>
                             <div class="text-wrapper pt-2">
-                                <a href="/projekte/strato/">
-                                    <h3>
-                                        STRATO 
-                                    </h3>
-                                </a>
+                                <h3 class="fs-20 fw-400">
+                                    <em>STRATO</em>
+                                </h3>
                             </div>
                         </article>
                     </div>
@@ -105,11 +99,9 @@ $isEn = is_en();
                                 </a>
                             </div>
                             <div class="text-wrapper pt-2">
-                                <a href="/projekte/lisa/">
-                                    <h3 class="fs-24">
-                                        Website Prof. Dr. Lisa Y. Haller 
-                                    </h3>
-                                </a>
+                                <h3 class="fs-20 fw-400">
+                                    <em>Prof. Dr. Lisa Y. Haller</em>
+                                </h3>
                             </div>
                         </article>
                     </div>
@@ -124,11 +116,9 @@ $isEn = is_en();
                                 </a>
                             </div>
                             <div class="text-wrapper pt-2">
-                                <a href="/projekte/park-klinik/">
-                                    <h3 class="fs-24">
-                                        Website Park-Klinik Birkenwerder
-                                    </h3>
-                                </a>
+                                <h3 class="fs-20 fw-400">
+                                    <em>Park-Klinik Birkenwerder</em>
+                                </h3>
                             </div>
                         </article>
                     </div>
@@ -149,8 +139,8 @@ $isEn = is_en();
         <!-- ### SERVICES ### -->
         <section class="px-3 px-md-0 py-5">
             <div class="container">
-                <h2 class="font-nidorina mt-0 mb-4">Services</h2>
-                <ul class="service">
+                <h2 class="font-primary mt-0 mb-4">Services</h2>
+                <!--ul class="service">
                     <li>
                         <a href="/service-details" style="cursor: none">
                             <h3>UX</h3>
@@ -177,7 +167,6 @@ $isEn = is_en();
                             <h3>Web Development</h3>
                         </a>
                     </li>
-
                     <li>
                         <a href="/service-details" style="cursor: none">
                             <h3>Accessebility</h3>
@@ -197,6 +186,39 @@ $isEn = is_en();
                         <a href="/service-details" style="cursor: none">
                             <h3>Photography</h3>
                         </a>
+                    </li>
+                </ul-->
+                <ul class="service">
+                    <li>
+                        <h3>UX</h3>
+                    </li>
+                    <li>
+                        <h3>UI</h3>
+                    </li>
+                    <li>
+                        <h3>
+                            <?php if (is_en()): ?>
+                                Web Design
+                            <?php else: ?>
+                                Webdesign
+                            <?php endif; ?>
+                        </h3>
+                        </a>
+                    </li>
+                    <li>
+                        <h3>Web Development</h3>
+                    </li>
+                    <li>
+                        <h3>Accessebility</h3>
+                    </li>
+                    <li>
+                        <h3>Performance</h3>
+                    </li>
+                    <li>
+                        <h3>SEO</h3>
+                    </li>
+                    <li>
+                        <h3>Photography</h3>
                     </li>
                 </ul>
             </div>
@@ -223,4 +245,4 @@ $isEn = is_en();
 
     </main>
 
-    <?php include( $_SERVER[ "DOCUMENT_ROOT" ] . "/includes/footer.php" );?>
+    <?php include($_SERVER["DOCUMENT_ROOT"] . "/includes/footer.php"); ?>

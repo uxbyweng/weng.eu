@@ -28,7 +28,6 @@ export function initContactForm() {
     const $submitBtn = $form.find('[type="submit"]'); // Senden-Button
     const $name = $form.find('[name="name"]'); // Name-Feld
     const $email = $form.find('[name="email"]'); // Email-Feld
-    const $privacy = $form.find('[name="privacy"]'); // Checkbox "Datenschutz"
     const $messageFld = $form.find('[name="message"]'); // Textarea "Nachricht"
 
     // --------------------------------------------
@@ -133,11 +132,9 @@ export function initContactForm() {
         const $name = $form.find('[name="name"]');
         const $email = $form.find('[name="email"]');
         const $messageField = $form.find('[name="message"]');
-        const $privacy = $form.find('[name="privacy"]');
         const nameVal = ($name.val() || "").trim();
         const emailVal = ($email.val() || "").trim();
         const messageVal = ($messageField.val() || "").trim();
-        const privacyVal = $privacy.prop("checked");
 
         // Flag, ob Fehler gefunden wurden
         let hasErr = false;
@@ -173,15 +170,6 @@ export function initContactForm() {
                 setErr($messageField, "Links sind in der Nachricht nicht erlaubt.");
                 hasErr = true;
             }
-        }
-
-        // Datenschutz-Checkbox muss angehakt sein
-        if (!privacyVal) {
-            // Fehlermeldung bei der Gruppe (nicht direkt am Input)
-            const $grp = $form.find(".form-group.privacy");
-            $grp.find(".invalid-feedback").remove();
-            $grp.append('<div class="invalid-feedback d-block">Bitte die Datenschutzerklärung akzeptieren.</div>');
-            hasErr = true;
         }
 
         // Wenn es Client-Fehler gibt: oben eine Sammelmeldung, aber NICHT absenden.
