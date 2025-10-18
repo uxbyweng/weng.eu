@@ -56,10 +56,12 @@ $isEn = is_en();
             </div>
         </section>
 
-        <!-- CONTACT FORM -->
+
         <section class="px-3 px-md-0 py-5">
             <div class="container">
                 <div class="row">
+
+                    <!-- CONTACT FORM -->
                     <div class="col-12 col-md-7 order-1 pb-5">
                         <?php if (is_en()): ?>
                             <form action="/kontakt/kontakt.en.php" method="post" id="contact-form" novalidate>
@@ -146,9 +148,11 @@ $isEn = is_en();
                                 </button>
                                 </form>
                     </div>
+
+                    <!-- SIDEBAR -->
                     <aside class="col-12 offset-md-2 col-md-3 order-2 pe-5">
                         <section class="py-3 border-bottom">
-                            <h2 class="fs-20 font-gray8 text-uppercase">
+                            <h2 class="font-primary fs-20 fs-400 text-uppercase">
                                 <?php if (is_en()): ?>
                                     <strong>Contact</strong>
                                 <?php else: ?>
@@ -162,7 +166,7 @@ $isEn = is_en();
                             </p>
                         </section>
                         <section class="py-3 border-bottom mb-5">
-                            <h2 class="fs-20 font-gray8 text-uppercase">
+                            <h2 class="font-primary fs-20 fs-400 text-uppercase">
                                 <strong>Networks</strong>
                             </h2>
                             <ul class="style-none">

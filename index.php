@@ -52,9 +52,9 @@ $isEn = is_en();
                         <div class="text-center text-md-start">
                             <a href="/kontakt/" class="wng-btn d-inline-flex align-items-center gap-2 my-4 px-4 py-2">
                                 <?php if (is_en()): ?>
-                                    Make contact
+                                    Say Hello
                                 <?php else: ?>
-                                    Kontakt aufnehmen
+                                    Sag Hallo
                                 <?php endif; ?>
                                 <i class="bi bi-arrow-right"></i>
                             </a>

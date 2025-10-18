@@ -1,0 +1,33 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "php-dev-server",
+            "type": "shell",
+            "command": "php -S 127.0.0.1:8000 -t . router.php",
+            "options": {
+                "env": { "WENG_DEV": "1" }
+            },
+            "isBackground": true,
+            "problemMatcher": {
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "^PHP \\d+\\.\\d+\\.\\d+ Development Server \\(.*\\) started",
+                    "endsPattern": "^$never_matches_anything$"
+                },
+                "pattern": [{ "regexp": "^\\[(.*)\\] (.*):(\\d+): (.*)$", "file": 2, "line": 3, "message": 4 }]
+            }
+        },
+        {
+            "label": "open-browser",
+            "type": "shell",
+            "command": "powershell -Command \"Start-Process http://127.0.0.1:8000\""
+        },
+        {
+            "label": "dev",
+            "dependsOn": ["php-dev-server", "open-browser"],
+            "dependsOrder": "sequence",
+            "runOptions": { "runOn": "folderOpen" }
+        }
+    ]
+}
