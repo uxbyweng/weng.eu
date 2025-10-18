@@ -1,4 +1,4 @@
-# weng.eu — UX/UI Web Design Website
+# weng.eu
 
 Lightweight website with focus on UX, accessibility, and performance.  
 Design-first, mobile-first, clean code.
