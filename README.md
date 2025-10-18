@@ -1,11 +1,10 @@
 # weng.eu
 
-Lightweight website with focus on UX, accessibility, and performance.  
-Design-first, mobile-first, clean code.
+My personal portfolio website — created to present my work, showcase selected projects, and offer an easy way to get in touch. The site is lightweight, accessible, and highly performant — built with a design-first, mobile-first, and clean-code philosophy.
 
 Live: [weng.eu](https://weng.eu/)  
 Author: Karsten Weng · [LinkedIn](https://www.linkedin.com/in/kweng/)  
-Last update: 17.09.2025
+Last update: 18.10.2025
 
 ## Stack
 
@@ -27,38 +26,37 @@ npm run dev
 npm run build
 ```
 
-## Lokaler PHP-Server (ohne BrowserSync)
+## Local PHP server
 
-Zum lokalen Entwickeln kann der eingebaute PHP-Server genutzt werden. Voraussetzung: PHP 8+ ist installiert.
+Built-in PHP server that can be used for local development. Requires PHP 8+ installation.
 
 ```bash
 # Im Projektstamm ausführen
 php -S 127.0.0.1:8000 -t . router.php
 ```
 
--   Aufruf im Browser: http://127.0.0.1:8000
--   router.php sorgt dafür, dass „schöne“ URLs korrekt auf PHP-Dateien gemappt werden und statische Assets direkt ausgeliefert werden.
--   Optionaler DEV-Schalter: Einige Teile der Seite reagieren auf WENG_DEV=1 (z. B. Debug/kein Caching).
+-   Call in browser: http://127.0.0.1:8000
+-   router.php ensures that “pretty” URLs are correctly mapped to PHP files and that static assets are delivered directly.
 
-### Beispiel router.php
+### Example router.php
 
 ```php
 <?php
-// Statische Dateien direkt ausliefern
+// Deliver static files directly
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $file = __DIR__ . $path;
 
 if ($path !== '/' && file_exists($file) && !is_dir($file)) {
-    return false; // von PHP-Server direkt liefern lassen
+    return false; // deliver directly from PHP server
 }
 
-// Fallback: index.php oder angeforderte PHP-Seite
+// Fallback: index.php or requested PHP page
 require __DIR__ . '/index.php';
 ```
 
 ### Optional: VS Code Task
 
-Automatischer Start des PHP-Servers beim Öffnen des Ordners.
+Automatically start the PHP server when the folder is opened.
 
 .vscode/settings.json
 
