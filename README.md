@@ -101,7 +101,8 @@ assets/
 ├─ js/
 │  └─ modules/      # ES modules
 ├─ scss/            # Bootstrap Sass + custom
-└─ vendor/          # local libraries
+├─ vendor/          # local libraries
+└─ video/           # mp4 videos
 
 includes/           # PHP partials
 
@@ -119,5 +120,5 @@ projekte/           # projects
 ## Contact
 
 -   Karsten Weng · Berlin
--   info@weng.eu
+-   karsten@weng.eu
 -   LinkedIn: /in/kweng/
