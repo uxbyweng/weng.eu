@@ -97,6 +97,7 @@
 /* === Dark Mode Color Styles === */
 [data-bs-theme="dark"] {
     --header-bg: #1a1a1a99; /* Dunkel ~60% */
+    --breadcrumb-active-color: #ff8f9a;
     --bg-color-blob1: #359a9aff;
     --bg-color-blob2: rgb(57, 103, 159);
     --bg-body: #212529;
@@ -580,6 +581,36 @@ a.btn-secondary.is-checked {
 
 a.nav-link.active {
     color: var(--bs-accent);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+}
+
+.breadcrumbs li {
+    font-family: var(--font-body);
+    font-weight: 400;
+}
+
+.breadcrumbs li.active {
+    color: var(--breadcrumb-active-color);
+    font-family: var(--font-body);
+    font-weight: 400;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+}
+
+.breadcrumbs li:not(:last-child)::after {
+    content: ">";
+    margin: 0 10px;
+}
+
+.breadcrumbs li a {
+    color: var(--white);
+    font-family: var(--font-body);
+    font-weight: 400;
+    text-decoration: none;
+}
+.breadcrumbs li a:hover {
+    color: var(--breadcrumb-active-color);
     text-decoration: underline;
     text-underline-offset: 0.2em;
 }
