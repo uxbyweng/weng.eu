@@ -12,14 +12,10 @@
                 echo '<li' . ($isHomeActive ? ' class="active"' : '') . '>';
 
                 if ($isHomeActive) {
-                    echo '<span aria-current="page">'
-                        . '<i class="bi bi-house-door-fill" aria-hidden="true"></i>'
-                        . '<span class="visually-hidden">Startseite</span>'
-                        . '</span>';
+                    echo '';
                 } else {
                     echo '<a href="/" aria-label="Startseite">'
-                        . '<i class="bi bi-house-door-fill" aria-hidden="true"></i>'
-                        . '<span class="visually-hidden">Startseite</span>'
+                        . 'Startseite'
                         . '</a>';
                 }
                 echo '</li>';
