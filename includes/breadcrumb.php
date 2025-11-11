@@ -14,9 +14,16 @@
                 if ($isHomeActive) {
                     echo '';
                 } else {
-                    echo '<a href="/" aria-label="Startseite">'
-                        . 'Startseite'
-                        . '</a>';
+                    if ($isEn):
+                        echo '<a href="/" aria-label="Homepage">'
+                            . 'home'
+                            . '</a>';
+                    else:
+                        echo '<a href="/" aria-label="Startseite">'
+                            . 'home'
+                            . '</a>';
+
+                    endif;
                 }
                 echo '</li>';
 

@@ -30,7 +30,7 @@ export function initThemeToggle() {
             const txt = isDark ? mobileBtn?.dataset.textDark : mobileBtn?.dataset.textLight;
             if (txt) textMobile.textContent = txt;
         }
-        if (logo) logo.src = isDark ? "/assets/img/logo/logo-dark.svg" : "/assets/img/logo/logo-light.svg";
+        // if (logo) logo.src = isDark ? "/assets/img/logo/logo-dark.svg" : "/assets/img/logo/logo-light.svg";
         updateToggleA11y(theme);
     }
 
