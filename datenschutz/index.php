@@ -1,7 +1,7 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'].'/includes/lang.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/includes/helpers.php';
-require_once $_SERVER['DOCUMENT_ROOT'].'/includes/head.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/lang.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/helpers.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/head.php';
 $meta = [
     'title' => 'WENG.EU - Privacy Policy / Datenschutzerklärung',
     'desc'  => 'Privacy Policy / Datenschutzerklärung of WENG.EU. We respect your privacy. Here you can find out which personal data we collect, for what purposes we process it, and what rights you have.',
@@ -12,15 +12,15 @@ echo render_head($meta, $cspNonce);
 $isEn = is_en();
 ?>
 
-<body> 
-    <?php include $_SERVER['DOCUMENT_ROOT'].'/includes/header.php'; ?>
+<body>
+    <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php'; ?>
 
     <main class="page-wrapper" id="startMainContent">
 
-        <!-- ### BREADCRUMB ### -->  
+        <!-- ### BREADCRUMB ### -->
         <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/breadcrumb.php'; ?>
 
-        <!-- ### STAGE ### -->    
+        <!-- ### STAGE ### -->
         <section class="px-3 px-md-0 py-2 py-md-5">
             <div class="container">
                 <div class="row">
@@ -40,7 +40,7 @@ $isEn = is_en();
                         <img src="/assets/img/privacy/undraw_personal-data_a1n8.svg" alt="Personal Data" width="500" height="500" class="img-fluid">
                     </div>
 
-                    <div class="col-12 col-md-7 order-3 order-md-2"> 
+                    <div class="col-12 col-md-7 order-3 order-md-2">
                         <p class="fs-20 lh-1-5 my-3">
                             <?php if ($sprache === 'en'): ?>
                                 <em>We respect your privacy. Below we inform you about which personal data we collect, for what purposes we process it, and what rights you have.</em>
@@ -70,7 +70,7 @@ $isEn = is_en();
                     <p id="mailSlotPrivacy">Email is loading ...</p>
                     <br>
                     <p>
-                        Further information can be found in the <a href="/impressum/"><u>Imprint</u></a>.
+                        Further information can be found in the <a href="/impressum/" class="text-link"><u>Imprint</u></a>.
                     </p>
                     <hr class="my-4">
                     <h2 class="font-nidorina fs-30 pb-3">
@@ -159,7 +159,7 @@ $isEn = is_en();
                         8. Ihre Rechte
                     </h2>
                     <p>
-                    You have the right at any time to:
+                        You have the right at any time to:
                     </p>
                     <ul>
                         <li>
@@ -183,7 +183,7 @@ $isEn = is_en();
                     </h2>
                     <p>
                         In the event of a data protection violation, you have the right to lodge a complaint with the competent supervisory authority. An overview of the data protection officers can be found here:<br>
-                        <a href="https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html" target="_blank" rel="noopener noreferrer">https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html</a>
+                        <a href="https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html" class="text-link" target="_blank" rel="noopener noreferrer">https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html</a>
                     </p>
                     <hr class="my-4">
                     <h2 class="font-nidorina fs-30 pb-3">
@@ -211,7 +211,7 @@ $isEn = is_en();
                     <p id="mailSlotPrivacy">E-Mail wird geladen ...</p>
                     <br>
                     <p>
-                        Weitere Angaben finden Sie im <a href="/impressum/"><u>Impressum</u></a>.
+                        Weitere Angaben finden Sie im <a href="/impressum/" class="text-link"><u>Impressum</u></a>.
                     </p>
                     <hr class="my-4">
                     <h2 class="font-nidorina fs-30 pb-3">
@@ -324,7 +324,7 @@ $isEn = is_en();
                     </h2>
                     <p>
                         Im Falle eines datenschutzrechtlichen Verstoßes steht Ihnen ein Beschwerderecht bei der zuständigen Aufsichtsbehörde zu. Eine Übersicht der Datenschutzbeauftragten finden Sie hier:<br>
-                        <a href="https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html" target="_blank" rel="noopener noreferrer">https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html</a>
+                        <a href="https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html" class="text-link" target="_blank" rel="noopener noreferrer">https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html</a>
                     </p>
                     <hr class="my-4">
                     <h2 class="font-nidorina fs-30 pb-3">
@@ -343,4 +343,4 @@ $isEn = is_en();
 
     </main>
 
-    <?php include( $_SERVER[ "DOCUMENT_ROOT" ] . "/includes/footer.php" );?>
+    <?php include($_SERVER["DOCUMENT_ROOT"] . "/includes/footer.php"); ?>

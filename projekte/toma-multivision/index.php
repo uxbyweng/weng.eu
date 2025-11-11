@@ -51,10 +51,10 @@ $isEn = is_en();
                                     <source src="/assets/video/intro_toma_multivision_website.mp4" type="video/mp4">
                                     <?php if ($isEn): ?>
                                         Your browser does not support HTML5 video.
-                                        <a href="/assets/video/intro_toma_multivision_website.mp4">Download MP4</a>.
+                                        <a href="/assets/video/intro_toma_multivision_website.mp4" class="text-link">Download MP4</a>.
                                     <?php else: ?>
                                         Ihr Browser unterstützt kein HTML5-Video.
-                                        <a href="/assets/video/intro_toma_multivision_website.mp4">MP4 herunterladen</a>.
+                                        <a href="/assets/video/intro_toma_multivision_website.mp4" class="text-link">MP4 herunterladen</a>.
                                     <?php endif; ?>
                                 </video>
                             </div>

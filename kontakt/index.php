@@ -134,11 +134,11 @@ $isEn = is_en();
                                         <?php if (is_en()): ?>
                                             By sending this form, your data will be processed to handle your request
                                             (Art. 6(1)(b) or (f) GDPR). More details in our
-                                            <a href="/datenschutz/" target="_blank" rel="noopener">privacy policy</a>.
+                                            <a href="/datenschutz/" class="text-link" target="_blank" rel="noopener">privacy policy</a>.
                                         <?php else: ?>
                                             Mit dem Absenden werden Ihre Angaben zur Bearbeitung der Anfrage verarbeitet
                                             (Art. 6 Abs. 1 lit. b bzw. f DSGVO). Weitere Hinweise in unserer
-                                            <a href="/datenschutz/" target="_blank" rel="noopener">Datenschutzerklärung</a>.
+                                            <a href="/datenschutz/" class="text-link" target="_blank" rel="noopener">Datenschutzerklärung</a>.
                                         <?php endif; ?>
                                     </p>
                                 </div>
@@ -162,7 +162,7 @@ $isEn = is_en();
                             <p>
                                 Karsten Weng<br>
                                 Berlin, Germany<br>
-                                <a href="mailto:info@weng.eu"><u>info@weng.eu</u></a>
+                                <a href="mailto:info@weng.eu" class="text-link"><u>info@weng.eu</u></a>
                             </p>
                         </section>
                         <section class="py-3 border-bottom mb-5">
@@ -171,12 +171,12 @@ $isEn = is_en();
                             </h2>
                             <ul class="style-none">
                                 <li>
-                                    <a href="https://www.linkedin.com/in/kweng/" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+                                    <a href="https://www.linkedin.com/in/kweng/" class="text-link" target="_blank" rel="noopener noreferrer" title="LinkedIn">
                                         <i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i> LinkedIn
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" title="Instagram">
+                                    <a href="https://www.instagram.com/" class="text-link" target="_blank" rel="noopener noreferrer" title="Instagram">
                                         <i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i> Instagram
                                     </a>
                                 </li>

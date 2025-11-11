@@ -157,7 +157,7 @@ $isEn = is_en();
                         <section class="py-3 border-bottom">
                             <h2 class="font-primary fs-20 text-uppercase"><strong>URL</strong></h2>
                             <p>
-                                <a href="https://www.pangolin-doxx.com/" rel="nofollow" target="_blank">pangolin-doxx.com</a>
+                                <a href="https://www.pangolin-doxx.com/" class="text-link" rel="nofollow" target="_blank">pangolin-doxx.com</a>
                             </p>
                         </section>
 

@@ -46,10 +46,8 @@
     src: url("/assets/vendor/googlefonts/nothingyoucoulddo/NothingYouCouldDo-Regular.woff2") format("woff2");
 }
 
-/* VARIABLEN */
-/* === Light Mode Color Styles === */
+/* VARIABLEN  -- LIGHT-MODE */
 :root {
-    /* === Base Font Styles === */
     --font-body: "Noto";
     --font-headline: "Quicksand";
     --font-handwriting: "Nothing You Could Do";
@@ -62,85 +60,119 @@
     --footer-color: #aeaeae;
     --bs-body-bg: #f5f7f1;
     --bs-header-bg: #fff;
-    --bs-alert-color: #ff0000 !important;
-    --bs-alert-border-color: #ff0000 !important;
+    --bs-alert-color: #d72b00 !important;
+    --bs-alert-border-color: #d72b00 !important;
     --bs-form-bg: #fff;
     --bs-form-color: #333;
     --bs-form-border-color: #005884;
-    --bs-form-invalid-color: #ff0000;
-    --form-error-color: #ff0000;
+    --bs-form-invalid-color: #d72b00;
+    --form-error-color: #d72b00;
     --bs-body-color: #333;
     --bs-code-color: #d72b00;
     --bs-primary: #669999;
     --bs-secondary: #6c757d;
     --bs-accent: #d72b00;
-    --bs-link-color: #007bff;
+    --bs-link-color: #0997c5;
     --bs-primary-text: #fff;
     --bs-accent-text: #fff;
     --btn-primary-hover-bg-color: #fff;
     --btn-primary-hover-border-color: #d03241;
     --btn-primary-hover-color: #d03241;
-    --btn-secondary-color: #d03241;
-    --btn-secondary-border-color: #d03241;
+    --btn-secondary-color: #d72b00;
+    --btn-secondary-border-color: #d72b00;
     --btn-secondary-hover-bg-color: #fff;
     --btn-secondary-hover-border-color: #d03241;
     --btn-secondary-hover-color: #d03241;
     --btn-secondary-disabled-color: #d03241;
-
-    --bs-btn-hover-color: #ff3300 !important;
-
+    --bs-btn-hover-color: #d03241 !important;
     --nidorina-gradient: linear-gradient(to right, #669999, #22373f);
     --cc-background-color: #101c38;
     --cc-msg-color: #fff;
+
+    /* === Global Styles === */
+    --wng-accent: #d72b00;
+    /* === Font Styles === */
+    --wng-body-text-color: #222;
+    --wng-link-text-color: #07799e;
+    --wng-navi-link-color: #222;
+    --wng-code-text-color: #d72b00;
+    /* === Button Styles === */
+    --wng-btn-bg: #d72b00;
+    --wng-btn-bg-hover: #990000;
+    --wng-btn-fg: #eee;
+    --wng-btn-radius: 6px;
+    --wng-btn-font-size: 16px;
+    --wng-btn-font-weight: 400;
+    --wng-btn-line-height: 24px;
+    --wng-btn-pad-y: 8px;
+    --wng-btn-pad-x: 24px;
+    --wng-btn-border: 1px;
 }
 
-/* === Dark Mode Color Styles === */
+/* VARIABLEN  -- DARK-MODE */
 [data-bs-theme="dark"] {
     --header-bg: #1a1a1a99; /* Dunkel ~60% */
-    --breadcrumb-active-color: #ff8f9a;
-    --bg-color-blob1: #359a9aff;
+    --breadcrumb-active-color: #d72b00;
+    --bg-color-blob1: rgb(53, 97, 154);
     --bg-color-blob2: rgb(57, 103, 159);
     --bg-body: #212529;
     --bg-footer: #212529;
     --footer-color: #ccc;
     --bs-body-bg: #212529;
     --bs-header-bg: #000;
-    --bs-alert-color: #ff0000 !important;
-    --bs-alert-border-color: #ff0000 !important;
+    --bs-alert-color: #d72b00 !important;
+    --bs-alert-border-color: #d72b00 !important;
     --bs-form-bg: #22373f;
     --bs-form-color: #fff;
     --bs-form-border-color: #ccc;
-    --bs-form-invalid-color: #ff0000;
-    --form-error-color: #ff0000;
+    --bs-form-invalid-color: #d72b00;
+    --form-error-color: #d72b00;
     --bs-body-color: #eee;
-    --bs-code-color: #ff3300;
-    --bs-primary: #ff0000;
+    --bs-code-color: #d72b00;
+    --bs-primary: #d72b00;
     --bs-secondary: #6c757d;
-    --bs-accent: #ff3300;
+    --bs-accent: #d72b00;
     --btn-primary-hover-bg-color: #fff;
     --btn-primary-hover-border-color: #d03241;
-    --btn-primary-hover-color: #ff3300;
+    --btn-primary-hover-color: #d72b00;
     --link-color: #eee;
     --bs-primary-text: #fff;
     --bs-accent-text: #fff;
-    --btn-secondary-color: #ff3300;
-    --btn-secondary-border-color: #ff3300;
+    --btn-secondary-color: #d72b00;
+    --btn-secondary-border-color: #d72b00;
     --btn-secondary-hover-bg-color: #fff;
-    --btn-secondary-hover-border-color: #ff3300;
-    --btn-secondary-hover-color: #ff3300 !important;
-    --btn-secondary-disabled-color: #ff3300;
-
-    --bs-btn-hover-color: #ff3300 !important;
-    --bs-btn-secondary-color: #ff3300;
-    --bs-btn-secondary-border-color: #ff3300;
+    --btn-secondary-hover-border-color: #d72b00;
+    --btn-secondary-hover-color: #d72b00 !important;
+    --btn-secondary-disabled-color: #d72b00;
+    --bs-btn-hover-color: #d72b00 !important;
+    --bs-btn-secondary-color: #d72b00;
+    --bs-btn-secondary-border-color: #d72b00;
     --bs-btn-secondary-hover-bg-color: #fff;
-    --bs-btn-secondary-hover-border-color: #ff3300;
-    --bs-btn-secondary-hover-color: #ff3300 !important;
-    --bs-btn-secondary-disabled-color: #ff3300;
-
+    --bs-btn-secondary-hover-border-color: #d72b00;
+    --bs-btn-secondary-hover-color: #d72b00 !important;
+    --bs-btn-secondary-disabled-color: #d72b00;
     --nidorina-gradient: linear-gradient(to right, #669999, #22373f);
     --cc-background-color: #101c38;
     --cc-msg-color: #fff;
+
+    /* === Global Styles === */
+    --wng-accent: #ff3300;
+    /* === Font Styles === */
+    --wng-body-text-color: #eee;
+    --wng-link-text-color: #0997c5;
+    --wng-navi-link-color: #eee;
+    --wng-code-text-color: #ff3300;
+    /* === Button Styles === */
+    --wng-btn-bg: #d72b00;
+    --wng-btn-bg-hover: #990000;
+    --wng-btn-fg: #eee;
+    --wng-btn-radius: 6px;
+    --wng-btn-font-size: 16px;
+    --wng-btn-font-weight: 400;
+    --wng-btn-line-height: 24px;
+    --wng-btn-pad-y: 8px;
+    --wng-btn-pad-x: 24px;
+    --wng-btn-border: 1px;
 }
 
 /* LAYOUT */
@@ -219,7 +251,7 @@ header {
 html,
 body {
     font-family: var(--font-body);
-    color: var(--bs-body-color);
+    color: var(--wng-body-text-color);
     background-color: var(--bg-body) !important;
     font-weight: 500;
     line-height: 1.6;
@@ -235,7 +267,7 @@ h5,
 h6 {
     font-family: var(--font-headline);
     font-weight: 500;
-    color: var(--bs-body-color);
+    color: var(--wng-body-text-color);
 }
 
 h1 {
@@ -261,6 +293,7 @@ h4 {
 p,
 a,
 li {
+    font-family: var(--font-body);
     text-decoration: none;
     margin-top: 0;
     margin-bottom: 0;
@@ -277,12 +310,18 @@ p {
     }
 }
 
-a {
-    color: var(--bs-body-color);
+a.text-link {
+    color: var(--wng-link-text-color);
 }
 
 a.nav-link {
-    color: var(--bs-body-color);
+    color: var(--wng-navi-link-color);
+}
+a.nav-link:hover,
+a.nav-link:focus {
+    color: var(--wng-accent);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
 }
 
 footer a {
@@ -294,6 +333,7 @@ a:not(.btn):focus,*/
 button.easyspeach:hover,
 button.easyspeach:focus,
 button#toggleTheme:hover {
+    font-family: var(--font-headline);
     color: var(--bs-accent) !important;
     text-decoration: underline;
 }
@@ -328,19 +368,6 @@ code span.active {
 /* COMPONENTS */
 
 /* ===== WENG Button ====================================================== */
-:root {
-    --wng-accent: #FF3300;
-    --wng-btn-bg: #cc0000; 
-    --wng-btn-bg-hover: #990000
-    --wng-btn-fg: #fff;
-    --wng-btn-radius: 6px;
-    --wng-btn-font-size: 16px;
-    --wng-btn-font-weight: 400;
-    --wng-btn-line-height: 24px;
-    --wng-btn-pad-y: 8px;
-    --wng-btn-pad-x: 24px;
-    --wng-btn-border: 1px;
-}
 
 /* Basis: funktioniert für <button> und <a> */
 .wng-btn {
@@ -353,6 +380,7 @@ code span.active {
     color: var(--wng-btn-fg);
     border-radius: var(--wng-btn-radius);
     font-size: var(--wng-btn-font-size);
+    font-family: var(--font-body);
     font-weight: var(--wng-btn-font-weight);
     line-height: var(--wng-btn-line-height);
     padding: var(--wng-btn-pad-y) var(--wng-btn-pad-x);
@@ -577,11 +605,12 @@ a.btn-secondary.is-checked {
 }
 
 .nav-link {
+    font-family: var(--font-body);
     font-weight: 600;
 }
 
 a.nav-link.active {
-    color: var(--bs-accent);
+    color: var(--wng-accent);
     text-decoration: underline;
     text-underline-offset: 0.2em;
 }
@@ -592,7 +621,7 @@ a.nav-link.active {
 }
 
 .breadcrumbs li.active {
-    color: var(--bs-accent);
+    color: var(--wng-accent);
     font-family: var(--font-body);
     font-weight: 400;
     text-decoration: underline;
@@ -611,7 +640,7 @@ a.nav-link.active {
     text-decoration: none;
 }
 .breadcrumbs li a:hover {
-    color: var(--bs-accent);
+    color: var(--wng-accent);
     text-decoration: underline;
     text-underline-offset: 0.2em;
 }
@@ -692,7 +721,7 @@ footer .logo-img {
 }
 
 .service a {
-    color: var(--bs-body-color);
+    color: var(--wng-body-text-color);
     text-decoration: none;
     cursor: pointer !important;
 }
@@ -812,9 +841,9 @@ footer .logo-img {
 }
 
 .portfolio-gallery li.is-checked {
-    background-color: var(--bs-accent);
-    color: var(--bs-accent-text);
-    border-color: var(--bs-accent);
+    background-color: var(--wng-accent);
+    color: var(--wng-accent);
+    border-color: var(--wng-accent);
 }
 
 /* === Kontakt / Formular === */
@@ -904,7 +933,7 @@ footer .logo-img {
 }
 
 .lang-switch .nav-link.active {
-    color: var(--bs-accent);
+    color: var(--wng-accent);
     opacity: 1;
     font-weight: 600;
 }
@@ -1022,7 +1051,7 @@ article:hover .image-wrapper img {
 }
 
 article:hover svg {
-    color: var(--bs-accent);
+    color: var(--wng-accent);
 }
 
 /* Link- und Text-Hover bei Bild- oder Text-Hover article:hover p, article:hover h3, article:hover a { color: var(--bs-accent) !important; text-decoration: underline; } */
@@ -1061,7 +1090,7 @@ article:hover svg {
 }
 
 .bg-primary {
-    background: var(--bs-accent) !important;
+    background: var(--wng-accent) !important;
 }
 
 .bg-black {
@@ -1073,16 +1102,16 @@ article:hover svg {
 }
 
 .body-color {
-    color: var(--bs-body-color) !important;
+    color: var(--wng-body-text-color) !important;
 }
 
 /* Font Colors */
 .font-accent {
-    color: var(--bs-accent) !important;
+    color: var(--wng-accent) !important;
 }
 
 .font-primary {
-    color: var(--bs-accent) !important;
+    color: var(--wng-accent) !important;
 }
 
 .font-secondary {

@@ -173,7 +173,7 @@ $isEn = is_en();
                         <section class="py-3 border-bottom">
                             <h2 class="font-primary fs-20 text-uppercase"><strong>URL</strong></h2>
                             <p>
-                                <a href="https://www.park-klinik-birkenwerder.de/" rel="nofollow">park-klinik-birkenwerder.de</a>
+                                <a href="https://www.park-klinik-birkenwerder.de/" class="text-link" rel="nofollow">park-klinik-birkenwerder.de</a>
                             </p>
                         </section>
 

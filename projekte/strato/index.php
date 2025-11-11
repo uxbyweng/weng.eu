@@ -123,7 +123,7 @@ $isEn = is_en();
                                 <strong>URL</strong>
                             </h2>
                             <p>
-                                <a href="http://www.strato.de" rel="nofollow">www.strato.de </a>
+                                <a href="http://www.strato.de" class="text-link" rel="nofollow">www.strato.de </a>
                             </p>
                         </section>
                         <section class="py-3">

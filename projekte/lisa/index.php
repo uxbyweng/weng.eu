@@ -125,7 +125,7 @@ $isEn = is_en();
                                 <strong>URL</strong>
                             </h2>
                             <p>
-                                <a href="https://www.lisa-yashodhara-haller.de/" rel="nofollow">lisa-yashodhara-haller.de</a>
+                                <a href="https://www.lisa-yashodhara-haller.de/" class="text-link" rel="nofollow">lisa-yashodhara-haller.de</a>
                             </p>
                         </section>
                         <section class="py-3">
