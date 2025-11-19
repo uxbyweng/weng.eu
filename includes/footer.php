@@ -3,16 +3,16 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                    <p class="font-gray10 mt-3 mt-md-0">
+                    <p class="footer-color fs-22 fs-18-md mt-3 mt-md-0">
                         <?php if ($sprache === 'en'): ?>
-                            Thanks for stopping by —<br>
-                            let’s connect on social media.
+                            Thanks for stopping by.<br>
+                            Check out my work & profile:
                         <?php else: ?>
-                            Schön, dass du vorbei schaust —<br>
-                            vernetze dich gern auf Social Media.
+                            Schön, dass du da warst.<br>
+                            Mehr von mir gibt's hier:
                         <?php endif; ?>
                     </p>
-                    <ul class="list-unstyled d-flex flex-wrap justify-content-center justify-content-xl-start gap-3 mt-2">
+                    <ul class="list-unstyled d-flex flex-wrap justify-content-center justify-content-md-start gap-3 mt-2">
                         <li class="px-1">
                             <a class="social-btn" href="https://www.linkedin.com/company/certificates-dev/" target="_blank" rel="nofollow noopener" aria-label="LinkedIn">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 21" width="40" height="40" role="img" aria-hidden="true" focusable="false">
@@ -112,8 +112,8 @@
     <section class="py-3">
         <div class="container">
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
-                <div class="text-center font-gray10 mt-3 mt-md-0">
-                    <p class="footer-color">
+                <div class="text-center mt-3 mt-md-0">
+                    <p class="footer-color fs-22 fs-18-md">
                         ©&nbsp;<?php echo date("Y"); ?>&nbsp;Karsten&nbsp;Weng. All&nbsp;rights&nbsp;reserved. |
                         <?php if ($sprache === 'en'): ?>
                             <a href="/datenschutz/#no-tracking-en" class="px-2">

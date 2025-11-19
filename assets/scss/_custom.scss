@@ -5,6 +5,7 @@
     font-display: swap;
     src: url("/assets/vendor/googlefonts/noto/NotoSans-Regular.woff2") format("woff2");
 }
+
 @font-face {
     font-family: "Noto";
     font-weight: 400;
@@ -58,7 +59,8 @@
     --font-body: "Noto";
     --font-headline: "Quicksand";
     --font-handwriting: "Nothing You Could Do";
-    --header-bg: #ffffffcc; /* Weiß ~80% */
+    --header-bg: #ffffffcc;
+    /* Weiß ~80% */
     --header-backdrop: saturate(180%) blur(40px);
     --bg-color-blob1: rgb(255, 255, 255);
     --bg-color-blob2: rgb(255, 255, 255);
@@ -103,6 +105,7 @@
     --wng-link-text-color: #07799e;
     --wng-navi-link-color: #222;
     --wng-code-text-color: #d72b00;
+    --wng-footer-color: #bcbcbc;
     /* === Button Styles === */
     --wng-btn-bg: #d72b00;
     --wng-btn-bg-hover: #990000;
@@ -118,7 +121,8 @@
 
 /* VARIABLEN  -- DARK-MODE */
 [data-bs-theme="dark"] {
-    --header-bg: #1a1a1a99; /* Dunkel ~60% */
+    --header-bg: #1a1a1a99;
+    /* Dunkel ~60% */
     --breadcrumb-active-color: #d72b00;
     --bg-color-blob1: rgb(53, 97, 154);
     --bg-color-blob2: rgb(57, 103, 159);
@@ -169,6 +173,7 @@
     --wng-link-text-color: #0997c5;
     --wng-navi-link-color: #eee;
     --wng-code-text-color: #ff3300;
+    --wng-footer-color: #bcbcbc;
     /* === Button Styles === */
     --wng-btn-bg: #d72b00;
     --wng-btn-bg-hover: #990000;
@@ -185,6 +190,7 @@
 /* LAYOUT */
 /* === layout.css === */
 @media (min-width: 1200px) {
+
     .container,
     .container-lg,
     .container-md,
@@ -204,6 +210,7 @@
 .br-desktop {
     display: none;
 }
+
 @media (min-width: 992px) {
     .br-desktop {
         display: inline;
@@ -334,6 +341,7 @@ a.text-link {
 a.nav-link {
     color: var(--wng-navi-link-color);
 }
+
 a.nav-link:hover,
 a.nav-link:focus {
     color: var(--wng-accent);
@@ -344,9 +352,10 @@ a.nav-link:focus {
 footer a {
     color: #bcbcbc;
 }
+
 footer a:hover,
 footer a:focus {
-    color: #fff;
+    color: var(--wng-accent);
 }
 
 /*a:not(.btn):hover,
@@ -355,17 +364,19 @@ button.easyspeach:hover,
 button.easyspeach:focus,
 button#toggleTheme:hover {
     font-family: var(--font-headline);
-    color: var(--bs-accent) !important;
+    color: var(--wng-accent) !important;
     text-decoration: underline;
 }
 
 code {
     color: white !important;
 }
+
 code a {
     color: white !important;
     text-decoration: none !important;
 }
+
 code a.active,
 code span.active {
     color: white !important;
@@ -406,9 +417,11 @@ code span.active {
     line-height: var(--wng-btn-line-height);
     padding: var(--wng-btn-pad-y) var(--wng-btn-pad-x);
     text-align: center;
-    text-decoration: none; /* wichtig für <a> */
+    text-decoration: none;
+    /* wichtig für <a> */
     vertical-align: middle;
-    display: inline-flex; /* zentriert Inhalt sicher */
+    display: inline-flex;
+    /* zentriert Inhalt sicher */
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
@@ -464,6 +477,7 @@ code span.active {
     display: inline-flex;
     width: auto;
 }
+
 @media (max-width: 576px) {
     .wng-btn--mobile-full {
         display: flex;
@@ -472,8 +486,8 @@ code span.active {
 }
 
 /* (Optional) Icon-Größe angleichen, falls SVG/Icons im Button sind */
-.wng-btn > svg,
-.wng-btn > i {
+.wng-btn>svg,
+.wng-btn>i {
     width: 1em;
     /* height: 1em; */
     flex: 0 0 auto;
@@ -485,6 +499,7 @@ code span.active {
         transition: none;
     }
 }
+
 /* --- Fix for <a class="wng-btn"> hover/visited/link states --- */
 
 /* Basis: Farbe + keine Unterstreichung in allen Link-Zuständen */
@@ -505,7 +520,8 @@ a.wng-btn:focus {
 
 /* Basis: Button ist NICHT vollbreit auf Desktop */
 a.wng-btn {
-    display: inline-flex; /* überschreibt z. B. .pg-nav a {display:block} */
+    display: inline-flex;
+    /* überschreibt z. B. .pg-nav a {display:block} */
     width: auto;
     max-width: 100%;
 }
@@ -519,10 +535,14 @@ a.wng-btn {
 /* Nur mobil volle Breite (≤ 576px), Desktop normal */
 .wng-btn--mobile-full,
 .wng-input--mobile-full {
-    display: inline-flex; /* Desktop: normal */
-    width: 200px; /* max 285px breit auf Desktop */
+    display: inline-flex;
+    /* Desktop: normal */
+    width: 200px;
+    /* max 285px breit auf Desktop */
 }
+
 @media (max-width: 576px) {
+
     .wng-btn--mobile-full,
     .wng-input--mobile-full {
         display: flex;
@@ -660,6 +680,7 @@ a.nav-link.active {
     font-weight: 400;
     text-decoration: none;
 }
+
 .breadcrumbs li a:hover {
     color: var(--wng-accent);
     text-decoration: underline;
@@ -695,12 +716,10 @@ footer .logo-img {
     transition: background 200ms ease, color 200ms ease, transform 120ms ease;
 }
 
-.social-btn:hover,
-.social-btn:focus-visible {
+.social-btn:hover {
     background-color: transparent;
-    color: #fff !important;
+    color: var(--wng-accent);
     outline: none;
-    transform: translateY(-1px);
 }
 
 .social-btn svg {
@@ -771,12 +790,15 @@ footer .logo-img {
 /* === Referenz-Viewport (ein Bild, scrollable) === */
 .ref-viewport {
     width: 100%;
-    max-width: 800px; /* Desktop-Frame */
-    height: clamp(360px, 60vh, 700px); /* Default für ≥ Tablet */
+    max-width: 800px;
+    /* Desktop-Frame */
+    height: clamp(360px, 60vh, 700px);
+    /* Default für ≥ Tablet */
     border: 1px solid #ddd;
     border-radius: 12px;
     overflow: auto;
-    -webkit-overflow-scrolling: touch; /* smoother iOS scroll */
+    -webkit-overflow-scrolling: touch;
+    /* smoother iOS scroll */
     background: #fff;
 }
 
@@ -787,7 +809,8 @@ footer .logo-img {
        preferred = 55vh (Gefühlssache; kannst du anpassen)
        max = 4:3 → 0.75 * Breite */
         height: clamp(calc(100vw * 0.5625), 55vh, calc(100vw * 0.75));
-        max-width: 100%; /* volle Breite auf Mobil */
+        max-width: 100%;
+        /* volle Breite auf Mobil */
     }
 }
 
@@ -1017,6 +1040,7 @@ footer .logo-img {
 
 /* dark:xl:block – beide erst im Dark Mode ab 1280px anzeigen */
 @media (min-width: 1280px) {
+
     .dark #blob1,
     .dark #blob2 {
         display: block !important;
@@ -1129,7 +1153,7 @@ article:hover svg {
 }
 
 .footer-color {
-    color: var(--footer-color) !important;
+    color: var(--wng-footer-color) !important;
 }
 
 .body-color {
@@ -1201,15 +1225,19 @@ article:hover svg {
 .fw-300 {
     font-weight: 300 !important;
 }
+
 .fw-400 {
     font-weight: 400 !important;
 }
+
 .fw-500 {
     font-weight: 500 !important;
 }
+
 .fw-600 {
     font-weight: 600 !important;
 }
+
 /* Background Colors */
 .bg-gray2 {
     background-color: #212529 !important;
