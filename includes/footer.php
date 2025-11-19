@@ -85,7 +85,7 @@
                                     Kontakt
                                 <?php endif; ?>
                             </a>
-                        </li>
+                        </li> 
                         <li>
                             <a href="/impressum/">
                                 <?php if ($sprache === 'en'): ?>
