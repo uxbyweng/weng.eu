@@ -68,9 +68,9 @@ $isEn = is_en();
                                 </a>
                             </div>
                             <div class="text-wrapper pt-2">
-                                <h3 class="fs-20 fw-400">
-                                    <em>STRATO</em>
-                                </h3>
+                                <a href="/projekte/strato/" class="text-link fw-400">
+                                    STRATO
+                                </a>
                             </div>
                         </article>
                     </div>
@@ -84,9 +84,9 @@ $isEn = is_en();
                                 </a>
                             </div>
                             <div class="text-wrapper pt-2">
-                                <h3 class="fs-20 fw-400">
-                                    <em>Prof. Dr. Lisa Yashodhara Haller</em>
-                                </h3>
+                                <a href="/projekte/lisa/" class="text-link fw-400">
+                                    Prof. Dr. Lisa Y. Haller
+                                </a>
                             </div>
                         </article>
                     </div>
@@ -100,9 +100,9 @@ $isEn = is_en();
                                 </a>
                             </div>
                             <div class="text-wrapper pt-2">
-                                <h3 class="fs-20 fw-400">
-                                    <em>Park-Klinik Birkenwerder</em>
-                                </h3>
+                                <a href="/projekte/park-klinik/" class="text-link fw-400">
+                                    Park-Klinik Birkenwerder
+                                </a>
                             </div>
                         </article>
                     </div>
@@ -116,9 +116,9 @@ $isEn = is_en();
                                 </a>
                             </div>
                             <div class="text-wrapper pt-2">
-                                <h3 class="fs-20 fw-400">
-                                    <em>Pangolin-Doxx</em>
-                                </h3>
+                                <a href="/projekte/pangolin-doxx/" class="text-link fw-400">
+                                    Pangolin-Doxx
+                                </a>
                             </div>
                         </article>
                     </div>

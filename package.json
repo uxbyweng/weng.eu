@@ -5,6 +5,7 @@
     "description": "Build-Setup für Bootstrap via Sass + Autoprefixer",
     "scripts": {
         "dev": "sass --load-path=node_modules --embed-source-map --quiet-deps assets/scss/styles.scss assets/css/styles.css --watch",
+        "serve": "browser-sync start --proxy \"127.0.0.1:8000\" --files \"assets/css/**/*.css, assets/js/**/*.js, **/*.php\" --no-ui --no-notify",
         "build:sass": "sass --load-path=node_modules --style=compressed --quiet-deps assets/scss/styles.scss assets/css/styles.css",
         "build:css": "postcss assets/css/styles.css --replace --map",
         "build": "npm run build:sass && npm run build:css"
@@ -16,6 +17,7 @@
     ],
     "devDependencies": {
         "autoprefixer": "^10.4.20",
+        "baseline-browser-mapping": "^2.8.29",
         "browser-sync": "^3.0.4",
         "postcss": "^8.4.47",
         "postcss-cli": "^11.0.0",

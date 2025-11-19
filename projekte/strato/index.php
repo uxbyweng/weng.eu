@@ -3,8 +3,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/lang.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/helpers.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/head.php';
 $meta = [
-    'title' => 'WENG.EU - Projekt: STRATO Shopfrontend',
-    'desc'  => 'Web Development & laufende Betreuung des STRATO Shopfrontends. Fokus: Barrierearme UX, Performance. Wartbarer Code in einem agilen, crossfunktionalen Team.',
+    'title' => 'WENG.EU - Projekt: STRATO Shop-Frontend',
+    'desc'  => 'Web Development & laufende Betreuung des STRATO Shop-Frontends. Fokus: Barrierearme UX, Performance. Wartbarer Code in einem agilen, crossfunktionalen Team.',
     'og_image' => '',
 ];
 $cspNonce = $_SERVER['CSP_NONCE'] ?? null;
@@ -28,7 +28,7 @@ $isEn = is_en();
                     <div class="col-12 col-md-7 order-1">
                         <h1>
                             <span class="font-accent">STRATO</span><br>
-                            Shopfrontend
+                            Shop-Frontend
                         </h1>
                     </div>
 

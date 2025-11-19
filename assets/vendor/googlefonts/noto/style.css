@@ -25,6 +25,14 @@
 @font-face {
     font-display: swap;
     font-family: "Noto";
+    font-weight: 400;
+    font-style: italic;
+    src: url("NotoSans-Regular-Italic.woff2") format("woff2");
+}
+
+@font-face {
+    font-display: swap;
+    font-family: "Noto";
     font-weight: 500;
     font-style: normal;
     src: url("NotoSans-Medium.woff2") format("woff2");

@@ -1,98 +1,136 @@
 # weng.eu
 
-My personal portfolio website — created to present my work, showcase selected projects, and offer an easy way to get in touch. The site is lightweight, accessible, and highly performant — built with a design-first, mobile-first, and clean-code philosophy.
+A clean, fast, and accessible website designed to highlight my work, present selected projects, and providing a simple way to get in touch.
 
 Live: [weng.eu](https://weng.eu/)  
 Author: Karsten Weng · [LinkedIn](https://www.linkedin.com/in/kweng/)  
-Last update: 18.10.2025
+Last update: 19.11.2025
 
 ## Stack
 
 -   Frontend: Bootstrap 5 (Sass), PostCSS, ES Modules
--   Tooling: Node 18+, Dart Sass, PostCSS CLI
--   Backend: PHP 8+ (includes/partials)
+-   Tooling: Node 22 (via NVM), Dart Sass, PostCSS CLI, BrowserSync
+-   Backend: PHP 8+ (router-based includes/partials)
 -   Deployment: SFTP, SSH keys
+
+## Development Workflow
+
+The project uses 3 parallel processes:
+
+1. **PHP Development Server**  
+   Used for page rendering and routing.
+2. **Sass-Watcher (`npm run dev`)**  
+   Automatically rebuilds CSS with every change.
+3. **BrowserSync (`npm run serve`)**  
+   Proxy for 127.0.0.1:8000 + automatic reload on changes to
+    - `.scss` → generates new CSS
+    - `.php` → Template changes
+    - `.js` → Module changes
+
+These three tasks are automatically started in parallel via VS Code.
+
+## Keyboard shortcut: `Shift + W`
+
+`Shift + W` launches the entire development environment at once:
+
+-   PHP development server
+-   Sass watcher
+-   BrowserSync with automatic reload
+
+## What happens behind the scenes
+
+The shortcut runs the VS Code task `full-dev`, which starts the following processes in parallel:
+
+-   `php-dev-server` – serves the site locally
+-   `npm run dev` – compiles Sass and watches for changes
+-   `npm run serve` – starts BrowserSync and reloads the browser when files change
+
+BrowserSync automatically opens:
+
+```cpp
+http://localhost:3000
+```
+
+This proxys requests to:
+
+```cpp
+http://127.0.0.1:8000
+```
+
+Any change to PHP, SCSS, or JavaScript triggers an instant browser reload, so page updates appear immediately.
 
 ## Setup
 
 ```bash
-# Dependencies
+# Install dependencies
 npm install
 
-# Dev: Sass Watch + Sourcemaps
+# Dev: Sass Watch (normal, ohne BrowserSync)
 npm run dev
 
 # Build: minified CSS + PostCSS
 npm run build
+
+# BrowserSync für Auto-Reload
+npm run serve
 ```
+
+## BrowserSync proxy
+
+```cpp
+http://127.0.0.1:8000
+```
+
+under
+
+```arduino
+http://localhost:3000
+```
+
+→ This URL is crucial during the development process.
 
 ## Local PHP server
 
-Built-in PHP server that can be used for local development. Requires PHP 8+ installation.
+In case it's supposed to start without VS Code
 
 ```bash
-# Im Projektstamm ausführen
+# Execute in project master
 php -S 127.0.0.1:8000 -t . router.php
 ```
 
--   Call in browser: http://127.0.0.1:8000
--   router.php ensures that “pretty” URLs are correctly mapped to PHP files and that static assets are delivered directly.
+→ router.php ensures that assets are delivered directly and all other requests are returned to index.php.
 
-### Example router.php
+## VS Code Tasks
 
-```php
-<?php
-// Deliver static files directly
-$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$file = __DIR__ . $path;
+-   .vscode/tasks.json contains:
+-   php-dev-server
+-   npm-dev (Sass-Watcher)
+-   npm-serve (BrowserSync)
+-   full-dev (Starts everything simultaneously)
 
-if ($path !== '/' && file_exists($file) && !is_dir($file)) {
-    return false; // deliver directly from PHP server
-}
-
-// Fallback: index.php or requested PHP page
-require __DIR__ . '/index.php';
-```
-
-### Optional: VS Code Task
-
-Automatically start the PHP server when the folder is opened.
-
-.vscode/settings.json
+### Example (abbreviated):
 
 ```json
 {
-    "task.allowAutomaticTasks": "on"
+    "label": "full-dev",
+    "dependsOn": ["php-dev-server", "npm-dev", "npm-serve"],
+    "dependsOrder": "parallel"
 }
 ```
+
+### Keyboard shortcut
 
 ```json
-{
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "php-dev-server",
-            "type": "shell",
-            "command": "php -S 127.0.0.1:8000 -t . router.php",
-            "options": {
-                "env": { "WENG_DEV": "1" }
-            },
-            "isBackground": true,
-            "problemMatcher": {
-                "background": {
-                    "activeOnStart": true,
-                    "beginsPattern": "^PHP \\d+\\.\\d+\\.\\d+ Development Server \\(.*\\) started",
-                    "endsPattern": "^$never_matches_anything$"
-                },
-                "pattern": [{ "regexp": "^\\[(.*)\\] (.*):(\\d+): (.*)$", "file": 2, "line": 3, "message": 4 }]
-            },
-            "runOptions": { "runOn": "folderOpen" }
-        }
-    ]
-}
+[
+    {
+        "key": "shift+w",
+        "command": "workbench.action.tasks.runTask",
+        "args": "full-dev"
+    }
+]
 ```
 
-## Structure (excerpt)
+## Project structure
 
 ```text
 assets/
@@ -103,14 +141,24 @@ assets/
 ├─ scss/            # Bootstrap Sass + custom
 ├─ vendor/          # local libraries
 └─ video/           # mp4 videos
-
 includes/           # PHP partials
-
 kontakt/            # contact form
-
 projekte/           # projects
-
+router.php          # routing for PHP dev server
 ```
+
+## Notes
+
+-   Node is managed via nvm-windows
+    Current version in the project: Node 22.21.1
+-   Dev environment uses:
+    -   sass --watch
+    -   browser-sync --proxy
+    -   PHP built-in server
+-   Auto-reload works for:
+    -   PHP
+    -   SCSS → CSS
+    -   JavaScript
 
 ## License
 

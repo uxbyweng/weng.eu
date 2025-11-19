@@ -5,6 +5,13 @@
     font-display: swap;
     src: url("/assets/vendor/googlefonts/noto/NotoSans-Regular.woff2") format("woff2");
 }
+@font-face {
+    font-family: "Noto";
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+    src: url("/assets/vendor/googlefonts/noto/NotoSans-Regular-Italic.woff2") format("woff2");
+}
 
 @font-face {
     font-family: "Noto";
@@ -57,7 +64,7 @@
     --bg-color-blob2: rgb(255, 255, 255);
     --bg-body: #f5f7f1;
     --bg-footer: #212529;
-    --footer-color: #aeaeae;
+    --footer-color: #bcbcbc;
     --bs-body-bg: #f5f7f1;
     --bs-header-bg: #fff;
     --bs-alert-color: #d72b00 !important;
@@ -117,7 +124,7 @@
     --bg-color-blob2: rgb(57, 103, 159);
     --bg-body: #212529;
     --bg-footer: #212529;
-    --footer-color: #ccc;
+    --footer-color: #bcbcbc;
     --bs-body-bg: #212529;
     --bs-header-bg: #000;
     --bs-alert-color: #d72b00 !important;
@@ -191,6 +198,16 @@
 .page-wrapper {
     margin-left: auto;
     margin-right: auto;
+}
+
+/* Responsive Anzeige-Klassen */
+.br-desktop {
+    display: none;
+}
+@media (min-width: 992px) {
+    .br-desktop {
+        display: inline;
+    }
 }
 
 header {
@@ -325,6 +342,10 @@ a.nav-link:focus {
 }
 
 footer a {
+    color: #bcbcbc;
+}
+footer a:hover,
+footer a:focus {
     color: #fff;
 }
 
@@ -705,19 +726,15 @@ footer .logo-img {
     padding: 0;
     margin: 0;
     list-style-position: inside;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 2rem;
 }
 
 .service li {
     font-size: 2rem;
-    color: #999;
-    display: inline-flex;
     line-height: 1.3;
     position: relative;
-}
-
-.service li:not(:last-of-type):after {
-    content: "/";
-    margin: 0 15px 0 15px;
 }
 
 .service a {
@@ -728,6 +745,16 @@ footer .logo-img {
 
 .service a:hover {
     color: var(--bs-primary);
+}
+
+.service h3 {
+    margin-bottom: 0.4rem;
+    margin-right: 1.4rem;
+}
+
+.service p {
+    font-size: 0.95rem;
+    line-height: 1.5;
 }
 
 /* == Projekte === */
@@ -1090,6 +1117,10 @@ article:hover svg {
 }
 
 .bg-primary {
+    background: var(--wng-accent) !important;
+}
+
+.bg-accent {
     background: var(--wng-accent) !important;
 }
 

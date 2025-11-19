@@ -39,13 +39,13 @@ $isEn = is_en();
                         <p class="fs-20 lh-1-5 my-3">
                             <em>
                                 <?php if (is_en()): ?>
-                                    Websites that not only work, but impress.
-                                    Fast. Accessible. SEO-optimized. Responsive.
+                                    Websites that not only work, but impress.<br class="br-desktop">
+                                    Fast. Accessible. SEO-optimized. Responsive.<br class="br-desktop">
                                     Developed with clean code and impactful design.
                                 <?php else: ?>
-                                    Websites, die nicht nur funktionieren, sondern überzeugen.
-                                    Schnell. Barrierefrei. SEO-optimiert. Responsiv.
-                                    Entwickelt mit sauberem Code und Design mit Wirkung.
+                                    Websites, die nicht nur funktionieren, sondern überzeugen.<br class="br-desktop">
+                                    Schnell. Barrierefrei. SEO-optimiert. Responsiv.<br class="br-desktop">
+                                    Entwickelt mit sauberem Code und wirkungsvollem Design.
                                 <?php endif; ?>
                             </em>
                         </p>
@@ -68,7 +68,11 @@ $isEn = is_en();
         <section class="px-3 px-md-0 py-5">
             <div class="container">
                 <h2 class="font-primary mt-0 mb-4">
-                    Latest Projects
+                    <?php if (is_en()): ?>
+                        Latest Projects
+                    <?php else: ?>
+                        Neueste Projekte
+                    <?php endif; ?>
                 </h2>
                 <div class="row g-5">
                     <div class="col-lg-4">
@@ -82,9 +86,9 @@ $isEn = is_en();
                                 </a>
                             </div>
                             <div class="text-wrapper pt-2">
-                                <h3 class="fs-20 fw-400">
-                                    <em>STRATO</em>
-                                </h3>
+                                <a href="/projekte/strato/" class="text-link fw-400">
+                                    STRATO
+                                </a>
                             </div>
                         </article>
                     </div>
@@ -99,9 +103,9 @@ $isEn = is_en();
                                 </a>
                             </div>
                             <div class="text-wrapper pt-2">
-                                <h3 class="fs-20 fw-400">
-                                    <em>Prof. Dr. Lisa Y. Haller</em>
-                                </h3>
+                                <a href="/projekte/lisa/" class="text-link fw-400">
+                                    Prof. Dr. Lisa Y. Haller
+                                </a>
                             </div>
                         </article>
                     </div>
@@ -116,9 +120,9 @@ $isEn = is_en();
                                 </a>
                             </div>
                             <div class="text-wrapper pt-2">
-                                <h3 class="fs-20 fw-400">
-                                    <em>Park-Klinik Birkenwerder</em>
-                                </h3>
+                                <a href="/projekte/park-klinik/" class="text-link fw-400">
+                                    Park-Klinik Birkenwerder
+                                </a>
                             </div>
                         </article>
                     </div>
@@ -139,86 +143,91 @@ $isEn = is_en();
         <!-- ### SERVICES ### -->
         <section class="px-3 px-md-0 py-5">
             <div class="container">
-                <h2 class="font-primary mt-0 mb-4">Services</h2>
-                <!--ul class="service">
-                    <li>
-                        <a href="/service-details" style="cursor: none">
-                            <h3>UX</h3>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/service-details" style="cursor: none">
-                            <h3>UI</h3>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/service-details" style="cursor: none">
-                            <h3>
-                                <?php if (is_en()): ?>
-                                    Web Design
-                                <?php else: ?>
-                                    Webdesign
-                                <?php endif; ?>
-                            </h3>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/service-details" style="cursor: none">
-                            <h3>Web Development</h3>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/service-details" style="cursor: none">
-                            <h3>Accessebility</h3>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/service-details" style="cursor: none">
-                            <h3>Performance</h3>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/service-details" style="cursor: none">
-                            <h3>SEO</h3>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/service-details" style="cursor: none">
-                            <h3>Photography</h3>
-                        </a>
-                    </li>
-                </ul-->
+                <h2 class="font-accent mt-0 mb-4">Services</h2>
                 <ul class="service">
                     <li>
-                        <h3>UX</h3>
-                    </li>
-                    <li>
-                        <h3>UI</h3>
+                        <h3>
+                            UX/UI Web Design
+                        </h3>
+                        <p>
+                            <?php if (is_en()): ?>
+                                Designing thoughtful, responsive interfaces with a focus on usability, aesthetics, and brand identity.
+                            <?php else: ?>
+                                Gestaltung durchdachter, responsiver Interfaces mit Fokus auf Nutzerfreundlichkeit, Ästhetik und Markenidentität.
+                            <?php endif; ?>
+                        </p>
                     </li>
                     <li>
                         <h3>
                             <?php if (is_en()): ?>
-                                Web Design
+                                Web Development
                             <?php else: ?>
-                                Webdesign
+                                Webentwicklung
                             <?php endif; ?>
                         </h3>
-                        </a>
+                        <p>
+                            <?php if (is_en()): ?>
+                                Clean, performant code for stable, accessible, and maintainable websites – from prototype to live project.
+                            <?php else: ?>
+                                Sauberer, performanter Code für stabile, barrierefreie und wartbare Websites – vom Prototyp bis zum Live-Projekt.
+                            <?php endif; ?>
+                        </p>
                     </li>
                     <li>
-                        <h3>Web Development</h3>
+                        <h3>
+                            <?php if (is_en()): ?>
+                                Accessibility
+                            <?php else: ?>
+                                Barrierefreiheit
+                            <?php endif; ?>
+                        </h3>
+                        <p>
+                            <?php if (is_en()): ?>
+                                Development according to WCAG standards for inclusive digital experiences, accessible to all user groups.
+                            <?php else: ?>
+                                Entwicklung nach WCAG-Standards für inklusive digitale Erlebnisse, zugänglich für alle Nutzergruppen.
+                            <?php endif; ?>
+                        </p>
                     </li>
                     <li>
-                        <h3>Accessebility</h3>
+                        <h3>
+                            Performance
+                        </h3>
+                        <p>
+                            <?php if (is_en()): ?>
+                                Optimization of load times, code, and Core Web Vitals for a measurably better user experience.
+                            <?php else: ?>
+                                Optimierung von Ladezeiten, Code und Core Web Vitals für eine messbar bessere User Experience.
+                            <?php endif; ?>
+                        </p>
                     </li>
                     <li>
-                        <h3>Performance</h3>
+                        <h3>
+                            SEO
+                        </h3>
+                        <p>
+                            <?php if (is_en()): ?>
+                                Technical and content-related search engine optimization for long-term visibility and reach.
+                            <?php else: ?>
+                                Technische und inhaltliche Suchmaschinenoptimierung für langfristige Sichtbarkeit und Reichweite.
+                            <?php endif; ?>
+                        </p>
                     </li>
                     <li>
-                        <h3>SEO</h3>
-                    </li>
-                    <li>
-                        <h3>Photography</h3>
+                        <h3>
+                            <?php if (is_en()): ?>
+                                Photography
+                            <?php else: ?>
+                                Fotografie
+                            <?php endif; ?>
+                        </h3>
+                        <p>
+                            <?php if (is_en()): ?>
+                                Authentic image concepts and photography that visually enhance projects and convey stories.
+                            <?php else: ?>
+                                Authentische Bildkonzepte und Fotografie, die Projekte visuell stärken und Geschichten transportieren.
+                            <?php endif; ?>
+                        </p>
                     </li>
                 </ul>
             </div>
@@ -230,11 +239,11 @@ $isEn = is_en();
                 <div class="about-me-content container-xxl">
                     <div class="row justify-content-center text-white">
                         <div class="col-xl-10">
-                            <p class="font-handwriting display-6 fw-light">
+                            <p class="font-handwriting display-6 fw-light mt150">
                                 <?php if (is_en()): ?>
-                                    “Good web development means communication on equal terms with solutions that work for people – not just in code.”
+                                    „Good web development means communication on equal terms with solutions that work for people – not just in code.“
                                 <?php else: ?>
-                                    “Gute Webentwicklung bedeutet Kommunikation auf Augenhöhe mit Lösungen, die für Menschen funktionieren – nicht nur im Code.”
+                                    „Gute Webentwicklung bedeutet Kommunikation auf Augenhöhe mit Lösungen, die für Menschen funktionieren – nicht nur im Code.“
                                 <?php endif; ?>
                             </p>
                         </div>

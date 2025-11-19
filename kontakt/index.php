@@ -143,8 +143,8 @@ $isEn = is_en();
                                     </p>
                                 </div>
 
-                                <button class="btn btn-primary pull-right-sm" aria-describedby="privacy-note">
-                                    <?php if (is_en()): ?>Send Message<?php else: ?>Nachricht senden<?php endif; ?>
+                                <button class="wng-btn d-inline-flex align-items-center gap-2 my-4 px-4 py-2 pull-right-sm" aria-describedby="privacy-note">
+                                    <?php if (is_en()): ?>Send Message<?php else: ?>Nachricht senden<?php endif; ?> <i class="bi bi-arrow-right"></i>
                                 </button>
                                 </form>
                     </div>
