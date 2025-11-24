@@ -37,7 +37,7 @@ $isEn = is_en();
                         <img src="/assets/img/privacy/undraw_personal-data_a1n8.svg" alt="<?php echo ($sprache === 'en' ? 'Imprint' : 'Impressum'); ?>" width="500" height="500" class="img-fluid">
                     </div>
                     <div class="col-12 col-md-7 order-3 order-md-2">
-                        <p class="fs-20 lh-1-5 my-3"><em>
+                        <p class="fs-18 lh-1-5 my-3"><em>
                                 <?php if ($sprache === 'en'): ?>
                                     Mandatory legal notice pursuant to German law<br>
                                     (Sec. 5 TMG / Sec. 18 MStV).
@@ -58,7 +58,7 @@ $isEn = is_en();
                 <!-- Adresse -->
                 <div class="row mb-4">
                     <div class="col-12 col-md-3">
-                        <h2 class="fs-20 pb-3">
+                        <h2 class="fs-18 pb-3">
                             <?php if ($sprache === 'en'): ?>
                                 Address
                             <?php else: ?>
@@ -90,7 +90,7 @@ $isEn = is_en();
                 <!-- Kontakt -->
                 <div class="row mb-4">
                     <div class="col-12 col-md-3">
-                        <h2 class="fs-20 pb-3">
+                        <h2 class="fs-18 pb-3">
                             <?php if ($sprache === 'en'): ?>
                                 Contact
                             <?php else: ?>
@@ -109,7 +109,7 @@ $isEn = is_en();
                 <!-- USt-IdNr. -->
                 <div class="row mb-4">
                     <div class="col-12 col-md-3">
-                        <h2 class="fs-20 pb-3">
+                        <h2 class="fs-18 pb-3">
                             <?php if ($sprache === 'en'): ?>
                                 VAT ID
                             <?php else: ?>
@@ -131,7 +131,7 @@ $isEn = is_en();
                 <!-- EU-Streitbeilegung -->
                 <div class="row mb-4">
                     <div class="col-12 col-md-3">
-                        <h2 class="fs-20 pb-3">
+                        <h2 class="fs-18 pb-3">
                             <?php if ($sprache === 'en'): ?>
                                 EU Dispute Resolution
                             <?php else: ?>
@@ -153,7 +153,7 @@ $isEn = is_en();
                 <!-- Verbraucherschlichtung -->
                 <div class="row mb-4">
                     <div class="col-12 col-md-3">
-                        <h2 class="fs-20 pb-3">
+                        <h2 class="fs-18 pb-3">
                             <?php if ($sprache === 'en'): ?>
                                 Consumer Arbitration
                             <?php else: ?>
@@ -175,7 +175,7 @@ $isEn = is_en();
                 <!-- Haftungsausschluss -->
                 <div class="row mb-4">
                     <div class="col-12 col-md-3">
-                        <h2 class="fs-20 pb-3">
+                        <h2 class="fs-18 pb-3">
                             <?php if ($sprache === 'en'): ?>
                                 Liability for Content
                             <?php else: ?>
@@ -197,7 +197,7 @@ $isEn = is_en();
                 <!-- Haftung für Links -->
                 <div class="row mb-4">
                     <div class="col-12 col-md-3">
-                        <h2 class="fs-20 pb-3">
+                        <h2 class="fs-18 pb-3">
                             <?php if ($sprache === 'en'): ?>
                                 Liability for Links
                             <?php else: ?>
@@ -219,7 +219,7 @@ $isEn = is_en();
                 <!-- Urheberrecht -->
                 <div class="row mb-4">
                     <div class="col-12 col-md-3">
-                        <h2 class="fs-20 pb-3">
+                        <h2 class="fs-18 pb-3">
                             <?php if ($sprache === 'en'): ?>
                                 Copyright
                             <?php else: ?>
@@ -248,7 +248,7 @@ $isEn = is_en();
                 <!-- Hosting -->
                 <div class="row mb-5">
                     <div class="col-12 col-md-3">
-                        <h2 class="fs-20 pb-3">Hosting</h2>
+                        <h2 class="fs-18 pb-3">Hosting</h2>
                     </div>
                     <div class="col-12 col-md-6">
                         <p>
