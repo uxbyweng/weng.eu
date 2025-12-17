@@ -31,7 +31,7 @@ $isEn = is_en();
                             <span class="font-accent">Built for People.</span>
                         </h1>
                     </div>
-                    <div class="col-12 col-md-5 text-center position-relative order-2 order-md-3 p-4 mh-200 mt-150-md">
+                    <div class="col-12 col-md-5 text-center position-relative order-2 order-md-3 p-4 mh-200 mt-100-md">
                         <div id="blob1" class="position-absolute"></div>
                         <div id="blob2" class="position-absolute"></div>
                         <img src="/assets/img/home/undraw_user-flow_d1ya.svg" alt="User Flow Illustration" width="500" height="254" fetchpriority="high" decoding="async" class="img-fluid" style="position:absolute; left:0rem;z-index:3;">
