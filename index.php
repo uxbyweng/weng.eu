@@ -27,7 +27,7 @@ $isEn = is_en();
                 <div class="row">
                     <div class="col-12 col-md-7 order-1">
                         <h1>
-                            UX/UI Web Design — <br>
+                            Frontend & UX/UI Design — <br>
                             <span class="font-accent">Built for People.</span>
                         </h1>
                     </div>

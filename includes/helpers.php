@@ -121,8 +121,8 @@ function critical_css_inline(?string $nonce = null): string {
  */
 function meta_tags(array $meta): string {
   $defaults = [
-    'title'    => 'WENG.EU | UX/UI Web Design – Built for People.',
-    'desc'     => 'Websites, die nicht nur funktionieren, sondern überzeugen. Schnell. Barrierefrei. SEO-optimiert. Responsiv.',
+    'title'    => 'WENG.EU | Frontend & UX/UI Design – Built for People.',
+    'desc'     => 'Production-Ready Websites. Schnell. Barrierefrei. Responsiv. Entwickelt mit semantischem HTML, skalierbarem CSS und modernen Frontend-Workflows.',
     'og_image' => '/assets/img/logo/logo-light.svg',
     'robots'   => 'index, follow',
   ];
