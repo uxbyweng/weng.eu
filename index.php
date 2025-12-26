@@ -79,6 +79,23 @@ $isEn = is_en();
                     <div class="col-lg-4">
                         <article>
                             <div class="image-wrapper box-shadow">
+                                <a href="/projekte/mur-art/">
+                                    <picture>
+                                        <source srcset="/assets/img/projects/mur-art/teaser-startseite-mur-art.webp" type="image/webp">
+                                        <img src="/assets/img/projects/strato/teaser-startseite-mur-art.jpg" class="img-fluid screen-img" alt="Teaser: mur.art - Quiz App" width="360" height="240" loading="lazy">
+                                    </picture>
+                                </a>
+                            </div>
+                            <div class="text-wrapper pt-2">
+                                <a href="/projekte/mur-art/" class="text-link fw-400">
+                                    mur-art (Quiz-App) — In Progress
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="col-lg-4">
+                        <article>
+                            <div class="image-wrapper box-shadow">
                                 <a href="/projekte/strato/">
                                     <picture>
                                         <source srcset="/assets/img/projects/strato/screen-startseite-strato-april-2024_xs.webp" type="image/webp">
@@ -89,23 +106,6 @@ $isEn = is_en();
                             <div class="text-wrapper pt-2">
                                 <a href="/projekte/strato/" class="text-link fw-400">
                                     STRATO
-                                </a>
-                            </div>
-                        </article>
-                    </div>
-                    <div class="col-lg-4">
-                        <article>
-                            <div class="image-wrapper box-shadow">
-                                <a href="/projekte/lisa/">
-                                    <picture>
-                                        <source srcset="/assets/img/projects/lisa/screen-startseite-lisa-yashodhara-haller_xs.webp" type="image/webp">
-                                        <img src="/assets/img/projects/lisa/screen-startseite-lisa-yashodhara-haller_xs.jpg" class="img-fluid screen-img" alt="Screen: Website Prof. Dr. Lisa Yashodhara Haller" width="360" height="240" loading="lazy">
-                                    </picture>
-                                </a>
-                            </div>
-                            <div class="text-wrapper pt-2">
-                                <a href="/projekte/lisa/" class="text-link fw-400">
-                                    Prof. Dr. Lisa Y. Haller
                                 </a>
                             </div>
                         </article>

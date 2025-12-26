@@ -6,7 +6,9 @@
             "type": "shell",
             "command": "php -S 127.0.0.1:8000 -t . router.php",
             "options": {
-                "env": { "WENG_DEV": "1" }
+                "env": {
+                    "WENG_DEV": "1"
+                }
             },
             "isBackground": true
         },
@@ -25,7 +27,8 @@
         {
             "label": "full-dev",
             "dependsOn": ["php-dev-server", "npm-dev", "npm-serve"],
-            "dependsOrder": "parallel"
+            "dependsOrder": "parallel",
+            "problemMatcher": []
         }
     ]
 }

@@ -47,15 +47,11 @@ $isEn = is_en();
             </div>
         </section>
 
-        <!-- ### PROJEKTE ### -->
+        <!-- ### WEB PROJEKTE ### -->
         <section class="px-3 px-md-0 py-5 border-bottom">
             <div class="container">
                 <h2 class="font-primary mt-0 mb-4">
-                    <?php if (is_en()): ?>
-                        Web Projects
-                    <?php else: ?>
-                        Web Projekte
-                    <?php endif; ?>
+                    Websites
                 </h2>
                 <div class="row g-4">
 
@@ -121,6 +117,49 @@ $isEn = is_en();
                                 </a>
                             </div>
                         </article>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ### APPS ### -->
+        <section class="px-3 px-md-0 py-5 border-bottom">
+            <div class="container">
+                <h2 class="font-primary mt-0 mb-4">
+                    Apps
+                </h2>
+                <div class="row g-4">
+
+                    <!-- Quiz-App -->
+                    <div class="col-lg-4 website">
+                        <article>
+                            <div class="image-wrapper box-shadow">
+                                <a href="/projekte/mur-art/">
+                                    <picture>
+                                        <source srcset="/assets/img/projects/mur-art/teaser-startseite-mur-art.webp" type="image/webp">
+                                        <img src="/assets/img/projects/strato/teaser-startseite-mur-art.jpg" class="img-fluid screen-img" alt="Teaser: mur.art - Quiz App" width="360" height="240" loading="lazy">
+                                    </picture>
+                                </a>
+                            </div>
+                            <div class="text-wrapper pt-2">
+                                <a href="/projekte/mur-art/" class="text-link fw-400">
+                                    mur-art (Quiz-App) — In Progress
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="col-lg-4 website">
+                        <article></article>
+                    </div>
+
+                    <div class="col-lg-4 website">
+                        <article></article>
+                    </div>
+
+                    <div class="col-lg-4 website">
+                        <article></article>
                     </div>
 
                 </div>
