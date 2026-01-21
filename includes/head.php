@@ -45,7 +45,7 @@ function render_head(array $meta = [], ?string $cspNonce = null): string
             <noscript>
                 <link rel="stylesheet" href="/assets/vendor/bootstrap/bootstrap-icons/bootstrap-icons.min.css?v=<?= $iconsV ?>">
             </noscript>
-            <link rel="preload" href="/assets/css/styles.css?v=<?= $cssV ?>" as="style" onload="this.rel='stylesheet'">
+            <link rel="stylesheet" href="/assets/css/styles.css?v=<?= $cssV ?>">
             <noscript>
                 <link rel="stylesheet" href="/assets/css/styles.css?v=<?= $cssV ?>">
             </noscript>

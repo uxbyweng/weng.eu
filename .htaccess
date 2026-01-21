@@ -1,17 +1,53 @@
 # .htaccess (non-versioned assets)
+
 RewriteEngine On
 
-# Eigene Fehlerseiten
+# === ERROR PAGES ===
+
 ErrorDocument 404 /error/404/
 ErrorDocument 500 /error/500/
 
+# === WEBP HANDLING ===
+
 ### WebP, wenn Browser es akzeptiert und .webp existiert
+
 RewriteCond %{HTTP_ACCEPT} image/webp
 RewriteCond %{REQUEST_URI} \.(jpe?g|png)$ [NC]
 RewriteCond %{REQUEST_FILENAME}\.webp -f
 RewriteRule ^(.+)\.(jpe?g|png)$ $1.webp [T=image/webp,E=accept:1,L]
 
-# === CACHING (robust, ohne Expires-Module) ===
+# === COMPRESSION ===
+
+# Brotli (wenn verfügbar)
+
+<IfModule mod_brotli.c>
+  AddOutputFilterByType BROTLI_COMPRESS text/css
+  AddOutputFilterByType BROTLI_COMPRESS application/javascript text/javascript
+  AddOutputFilterByType BROTLI_COMPRESS application/json
+  AddOutputFilterByType BROTLI_COMPRESS image/svg+xml
+</IfModule>
+
+# Gzip/Deflate (Fallback, meist verfügbar)
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/css
+  AddOutputFilterByType DEFLATE application/javascript text/javascript
+  AddOutputFilterByType DEFLATE application/json
+  AddOutputFilterByType DEFLATE image/svg+xml
+
+# optional, aber sauber: bereits komprimierte Formate nicht nochmal anfassen
+
+SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png|webp|avif|ico|woff2?)$ no-gzip dont-vary
+</IfModule>
+
+# Wichtig für korrekte Caches/Proxies
+
+<IfModule mod_headers.c>
+  Header always append Vary Accept-Encoding
+</IfModule>
+
+# === CACHING (ohne Expires-Module) ===
+
 <IfModule mod_headers.c>
   # a) Statische Assets: 7 Tage, Revalidation möglich
   <FilesMatch "\.(?:css|js|mjs|png|jpe?g|gif|webp|avif|svg|ico|woff2?|ttf|eot)$">
@@ -20,23 +56,29 @@ RewriteRule ^(.+)\.(jpe?g|png)$ $1.webp [T=image/webp,E=accept:1,L]
     # Expires fix gesetzt, aber Cache-Control steuert die effektive TTL
   </FilesMatch>
 
-  # b) HTML & PHP: nicht cachen
-  <FilesMatch "\.(?:html?|php)$">
-    Header always set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
-    Header always set Pragma "no-cache"
-    Header always set Expires "0"
-  </FilesMatch>
+# b) HTML & PHP: nicht cachen
 
-  # c) JSON/XML (falls genutzt): kurzlebig
-  <FilesMatch "\.(?:json|xml)$">
-    Header always set Cache-Control "private, max-age=60, must-revalidate"
-  </FilesMatch>
+<FilesMatch "\.(?:html?|php)$">
+Header always set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+Header always set Pragma "no-cache"
+Header always set Expires "0"
+</FilesMatch>
 
-  # d) Vary für WebP bleibt (von deinem Block)
-  Header append Vary Accept env=REDIRECT_accept
+# c) JSON/XML (falls genutzt): kurzlebig
+
+<FilesMatch "\.(?:json|xml)$">
+Header always set Cache-Control "private, max-age=60, must-revalidate"
+</FilesMatch>
+
+# d) Vary für WebP bleibt (von deinem Block)
+
+Header append Vary Accept env=REDIRECT_accept
 </IfModule>
 
+# === MIME-TYPES ===
+
 # Korrekte MIME-Typen (hilfreich für einige Hosts)
+
 AddType font/woff2 .woff2
-AddType font/woff  .woff
+AddType font/woff .woff
 AddType image/webp .webp

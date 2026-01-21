@@ -142,7 +142,7 @@
 
 <!-- JavaScript -->
 <script type="module" src="/assets/js/site.<?= ($sprache === 'en' ? 'en' : 'de') ?>.js"></script>
-<script src="/assets/vendor/jquery/jquery-3.3.1.min.js" defer></script>
+<script src="/assets/vendor/jquery/jquery-3.3.1.min.js"></script>
 
 </body>
 
