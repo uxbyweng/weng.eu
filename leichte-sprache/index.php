@@ -44,10 +44,8 @@ $isEn = is_en();
                     <div class="col-12 col-md-7 order-3 order-md-2">
                         <p class="fs-20 lh-1-5 my-3">
                             <?php if ($sprache === 'en'): ?>
-                                What makes a good website - explained simply:<br>
                                 Good websites are not only visually appealing but also easy to use. They load quickly, are accessible, and can be easily found via search engines. The design is clear. The code is clean.
                             <?php else: ?>
-                                Was gute Webseiten ausmacht – einfach erklärt:<br>
                                 Gute Webseiten sehen nicht nur schön aus sondern sind auch leicht zu benutzen. Sie laden schnell, sind barrierefrei und gut über Suchmaschinen zu finden. Das Design ist klar. Der Code ist sauber.
                             <?php endif; ?>
                         </p>
@@ -260,7 +258,7 @@ $isEn = is_en();
                                 <p class="fs-20 my-3">
                                     <a href="https://www.pangolin-doxx.com/" rel="nofollow" target="_blank">pangolin-doxx.com</a>
                                 </p>
-                                <a href="/projekte/park-klinik/" class="btn btn-secondary d-inline-flex align-items-center gap-2 my-3 px-4 py-2">
+                                <a href="/projekte/pangolin-doxx/" class="btn btn-secondary d-inline-flex align-items-center gap-2 my-3 px-4 py-2">
                                     <?php if ($sprache === 'en'): ?>
                                         More info about Project Pangolin-Doxx
                                     <?php else: ?>

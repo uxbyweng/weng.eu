@@ -82,7 +82,7 @@ $isEn = is_en();
                                 <a href="/projekte/mur-art/">
                                     <picture>
                                         <source srcset="/assets/img/projects/mur-art/teaser-startseite-mur-art.webp" type="image/webp">
-                                        <img src="/assets/img/projects/strato/teaser-startseite-mur-art.jpg" class="img-fluid screen-img" alt="Teaser: mur.art - Quiz App" width="360" height="240" loading="lazy">
+                                        <img src="/assets/img/projects/strato/teaser-startseite-mur-art.jpg" class="img-fluid screen-img" alt="Teaser: mur.art - Quiz App" width="203" height="136" loading="lazy" decoding="async">
                                     </picture>
                                 </a>
                             </div>

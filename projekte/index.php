@@ -127,24 +127,24 @@ $isEn = is_en();
         <section class="px-3 px-md-0 py-5 border-bottom">
             <div class="container">
                 <h2 class="font-primary mt-0 mb-4">
-                    Apps
+                    Print
                 </h2>
                 <div class="row g-4">
 
-                    <!-- Quiz-App -->
+                    <!-- Campzeitung circuscamp 2018 -->
                     <div class="col-lg-4 website">
                         <article>
                             <div class="image-wrapper box-shadow">
-                                <a href="/projekte/mur-art/">
+                                <a href="/projekte/circus-schatzinsel/">
                                     <picture>
-                                        <source srcset="/assets/img/projects/mur-art/teaser-startseite-mur-art.webp" type="image/webp">
-                                        <img src="/assets/img/projects/strato/teaser-startseite-mur-art.jpg" class="img-fluid screen-img" alt="Teaser: mur.art - Quiz App" width="360" height="240" loading="lazy">
+                                        <source srcset="/assets/img/projects/circus-schatzinsel/teaser-campzeitung-2018.jpg" type="image/webp">
+                                        <img src="/assets/img/projects/circus-schatzinsel/teaser-campzeitung-2018.jpg" class="img-fluid screen-img" alt="<?php echo is_en() ? 'Teaser: Camp newspaper for the International Circus Camp 2018' : 'Teaser: Campzeitung für das Internationale Circuscamp 2018'; ?>" width="360" height="240" loading="lazy">
                                     </picture>
                                 </a>
                             </div>
                             <div class="text-wrapper pt-2">
-                                <a href="/projekte/mur-art/" class="text-link fw-400">
-                                    mur-art (Quiz-App) — In Progress
+                                <a href="/projekte/circus-schatzinsel/" class="text-link fw-400">
+                                    Campzeitung - Internationales Circuscamp 2018
                                 </a>
                             </div>
                         </article>
@@ -165,6 +165,51 @@ $isEn = is_en();
                 </div>
             </div>
         </section>
+
+        <!-- ### APPS ### -->
+        <section class="px-3 px-md-0 py-5 border-bottom">
+            <div class="container">
+                <h2 class="font-primary mt-0 mb-4">
+                    Apps
+                </h2>
+                <div class="row g-4">
+
+                    <!-- Quiz-App -->
+                    <div class="col-lg-4 website">
+                        <article>
+                            <div class="image-wrapper box-shadow">
+                                <a href="/projekte/mur-art/">
+                                    <picture>
+                                        <source srcset="/assets/img/projects/mur-art/teaser-startseite-mur-art.webp" type="image/webp">
+                                        <img src="/assets/img/projects/strato/teaser-startseite-mur-art.jpg" class="img-fluid screen-img" alt="Teaser: mur.art - Quiz App" width="360" height="240" loading="lazy">
+                                    </picture>
+                                </a>
+                            </div>
+                            <div class="text-wrapper pt-2">
+                                <a href="/projekte/mur-art/" class="text-link fw-400">
+                                    mur-art - Quiz-App
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="col-lg-4 website">
+                        <article></article>
+                    </div>
+
+                    <div class="col-lg-4 website">
+                        <article></article>
+                    </div>
+
+                    <div class="col-lg-4 website">
+                        <article></article>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+       
 
     </main>
 

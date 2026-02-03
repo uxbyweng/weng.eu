@@ -36,6 +36,7 @@ function render_head(array $meta = [], ?string $cspNonce = null): string
             // (Datei-Änderungszeit oder Zeitstempel jetzt, falls Datei nicht
             $cssV   = @filemtime($_SERVER['DOCUMENT_ROOT'] . '/assets/css/styles.css') ?: time();
             $iconsV = @filemtime($_SERVER['DOCUMENT_ROOT'] . '/assets/vendor/bootstrap/bootstrap-icons/bootstrap-icons.min.css') ?: time();
+            echo $iconSV;
             $siteJsName = '/assets/js/site.' . (is_en() ? 'en' : 'de') . '.js';
             $siteV  = @filemtime($_SERVER['DOCUMENT_ROOT'] . $siteJsName) ?: time();
             $cfJsName = '/assets/js/modules/contact-form.' . (is_en() ? 'en' : 'de') . '.js';
