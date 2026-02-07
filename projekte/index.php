@@ -123,7 +123,7 @@ $isEn = is_en();
             </div>
         </section>
 
-        <!-- ### APPS ### -->
+        <!-- ### PRINT PROJEKTE ### -->
         <section class="px-3 px-md-0 py-5 border-bottom">
             <div class="container">
                 <h2 class="font-primary mt-0 mb-4">
@@ -193,8 +193,23 @@ $isEn = is_en();
                         </article>
                     </div>
 
+                    <!-- HexaChrome App -->
                     <div class="col-lg-4 website">
-                        <article></article>
+                        <article>
+                            <div class="image-wrapper box-shadow">
+                                <a href="#">
+                                    <picture>
+                                        <source srcset="/assets/img/projects/hexachrome/teaser-hexachrome.webp" type="image/webp">
+                                        <img src="/assets/img/projects/strato/teaser-hexachrome.jpg" class="img-fluid screen-img" alt="Teaser: HexaChrome - Theme Creator App" width="360" height="240" loading="lazy">
+                                    </picture>
+                                </a>
+                            </div>
+                            <div class="text-wrapper pt-2">
+                                <a href="#" class="text-link fw-400">
+                                    HexaChrome - Theme Creator App
+                                </a>
+                            </div>
+                        </article>
                     </div>
 
                     <div class="col-lg-4 website">
