@@ -123,49 +123,6 @@ $isEn = is_en();
             </div>
         </section>
 
-        <!-- ### PRINT PROJEKTE ### -->
-        <section class="px-3 px-md-0 py-5 border-bottom">
-            <div class="container">
-                <h2 class="font-primary mt-0 mb-4">
-                    Print
-                </h2>
-                <div class="row g-4">
-
-                    <!-- Campzeitung circuscamp 2018 -->
-                    <div class="col-lg-4 website">
-                        <article>
-                            <div class="image-wrapper box-shadow">
-                                <a href="/projekte/circus-schatzinsel/">
-                                    <picture>
-                                        <source srcset="/assets/img/projects/circus-schatzinsel/teaser-campzeitung-2018.jpg" type="image/webp">
-                                        <img src="/assets/img/projects/circus-schatzinsel/teaser-campzeitung-2018.jpg" class="img-fluid screen-img" alt="<?php echo is_en() ? 'Teaser: Camp newspaper for the International Circus Camp 2018' : 'Teaser: Campzeitung für das Internationale Circuscamp 2018'; ?>" width="360" height="240" loading="lazy">
-                                    </picture>
-                                </a>
-                            </div>
-                            <div class="text-wrapper pt-2">
-                                <a href="/projekte/circus-schatzinsel/" class="text-link fw-400">
-                                    Campzeitung - Internationales Circuscamp 2018
-                                </a>
-                            </div>
-                        </article>
-                    </div>
-
-                    <div class="col-lg-4 website">
-                        <article></article>
-                    </div>
-
-                    <div class="col-lg-4 website">
-                        <article></article>
-                    </div>
-
-                    <div class="col-lg-4 website">
-                        <article></article>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
         <!-- ### APPS ### -->
         <section class="px-3 px-md-0 py-5 border-bottom">
             <div class="container">
@@ -224,7 +181,48 @@ $isEn = is_en();
             </div>
         </section>
 
-       
+        <!-- ### PRINT PROJEKTE ### -->
+        <section class="px-3 px-md-0 py-5 border-bottom">
+            <div class="container">
+                <h2 class="font-primary mt-0 mb-4">
+                    Print
+                </h2>
+                <div class="row g-4">
+
+                    <!-- Campzeitung circuscamp 2018 -->
+                    <div class="col-lg-4 website">
+                        <article>
+                            <div class="image-wrapper box-shadow">
+                                <a href="/projekte/circus-schatzinsel/">
+                                    <picture>
+                                        <source srcset="/assets/img/projects/circus-schatzinsel/teaser-campzeitung-2018.jpg" type="image/webp">
+                                        <img src="/assets/img/projects/circus-schatzinsel/teaser-campzeitung-2018.jpg" class="img-fluid screen-img" alt="<?php echo is_en() ? 'Teaser: Camp newspaper for the International Circus Camp 2018' : 'Teaser: Campzeitung für das Internationale Circuscamp 2018'; ?>" width="360" height="240" loading="lazy">
+                                    </picture>
+                                </a>
+                            </div>
+                            <div class="text-wrapper pt-2">
+                                <a href="/projekte/circus-schatzinsel/" class="text-link fw-400">
+                                    Campzeitung - Internationales Circuscamp 2018
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+
+                    <div class="col-lg-4 website">
+                        <article></article>
+                    </div>
+
+                    <div class="col-lg-4 website">
+                        <article></article>
+                    </div>
+
+                    <div class="col-lg-4 website">
+                        <article></article>
+                    </div>
+
+                </div>
+            </div>
+        </section>
 
     </main>
 
