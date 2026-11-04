@@ -91,7 +91,7 @@ router.php          # routing for the PHP dev server
 ## Status
 
 -   Nov 2026: tooling migrated to Bun + TypeScript (strict), jQuery removed, automatic deployment via GitHub Actions.
--   Next: recruiter-focused relaunch (design handoff in `docs/`), then trimming the Bootstrap CSS to what is actually used.
+-   Next: relaunch (design handoff in `docs/`), then trimming the Bootstrap CSS to what is actually used.
 
 ## License
 
