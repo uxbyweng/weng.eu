@@ -2,256 +2,169 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/lang.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/helpers.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/head.php';
-$meta = [
-    'title' => '',
-    'desc'  => '',
-    'og_image' => '',
-];
+
 $cspNonce = $_SERVER['CSP_NONCE'] ?? null;
-echo render_head($meta, $cspNonce);
-$isEn = is_en();
+echo render_head([], $cspNonce); // Startseite: Standard-Title/-Description aus i18n (meta.default_*)
+
+// Projekt-Karten teilen sich Aufbau und Link-Text
+$projectLink = fn(string $href, string $nameKey): string =>
+    '<a class="project-link" href="' . e(url($href)) . '">' . e(t('project.read')) .
+    '<span class="visually-hidden">: ' . e(t($nameKey)) . '</span> <span aria-hidden="true">→</span></a>';
 ?>
 
 <body>
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php'; ?>
 
-    <main class="page-wrapper" id="startMainContent">
+    <main id="main">
 
+        <!-- Hero (Variante A: Porträt) -->
+        <section class="hero">
+            <div class="wrap hero__inner">
+                <div class="hero__text">
+                    <h1 class="hero__title">
+                        <span class="hero__name"><?= e(t('home.hero.name')) ?></span>
+                        <span class="visually-hidden"> – </span>
+                        <span class="hero__role"><?= e(t('home.hero.role')) ?></span>
+                    </h1>
+                    <p class="lead hero__lead"><?= e(t('home.hero.lead')) ?></p>
+                    <p class="hero__sub"><?= e(t('home.hero.sub')) ?></p>
+                    <div class="hero__actions">
+                        <a class="button" href="<?= e(url('/projekte/')) ?>"><?= e(t('home.hero.cta_projects')) ?></a>
+                        <a class="button button--secondary" href="<?= e(url('/kontakt/')) ?>"><?= e(t('home.hero.cta_contact')) ?></a>
+                    </div>
+                </div>
+                <figure class="hero__figure portrait">
+                    <img src="/assets/img/home/about-me.jpg" alt="<?= e(t('home.hero.portrait_alt')) ?>" width="900" height="1153" fetchpriority="high" decoding="async">
+                    <figcaption class="portrait__badge">
+                        <strong><?= e(t('home.hero.badge_since')) ?></strong>
+                        <span><?= e(t('home.hero.badge_for')) ?></span>
+                    </figcaption>
+                </figure>
+            </div>
+        </section>
 
-        <!-- ### BREADCRUMB ### -->
-        <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/breadcrumb.php'; ?>
+        <!-- Ausgewählte Arbeiten -->
+        <section class="section" id="projekte" aria-labelledby="projekte-title">
+            <div class="wrap">
+                <div class="section-head">
+                    <div>
+                        <p class="eyebrow"><?= e(t('home.projects.eyebrow')) ?></p>
+                        <h2 id="projekte-title"><?= e(t('home.projects.title')) ?></h2>
+                    </div>
+                    <a class="more-link" href="<?= e(url('/projekte/')) ?>"><?= e(t('home.projects.all')) ?> <span aria-hidden="true">→</span></a>
+                </div>
 
-        <!-- ### STAGE ### -->
-        <section class="px-3 px-md-0 py-2 py-md-5">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 col-md-7 order-1">
-                        <h1>
-                           Websites — <span class="font-accent">Built for People.</span>
-                        </h1>
+                <article class="project-feature">
+                    <img class="project-media" src="/assets/img/projects/park-klinik/screen-startseite-park-klinik-birkenwerder.jpg"
+                        alt="<?= e(t('project.pk.alt')) ?>" width="1200" height="800" loading="lazy" decoding="async">
+                    <div class="project-feature__body">
+                        <p class="project-meta"><?= e(t('project.pk.meta')) ?></p>
+                        <h3><?= e(t('project.pk.name')) ?></h3>
+                        <p><?= e(t('project.pk.text')) ?></p>
+                        <ul class="results">
+                            <li class="result"><?= e(t('project.pk.r1')) ?></li>
+                            <li class="result"><?= e(t('project.pk.r2')) ?></li>
+                        </ul>
+                        <ul class="chip-list">
+                            <li class="chip">PHP</li>
+                            <li class="chip">SQLite</li>
+                            <li class="chip">Vanilla JS</li>
+                            <li class="chip">JSON-LD</li>
+                        </ul>
+                        <?= $projectLink('/projekte/park-klinik/', 'project.pk.name') ?>
                     </div>
-                    <div class="col-12 col-md-5 text-center position-relative order-2 order-md-3 p-4 mh-200 mt-100-md">
-                        <div id="blob1" class="position-absolute"></div>
-                        <div id="blob2" class="position-absolute"></div>
-                        <img src="/assets/img/home/undraw_user-flow_d1ya.svg" alt="User Flow Illustration" width="500" height="254" fetchpriority="high" decoding="async" class="img-fluid" style="position:absolute; left:0rem;z-index:3;">
-                    </div>
-                    <div class="col-12 col-md-7 order-3 order-md-2">
-                        <p class="fs-20 lh-1-5 my-3">
-                            <em>
-                                <?php if (is_en()): ?>
-                                    Websites that not only work, but impress.<br class="br-desktop">
-                                    Fast. Accessible. SEO-optimized. Responsive.<br class="br-desktop">
-                                    Developed with clean code and impactful design.
-                                <?php else: ?>
-                                    Websites, die nicht nur funktionieren, sondern überzeugen.<br class="br-desktop">
-                                    Schnell. Barrierefrei. SEO-optimiert. Responsiv.<br class="br-desktop">
-                                    Entwickelt mit sauberem Code und wirkungsvollem Design.
-                                <?php endif; ?>
-                            </em>
-                        </p>
-                        <div class="text-center text-md-start">
-                            <a href="/kontakt/" class="wng-btn d-inline-flex align-items-center gap-2 my-4 px-4 py-2">
-                                <?php if (is_en()): ?>
-                                    Say Hello
-                                <?php else: ?>
-                                    Sag Hallo
-                                <?php endif; ?>
-                                <i class="bi bi-arrow-right"></i>
-                            </a>
-                        </div>
-                    </div>
+                </article>
+
+                <div class="grid project-grid">
+                    <article class="project-card">
+                        <img class="project-media" src="/assets/img/projects/lisa/screen-startseite-lisa-yashodhara-haller.jpg"
+                            alt="<?= e(t('project.lisa.alt')) ?>" width="1200" height="800" loading="lazy" decoding="async">
+                        <?php // Jahr, Aufgabe und Ergebnis liefert der Inhaber (live bleiben die Felder leer, siehe todo()) ?>
+                        <p class="project-meta"><?= implode(' · ', array_filter([e(t('project.lisa.kind')), todo('Jahr'), e(t('project.lisa.role'))])) ?></p>
+                        <h3><?= e(t('project.lisa.name')) ?></h3>
+                        <?php if ($task = todo('Ein Satz: Was war die Aufgabe?')): ?><p><?= $task ?></p><?php endif; ?>
+                        <?php if ($outcome = todo('Ergebnis, z. B. Lighthouse 96+')): ?><p class="result"><?= $outcome ?></p><?php endif; ?>
+                        <?= $projectLink('/projekte/lisa/', 'project.lisa.name') ?>
+                    </article>
+
+                    <article class="project-card">
+                        <img class="project-media" src="/assets/img/projects/berlin-street-view/teaser-berlin-street-view.jpg"
+                            alt="<?= e(t('project.bsv.alt')) ?>" width="600" height="400" loading="lazy" decoding="async">
+                        <p class="project-meta"><?= e(t('project.bsv.meta')) ?></p>
+                        <h3><?= e(t('project.bsv.name')) ?></h3>
+                        <p><?= e(t('project.bsv.text')) ?></p>
+                        <ul class="chip-list">
+                            <li class="chip">Next.js</li>
+                            <li class="chip">TypeScript</li>
+                            <li class="chip">MongoDB</li>
+                            <li class="chip">OAuth</li>
+                            <li class="chip">MapLibre</li>
+                        </ul>
+                        <?= $projectLink('/projekte/berlin-street-view/', 'project.bsv.name') ?>
+                    </article>
                 </div>
             </div>
         </section>
 
-        <!-- ### PROJECTS ### -->
-        <section class="px-3 px-md-0 py-5">
-            <div class="container">
-                <h2 class="font-primary mt-0 mb-4">
-                    <?php if (is_en()): ?>
-                        Latest Projects
-                    <?php else: ?>
-                        Neueste Projekte
-                    <?php endif; ?>
-                </h2>
-                <div class="row g-5">
-                    <div class="col-lg-4">
-                        <article>
-                            <div class="image-wrapper box-shadow">
-                                <a href="/projekte/mur-art/">
-                                    <picture>
-                                        <source srcset="/assets/img/projects/mur-art/teaser-startseite-mur-art.webp" type="image/webp">
-                                        <img src="/assets/img/projects/strato/teaser-startseite-mur-art.jpg" class="img-fluid screen-img" alt="Teaser: mur.art - Quiz App" width="203" height="136" loading="lazy" decoding="async">
-                                    </picture>
-                                </a>
-                            </div>
-                            <div class="text-wrapper pt-2">
-                                <a href="/projekte/mur-art/" class="text-link fw-400">
-                                    mur-art (Quiz-App) — In Progress
-                                </a>
-                            </div>
-                        </article>
-                    </div>
-                    <div class="col-lg-4">
-                        <article>
-                            <div class="image-wrapper box-shadow">
-                                <a href="/projekte/strato/">
-                                    <picture>
-                                        <source srcset="/assets/img/projects/strato/screen-startseite-strato-april-2024_xs.webp" type="image/webp">
-                                        <img src="/assets/img/projects/strato/screen-startseite-strato-april-2024_xs.jpg" class="img-fluid screen-img" alt="Screen: Website STRATO" width="360" height="240" loading="lazy">
-                                    </picture>
-                                </a>
-                            </div>
-                            <div class="text-wrapper pt-2">
-                                <a href="/projekte/strato/" class="text-link fw-400">
-                                    STRATO
-                                </a>
-                            </div>
-                        </article>
-                    </div>
-                    <div class="col-lg-4">
-                        <article>
-                            <div class="image-wrapper box-shadow">
-                                <a href="/projekte/park-klinik/">
-                                    <picture>
-                                        <source srcset="/assets/img/projects/park-klinik/screen-startseite-park-klinik-birkenwerder_xs.webp" type="image/webp">
-                                        <img src="/assets/img/projects/park-klinik/screen-startseite-park-klinik-birkenwerder_xs.jpg" class="img-fluid screen-img" alt="Screen: Website Park-Klinik Birkenwerder" width="360" height="240" loading="lazy">
-                                    </picture>
-                                </a>
-                            </div>
-                            <div class="text-wrapper pt-2">
-                                <a href="/projekte/park-klinik/" class="text-link fw-400">
-                                    Park-Klinik Birkenwerder
-                                </a>
-                            </div>
-                        </article>
-                    </div>
-                </div>
-                <div class="text-center">
-                    <a href="/projekte/" class="wng-btn d-inline-flex align-items-center gap-2 m-4">
-                        <?php if (is_en()): ?>
-                            View all projects
-                        <?php else: ?>
-                            Alle Projekte ansehen
-                        <?php endif; ?>
-                        <i class="bi bi-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- ### SERVICES ### -->
-        <section class="px-3 px-md-0 py-5">
-            <div class="container">
-                <h2 class="font-accent mt-0 mb-4">Services</h2>
-                <ul class="service">
-                    <li>
-                        <h3>
-                            UX/UI Web Design
-                        </h3>
-                        <p>
-                            <?php if (is_en()): ?>
-                                Designing thoughtful, responsive interfaces with a focus on usability, aesthetics, and brand identity.
-                            <?php else: ?>
-                                Gestaltung durchdachter, responsiver Interfaces mit Fokus auf Nutzerfreundlichkeit, Ästhetik und Markenidentität.
-                            <?php endif; ?>
-                        </p>
-                    </li>
-                    <li>
-                        <h3>
-                            <?php if (is_en()): ?>
-                                Web Development
-                            <?php else: ?>
-                                Webentwicklung
-                            <?php endif; ?>
-                        </h3>
-                        <p>
-                            <?php if (is_en()): ?>
-                                Clean, performant code for stable, accessible, and maintainable websites – from prototype to live project.
-                            <?php else: ?>
-                                Sauberer, performanter Code für stabile, barrierefreie und wartbare Websites – vom Prototyp bis zum Live-Projekt.
-                            <?php endif; ?>
-                        </p>
-                    </li>
-                    <li>
-                        <h3>
-                            <?php if (is_en()): ?>
-                                Accessibility
-                            <?php else: ?>
-                                Barrierefreiheit
-                            <?php endif; ?>
-                        </h3>
-                        <p>
-                            <?php if (is_en()): ?>
-                                Development according to WCAG standards for inclusive digital experiences, accessible to all user groups.
-                            <?php else: ?>
-                                Entwicklung nach WCAG-Standards für inklusive digitale Erlebnisse, zugänglich für alle Nutzergruppen.
-                            <?php endif; ?>
-                        </p>
-                    </li>
-                    <li>
-                        <h3>
-                            Performance
-                        </h3>
-                        <p>
-                            <?php if (is_en()): ?>
-                                Optimization of load times, code, and Core Web Vitals for a measurably better user experience.
-                            <?php else: ?>
-                                Optimierung von Ladezeiten, Code und Core Web Vitals für eine messbar bessere User Experience.
-                            <?php endif; ?>
-                        </p>
-                    </li>
-                    <li>
-                        <h3>
-                            SEO
-                        </h3>
-                        <p>
-                            <?php if (is_en()): ?>
-                                Technical and content-related search engine optimization for long-term visibility and reach.
-                            <?php else: ?>
-                                Technische und inhaltliche Suchmaschinenoptimierung für langfristige Sichtbarkeit und Reichweite.
-                            <?php endif; ?>
-                        </p>
-                    </li>
-                    <li>
-                        <h3>
-                            <?php if (is_en()): ?>
-                                Photography
-                            <?php else: ?>
-                                Fotografie
-                            <?php endif; ?>
-                        </h3>
-                        <p>
-                            <?php if (is_en()): ?>
-                                Authentic image concepts and photography that visually enhance projects and convey stories.
-                            <?php else: ?>
-                                Authentische Bildkonzepte und Fotografie, die Projekte visuell stärken und Geschichten transportieren.
-                            <?php endif; ?>
-                        </p>
-                    </li>
+        <!-- Erfahrung -->
+        <section class="section section--band" aria-labelledby="erfahrung-title">
+            <div class="wrap">
+                <p class="eyebrow"><?= e(t('home.exp.eyebrow')) ?></p>
+                <h2 id="erfahrung-title"><?= e(t('home.exp.title')) ?></h2>
+                <ul class="stats">
+                    <?php foreach ([1, 2, 3, 4] as $n): ?>
+                        <li class="stat">
+                            <p class="stat__value"><?= e(t("home.exp.$n.value")) ?></p>
+                            <p class="stat__text"><?= e(t("home.exp.$n.text")) ?><?= $n === 3 ? todo('Ausgangswert und Tool', ' ') : '' ?></p>
+                        </li>
+                    <?php endforeach; ?>
                 </ul>
             </div>
         </section>
 
-        <!-- ### ABOUT ME ### -->
-        <section class="about-me-section-wrapper">
-            <div class="about-me-section">
-                <div class="about-me-content container-xxl">
-                    <div class="row justify-content-center text-white">
-                        <div class="col-xl-10">
-                            <p class="font-handwriting display-6 fw-light mt150">
-                                <?php if (is_en()): ?>
-                                    „Good web development means communication on equal terms with solutions that work for people – not just in code.“
-                                <?php else: ?>
-                                    „Gute Webentwicklung bedeutet Kommunikation auf Augenhöhe mit Lösungen, die für Menschen funktionieren – nicht nur im Code.“
-                                <?php endif; ?>
-                            </p>
-                        </div>
-                    </div>
+        <!-- Leistungen -->
+        <section class="section section--surface" id="leistungen" aria-labelledby="leistungen-title">
+            <div class="wrap">
+                <p class="eyebrow"><?= e(t('home.services.eyebrow')) ?></p>
+                <h2 id="leistungen-title"><?= e(t('home.services.title')) ?></h2>
+                <div class="grid service-grid">
+                    <?php foreach ([1, 2, 3] as $n): ?>
+                        <article class="card service-card">
+                            <span class="service-card__num" aria-hidden="true">0<?= $n ?></span>
+                            <h3><?= e(t("home.services.$n.title")) ?></h3>
+                            <p><?= e(t("home.services.$n.text")) ?></p>
+                            <p class="service-card__tools"><?= e(t("home.services.$n.tools")) ?></p>
+                        </article>
+                    <?php endforeach; ?>
+                </div>
+                <p class="section-foot"><a class="more-link" href="<?= e(url('/leistungen/')) ?>"><?= e(t('home.services.all')) ?> <span aria-hidden="true">→</span></a></p>
+            </div>
+        </section>
+
+        <!-- Über mich (Teaser) -->
+        <section class="section" aria-labelledby="teaser-title">
+            <div class="wrap teaser">
+                <?php // Arbeitsfoto fehlt noch (Handoff: "Fehlen noch: Arbeitsfoto") – lokal Platzhalter, live nur Text ?>
+                <?php if (is_dev()): ?><div class="teaser__photo"><?= todo('Arbeitsfoto, z. B. am Schreibtisch oder im Kundentermin') ?></div><?php endif; ?>
+                <div class="teaser__text">
+                    <p class="eyebrow"><?= e(t('home.about.eyebrow')) ?></p>
+                    <h2 id="teaser-title"><?= e(t('home.about.title')) ?></h2>
+                    <p><?= e(t('home.about.text')) ?></p>
+                    <a class="more-link" href="<?= e(url('/ueber-mich/')) ?>"><?= e(t('home.about.more')) ?> <span aria-hidden="true">→</span></a>
                 </div>
             </div>
         </section>
 
+        <!-- Kundenstimme: erscheint live erst, wenn ein echtes Zitat geliefert ist -->
+        <?php if (is_dev()): ?>
+            <section class="quote" aria-label="<?= e(t('home.quote.label')) ?>">
+                <figure class="wrap">
+                    <blockquote><p>„<?= todo('Zitat einer Kundin oder eines Kunden – zwei Sätze zur Zusammenarbeit oder zum Ergebnis.') ?>“</p></blockquote>
+                    <figcaption><?= todo('Name, Funktion') ?> · <?= e(t('project.pk.name')) ?></figcaption>
+                </figure>
+            </section>
+        <?php endif; ?>
+
     </main>
 
-    <?php include($_SERVER["DOCUMENT_ROOT"] . "/includes/footer.php"); ?>
+    <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/footer.php'; ?>

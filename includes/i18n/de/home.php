@@ -1,0 +1,66 @@
+<?php
+// Startseite. Texte 1:1 aus dem Design-Handoff (docs/…/design_handoff_weng_relaunch).
+return [
+  'home.hero.name'      => 'Karsten Weng',
+  'home.hero.role'      => 'Webdesigner & Frontend-Entwickler in Berlin',
+  'home.hero.lead'      => 'Ich gestalte Websites und setze sie selbst um: barrierefrei, schnell und wartbar.',
+  'home.hero.sub'       => 'Über 20 Jahre Praxis, zwei Jahrzehnte davon bei STRATO. Seit 2025 hauptberuflich selbstständig.',
+  'home.hero.cta_projects' => 'Projekte ansehen',
+  'home.hero.cta_contact'  => 'Kontakt aufnehmen',
+  'home.hero.portrait_alt' => 'Porträt von Karsten Weng',
+  'home.hero.badge_since'  => 'seit 2017',
+  'home.hero.badge_for'    => 'für die Park-Klinik Birkenwerder',
+
+  'home.projects.eyebrow' => 'Projekte',
+  'home.projects.title'   => 'Ausgewählte Arbeiten',
+  'home.projects.all'     => 'Alle Projekte ansehen',
+  'project.read'          => 'Case Study lesen',
+
+  'project.pk.name'   => 'Park-Klinik Birkenwerder',
+  'project.pk.meta'   => 'Kunde seit 2017 · Konzept, Design, Umsetzung, Betreuung',
+  'project.pk.text'   => 'Relaunch der zweisprachigen Klinik-Website (DE/EN) – vom UX-Konzept bis zur Umsetzung in PHP, SQLite und Vanilla JavaScript.',
+  'project.pk.r1'     => 'Core Web Vitals mobil für alle erfassten URLs bestanden',
+  'project.pk.r2'     => 'Rund 30 wiederverwendbare Komponenten mit Living Styleguide',
+  'project.pk.alt'    => 'Startseite der Park-Klinik Birkenwerder',
+
+  'project.lisa.name' => 'Prof. Dr. Lisa Y. Haller',
+  'project.lisa.kind' => 'Kundenprojekt',
+  'project.lisa.role' => 'Design & Umsetzung',
+  'project.lisa.alt'  => 'Startseite der Website von Prof. Dr. Lisa Y. Haller',
+
+  'project.bsv.name'  => 'Berlin Street View',
+  'project.bsv.meta'  => 'Eigenprojekt · 2026 · Full-Stack',
+  'project.bsv.text'  => 'Full-Stack-App mit Karte, Login und eigener Datenbank – Abschlussprojekt meiner Weiterbildung bei neue fische.',
+  'project.bsv.alt'   => 'Berlin Street View: Karte mit Straßenansicht',
+
+  'home.exp.eyebrow'  => 'Erfahrung',
+  'home.exp.title'    => 'Erfahrung, die sich nachprüfen lässt',
+  'home.exp.1.value'  => '20 Jahre',
+  'home.exp.1.text'   => 'bei STRATO (IONOS Group), Festanstellung 2005–2025 – zuletzt Senior im Shop-Plattform-Team.',
+  'home.exp.2.value'  => 'Design-Lead',
+  'home.exp.2.text'   => 'bei der Umstellung auf Responsive Webdesign: sämtliche mobilen Designs, Schwerpunkt Bestellprozess.',
+  'home.exp.3.value'  => 'ca. 90 %',
+  'home.exp.3.text'   => 'Accessibility-Score, im Shop-Team systematisch erreicht.',
+  'home.exp.4.value'  => 'seit 2017',
+  'home.exp.4.text'   => 'betreue ich die Park-Klinik Birkenwerder – vom Konzept bis zum Relaunch.',
+
+  'home.services.eyebrow' => 'Leistungen',
+  'home.services.title'   => 'Von der ersten Skizze bis zum Live-Gang',
+  'home.services.all'     => 'Alle Leistungen im Detail',
+  'home.services.1.title' => 'Webdesign & UX/UI',
+  'home.services.1.text'  => 'Konzeption, Informationsarchitektur und Gestaltung responsiver Interfaces – mit Fokus auf Nutzerfreundlichkeit und Markenidentität.',
+  'home.services.1.tools' => 'Figma · Prototypen · Design-Systeme',
+  'home.services.2.title' => 'Frontend-Entwicklung',
+  'home.services.2.text'  => 'Sauberer, wartbarer Code für Websites und Web-Apps – von HTML und SCSS bis React. Oder WordPress und PHP, wenn das Projekt es braucht.',
+  'home.services.2.tools' => 'HTML · SCSS · JavaScript · React · WordPress',
+  'home.services.3.title' => 'Barrierefreiheit, Performance & SEO',
+  'home.services.3.text'  => 'WCAG 2.2 und BFSG, Core Web Vitals und technische SEO – von Anfang an eingeplant statt nachträglich repariert.',
+  'home.services.3.tools' => 'WCAG · BFSG · Core Web Vitals · JSON-LD',
+
+  'home.about.eyebrow' => 'Über mich',
+  'home.about.title'   => 'Kommunikationsdesigner, der seinen Code selbst schreibt',
+  'home.about.text'    => 'Ich habe Kommunikationsdesign studiert und arbeite seit über 20 Jahren im Web – zwei Jahrzehnte davon bei STRATO. Eigene Kunden habe ich immer parallel betreut, seit 2025 hauptberuflich. Aktuell erweitere ich mein Profil gezielt um Backend und KI-gestützte Entwicklung.',
+  'home.about.more'    => 'Mehr über mich',
+
+  'home.quote.label'   => 'Kundenstimme',
+];

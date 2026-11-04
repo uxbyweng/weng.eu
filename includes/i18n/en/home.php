@@ -1,0 +1,66 @@
+<?php
+// Home page (English). TODO Inhaber: Übersetzung prüfen – das ist die Außendarstellung auf Englisch.
+return [
+  'home.hero.name'      => 'Karsten Weng',
+  'home.hero.role'      => 'Web Designer & Frontend Developer in Berlin',
+  'home.hero.lead'      => 'I design websites and build them myself: accessible, fast and maintainable.',
+  'home.hero.sub'       => 'Over 20 years of practice, two decades of it at STRATO. Self-employed full time since 2025.',
+  'home.hero.cta_projects' => 'View projects',
+  'home.hero.cta_contact'  => 'Get in touch',
+  'home.hero.portrait_alt' => 'Portrait of Karsten Weng',
+  'home.hero.badge_since'  => 'since 2017',
+  'home.hero.badge_for'    => 'for Park-Klinik Birkenwerder',
+
+  'home.projects.eyebrow' => 'Projects',
+  'home.projects.title'   => 'Selected work',
+  'home.projects.all'     => 'View all projects',
+  'project.read'          => 'Read the case study',
+
+  'project.pk.name'   => 'Park-Klinik Birkenwerder',
+  'project.pk.meta'   => 'Client since 2017 · Concept, design, development, maintenance',
+  'project.pk.text'   => 'Relaunch of the clinic’s bilingual website (DE/EN) – from UX concept to implementation in PHP, SQLite and vanilla JavaScript.',
+  'project.pk.r1'     => 'Core Web Vitals passed on mobile for all tracked URLs',
+  'project.pk.r2'     => 'Around 30 reusable components with a living style guide',
+  'project.pk.alt'    => 'Home page of Park-Klinik Birkenwerder',
+
+  'project.lisa.name' => 'Prof. Dr. Lisa Y. Haller',
+  'project.lisa.kind' => 'Client project',
+  'project.lisa.role' => 'Design & development',
+  'project.lisa.alt'  => 'Home page of the website of Prof. Dr. Lisa Y. Haller',
+
+  'project.bsv.name'  => 'Berlin Street View',
+  'project.bsv.meta'  => 'Personal project · 2026 · Full stack',
+  'project.bsv.text'  => 'Full-stack app with a map, login and its own database – final project of my training at neue fische.',
+  'project.bsv.alt'   => 'Berlin Street View: map with street view',
+
+  'home.exp.eyebrow'  => 'Experience',
+  'home.exp.title'    => 'Experience you can verify',
+  'home.exp.1.value'  => '20 years',
+  'home.exp.1.text'   => 'at STRATO (IONOS Group), employed 2005–2025 – most recently senior in the shop platform team.',
+  'home.exp.2.value'  => 'Design lead',
+  'home.exp.2.text'   => 'for the switch to responsive web design: all mobile designs, focused on the checkout process.',
+  'home.exp.3.value'  => 'approx. 90 %',
+  'home.exp.3.text'   => 'accessibility score, reached systematically in the shop team.',
+  'home.exp.4.value'  => 'since 2017',
+  'home.exp.4.text'   => 'I have been looking after Park-Klinik Birkenwerder – from concept to relaunch.',
+
+  'home.services.eyebrow' => 'Services',
+  'home.services.title'   => 'From the first sketch to going live',
+  'home.services.all'     => 'All services in detail',
+  'home.services.1.title' => 'Web design & UX/UI',
+  'home.services.1.text'  => 'Concept, information architecture and design of responsive interfaces – focused on usability and brand identity.',
+  'home.services.1.tools' => 'Figma · Prototypes · Design systems',
+  'home.services.2.title' => 'Frontend development',
+  'home.services.2.text'  => 'Clean, maintainable code for websites and web apps – from HTML and SCSS to React. Or WordPress and PHP when the project needs it.',
+  'home.services.2.tools' => 'HTML · SCSS · JavaScript · React · WordPress',
+  'home.services.3.title' => 'Accessibility, performance & SEO',
+  'home.services.3.text'  => 'WCAG 2.2 and the German accessibility act (BFSG), Core Web Vitals and technical SEO – planned from the start instead of fixed afterwards.',
+  'home.services.3.tools' => 'WCAG · BFSG · Core Web Vitals · JSON-LD',
+
+  'home.about.eyebrow' => 'About me',
+  'home.about.title'   => 'A communication designer who writes his own code',
+  'home.about.text'    => 'I studied communication design and have worked on the web for over 20 years – two decades of it at STRATO. I always looked after my own clients on the side, and since 2025 full time. Right now I am deliberately broadening my profile towards backend and AI-assisted development.',
+  'home.about.more'    => 'More about me',
+
+  'home.quote.label'   => 'Client testimonial',
+];
