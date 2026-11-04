@@ -1,0 +1,107 @@
+/*
+ * Design-Tokens (Quelle: docs/…/design_handoff_weng_relaunch/README.md → "Design Tokens")
+ * Helles Theme ist der Standard. Das dunkle Theme wird über data-bs-theme="dark" am <html> geschaltet
+ * (setzt theme-toggle.ts; Attributname bleibt vorerst, bis die Altseiten migriert sind).
+ */
+
+:root {
+    /* Marke */
+    --color-accent: #d72b00;
+    --color-accent-hover: #b32400;
+    --color-accent-dark: #9e1f00;
+    --color-accent-link: #c42700; /* große Mail-Adresse im Kontakt-Band */
+    --color-petrol: #22373f;
+
+    /* Text */
+    --color-heading: #1f2b30;
+    --color-text: #333;
+    --color-muted: #5c6366;
+    --color-chip-text: #3f4649;
+
+    /* Flächen & Linien */
+    --color-bg: #fff;
+    --color-surface: #f4f6f6;
+    --color-surface-2: #eef2f2;
+    --color-surface-3: #e4eded;
+    --color-warm: #fbf1ed; /* Kontakt-Band, Kategorie "Kundenprojekt" */
+    --color-success-bg: #eef4f2;
+    --color-success-line: #cfe0db;
+    --color-line: #e3e7e7;
+    --color-line-2: #dfe4e4;
+    --color-input-line: #b9c3c3;
+    --color-dot: #d5dbdb;
+
+    /* Auf Petrol-Flächen (dunkle Bänder) */
+    --color-on-petrol-eyebrow: #a9cccc;
+    --color-on-petrol-text: #d5e3e3;
+    --color-on-petrol-strong: #eef3f3;
+    --color-on-petrol-line: rgb(255 255 255 / 0.22);
+
+    /* Fokus */
+    --color-focus: var(--color-petrol);
+    --focus-ring: 3px solid var(--color-focus);
+
+    /* Typografie */
+    --font-body: "Noto", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-heading: "Quicksand", "Noto", system-ui, sans-serif;
+    --text-base: 17px;
+    --text-h1-home: clamp(48px, 7vw, 92px);
+    --text-h1: clamp(40px, 5.4vw, 72px);
+    --text-h1-case: clamp(36px, 4.6vw, 60px);
+    --text-h2: clamp(32px, 3.8vw, 46px);
+    --text-lead: clamp(18px, 1.5vw, 20px);
+
+    /* Radien */
+    --radius-control: 10px;
+    --radius-badge: 12px;
+    --radius-image: 14px;
+    --radius-card: 16px;
+    --radius-portrait: 20px;
+    --radius-pill: 999px;
+
+    /* Schatten */
+    --shadow-frame: 0 30px 70px -36px rgb(34 55 63 / 0.45);
+    --shadow-badge: 0 12px 32px -12px rgb(34 55 63 / 0.45);
+
+    /* Abstände */
+    --gutter: clamp(20px, 5vw, 56px);
+    --section-space: clamp(64px, 9vw, 120px);
+    --card-padding: clamp(24px, 3vw, 36px);
+    --container-max: 1200px;
+
+    color-scheme: light;
+}
+
+/* Dunkles Theme – Werte abgeleitet aus der Pattern Library (Text #eee, Hintergrund #212529).
+   TODO Inhaber: Kontraste und Optik prüfen, der Entwurf zeigt nur den hellen Modus. */
+:root[data-bs-theme="dark"] {
+    --color-accent: #ff6b45; /* auf dunklem Grund heller, damit Text-Kontrast ≥ 4.5:1 */
+    --color-accent-hover: #ff8a6b;
+    --color-accent-dark: #ff8a6b;
+    --color-accent-link: #ff8a6b;
+
+    --color-heading: #f4f6f6;
+    --color-text: #eee;
+    --color-muted: #aab3b6;
+    --color-chip-text: #d5dbdb;
+
+    --color-bg: #212529;
+    --color-surface: #2a3035;
+    --color-surface-2: #30373c;
+    --color-surface-3: #394146;
+    --color-warm: #2f2724;
+    --color-success-bg: #1f2e29;
+    --color-success-line: #34504a;
+    --color-line: #3a4247;
+    --color-line-2: #424b50;
+    --color-input-line: #5c6a70;
+    --color-dot: #4a5359;
+
+    --color-petrol: #18262b; /* dunkle Bänder bleiben dunkler als der Seitenhintergrund */
+    --color-focus: #fff;
+
+    --shadow-frame: 0 30px 70px -36px rgb(0 0 0 / 0.7);
+    --shadow-badge: 0 12px 32px -12px rgb(0 0 0 / 0.7);
+
+    color-scheme: dark;
+}
