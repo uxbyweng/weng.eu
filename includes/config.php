@@ -10,14 +10,42 @@ function is_dev(): bool {
   return (getenv('WENG_DEV') ?: ($_SERVER['WENG_DEV'] ?? '')) === '1';
 }
 
-/**
- * EN_ENABLED
- * Schaltet die englische Version ein. Solange nicht alle Seiten übersetzt sind:
- * lokal an (zum Testen), live aus – dann gibt es nur Deutsch und keinen Sprachumschalter.
- * Zum Freischalten: `define('EN_ENABLED', true);`
+/* ============================================================
+ * Sprache aus der URL: "/" = Deutsch, "/en/…" = Englisch
+ * ============================================================
+ * Es gibt pro Seite nur eine Datei (z. B. /kontakt/index.php). Die .htaccess (live) bzw. router.php (lokal)
+ * liefert /en/kontakt/ intern mit derselben Datei aus; die Sprache steht weiter in REQUEST_URI.
  */
-if (!defined('EN_ENABLED')) {
-  define('EN_ENABLED', is_dev());
+
+/** Pfad der aktuellen Anfrage, wie ihn der Besucher sieht (inkl. /en), ohne Query. */
+function request_path(): string {
+  return parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
+}
+
+/** 'de' | 'en' – Englisch, wenn die URL mit /en beginnt. */
+function current_lang(): string {
+  $path = request_path();
+  return ($path === '/en' || str_starts_with($path, '/en/')) ? 'en' : 'de';
+}
+
+function is_en(): bool { return current_lang() === 'en'; }
+
+/** Präfix für interne Links: '' (Deutsch) oder '/en'. */
+function lang_prefix(): string { return is_en() ? '/en' : ''; }
+
+/**
+ * url('/projekte/') → '/projekte/' bzw. '/en/projekte/'
+ * Für alle internen Seiten-Links verwenden (nicht für /assets/…).
+ */
+function url(string $path): string {
+  return lang_prefix() . $path;
+}
+
+/** Adresse der aktuellen Seite in einer bestimmten Sprache (für Sprachumschalter und hreflang). */
+function lang_url(string $lang): string {
+  $path = current_path();
+  $path = $path === '/' ? '/' : $path . '/';
+  return ($lang === 'en' ? '/en' : '') . $path;
 }
 
 /** Kontakt-Daten, die an mehreren Stellen vorkommen (eine E-Mail überall). */

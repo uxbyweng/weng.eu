@@ -10,11 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Rest, wenn der Browser Zeit hat
     idle(async () => {
-        if (document.querySelector("[data-lang]")) {
-            const { initLangSwitcher } = await import("./modules/lang-switcher");
-            initLangSwitcher();
-        }
-
         if (document.querySelector("#contact-form")) {
             const { initContactForm } = await import("./modules/contact-form");
             initContactForm();

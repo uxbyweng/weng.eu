@@ -47,6 +47,9 @@ function render_head(array $meta = [], ?string $cspNonce = null): string
         })();
     </script>
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/canonical.php'; ?>
+    <link rel="alternate" hreflang="de" href="<?= e(abs_url(lang_url('de'))) ?>">
+    <link rel="alternate" hreflang="en" href="<?= e(abs_url(lang_url('en'))) ?>">
+    <link rel="alternate" hreflang="x-default" href="<?= e(abs_url(lang_url('de'))) ?>">
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/icons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/icons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/icons/favicon-16x16.png">

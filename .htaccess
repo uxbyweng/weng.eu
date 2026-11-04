@@ -2,6 +2,14 @@
 
 RewriteEngine On
 
+# === SPRACHE ===
+# /en/… liefert dieselbe Datei wie die deutsche Seite (z. B. /en/kontakt/ → /kontakt/index.php).
+# Die Sprache erkennt PHP an der ursprünglichen URL (includes/config.php), es gibt keine Parameter.
+RewriteRule ^en$ /en/ [R=301,L]
+RewriteCond %{DOCUMENT_ROOT}/$1 -d
+RewriteRule ^en/(.+[^/])$ /en/$1/ [R=301,L]
+RewriteRule ^en/(.*)$ /$1 [L]
+
 # === ERROR PAGES ===
 
 ErrorDocument 404 /error/404/

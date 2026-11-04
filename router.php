@@ -8,6 +8,16 @@ $_SERVER['WENG_DEV'] = $_SERVER['WENG_DEV'] ?? getenv('WENG_DEV') ?? '1';
 $uri  = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
 $path = urldecode($uri);
 
+// Englische Version: /en/… wird intern wie die deutsche Seite ausgeliefert (REQUEST_URI bleibt unverändert,
+// daran erkennt includes/config.php die Sprache). Live macht das die .htaccess.
+if ($path === '/en') {
+    header('Location: /en/', true, 301);
+    exit;
+}
+if (str_starts_with($path, '/en/')) {
+    $path = substr($path, 3);
+}
+
 // Absoluter Dateipfad relativ zum Projektroot
 $full = __DIR__ . $path;
 

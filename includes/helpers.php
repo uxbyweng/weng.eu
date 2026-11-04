@@ -18,24 +18,7 @@ function e(string $s): string { return htmlspecialchars($s, ENT_QUOTES, 'UTF-8')
  * ============================================================
  */
 
-/**
- * current_lang()
- * Liefert die aktuell gesetzte Sprache als ISO-Code ('de' | 'en').
- * Reihenfolge: Session (wenn aktiv) > Cookie 'sprache' > Fallback 'de'.
- */
-function current_lang(): string {
-  if (!EN_ENABLED) return 'de';
-  if (session_status() === PHP_SESSION_ACTIVE && !empty($_SESSION['sprache'])) {
-    return $_SESSION['sprache'];
-  }
-  return $_COOKIE['sprache'] ?? 'de';
-}
-
-/**
- * is_en()
- * Bequeme Abfrage, ob die aktuelle Sprache Englisch ist.
- */
-function is_en(): bool { return current_lang() === 'en'; }
+/* current_lang(), is_en(), url() u. a.: siehe config.php */
 
 
 /* ============================================================
@@ -244,10 +227,11 @@ function is_honeypot_triggered(array $post, string $formId = 'default'): bool {
  * current_path()
  * Liefert den aktuellen Pfad-Teil der URL (ohne Domain/Query), ohne trailing Slash.
  * Ausnahme: die Startseite bleibt als "/" erhalten.
- * Beispiel: /projekte/ -> "/projekte"
+ * Das Sprachpräfix /en wird entfernt. Beispiel: /en/projekte/ -> "/projekte"
  */
 function current_path(): string {
   $path = parse_url(page_url(), PHP_URL_PATH) ?? '/';
+  $path = preg_replace('#^/en(?=/|$)#', '', $path); // Sprachpräfix gehört nicht zum Seitenpfad
   $path = rtrim($path, '/');
   return $path === '' ? '/' : $path;
 }

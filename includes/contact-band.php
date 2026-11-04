@@ -11,7 +11,7 @@ if (is_active('/kontakt/', false)) return;
         <ul class="contact-band__links">
             <li><a href="<?= e(SITE_LINKEDIN) ?>">LinkedIn&nbsp;<span aria-hidden="true">↗</span></a></li>
             <li><a href="<?= e(SITE_GITHUB) ?>">GitHub&nbsp;<span aria-hidden="true">↗</span></a></li>
-            <li><a href="/kontakt/"><?= e(t('band.form')) ?>&nbsp;<span aria-hidden="true">→</span></a></li>
+            <li><a href="<?= url('/kontakt/') ?>"><?= e(t('band.form')) ?>&nbsp;<span aria-hidden="true">→</span></a></li>
             <li><?= e(t('band.place')) ?></li>
         </ul>
     </div>

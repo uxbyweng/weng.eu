@@ -39,13 +39,13 @@ function breadcrumb_trail(?array $set = null): array {
   $segments = array_values(array_filter(explode('/', trim(current_path(), '/'))));
   if (!$segments) return $trail = [];
 
-  $items = [['label' => t('crumb.home'), 'href' => '/']];
+  $items = [['label' => t('crumb.home'), 'href' => url('/')]];
   $url = '';
   foreach ($segments as $i => $slug) {
     $url .= '/' . $slug;
     $isLast = $i === array_key_last($segments);
     $label = t_has("crumb.$slug") ? t("crumb.$slug") : ucfirst(str_replace('-', ' ', $slug));
-    $items[] = ['label' => $label, 'href' => $isLast ? null : $url . '/'];
+    $items[] = ['label' => $label, 'href' => $isLast ? null : url($url . '/')];
   }
   return $trail = $items;
 }
@@ -55,7 +55,7 @@ function breadcrumb_json_ld(array $trail): array {
   $list = [];
   foreach ($trail as $i => $item) {
     $entry = ['@type' => 'ListItem', 'position' => $i + 1, 'name' => $item['label']];
-    $entry['item'] = abs_url($item['href'] ?? current_path() . '/');
+    $entry['item'] = abs_url($item['href'] ?? lang_url(current_lang()));
     $list[] = $entry;
   }
   return ['@context' => 'https://schema.org', '@type' => 'BreadcrumbList', 'itemListElement' => $list];
@@ -68,7 +68,7 @@ function person_json_ld(): array {
     '@type' => 'Person',
     'name' => 'Karsten Weng',
     'jobTitle' => t('meta.job_title'),
-    'url' => 'https://weng.eu/',
+    'url' => 'https://weng.eu' . url('/'),
     'address' => ['@type' => 'PostalAddress', 'addressLocality' => 'Berlin', 'addressCountry' => 'DE'],
     'sameAs' => [SITE_LINKEDIN, SITE_GITHUB],
   ];

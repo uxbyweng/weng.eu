@@ -9,39 +9,31 @@ $onEasy = str_starts_with(current_path(), '/leichte-sprache');
 ?>
 <a class="skip-link" href="#main"><?= e(t('skip')) ?></a>
 
-<?php if (EN_ENABLED): ?>
-    <form id="langForm" method="post" hidden>
-        <input name="lang" type="hidden">
-    </form>
-<?php endif; ?>
-
 <header class="site-header">
     <div class="wrap site-header__inner">
-        <a class="site-header__logo" href="/" aria-label="<?= e(t('logo.home_aria')) ?>">
+        <a class="site-header__logo" href="<?= url('/') ?>" aria-label="<?= e(t('logo.home_aria')) ?>">
             <img src="/assets/img/logo/logo-weng.svg" alt="" width="104" height="36" fetchpriority="high" decoding="async">
         </a>
 
         <nav id="site-nav" class="site-nav" aria-label="<?= e(t('nav.label')) ?>">
             <ul class="site-nav__list">
                 <?php foreach ($navItems as [$href, $key, $prefix]): ?>
-                    <li><a class="site-nav__link" href="<?= $href ?>" <?= aria_current($href, $prefix) ?>><?= e(t($key)) ?></a></li>
+                    <li><a class="site-nav__link" href="<?= url($href) ?>" <?= aria_current($href, $prefix) ?>><?= e(t($key)) ?></a></li>
                 <?php endforeach; ?>
                 <li>
                     <?php if ($onEasy): ?>
-                        <a class="site-nav__link site-nav__link--quiet" href="/"><?= e(t('nav.everyday')) ?></a>
+                        <a class="site-nav__link site-nav__link--quiet" href="<?= url('/') ?>"><?= e(t('nav.everyday')) ?></a>
                     <?php else: ?>
-                        <a class="site-nav__link site-nav__link--quiet" href="/leichte-sprache/"><?= e(t('nav.easy')) ?></a>
+                        <a class="site-nav__link site-nav__link--quiet" href="<?= url('/leichte-sprache/') ?>"><?= e(t('nav.easy')) ?></a>
                     <?php endif; ?>
                 </li>
-                <li><a class="site-nav__link site-nav__link--cta" href="/kontakt/" <?= aria_current('/kontakt/', false) ?>><?= e(t('nav.contact')) ?></a></li>
-                <?php if (EN_ENABLED): ?>
-                    <li class="lang-switch" role="group" aria-label="<?= e(t('lang.label')) ?>">
-                        <?php foreach (['de' => 'DE', 'en' => 'EN'] as $code => $label): ?>
-                            <a class="site-nav__link site-nav__link--quiet" href="#" data-lang="<?= $code ?>" lang="<?= $code ?>"
-                                <?= current_lang() === $code ? 'aria-current="true"' : '' ?>><?= $label ?></a>
-                        <?php endforeach; ?>
-                    </li>
-                <?php endif; ?>
+                <li><a class="site-nav__link site-nav__link--cta" href="<?= url('/kontakt/') ?>" <?= aria_current('/kontakt/', false) ?>><?= e(t('nav.contact')) ?></a></li>
+                <li class="lang-switch" role="group" aria-label="<?= e(t('lang.label')) ?>">
+                    <?php foreach (['de' => 'DE', 'en' => 'EN'] as $code => $label): ?>
+                        <a class="site-nav__link site-nav__link--quiet" href="<?= e(lang_url($code)) ?>" hreflang="<?= $code ?>" lang="<?= $code ?>"
+                            <?= current_lang() === $code ? 'aria-current="true"' : '' ?>><?= $label ?></a>
+                    <?php endforeach; ?>
+                </li>
             </ul>
         </nav>
 
