@@ -349,12 +349,13 @@ a.nav-link:focus {
     text-underline-offset: 0.2em;
 }
 
-footer a {
+/* Alte Footer-Links; der neue Footer (.site-footer) erbt die Textfarbe */
+footer:not(.site-footer) a {
     color: #bcbcbc;
 }
 
-footer a:hover,
-footer a:focus {
+footer:not(.site-footer) a:hover,
+footer:not(.site-footer) a:focus {
     color: var(--wng-accent);
 }
 

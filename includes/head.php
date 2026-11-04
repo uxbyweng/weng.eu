@@ -65,7 +65,7 @@ function render_head(array $meta = [], ?string $cspNonce = null): string
 
     <link rel="preload" as="font" href="/assets/vendor/googlefonts/noto/NotoSans-Regular.woff2" type="font/woff2" crossorigin>
     <link rel="preload" as="font" href="/assets/vendor/googlefonts/quicksand/Quicksand-VariableFont_wght.woff2" type="font/woff2" crossorigin>
-    <?php if (preg_match('#^/kontakt/?$#', $_SERVER['REQUEST_URI'] ?? '')): ?>
+    <?php if (preg_match('#^(/en)?/kontakt/?$#', parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH) ?: '')): ?>
     <link rel="modulepreload" href="<?= asset('contact-form.js') ?>">
     <?php endif; ?>
     <link rel="modulepreload" href="<?= asset('site.js') ?>">

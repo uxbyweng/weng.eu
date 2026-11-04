@@ -1,0 +1,180 @@
+/* Kontakt: Formular (Felder, Fehler, Statusmeldung) und Kontaktkarte */
+
+.contact {
+    padding-bottom: var(--section-space);
+}
+
+.contact__inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(32px, 5vw, 72px);
+    align-items: flex-start;
+}
+
+.contact__form {
+    flex: 3 1 460px;
+    min-width: 0;
+}
+
+/* ---- Formular ---- */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+/* Leerer Meldungsbereich soll keinen Abstand erzeugen */
+.contact-form .messages:empty {
+    display: none;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    label {
+        color: var(--color-heading);
+        font-size: 15.5px;
+        font-weight: 600;
+    }
+
+    input,
+    textarea {
+        width: 100%;
+        padding: 13px 14px;
+        border: 1.5px solid var(--color-input-line);
+        border-radius: var(--radius-control);
+        background: var(--color-bg);
+        color: var(--color-text);
+        font: inherit;
+        font-size: 16px;
+
+        &:focus {
+            border-color: var(--color-heading);
+            outline: 3px solid rgb(215 43 0 / 0.28);
+            outline-offset: 1px;
+        }
+
+        &[aria-invalid="true"] {
+            border-color: var(--color-accent-hover);
+        }
+    }
+
+    textarea {
+        line-height: 1.55;
+        resize: vertical;
+    }
+
+    /* Bot-Falle: außerhalb des sichtbaren Bereichs, nicht fokussierbar */
+    &.form-field--trap {
+        position: absolute;
+        left: -9999px;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+    }
+}
+
+.field-error {
+    color: var(--color-accent-hover);
+    font-size: 14.5px;
+    font-weight: 500;
+}
+
+.form-note {
+    max-width: 40em;
+    margin: 0;
+    color: var(--color-muted);
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+/* ---- Statusmeldung (Erfolg: role="status", Fehler: role="alert") ---- */
+.form-status {
+    margin-bottom: 22px;
+    padding: clamp(20px, 3vw, 28px);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    background: var(--color-surface);
+
+    &.form-status--success {
+        border-color: var(--color-success-line);
+        background: var(--color-success-bg);
+    }
+
+    &.form-status--danger,
+    &.form-status--warning {
+        border-color: var(--color-accent-hover);
+        background: var(--color-warm);
+    }
+}
+
+/* ---- Kontaktkarte ---- */
+.contact-card {
+    flex: 2 1 300px;
+    min-width: 0;
+    padding: clamp(24px, 3vw, 32px);
+    border-radius: var(--radius-card);
+    background: var(--color-surface);
+}
+
+.contact-card__head {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+
+    img {
+        flex: none;
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    p {
+        margin: 0;
+    }
+}
+
+.contact-card__name {
+    color: var(--color-heading);
+    font-family: var(--font-heading);
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.contact-card__role {
+    margin-top: 2px;
+    color: var(--color-muted);
+    font-size: 14.5px;
+}
+
+.contact-card__list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin: 24px 0 0;
+
+    dt {
+        color: var(--color-muted);
+        font-size: 12.5px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+    }
+
+    dd {
+        margin: 2px 0 0;
+    }
+
+    a {
+        font-weight: 600;
+    }
+}
+
+.contact-card__profiles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+}

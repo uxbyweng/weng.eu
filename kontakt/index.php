@@ -7,185 +7,100 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/lang.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/helpers.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/head.php';
 
-// vorübergehend, bis alle sprachswitcher auf die neue schreibweise umgestellt sind
-$sprache = current_lang();   // aus helpers.php
-
 /* Tokens generieren (Form-ID: 'contact') */
 $hpName = get_honeypot_name('contact');
 $csrf   = get_csrf_token('contact');
 session_write_close();
+
 $meta = [
-    'title' => 'WENG.EU - Kontakt / Contact',
-    'desc'  => 'Get in touch.',
-    'og_image' => '',
+    'title' => t('contact.meta.title'),
+    'desc'  => t('contact.meta.desc'),
 ];
 $cspNonce = $_SERVER['CSP_NONCE'] ?? null;
 echo render_head($meta, $cspNonce);
-$isEn = is_en();
+
+$action = '/kontakt/kontakt.' . (is_en() ? 'en' : 'de') . '.php';
+$privacyLink = '<a href="' . e(url('/datenschutz/')) . '" target="_blank" rel="noopener">' . e(t('contact.form.privacy.link')) . '</a>';
 ?>
 
 <body>
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php'; ?>
 
-    <main class="page-wrapper" id="startMainContent">
-
-        <!-- ### BREADCRUMB ### -->
+    <main id="main">
         <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/breadcrumb.php'; ?>
 
-        <!-- ### STAGE ### -->
-        <section class="px-3 px-md-0 pt-3">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-7 order-2 mt-3">
-                        <h1>
-                            Just say <span class="font-accent">hello</span> and drop me a line.
-                        </h1>
-                    </div>
-                    <div class="offset-md-1 col-md-4 text-center order-1 order-md-3">
-                        <picture>
-                            <!-- Desktop (≥ 56.25em ≈ 900px): 200×200 -->
-                            <source media="(min-width:56.25em)" srcset="/assets/img/contact/img-contact.webp" type="image/webp">
-                            <source media="(min-width:56.25em)" srcset="/assets/img/contact/img-contact.jpg" type="image/jpeg">
-                            <!-- Mobile (< 56.25em): 100×100 -->
-                            <source srcset="/assets/img/contact/img-contact_xs.webp" type="image/webp">
-                            <!-- Fallback (Browser ohne <picture> oder ohne WebP): mobile-Datei -->
-                            <img src="/assets/img/contact/img-contact_xs.jpg" alt="Karsten Weng" class="contact-photo" width="200" height="200" loading="lazy" decoding="async">
-                        </picture>
-                    </div>
-                </div>
+        <section class="page-head" aria-labelledby="contact-title">
+            <div class="wrap">
+                <p class="eyebrow"><?= e(t('contact.eyebrow')) ?></p>
+                <h1 id="contact-title"><?= e(t('contact.title')) ?></h1>
+                <p class="lead"><?= e(t('contact.lead')) ?></p>
             </div>
         </section>
 
+        <section class="contact">
+            <div class="wrap contact__inner">
 
-        <section class="px-3 px-md-0 py-5">
-            <div class="container">
-                <div class="row">
+                <div class="contact__form">
+                    <form class="contact-form" id="contact-form" action="<?= e($action) ?>" method="post" novalidate aria-label="<?= e(t('contact.form.label')) ?>">
+                        <?php /* Meldungen des Formulars (contact-form.ts schreibt Erfolg als role="status", Fehler als role="alert") */ ?>
+                        <div class="messages"></div>
 
-                    <!-- CONTACT FORM -->
-                    <div class="col-12 col-md-7 order-1 pb-5">
-                        <?php if (is_en()): ?>
-                            <form action="/kontakt/kontakt.en.php" method="post" id="contact-form" novalidate>
-                            <?php else: ?>
-                                <form action="/kontakt/kontakt.de.php" method="post" id="contact-form" novalidate>
-                                <?php endif; ?>
-                                <div class="messages"></div>
+                        <div class="form-field">
+                            <label for="cf-name"><?= e(t('contact.form.name')) ?> <span aria-hidden="true">*</span></label>
+                            <input id="cf-name" name="name" type="text" required autocomplete="name">
+                        </div>
 
-                                <div class="form-group">
-                                    <label for="cf-name" class="form-label">Name*</label>
-                                    <input
-                                        id="cf-name"
-                                        name="name"
-                                        type="text"
-                                        class="form-control"
-                                        placeholder="<?php if (is_en()): ?>Name<?php else: ?>Name<?php endif; ?>"
-                                        required
-                                        pattern="^[A-Za-zÀ-ÖØ-öø-ÿ](?:[A-Za-zÀ-ÖØ-öø-ÿ'’\- ]*[A-Za-zÀ-ÖØ-öø-ÿ])$"
-                                        autocomplete="name"
-                                        inputmode="text"
-                                        autocapitalize="words">
-                                </div>
+                        <div class="form-field">
+                            <label for="cf-email"><?= e(t('contact.form.email')) ?> <span aria-hidden="true">*</span></label>
+                            <input id="cf-email" name="email" type="email" required autocomplete="email" inputmode="email">
+                            <input type="text" name="<?= e($hpName) ?>" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
+                            <input type="hidden" name="csrf" value="<?= e($csrf) ?>">
+                        </div>
 
-                                <div class="form-group">
-                                    <label for="cf-email" class="form-label">
-                                        <?php if (is_en()): ?>Email Address*<?php else: ?>E-Mail-Adresse*<?php endif; ?>
-                                    </label>
-                                    <input
-                                        id="cf-email"
-                                        name="email"
-                                        type="email"
-                                        class="form-control"
-                                        placeholder="<?php if (is_en()): ?>Email Address<?php else: ?>E-Mail-Adresse<?php endif; ?>"
-                                        required
-                                        pattern="^[^\s@]+@[^\s@]+\.[^\s@]{2,}$"
-                                        autocomplete="email"
-                                        inputmode="email">
-                                    <input type="text" name="<?= e($hpName) ?>" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
-                                    <input type="hidden" name="csrf" value="<?= e($csrf) ?>">
-                                </div>
+                        <div class="form-field">
+                            <label for="cf-message"><?= e(t('contact.form.message')) ?> <span aria-hidden="true">*</span></label>
+                            <textarea id="cf-message" name="message" rows="7" required spellcheck="true" autocomplete="off"></textarea>
+                        </div>
 
-                                <div class="form-group">
-                                    <label for="cf-message" class="form-label">
-                                        <?php if (is_en()): ?>Message*<?php else: ?>Nachricht*<?php endif; ?>
-                                    </label>
-                                    <style>
-                                        ::spelling-error {
-                                            color: red;
-                                            text-decoration: 2px underline solid crimson;
-                                        }
-                                    </style>
-                                    <textarea
-                                        id="cf-message"
-                                        name="message"
-                                        spellcheck="true"
-                                        class="form-control"
-                                        rows="3"
-                                        placeholder="<?php if (is_en()): ?>Message<?php else: ?>Nachricht<?php endif; ?>"
-                                        required
-                                        autocomplete="off"></textarea>
-                                </div>
+                        <?php /* Bot-Falle (unsichtbar, nicht fokussierbar) */ ?>
+                        <div class="form-field form-field--trap">
+                            <input type="checkbox" name="terms" tabindex="-1" aria-hidden="true" autocomplete="off">
+                        </div>
 
-                                <div class="form-group terms" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
-                                    <input type="checkbox" name="terms" tabindex="-1" aria-hidden="true" autocomplete="off">
-                                </div>
+                        <p class="form-note" id="privacy-note"><?= str_replace('{link}', $privacyLink, e(t('contact.form.privacy'))) ?><?= todo('Antwortzeit, z. B. „Ich antworte in der Regel innerhalb von zwei Werktagen.“', ' ') ?></p>
 
-                                <!-- Datenschutz-Hinweis -->
-                                <div class="form-group mt-3">
-                                    <p class="form-text small mb-0" id="privacy-note">
-                                        <?php if (is_en()): ?>
-                                            By sending this form, your data will be processed to handle your request
-                                            (Art. 6(1)(b) or (f) GDPR). More details in our
-                                            <a href="/datenschutz/" class="text-link" target="_blank" rel="noopener">privacy policy</a>.
-                                        <?php else: ?>
-                                            Mit dem Absenden werden Ihre Angaben zur Bearbeitung der Anfrage verarbeitet
-                                            (Art. 6 Abs. 1 lit. b bzw. f DSGVO). Weitere Hinweise in unserer
-                                            <a href="/datenschutz/" class="text-link" target="_blank" rel="noopener">Datenschutzerklärung</a>.
-                                        <?php endif; ?>
-                                    </p>
-                                </div>
-
-                                <button class="wng-btn d-inline-flex align-items-center gap-2 my-4 px-4 py-2 pull-right-sm" aria-describedby="privacy-note">
-                                    <?php if (is_en()): ?>Send Message<?php else: ?>Nachricht senden<?php endif; ?> <i class="bi bi-arrow-right"></i>
-                                </button>
-                                </form>
-                    </div>
-
-                    <!-- SIDEBAR -->
-                    <aside class="col-12 offset-md-2 col-md-3 order-2 pe-5">
-                        <section class="py-3 border-bottom">
-                            <h2 class="font-primary fs-20 fs-400 text-uppercase">
-                                <?php if (is_en()): ?>
-                                    <strong>Contact</strong>
-                                <?php else: ?>
-                                    <strong>Kontakt</strong>
-                                <?php endif; ?>
-                            </h2>
-                            <p>
-                                Karsten Weng<br>
-                                Berlin, Germany<br>
-                                <a href="mailto:info@weng.eu" class="text-link"><u>info@weng.eu</u></a>
-                            </p>
-                        </section>
-                        <section class="py-3 border-bottom mb-5">
-                            <h2 class="font-primary fs-20 fs-400 text-uppercase">
-                                <strong>Networks</strong>
-                            </h2>
-                            <ul class="style-none">
-                                <li>
-                                    <a href="https://www.linkedin.com/in/kweng/" class="text-link" target="_blank" rel="noopener noreferrer" title="LinkedIn">
-                                        <i class="fa-brands fa-linkedin fa-lg" aria-hidden="true"></i> LinkedIn
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://www.instagram.com/" class="text-link" target="_blank" rel="noopener noreferrer" title="Instagram">
-                                        <i class="fa-brands fa-instagram fa-lg" aria-hidden="true"></i> Instagram
-                                    </a>
-                                </li>
-                            </ul>
-                        </section>
-                    </aside>
+                        <div class="form-actions">
+                            <button class="button" type="submit" aria-describedby="privacy-note"><?= e(t('contact.form.submit')) ?></button>
+                        </div>
+                    </form>
                 </div>
+
+                <aside class="contact-card" aria-label="<?= e(t('contact.aside.label')) ?>">
+                    <div class="contact-card__head">
+                        <img src="/assets/img/contact/img-contact_xs.jpg" alt="" width="72" height="72" loading="lazy" decoding="async">
+                        <div>
+                            <p class="contact-card__name">Karsten Weng</p>
+                            <p class="contact-card__role"><?= e(t('meta.job_title')) ?></p>
+                        </div>
+                    </div>
+                    <dl class="contact-card__list">
+                        <div><dt><?= e(t('contact.aside.email')) ?></dt><dd><a href="mailto:<?= e(SITE_EMAIL) ?>"><?= e(SITE_EMAIL) ?></a></dd></div>
+                        <?php if ($phone = todo('Telefonnummer (optional)')): ?>
+                            <div><dt><?= e(t('contact.aside.phone')) ?></dt><dd><?= $phone ?></dd></div>
+                        <?php endif; ?>
+                        <div><dt><?= e(t('contact.aside.place')) ?></dt><dd><?= e(t('band.place')) ?></dd></div>
+                        <div>
+                            <dt><?= e(t('contact.aside.profiles')) ?></dt>
+                            <dd class="contact-card__profiles">
+                                <a href="<?= e(SITE_LINKEDIN) ?>" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a>
+                                <a href="<?= e(SITE_GITHUB) ?>" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+                            </dd>
+                        </div>
+                    </dl>
+                </aside>
+
             </div>
         </section>
+    </main>
 
-
-        <?php include($_SERVER["DOCUMENT_ROOT"] . "/includes/footer.php"); ?>
+    <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/footer.php'; ?>
