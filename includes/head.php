@@ -32,34 +32,23 @@ function render_head(array $meta = [], ?string $cspNonce = null): string
             <link rel="manifest" href="/assets/img/icons/site.webmanifest">
             <meta name="theme-color" content="#ffffff">
             <?= critical_css_inline($cspNonce) ?>
-            <?php // Versions-Hash für Cache-Busting
-            // (Datei-Änderungszeit oder Zeitstempel jetzt, falls Datei nicht
-            $cssV   = @filemtime($_SERVER['DOCUMENT_ROOT'] . '/assets/css/styles.css') ?: time();
+            <?php // Versions-Hash der Icon-Schrift für Cache-Busting (Vendor-Datei, nicht vom Build gehasht)
             $iconsV = @filemtime($_SERVER['DOCUMENT_ROOT'] . '/assets/vendor/bootstrap/bootstrap-icons/bootstrap-icons.min.css') ?: time();
-            echo $iconSV;
-            $siteJsName = '/assets/js/site.' . (is_en() ? 'en' : 'de') . '.js';
-            $siteV  = @filemtime($_SERVER['DOCUMENT_ROOT'] . $siteJsName) ?: time();
-            $cfJsName = '/assets/js/modules/contact-form.' . (is_en() ? 'en' : 'de') . '.js';
-            $cfV   = @filemtime($_SERVER['DOCUMENT_ROOT'] . $cfJsName) ?: time();
             ?>
             <link rel="preload" href="/assets/vendor/bootstrap/bootstrap-icons/bootstrap-icons.min.css?v=<?= $iconsV ?>" as="style" onload="this.rel='stylesheet'">
             <noscript>
                 <link rel="stylesheet" href="/assets/vendor/bootstrap/bootstrap-icons/bootstrap-icons.min.css?v=<?= $iconsV ?>">
             </noscript>
-            <link rel="stylesheet" href="/assets/css/styles.css?v=<?= $cssV ?>">
+            <link rel="stylesheet" href="<?= asset('styles.css') ?>">
             <noscript>
-                <link rel="stylesheet" href="/assets/css/styles.css?v=<?= $cssV ?>">
+                <link rel="stylesheet" href="<?= asset('styles.css') ?>">
             </noscript>
             <link rel="preload" as="font" href="/assets/vendor/googlefonts/noto/NotoSans-Medium.woff2" type="font/woff2" crossorigin>
             <link rel="preload" as="font" href="/assets/vendor/googlefonts/quicksand/Quicksand-VariableFont_wght.woff2" type="font/woff2" crossorigin>
-            <link rel="modulepreload" href="/assets/js/modules/theme-toggle.js">
-            <link rel="modulepreload" href="/assets/js/modules/easy-language.js">
-            <link rel="modulepreload" href="/assets/js/modules/lang-switcher.js">
-            <link rel="modulepreload" href="/assets/js/modules/mobile-menu-autoclose.js">
             <?php if (preg_match('#^/kontakt/?$#', $_SERVER['REQUEST_URI'] ?? '')): ?>
-                <link rel="modulepreload" href="<?= $cfJsName ?>?v=<?= $cfV ?>">
+                <link rel="modulepreload" href="<?= asset('contact-form.js') ?>">
             <?php endif; ?>
-            <link rel="modulepreload" href="<?= $siteJsName ?>?v=<?= $siteV ?>">
+            <link rel="modulepreload" href="<?= asset('site.js') ?>">
     </head>
 <?php
     return (string)ob_get_clean();

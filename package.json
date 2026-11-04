@@ -1,29 +1,32 @@
 {
     "name": "weng-eu",
-    "version": "1.0.0",
+    "version": "2.0.0",
     "private": true,
-    "description": "Build-Setup für Bootstrap via Sass + Autoprefixer",
+    "type": "module",
+    "description": "weng.eu – PHP-Site mit Bun-Build (TypeScript, Sass, Lightning CSS)",
     "scripts": {
-        "dev": "sass --load-path=node_modules --embed-source-map --quiet-deps assets/scss/styles.scss assets/css/styles.css --watch",
-        "serve": "browser-sync start --proxy \"127.0.0.1:8000\" --files \"assets/css/**/*.css, assets/js/**/*.js, **/*.php\" --no-ui --no-notify",
-        "build:sass": "sass --load-path=node_modules --style=compressed --quiet-deps assets/scss/styles.scss assets/css/styles.css",
-        "build:css": "postcss assets/css/styles.css --replace --map",
-        "build": "npm run build:sass && npm run build:css"
+        "dev": "bun scripts/dev.ts",
+        "build": "bun scripts/build.ts",
+        "typecheck": "tsc --noEmit",
+        "lint": "biome check .",
+        "format": "biome format --write .",
+        "check": "bun run typecheck && bun run lint"
     },
     "browserslist": [
         ">0.5%",
         "last 2 versions",
         "not dead"
     ],
-    "devDependencies": {
-        "autoprefixer": "^10.4.20",
-        "baseline-browser-mapping": "^2.9.19",
-        "browser-sync": "^3.0.4",
-        "postcss": "^8.4.47",
-        "postcss-cli": "^11.0.0",
-        "sass": "^1.80.0"
-    },
     "dependencies": {
         "bootstrap": "^5.3.3"
+    },
+    "devDependencies": {
+        "@biomejs/biome": "^2.6.4",
+        "@types/bootstrap": "^5.2.11",
+        "@types/bun": "^1.4.4",
+        "browserslist": "^4.29.5",
+        "lightningcss": "^1.33.0",
+        "sass": "^1.107.1",
+        "typescript": "^7.0.2"
     }
 }
