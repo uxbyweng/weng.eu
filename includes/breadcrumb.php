@@ -1,48 +1,19 @@
-<section class="breadcrumb pt-3 px-3 px-md-0">
-    <div class="container">
-        <nav aria-label="Brotkrumen">
-            <ol class="breadcrumbs list-unstyled d-flex flex-wrap m-0 p-0">
-                <?php
-                $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-                $segments = array_values(array_filter(explode('/', trim($path, '/'))));
-                $segmentCount = count($segments);
-
-                // Home
-                $isHomeActive = ($segmentCount === 0);
-                echo '<li' . ($isHomeActive ? ' class="active"' : '') . '>';
-
-                if ($isHomeActive) {
-                    echo '';
-                } else {
-                    if ($isEn):
-                        echo '<a href="/" aria-label="Homepage">'
-                            . 'home'
-                            . '</a>';
-                    else:
-                        echo '<a href="/" aria-label="Startseite">'
-                            . 'home'
-                            . '</a>';
-
-                    endif;
-                }
-                echo '</li>';
-
-                // Trail
-                $url = '';
-                foreach ($segments as $index => $segment) {
-                    $url .= '/' . $segment;
-                    $isLast = ($index === array_key_last($segments));
-                    $label = htmlspecialchars($segment, ENT_QUOTES, 'UTF-8');
-                    $href  = $url . '/';
-
-                    if ($isLast) {
-                        echo '<li class="active"><span aria-current="page">' . $label . '</span></li>';
-                    } else {
-                        echo '<li><a href="' . $href . '">' . $label . '</a></li>';
-                    }
-                }
-                ?>
-            </ol>
-        </nav>
-    </div>
-</section>
+<?php
+// Brotkrumen (nicht auf der Startseite). Pfad: breadcrumb_trail() – aus der URL oder per $meta['trail'].
+$crumbs = breadcrumb_trail();
+if ($crumbs): ?>
+    <nav class="breadcrumb wrap" aria-label="<?= e(t('breadcrumb.label')) ?>">
+        <ol class="breadcrumb__list">
+            <?php foreach ($crumbs as $crumb): ?>
+                <li>
+                    <?php if ($crumb['href'] !== null): ?>
+                        <a href="<?= e($crumb['href']) ?>"><?= e($crumb['label']) ?></a>
+                        <span class="breadcrumb__sep" aria-hidden="true">/</span>
+                    <?php else: ?>
+                        <span aria-current="page"><?= e($crumb['label']) ?></span>
+                    <?php endif; ?>
+                </li>
+            <?php endforeach; ?>
+        </ol>
+    </nav>
+<?php endif; ?>

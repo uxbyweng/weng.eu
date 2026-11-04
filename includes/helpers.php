@@ -1,6 +1,10 @@
 <?php
 declare(strict_types=1);
 
+require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/i18n.php';
+require_once __DIR__ . '/seo.php';
+
 /**
  * e()
  * Sichere HTML-Ausgabe: wandelt Sonderzeichen in HTML-Entities um.
@@ -20,6 +24,7 @@ function e(string $s): string { return htmlspecialchars($s, ENT_QUOTES, 'UTF-8')
  * Reihenfolge: Session (wenn aktiv) > Cookie 'sprache' > Fallback 'de'.
  */
 function current_lang(): string {
+  if (!EN_ENABLED) return 'de';
   if (session_status() === PHP_SESSION_ACTIVE && !empty($_SESSION['sprache'])) {
     return $_SESSION['sprache'];
   }
@@ -131,17 +136,20 @@ function critical_css_inline(?string $nonce = null): string {
  */
 function meta_tags(array $meta): string {
   $defaults = [
-    'title'    => 'WENG.EU | Frontend & UX/UI Design – Built for People.',
-    'desc'     => 'Production-Ready Websites. Schnell. Barrierefrei. Responsiv. Entwickelt mit semantischem HTML, skalierbarem CSS und modernen Frontend-Workflows.',
+    'title'    => t('meta.default_title'),
+    'desc'     => t('meta.default_desc'),
+    // TODO Inhaber: 1200×630-JPG als Standardbild liefern (SVG wird von Social-Netzwerken nicht angezeigt)
     'og_image' => '/assets/img/logo/logo-light.svg',
+    'og_type'  => 'website',
     'robots'   => 'index, follow',
   ];
   $cleanMeta = array_filter($meta, fn($v) => !is_null($v) && !(is_string($v) && trim($v) === ''));
   $m = array_merge($defaults, $cleanMeta);
 
-  $ogImg   = abs_url($m['og_image']);
-  $url     = page_url();
-  $updated = gmdate('c', @filemtime($_SERVER['SCRIPT_FILENAME']) ?: time());
+  $ogImg    = abs_url($m['og_image']);
+  $url      = page_url();
+  $locale   = current_lang() === 'en' ? 'en_US' : 'de_DE';
+  $updated  = gmdate('c', @filemtime($_SERVER['SCRIPT_FILENAME']) ?: time());
 
   ob_start(); ?>
   <title><?= e($m['title']) ?></title>
@@ -149,8 +157,9 @@ function meta_tags(array $meta): string {
     <meta name="robots" content="<?= e($m['robots']) ?>">
     <meta property="og:title" content="<?= e($m['title']) ?>">
     <meta property="og:description" content="<?= e($m['desc']) ?>">
-    <meta property="og:site_name" content="WENG.EU">
-    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="weng.eu">
+    <meta property="og:type" content="<?= e($m['og_type']) ?>">
+    <meta property="og:locale" content="<?= e($locale) ?>">
     <meta property="og:image" content="<?= e($ogImg) ?>">
     <meta property="og:url" content="<?= e($url) ?>">
     <meta property="og:updated_time" content="<?= e($updated) ?>">

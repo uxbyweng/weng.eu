@@ -6,48 +6,35 @@ function isTheme(value: string | null): value is Theme {
     return value === "light" || value === "dark";
 }
 
+/** Dunkelmodus-Schalter (Button#toggleTheme). Das Icon wechselt per CSS anhand von data-bs-theme. */
 export function initThemeToggle(): void {
     const html = document.documentElement;
-    const desktopBtn = document.getElementById("toggleTheme");
-    const mobileBtn = document.getElementById("toggleThemeMobile");
-    const icon = document.getElementById("themeIcon");
-    const iconMobile = document.getElementById("themeIconMobileIcon");
-    const textMobile = document.getElementById("themeTextMobile");
-
-    if (!desktopBtn && !mobileBtn) return; // nichts zu tun
-
-    function updateToggleA11y(theme: Theme): void {
-        const isDark = theme === "dark";
-        for (const btn of [desktopBtn, mobileBtn]) {
-            if (!btn) continue;
-            btn.setAttribute("aria-pressed", String(isDark));
-            btn.setAttribute("aria-label", (isDark ? btn.dataset.labelDeactivate : btn.dataset.labelActivate) ?? "");
-        }
-    }
+    const button = document.getElementById("toggleTheme");
+    if (!button) return;
 
     function applyTheme(theme: Theme): void {
         const isDark = theme === "dark";
         html.setAttribute("data-bs-theme", theme);
-        const iconClass = isDark ? "bi bi-sun" : "bi bi-moon";
-        if (icon) icon.className = iconClass;
-        if (iconMobile) iconMobile.className = iconClass;
-        if (textMobile) {
-            const txt = isDark ? mobileBtn?.dataset.textDark : mobileBtn?.dataset.textLight;
-            if (txt) textMobile.textContent = txt;
+        button?.setAttribute("aria-pressed", String(isDark));
+        button?.setAttribute("aria-label", (isDark ? button.dataset.labelDeactivate : button.dataset.labelActivate) ?? "");
+    }
+
+    button.addEventListener("click", () => {
+        const next: Theme = html.getAttribute("data-bs-theme") === "dark" ? "light" : "dark";
+        try {
+            localStorage.setItem(STORAGE_KEY, next);
+        } catch {
+            // Speichern nicht möglich (z. B. privater Modus) – Wechsel gilt trotzdem für diese Seite
         }
-        updateToggleA11y(theme);
+        applyTheme(next);
+    });
+
+    let stored: string | null = null;
+    try {
+        stored = localStorage.getItem(STORAGE_KEY);
+    } catch {
+        // ignorieren
     }
-
-    function toggleTheme(): void {
-        const newTheme: Theme = html.getAttribute("data-bs-theme") === "dark" ? "light" : "dark";
-        localStorage.setItem(STORAGE_KEY, newTheme);
-        applyTheme(newTheme);
-    }
-
-    desktopBtn?.addEventListener("click", toggleTheme);
-    mobileBtn?.addEventListener("click", toggleTheme);
-
-    const stored = localStorage.getItem(STORAGE_KEY);
     const prefersDark = window.matchMedia?.("(prefers-color-scheme: dark)").matches;
     applyTheme(isTheme(stored) ? stored : prefersDark ? "dark" : "light");
 }

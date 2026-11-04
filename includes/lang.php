@@ -2,7 +2,10 @@
 // lang.php — unsichtbarer Sprachwechsel via POST + Cookie (PRG)
 session_start();
 
-$allowed = ['de','en'];
+require_once __DIR__ . '/config.php';
+
+// Englisch nur, wenn freigeschaltet (siehe config.php: EN_ENABLED)
+$allowed = EN_ENABLED ? ['de','en'] : ['de'];
 
 // Sprachwechsel verarbeiten
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['lang']) && in_array($_POST['lang'], $allowed, true)) {
