@@ -69,8 +69,8 @@
 
     &:hover,
     &[aria-current="page"] {
-        background: var(--color-accent);
-        border-color: var(--color-accent);
+        background: var(--button-bg);
+        border-color: var(--button-bg);
         color: #fff;
     }
 }

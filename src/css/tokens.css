@@ -12,6 +12,10 @@
     --color-accent-link: #c42700; /* große Mail-Adresse im Kontakt-Band */
     --color-petrol: #22373f;
 
+    /* Primär-Button: weißer Text auf Rot, in beiden Themes gleich (Kontrast ≥ 4.5:1) */
+    --button-bg: rgb(215 43 0);
+    --button-bg-hover: rgb(153 0 0);
+
     /* Text */
     --color-heading: #1f2b30;
     --color-text: #333;
