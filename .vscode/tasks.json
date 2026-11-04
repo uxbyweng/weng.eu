@@ -2,33 +2,12 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "php-dev-server",
-            "type": "shell",
-            "command": "php -S 127.0.0.1:8000 -t . router.php",
-            "options": {
-                "env": {
-                    "WENG_DEV": "1"
-                }
-            },
-            "isBackground": true
-        },
-        {
-            "label": "npm-dev",
-            "type": "npm",
-            "script": "dev",
-            "isBackground": true
-        },
-        {
-            "label": "npm-serve",
-            "type": "npm",
-            "script": "serve",
-            "isBackground": true
-        },
-        {
             "label": "full-dev",
-            "dependsOn": ["php-dev-server", "npm-dev", "npm-serve"],
-            "dependsOrder": "parallel",
-            "problemMatcher": []
+            "type": "shell",
+            "command": "bun run dev",
+            "isBackground": true,
+            "problemMatcher": [],
+            "detail": "PHP-Server + TS/Sass-Watcher + Live-Reload auf http://localhost:3000"
         }
     ]
 }

@@ -84,23 +84,33 @@ function minify_css(string $css): string {
 }
 
 /**
+ * asset($name)
+ * Liefert die gehashte URL eines Build-Artefakts aus /assets/dist/manifest.json,
+ * z. B. asset('site.js') → /assets/dist/site.bmtn5q94.js. (Manifest erzeugt `bun run build`.)
+ * Fehlt das Manifest oder der Eintrag, kommt ein leerer String zurück und es wird geloggt.
+ */
+function asset(string $name): string {
+  static $manifest = null;
+  if ($manifest === null) {
+    $file = $_SERVER['DOCUMENT_ROOT'] . '/assets/dist/manifest.json';
+    $manifest = is_file($file) ? (json_decode((string)file_get_contents($file), true) ?: []) : [];
+  }
+  if (!isset($manifest[$name])) {
+    error_log("asset(): '{$name}' nicht im Manifest – wurde `bun run build` ausgeführt?");
+    return '';
+  }
+  return $manifest[$name];
+}
+
+/**
  * critical_css_inline($nonce)
- * Liest /assets/css/critical.min.css (oder critical.css) und gibt es inline als <style> zurück.
- * - Nutzt vorhandenes .min.css, sonst minifiziert es critical.css on-the-fly.
+ * Gibt /assets/dist/critical.min.css (vom Build erzeugt) inline als <style> zurück.
  * - Optional mit CSP-Nonce.
  * Einsatz: render-blocking CSS früh laden, ohne extra Request.
  */
 function critical_css_inline(?string $nonce = null): string {
-  $root   = $_SERVER['DOCUMENT_ROOT'];
-  $min    = $root . '/assets/css/critical.min.css';
-  $src    = $root . '/assets/css/critical.css';
-  $css    = '/* no critical.css found */';
-
-  if (is_file($min)) {
-    $css = file_get_contents($min);
-  } elseif (is_file($src)) {
-    $css = minify_css(file_get_contents($src));
-  }
+  $file = $_SERVER['DOCUMENT_ROOT'] . '/assets/dist/critical.min.css';
+  $css  = is_file($file) ? file_get_contents($file) : '/* no critical.min.css found */';
   $nonceAttr = $nonce ? ' nonce="'.e($nonce).'"' : '';
   return "<style{$nonceAttr}>{$css}</style>";
 }

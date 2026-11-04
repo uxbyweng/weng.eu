@@ -141,8 +141,7 @@
 </footer>
 
 <!-- JavaScript -->
-<script type="module" src="/assets/js/site.<?= ($sprache === 'en' ? 'en' : 'de') ?>.js"></script>
-<script src="/assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+<script type="module" src="<?= asset('site.js') ?>"></script>
 
 </body>
 

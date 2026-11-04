@@ -34,3 +34,5 @@ config/*local*.php
 
 # SFTP/Deploy-Konfigs (egal wo)
 **/sftp.json
+# Bun-Build-Output (wird in der CI gebaut und deployt)
+assets/dist/

@@ -1,4 +1,4 @@
-﻿# Basis: Alle Textdateien normalisieren
+# Basis: Alle Textdateien normalisieren
 * text=auto
 
 # Erzwinge LF für Skripte/CI-Dateien (nie CRLF auschecken)
@@ -25,4 +25,4 @@
 *.ai   binary
 
 # Lockfiles (als Text, aber oft große Diffs vermeiden):
-package-lock.json text
+bun.lock text
