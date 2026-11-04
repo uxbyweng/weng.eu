@@ -39,3 +39,7 @@ assets/dist/
 
 # Lokale Claude-Code-Anweisungen
 CLAUDE.md
+
+# Nur lokal: Design-Unterlagen und Experimente
+docs/
+test/
