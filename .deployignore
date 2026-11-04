@@ -1,0 +1,30 @@
+# Was NICHT auf den Webserver gehört (rsync --exclude-from, siehe .github/workflows/deploy.yml)
+
+# Versionskontrolle & CI
+.git/
+.github/
+.gitignore
+.gitattributes
+.deployignore
+
+# Quellen & Tooling (auf dem Server läuft nur der Build-Output aus assets/dist/)
+src/
+scripts/
+node_modules/
+package.json
+bun.lock
+bunfig.toml
+tsconfig.json
+biome.json
+.bun-version
+
+# Lokale Entwicklung
+router.php
+.env
+.vscode/
+_psd/
+docs/
+test/
+README.md
+yolo.txt
+_deploy/

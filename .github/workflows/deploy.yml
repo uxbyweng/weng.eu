@@ -1,0 +1,83 @@
+name: Build & Deploy
+
+on:
+    push:
+        branches: [main]
+    pull_request:
+    workflow_dispatch:
+
+# Nie zwei Deployments gleichzeitig
+concurrency:
+    group: deploy-${{ github.ref }}
+    cancel-in-progress: false
+
+jobs:
+    build:
+        name: Check & Build
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+
+            - uses: oven-sh/setup-bun@v2
+              with:
+                  bun-version-file: .bun-version
+
+            - run: bun install --frozen-lockfile
+
+            - name: Typecheck & Lint
+              run: bun run check
+
+            - name: Build
+              run: bun run build
+
+            # Deploy-Paket zusammenstellen: nur, was auf den Server gehört (siehe .deployignore)
+            - name: Stage deploy files
+              run: rsync -a --exclude-from=.deployignore ./ _deploy/
+
+            - uses: actions/upload-artifact@v4
+              with:
+                  name: site
+                  path: _deploy
+                  include-hidden-files: true
+                  retention-days: 7
+
+    deploy:
+        name: Deploy per SFTP
+        needs: build
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/download-artifact@v4
+              with:
+                  name: site
+                  path: _deploy
+
+            - name: Install lftp
+              run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+
+            - name: Upload
+              env:
+                  SFTP_HOST: ${{ secrets.FTP_SERVER }}
+                  SFTP_USER: ${{ secrets.FTP_USERNAME }}
+                  SFTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+                  # Zielverzeichnis relativ zum Startverzeichnis des SFTP-Accounts (/_weng/)
+                  REMOTE: ${{ vars.SFTP_REMOTE_PATH || '/' }}
+              run: |
+                  lftp <<EOF
+                  set cmd:fail-exit yes
+                  set net:max-retries 3
+                  set sftp:auto-confirm yes
+                  open -u "$SFTP_USER","$SFTP_PASSWORD" "sftp://$SFTP_HOST"
+
+                  # 1) Große, selten geänderte Medien: nur nach Dateigröße vergleichen
+                  mirror -R --ignore-time --parallel=4 _deploy/assets/img    "$REMOTE/assets/img"
+                  mirror -R --ignore-time --parallel=4 _deploy/assets/video  "$REMOTE/assets/video"
+                  mirror -R --ignore-time --parallel=4 _deploy/assets/vendor "$REMOTE/assets/vendor"
+
+                  # 2) Alles andere (PHP, Build-Output, ...) – ohne --delete, damit .env & Co. auf dem Server unangetastet bleiben
+                  mirror -R --parallel=4 --exclude '^assets/(img|video|vendor)/' _deploy "$REMOTE"
+
+                  # 3) Alte gehashte Build-Dateien erst nach dem Upload der neuen entfernen
+                  mirror -R --delete --parallel=4 _deploy/assets/dist "$REMOTE/assets/dist"
+                  bye
+                  EOF
