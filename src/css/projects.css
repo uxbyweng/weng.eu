@@ -1,0 +1,110 @@
+/* Projekte-Übersicht: Filter, Karten mit Badge, Archiv */
+
+/* ---- Filter (Pill-Buttons, aktiv gefüllt) ---- */
+.filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 36px;
+
+    &[hidden] {
+        display: none;
+    }
+}
+
+.filter__button {
+    padding: 8px 18px;
+    border: 1.5px solid var(--color-heading);
+    border-radius: var(--radius-pill);
+    background: transparent;
+    color: var(--color-heading);
+    font: inherit;
+    font-size: 14.5px;
+    font-weight: 600;
+    line-height: 1.3;
+    cursor: pointer;
+
+    &:hover {
+        background: var(--color-surface-3);
+    }
+
+    /* Aktiv: invertiert (hell auf dunkel bzw. dunkel auf hell), damit der Zustand in beiden Themes erkennbar ist */
+    &[aria-pressed="true"] {
+        background: var(--color-heading);
+        color: var(--color-bg);
+    }
+}
+
+/* ---- Karten ---- */
+.projects {
+    padding-bottom: var(--section-space);
+}
+
+.project-grid--page {
+    --grid-min: 360px;
+    gap: clamp(44px, 5vw, 64px) clamp(32px, 4vw, 56px);
+
+    .project-card h2 {
+        margin-bottom: 12px;
+        font-size: 26px;
+        line-height: 1.2;
+        letter-spacing: -0.01em;
+    }
+
+    .project-card .result {
+        margin-top: 4px;
+    }
+
+    .project-card .chip-list {
+        margin-top: 2px;
+    }
+
+    /* .project-card setzt display: flex und würde das hidden-Attribut sonst überstimmen */
+    .project-card[hidden] {
+        display: none;
+    }
+}
+
+/* Kategorie-Badge + Meta in einer Zeile */
+.project-meta--badge {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 12px;
+    align-items: center;
+}
+
+/* ---- Archiv ---- */
+.archive {
+    margin-top: clamp(56px, 7vw, 88px);
+}
+
+.archive__title {
+    margin-bottom: 8px;
+    font-family: var(--font-body);
+    font-size: 15px;
+    letter-spacing: normal;
+}
+
+.archive__row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 24px;
+    align-items: baseline;
+    justify-content: space-between;
+    padding-block: 16px;
+    border-block: 1px solid var(--color-line);
+    text-decoration: none;
+
+    &:hover {
+        color: var(--color-accent);
+    }
+}
+
+.archive__name {
+    font-weight: 600;
+}
+
+.archive__meta {
+    color: var(--color-muted);
+    font-size: 15px;
+}

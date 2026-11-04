@@ -14,5 +14,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const { initContactForm } = await import("./modules/contact-form");
             initContactForm();
         }
+        if (document.querySelector("[data-project-filter]")) {
+            const { initProjectFilter } = await import("./modules/project-filter");
+            initProjectFilter();
+        }
     });
 });
