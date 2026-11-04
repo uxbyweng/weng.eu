@@ -65,6 +65,7 @@ return [
   'home.about.title'   => 'A communication designer who writes his own code',
   'home.about.text'    => 'I studied communication design and have worked on the web for over 20 years – two decades of it at STRATO. I always looked after my own clients on the side, and since 2025 full time. Right now I am deliberately broadening my profile towards backend and AI-assisted development.',
   'home.about.more'    => 'More about me',
+  'home.about.photo_alt' => 'Karsten Weng pointing at a screen with code at a desk while a colleague looks on',
 
   'home.quote.label'   => 'Client testimonial',
   // PLATZHALTER-Zitat (erfunden, nur lokal sichtbar) – durch das echte Zitat von Prof. Haller ersetzen, sobald sie es freigibt.

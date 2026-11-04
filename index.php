@@ -34,7 +34,9 @@ $projectLink = fn(string $href, string $nameKey): string =>
                     </div>
                 </div>
                 <figure class="hero__figure portrait">
-                    <img src="/assets/img/home/about-me.jpg" alt="<?= e(t('home.hero.portrait_alt')) ?>" width="900" height="1153" fetchpriority="high" decoding="async">
+                    <img src="/assets/img/home/weng_profile_1040x1300.webp"
+                        srcset="/assets/img/home/weng_profile_520x650.webp 520w, /assets/img/home/weng_profile_1040x1300.webp 1040w"
+                        sizes="(max-width: 520px) 100vw, 520px" alt="<?= e(t('home.hero.portrait_alt')) ?>" width="1040" height="1300" fetchpriority="high" decoding="async">
                     <figcaption class="portrait__badge">
                         <strong><?= e(t('home.hero.badge_since')) ?></strong>
                         <span><?= e(t('home.hero.badge_for')) ?></span>
@@ -147,8 +149,12 @@ $projectLink = fn(string $href, string $nameKey): string =>
         <!-- Über mich (Teaser) -->
         <section class="section" aria-labelledby="teaser-title">
             <div class="wrap teaser">
-                <?php // Arbeitsfoto fehlt noch (Handoff: "Fehlen noch: Arbeitsfoto") – lokal Platzhalter, live nur Text ?>
-                <?php if (is_dev()): ?><div class="teaser__photo"><?= todo('Arbeitsfoto, z. B. am Schreibtisch oder im Kundentermin') ?></div><?php endif; ?>
+                <figure class="teaser__photo">
+                    <img src="/assets/img/home/weng_at_work_1400x1120.webp"
+                        srcset="/assets/img/home/weng_at_work_700x560.webp 700w, /assets/img/home/weng_at_work_1400x1120.webp 1400w"
+                        sizes="(min-width: 1000px) 480px, 100vw" alt="<?= e(t('home.about.photo_alt')) ?>"
+                        width="1400" height="1120" loading="lazy" decoding="async">
+                </figure>
                 <div class="teaser__text">
                     <p class="eyebrow"><?= e(t('home.about.eyebrow')) ?></p>
                     <h2 id="teaser-title"><?= e(t('home.about.title')) ?></h2>

@@ -45,7 +45,9 @@ $dir = '/assets/img/projects/';
                     <p class="easy-hero__link"><a class="more-link" href="<?= e(url('/')) ?>"><?= e(t('easy.normal')) ?> <span aria-hidden="true">→</span></a></p>
                 </div>
                 <figure class="about-hero__figure">
-                    <img src="/assets/img/home/about-me.jpg" alt="<?= e(t('easy.portrait.alt')) ?>" width="900" height="1153" fetchpriority="high" decoding="async">
+                    <img src="/assets/img/home/weng_profile_1040x1300.webp"
+                        srcset="/assets/img/home/weng_profile_520x650.webp 520w, /assets/img/home/weng_profile_1040x1300.webp 1040w"
+                        sizes="(max-width: 460px) 100vw, 460px" alt="<?= e(t('easy.portrait.alt')) ?>" width="1040" height="1300" fetchpriority="high" decoding="async">
                 </figure>
             </div>
         </section>

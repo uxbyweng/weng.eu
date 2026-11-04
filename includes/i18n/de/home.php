@@ -65,6 +65,7 @@ return [
   'home.about.title'   => 'Kommunikationsdesigner, der seinen Code selbst schreibt',
   'home.about.text'    => 'Ich habe Kommunikationsdesign studiert und arbeite seit über 20 Jahren im Web – zwei Jahrzehnte davon bei STRATO. Eigene Kunden habe ich immer parallel betreut, seit 2025 hauptberuflich. Aktuell erweitere ich mein Profil gezielt um Backend und KI-gestützte Entwicklung.',
   'home.about.more'    => 'Mehr über mich',
+  'home.about.photo_alt' => 'Karsten Weng zeigt an einem Schreibtisch auf einen Bildschirm mit Code, ein Kollege schaut zu',
 
   'home.quote.label'   => 'Kundenstimme',
   // PLATZHALTER-Zitat (erfunden, nur lokal sichtbar) – durch das echte Zitat von Prof. Haller ersetzen, sobald sie es freigibt.
