@@ -55,7 +55,7 @@ $projectLink = fn(string $href, string $nameKey): string =>
                 </div>
 
                 <article class="project-feature">
-                    <img class="project-media" src="/assets/img/projects/park-klinik/screen-startseite-park-klinik-birkenwerder.jpg"
+                    <img class="project-media" src="/assets/img/projects/park-klinik/screen-startseite-redesign-park-klinik-birkenwerder.jpg"
                         alt="<?= e(t('project.pk.alt')) ?>" width="1200" height="800" loading="lazy" decoding="async">
                     <div class="project-feature__body">
                         <p class="project-meta"><?= e(t('project.pk.meta')) ?></p>

@@ -39,7 +39,7 @@ $result = fn(string $html): string => '<p class="result">' . $html . '</p>';
 $projects = [
     [
         'cat' => 'client',
-        'img' => $picture('park-klinik/screen-startseite-park-klinik-birkenwerder', true, t('project.pk.alt'), 1200, 800, false),
+        'img' => $picture('park-klinik/screen-startseite-redesign-park-klinik-birkenwerder', true, t('project.pk.alt'), 1200, 800, false),
         'meta' => e(t('projects.pk.meta')),
         'name' => t('project.pk.name'),
         'text' => e(t('projects.pk.text')),

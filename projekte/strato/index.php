@@ -2,145 +2,131 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/lang.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/helpers.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/head.php';
+
+$img = '/assets/img/projects/strato/';
 $meta = [
-    'title' => 'WENG.EU - Projekt: STRATO Shop-Frontend',
-    'desc'  => 'Web Development & laufende Betreuung des STRATO Shop-Frontends. Fokus: Barrierearme UX, Performance. Wartbarer Code in einem agilen, crossfunktionalen Team.',
-    'og_image' => '',
+    'title'    => t('strato.meta.title'),
+    'desc'     => t('strato.meta.desc'),
+    'og_image' => $img . 'screen-startseite-strato-april-2024.jpg',
 ];
 $cspNonce = $_SERVER['CSP_NONCE'] ?? null;
 echo render_head($meta, $cspNonce);
-$isEn = is_en();
+
+$stack = ['Bootstrap 5', 'Eleventy', 'Nunjucks', 'GitLab', 'Jenkins', 'Imperia CMS', 'Strapi', 'Jira', 'Confluence', 'Figma'];
+$phases = [1 => 3, 2 => 4]; // Phase => Anzahl Stichpunkte
 ?>
 
 <body>
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php'; ?>
 
-    <main class="page-wrapper" id="startMainContent">
-
-        <!-- ### BREADCRUMB ### -->
+    <main id="main">
         <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/breadcrumb.php'; ?>
 
-        <!-- ### STAGE ### -->
-        <section class="px-3 px-md-0 py-2 py-md-5">
-            <div class="container">
-                <div class="row">
+        <article aria-labelledby="case-title">
 
-                    <div class="col-12 col-md-7 order-1">
-                        <h1>
-                            <span class="font-accent">STRATO</span><br>
-                            Shop-Frontend
-                        </h1>
-                    </div>
-
-                    <div class="col-12 col-md-5 text-center order-2 order-md-3 p-4 mt-150-md">
-                        <img src="/assets/img/projects/strato/screen-startseite-strato-april-2024.jpg" alt="Screen: STRATO Startseite 2024" class="img-fluid box-shadow" loading="lazy">
-                    </div>
-
-                    <div class="col-12 col-md-7 order-3 order-md-2">
-                        <p class="fs-20 lh-1-3 my-3">
-                            <em>Weiterentwicklung und Pflege des Shop-Frontends – mit Fokus auf Usability, Performance und wartbarem Code in einem agilen, crossfunktionalen Team.</em>
-                        </p>
-                    </div>
-
+            <!-- Kopf: Eyebrow, H1, Lead, Steckbrief -->
+            <header class="page-head page-head--case">
+                <div class="wrap">
+                    <p class="eyebrow"><?= e(t('strato.eyebrow')) ?></p>
+                    <h1 id="case-title"><?= e(t('strato.title')) ?></h1>
+                    <p class="lead"><?= e(t('strato.lead')) ?></p>
+                    <dl class="case-facts">
+                        <div><dt><?= e(t('strato.facts.period')) ?></dt><dd><?= e(t('strato.facts.period.v')) ?></dd></div>
+                        <div><dt><?= e(t('strato.facts.role')) ?></dt><dd><?= e(t('strato.facts.role.v')) ?></dd></div>
+                        <div><dt><?= e(t('strato.facts.team')) ?></dt><dd><?= e(t('strato.facts.team.v')) ?></dd></div>
+                        <div><dt><?= e(t('strato.facts.live')) ?></dt><dd><a href="https://www.strato.de" rel="noopener">strato.de <span aria-hidden="true">↗</span></a></dd></div>
+                    </dl>
                 </div>
-            </div>
-        </section>
+            </header>
 
-        <section class="px-3 px-md-0 py-3">
-            <div class="container">
-                <div class="row">
+            <!-- Screenshot (enthält bereits den Browser-Rahmen, daher kein eigener Rahmen) -->
+            <section class="case-shot" aria-label="<?= e(t('strato.shot.caption')) ?>">
+                <div class="wrap">
+                    <figure class="case-figure">
+                        <picture>
+                            <source type="image/webp" media="(max-width: 700px)" srcset="<?= $img ?>screen-startseite-strato-april-2024_xs.webp">
+                            <source type="image/webp" srcset="<?= $img ?>screen-startseite-strato-april-2024.webp">
+                            <img src="<?= $img ?>screen-startseite-strato-april-2024.jpg" alt="<?= e(t('strato.shot.alt')) ?>"
+                                width="1200" height="800" fetchpriority="high" decoding="async">
+                        </picture>
+                        <figcaption><?= e(t('strato.shot.caption')) ?></figcaption>
+                    </figure>
+                </div>
+            </section>
 
-                    <div class="col-12 col-md-8 order-1 pe-2 pe-md-5">
+            <!-- Was ich bewegt habe -->
+            <section class="section section--band" aria-labelledby="case-results">
+                <div class="wrap">
+                    <h2 id="case-results"><?= e(t('strato.results.title')) ?></h2>
+                    <ul class="stats">
+                        <?php foreach ([1, 2, 3] as $n): ?>
+                            <li class="stat">
+                                <p class="stat__value"><?= e(t("strato.results.$n.v")) ?></p>
+                                <?php // Ausgangswert und Tool des Accessibility-Scores liefert der Inhaber (live leer, siehe todo()) ?>
+                                <p class="stat__text"><?= e(t("strato.results.$n.t")) ?><?= $n === 2 ? todo('Ausgangswert und Tool', ' ') : '' ?></p>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            </section>
 
-                        <div class="ref-viewport" role="region" aria-label="Scrollable reference screen" tabindex="0">
-                            <figure>
-                                <picture>
-                                    <source srcset="/assets/img/projects/strato/screen_strato_woocommerce_full_page_mai_2024.webp" type="image/webp">
-                                    <img
-                                        src="/assets/img/projects/strato/screen_strato_woocommerce_full_page_mai_2024.jpg"
-                                        class="screen-img"
-                                        alt="STRATO WooCommerce – vollständiger Seiten-Screenshot, Stand Mai 2024"
-                                        loading="lazy"
-                                        decoding="async"
-                                        sizes="(min-width: 992px) 800px, 100vw">
-                                </picture>
-                                <figcaption>Screen: STRATO WooCommerce Full Page Mai 2024 — <a href="/assets/img/projects/strato/screen_strato_woocommerce_full_page_mai_2024.jpg" target="_blank" rel="noopener">In neuem Tab öffnen</a></figcaption>
-                            </figure>
-                        </div>
-
-
-                        <!--aricle>
-                        <img src="/assets/img/projects/strato/screen-strato-mobile-menu-2024.jpg" alt="Screen: STRATO Mobile Menu 2024" class="img-fluid box-shadow mb-5" loading="lazy">
-                    </aricle>
-                    <aricle>
-                        <img src="/assets/img/projects/screen-strato-windows-v-server-filtertabelle.jpg" alt="Screen: Filterbare Windows V-Server Tabelle" class="img-fluid mb-5" loading="lazy">
-                    </aricle>
-                    <aricle>
-                        <img src="/assets/img/projects/strato/screen-strato-trust-leiste-2024.png" alt="Screen: STRATO Trust-Icon-Bar" class="img-fluid box-shadow mb-5" loading="lazy">
-                    </aricle>
-                    <aricle>
-                        <div class="row g-4 mb-5">
-                            <div class="col-12 col-md-6 px-5">
-                                <img src="/assets/img/projects/strato/undraw_hosting_vorteile_inklusive.svg" alt="Illustration: STRATO FAQ Icon" class="img-fluid" loading="lazy">
-                            </div>
-                            <div class="col-12 col-md-6 px-5">
-                                <img src="/assets/img/projects/strato/undraw_lupe.svg" alt="Illustration: STRATO FAQ Icon" class="img-fluid" loading="lazy">
-                            </div>
-                            <div class="col-12 col-md-6 px-5">
-                                <img src="/assets/img/projects/strato/faireinfacht_2020.svg" alt="Illustration: STRATO #FAIREINFACHT" class="img-fluid" loading="lazy">
-                            </div>
-                        </div>
-                    </aricle-->
+            <!-- Zwei Phasen -->
+            <section class="section" aria-labelledby="case-phases">
+                <div class="wrap">
+                    <h2 id="case-phases"><?= e(t('strato.phases.title')) ?></h2>
+                    <div class="phases">
+                        <?php foreach ($phases as $phase => $count): ?>
+                            <article class="card phase">
+                                <p class="phase__period"><?= e(t("strato.phase$phase.period")) ?></p>
+                                <h3><?= e(t("strato.phase$phase.title")) ?></h3>
+                                <ul>
+                                    <?php for ($i = 1; $i <= $count; $i++): ?>
+                                        <li><?= e(t("strato.phase$phase.$i")) ?></li>
+                                    <?php endfor; ?>
+                                </ul>
+                            </article>
+                        <?php endforeach; ?>
                     </div>
 
-                    <aside class="col-12 col-md-4 order-2 pt-5 pt-md-0 pe-5">
-                        <section class="pb-3 border-bottom">
-                            <h2 class="font-primary fs-20 text-uppercase">
-                                <strong>Info</strong>
-                            </h2>
-                            <p>
-                                Die STRATO Shopplattform basiert auf einem modularen, responsiven Frontend. Eingebettet in ein agiles Setup kommen moderne Webtechnologien und Headless-Architekturen zum Einsatz.
-                            </p>
-                        </section>
-                        <section class="py-3 border-bottom">
-                            <h2 class="font-primary fs-20 text-uppercase">
-                                <strong>Tech-Stack</strong>
-                            </h2>
-                            <p>
-                                Bootstrap 5, Eleventy (Static Site Generator), Nunjucks, GitLab, Jenkins, Imperia CMS, Strapi (Headless CMS), JIRA, Confluence, Figma
-                            </p>
-                        </section>
-                        <section class="py-3 border-bottom">
-                            <h2 class="font-primary fs-20 text-uppercase">
-                                <strong>Services</strong>
-                            </h2>
-                            <p>
-                                UI/UX Design, Frontend-Entwicklung, Design-Systeme, SEO, Accessibility, Web-konforme Bildbearbeitung
-                            </p>
-                        </section>
-                        <section class="py-3 border-bottom">
-                            <h2 class="font-primary fs-20 text-uppercase">
-                                <strong>URL</strong>
-                            </h2>
-                            <p>
-                                <a href="http://www.strato.de" class="text-link" rel="nofollow">www.strato.de </a>
-                            </p>
-                        </section>
-                        <section class="py-3">
-                            <h2 class="font-primary fs-20 text-uppercase">
-                                <strong>Zeitraum</strong>
-                            </h2>
-                            <p>2005 -2025</p>
-                        </section>
-                    </aside>
-
+                    <figure class="case-figure case-figure--spaced">
+                        <picture>
+                            <source type="image/webp" media="(max-width: 700px)" srcset="<?= $img ?>screen-strato-woocommerce-ausschnitt-mai-2024_xs.webp">
+                            <source type="image/webp" srcset="<?= $img ?>screen-strato-woocommerce-ausschnitt-mai-2024.webp">
+                            <img src="<?= $img ?>screen-strato-woocommerce-ausschnitt-mai-2024.jpg" alt="<?= e(t('strato.woo.alt')) ?>"
+                                width="1200" height="675" loading="lazy" decoding="async">
+                        </picture>
+                        <figcaption><?= e(t('strato.woo.caption')) ?></figcaption>
+                    </figure>
                 </div>
-            </div>
-        </section>
+            </section>
 
+            <?php // Referenz: live erst mit echter Empfehlung (z. B. LinkedIn) – nichts erfinden, bis der Inhaber sie liefert ?>
+            <?php if (is_dev()): ?>
+                <section class="quote case-quote" aria-label="<?= e(t('home.quote.label')) ?>">
+                    <figure class="wrap">
+                        <blockquote><p>„<?= todo('Empfehlung einer ehemaligen Teamleitung, z. B. von LinkedIn') ?>“</p></blockquote>
+                        <figcaption><?= todo('Name, Funktion') ?> · STRATO</figcaption>
+                    </figure>
+                </section>
+            <?php endif; ?>
 
+            <!-- Tech-Stack + weiter -->
+            <footer class="section case-foot">
+                <div class="wrap case-foot__inner">
+                    <div class="case-foot__stack">
+                        <h2 class="case-foot__label"><?= e(t('strato.stack')) ?></h2>
+                        <ul class="chip-list">
+                            <?php foreach ($stack as $item): ?><li class="chip"><?= e($item) ?></li><?php endforeach; ?>
+                        </ul>
+                    </div>
+                    <div class="case-foot__next">
+                        <a class="case-foot__next-link" href="<?= e(url('/projekte/lisa/')) ?>"><?= e(t('strato.next')) ?> <span aria-hidden="true">→</span></a>
+                        <a class="more-link" href="<?= e(url('/projekte/')) ?>"><?= e(t('strato.all')) ?></a>
+                    </div>
+                </div>
+            </footer>
+
+        </article>
     </main>
 
-    <?php
-    include($_SERVER["DOCUMENT_ROOT"] . "/includes/footer.php");
-    ?>
+    <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/footer.php'; ?>
