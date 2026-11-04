@@ -27,6 +27,10 @@ return [
   'project.lisa.kind' => 'Client project',
   'project.lisa.role' => 'Design & development',
   'project.lisa.alt'  => 'Home page of the website of Prof. Dr. Lisa Y. Haller',
+  'project.lisa.year' => '2024',
+  'project.lisa.text' => 'Modernisation of the existing WordPress website (Elementor). Starting point: a PageSpeed score of around 60 % on both desktop and mobile.',
+  'project.lisa.r1'   => 'PageSpeed performance: from around 60 % to 100 % on desktop and 93 % on mobile',
+  'project.lisa.r2'   => 'Lighthouse accessibility and SEO: 100 out of 100 (desktop and mobile)',
 
   'project.bsv.name'  => 'Berlin Street View',
   'project.bsv.meta'  => 'Personal project · 2026 · Full stack',
@@ -63,4 +67,6 @@ return [
   'home.about.more'    => 'More about me',
 
   'home.quote.label'   => 'Client testimonial',
+  // PLATZHALTER-Zitat (erfunden, nur lokal sichtbar) – durch das echte Zitat von Prof. Haller ersetzen, sobald sie es freigibt.
+  'home.quote.text'    => 'Karsten Weng has made my website not only more attractive but also much faster and easier to understand. Working with him was straightforward and reliable.',
 ];

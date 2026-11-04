@@ -27,6 +27,10 @@ return [
   'project.lisa.kind' => 'Kundenprojekt',
   'project.lisa.role' => 'Design & Umsetzung',
   'project.lisa.alt'  => 'Startseite der Website von Prof. Dr. Lisa Y. Haller',
+  'project.lisa.year' => '2024',
+  'project.lisa.text' => 'Modernisierung der bisherigen WordPress-Website (Elementor). Ausgangslage: PageSpeed auf Desktop und Mobile jeweils bei rund 60 %.',
+  'project.lisa.r1'   => 'PageSpeed-Performance: von rund 60 % auf 100 % am Desktop und 93 % mobil',
+  'project.lisa.r2'   => 'Lighthouse-Barrierefreiheit und -SEO: 100 von 100 (Desktop und mobil)',
 
   'project.bsv.name'  => 'Berlin Street View',
   'project.bsv.meta'  => 'Eigenprojekt · 2026 · Full-Stack',
@@ -63,4 +67,6 @@ return [
   'home.about.more'    => 'Mehr über mich',
 
   'home.quote.label'   => 'Kundenstimme',
+  // PLATZHALTER-Zitat (erfunden, nur lokal sichtbar) – durch das echte Zitat von Prof. Haller ersetzen, sobald sie es freigibt.
+  'home.quote.text'    => 'Karsten Weng hat meine Website nicht nur schöner, sondern auch deutlich schneller und verständlicher gemacht. Die Zusammenarbeit war unkompliziert und verlässlich.',
 ];

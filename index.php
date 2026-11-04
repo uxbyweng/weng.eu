@@ -79,11 +79,14 @@ $projectLink = fn(string $href, string $nameKey): string =>
                     <article class="project-card">
                         <img class="project-media" src="/assets/img/projects/lisa/screen-startseite-lisa-yashodhara-haller.jpg"
                             alt="<?= e(t('project.lisa.alt')) ?>" width="1200" height="800" loading="lazy" decoding="async">
-                        <?php // Jahr, Aufgabe und Ergebnis liefert der Inhaber (live bleiben die Felder leer, siehe todo()) ?>
-                        <p class="project-meta"><?= implode(' · ', array_filter([e(t('project.lisa.kind')), todo('Jahr'), e(t('project.lisa.role'))])) ?></p>
+                        <?php // Werte nachher: PageSpeed Insights, gemessen am 04.11.2026 (Mobil 93, Desktop 100) ?>
+                        <p class="project-meta"><?= e(t('project.lisa.kind')) ?> · <?= e(t('project.lisa.year')) ?> · <?= e(t('project.lisa.role')) ?></p>
                         <h3><?= e(t('project.lisa.name')) ?></h3>
-                        <?php if ($task = todo('Ein Satz: Was war die Aufgabe?')): ?><p><?= $task ?></p><?php endif; ?>
-                        <?php if ($outcome = todo('Ergebnis, z. B. Lighthouse 96+')): ?><p class="result"><?= $outcome ?></p><?php endif; ?>
+                        <p><?= e(t('project.lisa.text')) ?></p>
+                        <ul class="results">
+                            <li class="result"><?= e(t('project.lisa.r1')) ?></li>
+                            <li class="result"><?= e(t('project.lisa.r2')) ?></li>
+                        </ul>
                         <?= $projectLink('/projekte/lisa/', 'project.lisa.name') ?>
                     </article>
 
@@ -155,12 +158,13 @@ $projectLink = fn(string $href, string $nameKey): string =>
             </div>
         </section>
 
-        <!-- Kundenstimme: erscheint live erst, wenn ein echtes Zitat geliefert ist -->
+        <?php // Kundenstimme: erscheint live erst, wenn ein echtes Zitat geliefert ist.
+        // Aktuell ein erfundener Platzhalter für Prof. Haller (home.quote.text) – darf NICHT live gehen. ?>
         <?php if (is_dev()): ?>
             <section class="quote" aria-label="<?= e(t('home.quote.label')) ?>">
                 <figure class="wrap">
-                    <blockquote><p>„<?= todo('Zitat einer Kundin oder eines Kunden – zwei Sätze zur Zusammenarbeit oder zum Ergebnis.') ?>“</p></blockquote>
-                    <figcaption><?= todo('Name, Funktion') ?> · <?= e(t('project.pk.name')) ?></figcaption>
+                    <blockquote><p><mark class="todo">„<?= e(t('home.quote.text')) ?>“</mark></p></blockquote>
+                    <figcaption><?= e(t('project.lisa.name')) ?> <?= todo('Funktion, echtes Zitat von Lisa einholen', ' ') ?></figcaption>
                 </figure>
             </section>
         <?php endif; ?>
