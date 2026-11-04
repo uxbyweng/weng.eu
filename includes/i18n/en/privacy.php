@@ -5,6 +5,8 @@ return [
   'privacy.meta.title' => 'Privacy policy – Karsten Weng',
   'privacy.meta.desc'  => 'Privacy policy of weng.eu: which data is processed, for what purposes and what rights you have.',
   'privacy.title'      => 'Privacy policy',
+  // Hinweis zur maßgeblichen Fassung: nur in der englischen Datei gefüllt, in der deutschen leer (wird dann nicht angezeigt)
+  'privacy.notice'     => 'This English version is provided for convenience only. In case of doubt, the German version shall prevail.',
   'privacy.date'       => 'As of:',
 
   'privacy.link.imprint' => 'imprint',

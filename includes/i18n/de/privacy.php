@@ -9,6 +9,8 @@ return [
   'privacy.meta.title' => 'Datenschutzerklärung – Karsten Weng',
   'privacy.meta.desc'  => 'Datenschutzerklärung von weng.eu: welche Daten verarbeitet werden, zu welchen Zwecken und welche Rechte Sie haben.',
   'privacy.title'      => 'Datenschutzerklärung',
+  // Hinweis zur maßgeblichen Fassung: nur in der englischen Datei gefüllt, in der deutschen leer (wird dann nicht angezeigt)
+  'privacy.notice'     => '',
   'privacy.date'       => 'Stand:',
 
   'privacy.link.imprint' => 'Impressum',

@@ -41,8 +41,11 @@ function broadcast(event: string, data = ""): void {
     for (const c of clients) c.enqueue(`event: ${event}\ndata: ${data}\n\n`);
 }
 
+// Die Live-Reload-Verbindung muss beim Verlassen der Seite geschlossen werden: Sonst bleiben nach einigen Seitenwechseln
+// alle 6 Browser-Verbindungen zum Host belegt, und neue Seiten laden ~60 s nicht fertig (Schriften/Bilder warten).
 const CLIENT_JS = `
 const es = new EventSource("/__dev/events");
+addEventListener("pagehide", () => es.close());
 es.addEventListener("reload", () => location.reload());
 es.addEventListener("css", e => {
     const urls = JSON.parse(e.data);

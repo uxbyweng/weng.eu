@@ -2,6 +2,7 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/lang.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/helpers.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/head.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/text-blocks.php';
 
 $meta = [
     'title' => t('privacy.meta.title'),
@@ -27,33 +28,17 @@ $replace = [
     '{berlin}'  => '<a href="https://www.datenschutz-berlin.de/" rel="noopener">' . e(t('privacy.link.berlin')) . '</a>',
     '{list}'    => '<a href="https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html" rel="noopener">' . e(t('privacy.link.list')) . '</a>',
 ];
-$fill = fn(string $text): string => strtr(e($text), $replace);
 
-/** Gibt die Einträge eines Abschnitts als <p> bzw. <ul> aus. */
-$renderBody = function (string $id) use ($fill): string {
-    $html = '';
-    $inList = false;
-    for ($i = 1; t_has("privacy.$id.$i"); $i++) {
-        $text = t("privacy.$id.$i");
-        $isItem = str_starts_with($text, '- ');
-        if ($isItem && !$inList) { $html .= "<ul>\n"; $inList = true; }
-        if (!$isItem && $inList) { $html .= "</ul>\n"; $inList = false; }
-        $html .= $isItem ? '<li>' . $fill(substr($text, 2)) . "</li>\n" : '<p>' . $fill($text) . "</p>\n";
-
-        // Anschrift direkt nach dem einleitenden Satz des Verantwortlichen
-        if ($id === 'controller' && $i === 1) {
-            $address = array_filter([
-                e(t('imprint.name')),
-                e(t('imprint.trade')),
-                todo('Straße und Hausnummer (wie im Impressum)'),
-                e(t('imprint.city')),
-                e(t('imprint.country')),
-            ]);
-            $html .= '<p>' . implode('<br>', $address) . "</p>\n";
-        }
-    }
-    return $html . ($inList ? "</ul>\n" : '');
-};
+// Anschrift direkt nach dem einleitenden Satz des Verantwortlichen
+$addressAfter = fn(int $i): string => $i === 1
+    ? '<p>' . implode('<br>', array_filter([
+        e(t('imprint.name')),
+        e(t('imprint.trade')),
+        todo('Straße und Hausnummer (wie im Impressum)'),
+        e(t('imprint.city')),
+        e(t('imprint.country')),
+    ])) . '</p>'
+    : '';
 ?>
 
 <body>
@@ -71,9 +56,10 @@ $renderBody = function (string $id) use ($fill): string {
         <section class="legal-page" aria-labelledby="privacy-title">
             <div class="wrap">
                 <div class="legal">
+                    <?php if (t('privacy.notice') !== ''): ?><p class="legal__note"><?= e(t('privacy.notice')) ?></p><?php endif; ?>
                     <?php foreach ($sections as $id): ?>
                         <h2><?= e(t("privacy.$id.title")) ?></h2>
-                        <?= $renderBody($id) ?>
+                        <?= render_text_blocks("privacy.$id", $replace, $id === 'controller' ? $addressAfter : null) ?>
                         <?php if (isset($open[$id]) && ($note = todo($open[$id]))): ?><p><?= $note ?></p><?php endif; ?>
                     <?php endforeach; ?>
 
