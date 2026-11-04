@@ -36,3 +36,6 @@ config/*local*.php
 **/sftp.json
 # Bun-Build-Output (wird in der CI gebaut und deployt)
 assets/dist/
+
+# Lokale Claude-Code-Anweisungen
+CLAUDE.md
