@@ -5,7 +5,7 @@ $navItems = [
     ['/leistungen/', 'nav.services', true],
     ['/ueber-mich/', 'nav.about', false],
 ];
-$onEasy = str_starts_with(current_path(), '/leichte-sprache');
+$onEasy = str_starts_with(current_path(), '/einfache-sprache');
 ?>
 <a class="skip-link" href="#main"><?= e(t('skip')) ?></a>
 
@@ -24,7 +24,7 @@ $onEasy = str_starts_with(current_path(), '/leichte-sprache');
                     <?php if ($onEasy): ?>
                         <a class="site-nav__link site-nav__link--quiet" href="<?= url('/') ?>"><?= e(t('nav.everyday')) ?></a>
                     <?php else: ?>
-                        <a class="site-nav__link site-nav__link--quiet" href="<?= url('/leichte-sprache/') ?>"><?= e(t('nav.easy')) ?></a>
+                        <a class="site-nav__link site-nav__link--quiet" href="<?= url('/einfache-sprache/') ?>"><?= e(t('nav.easy')) ?></a>
                     <?php endif; ?>
                 </li>
                 <li><a class="site-nav__link site-nav__link--cta" href="<?= url('/kontakt/') ?>" <?= aria_current('/kontakt/', false) ?>><?= e(t('nav.contact')) ?></a></li>

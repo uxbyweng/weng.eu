@@ -8,7 +8,7 @@
 .about-hero__inner {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: flex-start; /* Porträt beginnt auf Höhe der Überzeile, nicht mittig neben dem langen Text */
     gap: 40px clamp(40px, 6vw, 88px);
 }
 
@@ -146,55 +146,10 @@
     }
 }
 
-/* ---- Weiterbildung (dunkles Band) ---- */
-.training__lead {
-    max-width: 38em;
-    margin: 18px 0 0;
-}
-
-.training {
-    display: grid;
-    gap: 24px;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
-    margin-top: clamp(32px, 4vw, 48px);
-}
-
-.training__card {
-    padding: clamp(24px, 3vw, 32px);
-    border: 1px solid rgb(255 255 255 / 0.18);
-    border-radius: var(--radius-card);
-    background: rgb(255 255 255 / 0.04);
-
-    h3 {
-        margin-top: 10px;
-        font-size: 24px;
-        line-height: 1.2;
-    }
-
-    p {
-        margin: 12px 0 0;
-        font-size: 16px;
-    }
-
-    .training__period {
-        margin: 0;
-        color: var(--color-on-petrol-eyebrow);
-        font-size: 14px;
-        font-weight: 600;
-    }
-}
-
-.training__link {
-    display: inline-block;
-    margin-top: 16px;
-    color: #fff;
-    font-weight: 600;
-    text-decoration: underline;
-    text-underline-offset: 3px;
-
-    &:hover {
-        color: var(--color-on-petrol-eyebrow);
-    }
+/* ---- Hinweis unter den Werkzeugen (Weiterbildung) ---- */
+.tools__note {
+    max-width: 46em;
+    margin: clamp(28px, 3vw, 40px) 0 0;
 }
 
 /* ---- Abschluss ---- */

@@ -2,7 +2,9 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/lang.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/helpers.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/head.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/case-study.php';
 
+// MASTER für alle Projektseiten: Aufbau und Bausteine stehen in includes/case-study.php.
 $img = '/assets/img/projects/park-klinik/';
 $meta = [
     'title'    => t('pkcase.meta.title'),
@@ -11,8 +13,6 @@ $meta = [
 ];
 $cspNonce = $_SERVER['CSP_NONCE'] ?? null;
 echo render_head($meta, $cspNonce);
-
-$stack = ['PHP', 'SQLite', 'Vanilla JavaScript', 'HTML5', 'CSS3', 'JSON-LD'];
 ?>
 
 <body>
@@ -22,126 +22,46 @@ $stack = ['PHP', 'SQLite', 'Vanilla JavaScript', 'HTML5', 'CSS3', 'JSON-LD'];
         <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/breadcrumb.php'; ?>
 
         <article aria-labelledby="case-title">
+            <?php
+            $shot = ['dir' => $img, 'base' => 'screen-startseite-redesign-park-klinik-birkenwerder', 'alt' => t('pkcase.shot.alt'), 'caption' => t('pkcase.shot.caption')];
+            case_head(t('pkcase.eyebrow'), t('pkcase.title'), t('pkcase.lead'), [
+                [t('pkcase.facts.period'), e(t('pkcase.facts.period.v'))],
+                [t('pkcase.facts.role'), e(t('pkcase.facts.role.v'))],
+                [t('pkcase.facts.live'), case_ext_link('https://www.park-klinik-birkenwerder.de/', 'park-klinik-birkenwerder.de')],
+            ], $shot);
 
-            <!-- Kopf: Eyebrow, H1, Lead, Steckbrief -->
-            <header class="page-head page-head--case">
-                <div class="wrap">
-                    <p class="eyebrow"><?= e(t('pkcase.eyebrow')) ?></p>
-                    <h1 id="case-title"><?= e(t('pkcase.title')) ?></h1>
-                    <p class="lead"><?= e(t('pkcase.lead')) ?></p>
-                    <dl class="case-facts">
-                        <div><dt><?= e(t('pkcase.facts.period')) ?></dt><dd><?= e(t('pkcase.facts.period.v')) ?><?= todo('Jahr des Relaunchs', is_en() ? ' · relaunch ' : ' · Relaunch ') ?></dd></div>
-                        <div><dt><?= e(t('pkcase.facts.role')) ?></dt><dd><?= e(t('pkcase.facts.role.v')) ?></dd></div>
-                        <div><dt><?= e(t('pkcase.facts.team')) ?></dt><dd><?= e(t('pkcase.facts.team.v')) ?></dd></div>
-                        <div><dt><?= e(t('pkcase.facts.live')) ?></dt><dd><a href="https://www.park-klinik-birkenwerder.de/" rel="noopener">park-klinik-birkenwerder.de <span aria-hidden="true">↗</span></a></dd></div>
-                    </dl>
-                </div>
-            </header>
+            case_glance(t('pkcase.results.title'), [
+                ['icon' => 'gauge', 'value' => t('pkcase.results.1.v'), 'text' => t('pkcase.results.1.t')],
+                ['icon' => 'grid', 'value' => t('pkcase.results.2.v'), 'text' => t('pkcase.results.2.t')],
+                ['icon' => 'sliders', 'value' => t('pkcase.results.3.v'), 'text' => t('pkcase.results.3.t')],
+                ['icon' => 'languages', 'value' => t('pkcase.results.4.v'), 'text' => t('pkcase.results.4.t')],
+            ], ['PHP', 'SQLite', 'Vanilla JavaScript', 'HTML5', 'CSS3', 'JSON-LD'], t('pkcase.stack'));
 
-            <!-- Screenshot (enthält bereits den Browser-Rahmen, daher kein eigener Rahmen) -->
-            <section class="case-shot" aria-label="<?= e(t('pkcase.shot.caption')) ?>">
-                <div class="wrap">
-                    <figure class="case-figure">
-                        <picture>
-                            <source type="image/webp" media="(max-width: 700px)" srcset="<?= $img ?>screen-startseite-redesign-park-klinik-birkenwerder_xs.webp">
-                            <source type="image/webp" srcset="<?= $img ?>screen-startseite-redesign-park-klinik-birkenwerder.webp">
-                            <img src="<?= $img ?>screen-startseite-redesign-park-klinik-birkenwerder.jpg" alt="<?= e(t('pkcase.shot.alt')) ?>"
-                                width="1200" height="800" fetchpriority="high" decoding="async">
-                        </picture>
-                        <figcaption><?= e(t('pkcase.shot.caption')) ?></figcaption>
-                    </figure>
-                </div>
+            case_start(t('pkcase.start.title'), [t('pkcase.start.1'), t('pkcase.start.2')], array_map(
+                fn(int $n): array => [t("pkcase.goals.$n.t"), t("pkcase.goals.$n.x")],
+                [1, 2, 3, 4]
+            ));
+
+            case_steps(t('pkcase.steps.title'), array_map(
+                fn(int $n): array => ['t' => t("pkcase.steps.$n.t"), 'x' => t("pkcase.steps.$n.x")],
+                [1, 2, 3, 4, 5, 6]
+            ));
+
+            case_slider(t('pkcase.slider.label'), $img, array_merge([case_shot_slide($shot)], [
+                ['base' => 'screen-startseite-mobile-redesign-park-klinik-birkenwerder', 'alt' => t('pkcase.mobile.alt'), 'caption' => t('pkcase.mobile.caption'), 'w' => 600, 'h' => 1338],
+                ['base' => 'screen-brustvergroesserung-eigenfett-park-klinik-birkenwerder', 'alt' => t('pkcase.treatment.alt'), 'caption' => t('pkcase.treatment.caption'), 'w' => 1400, 'h' => 933, 'xs' => true],
+                ['base' => 'screen-newsbeitrag-dgpraec-park-klinik-birkenwerder', 'alt' => t('pkcase.news.alt'), 'caption' => t('pkcase.news.caption'), 'w' => 1400, 'h' => 933, 'xs' => true],
+                ['base' => 'screen-living-styleguide-park-klinik-birkenwerder', 'alt' => t('pkcase.guide.alt'), 'caption' => t('pkcase.guide.caption'), 'w' => 1400, 'h' => 788, 'xs' => true],
+            ]));
+            ?>
+
+            <?php // Kundenstimme: Originalzitat aus der E-Mail der Chefärztin (23.10.), auf Deutsch; EN ist eine Übersetzung ?>
+            <section class="quote case-quote" aria-label="<?= e(t('home.quote.label')) ?>">
+                <figure class="wrap">
+                    <blockquote><p>„<?= e(t('pkcase.quote.text')) ?>“</p></blockquote>
+                    <figcaption><?= e(t('pkcase.quote.name')) ?>, <?= e(t('pkcase.quote.role')) ?> · <?= e(t('project.pk.name')) ?> · <time datetime="2026-10-23"><?= e(t('pkcase.quote.date')) ?></time></figcaption>
+                </figure>
             </section>
-
-            <!-- Ergebnis -->
-            <section class="section section--band" aria-labelledby="case-results">
-                <div class="wrap">
-                    <h2 id="case-results"><?= e(t('pkcase.results.title')) ?></h2>
-                    <ul class="stats">
-                        <?php foreach ([1, 2, 3] as $n): ?>
-                            <li class="stat">
-                                <p class="stat__value"><?= e(t("pkcase.results.$n.v")) ?></p>
-                                <p class="stat__text"><?= e(t("pkcase.results.$n.t")) ?></p>
-                            </li>
-                        <?php endforeach; ?>
-                        <?php // Lighthouse vorher → nachher liefert der Inhaber (live erscheint die Kennzahl erst mit Wert) ?>
-                        <?php if ($lighthouse = todo('Lighthouse vorher → nachher, Desktop und Mobile')): ?>
-                            <li class="stat">
-                                <p class="stat__value"><?= e(t('pkcase.results.4.v')) ?></p>
-                                <p class="stat__text"><?= $lighthouse ?></p>
-                            </li>
-                        <?php endif; ?>
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Ausgangslage + Vorgehen -->
-            <section class="section">
-                <div class="wrap case-split">
-                    <div class="case-split__intro">
-                        <h2><?= e(t('pkcase.start.title')) ?></h2>
-                        <p><?= e(t('pkcase.start.1')) ?><?= todo('Was war das Problem der alten Seite? Zwei, drei Sätze, z. B. schwer pflegbar, langsam auf dem Smartphone, nur einsprachig', ' ') ?></p>
-                    </div>
-                    <div class="case-split__main">
-                        <h2><?= e(t('pkcase.steps.title')) ?></h2>
-                        <ol class="steps">
-                            <?php foreach ([1, 2, 3, 4] as $n): ?>
-                                <li class="step">
-                                    <span class="step__num" aria-hidden="true">0<?= $n ?></span>
-                                    <div>
-                                        <h3><?= e(t("pkcase.steps.$n.t")) ?></h3>
-                                        <p><?= e(t("pkcase.steps.$n.x")) ?></p>
-                                    </div>
-                                </li>
-                            <?php endforeach; ?>
-                        </ol>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Vorher-Vergleich -->
-            <section class="section section--surface" aria-label="<?= e(t('pkcase.before.caption')) ?>">
-                <div class="wrap">
-                    <figure class="case-figure case-figure--narrow">
-                        <picture>
-                            <source type="image/webp" media="(max-width: 700px)" srcset="<?= $img ?>screen-startseite-park-klinik-birkenwerder_xs.webp">
-                            <source type="image/webp" srcset="<?= $img ?>screen-startseite-park-klinik-birkenwerder.webp">
-                            <img src="<?= $img ?>screen-startseite-park-klinik-birkenwerder.jpg" alt="<?= e(t('pkcase.before.alt')) ?>"
-                                width="1200" height="800" loading="lazy" decoding="async">
-                        </picture>
-                        <figcaption><?= e(t('pkcase.before.caption')) ?></figcaption>
-                    </figure>
-                    <?php if ($open = todo('Noch offen: Handy-Screenshot der neuen Startseite und Auszug aus dem Living Styleguide')): ?>
-                        <p class="case-note"><?= $open ?></p>
-                    <?php endif; ?>
-                </div>
-            </section>
-
-            <?php // Kundenstimme: live erst mit echtem Zitat der Klinik – nichts erfinden, bis der Inhaber es liefert ?>
-            <?php if (is_dev()): ?>
-                <section class="quote case-quote" aria-label="<?= e(t('home.quote.label')) ?>">
-                    <figure class="wrap">
-                        <blockquote><p>„<?= todo('Zitat aus der Klinik – zwei Sätze zur Zusammenarbeit oder zum Ergebnis.') ?>“</p></blockquote>
-                        <figcaption><?= todo('Name, Funktion') ?> · <?= e(t('project.pk.name')) ?></figcaption>
-                    </figure>
-                </section>
-            <?php endif; ?>
-
-            <!-- Tech-Stack + weiter -->
-            <footer class="section case-foot">
-                <div class="wrap case-foot__inner">
-                    <div class="case-foot__stack">
-                        <h2 class="case-foot__label"><?= e(t('pkcase.stack')) ?></h2>
-                        <ul class="chip-list">
-                            <?php foreach ($stack as $item): ?><li class="chip"><?= e($item) ?></li><?php endforeach; ?>
-                        </ul>
-                    </div>
-                    <div class="case-foot__next">
-                        <a class="case-foot__next-link" href="<?= e(url('/projekte/strato/')) ?>"><?= e(t('pkcase.next')) ?> <span aria-hidden="true">→</span></a>
-                        <a class="more-link" href="<?= e(url('/projekte/')) ?>"><?= e(t('pkcase.all')) ?></a>
-                    </div>
-                </div>
-            </footer>
 
         </article>
     </main>

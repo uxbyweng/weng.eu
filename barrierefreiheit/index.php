@@ -10,7 +10,10 @@ $meta = [
 $cspNonce = $_SERVER['CSP_NONCE'] ?? null;
 echo render_head($meta, $cspNonce);
 
-$mail = '<a href="mailto:' . e(SITE_EMAIL) . '">' . e(SITE_EMAIL) . '</a>';
+$replace = [
+    '{mail}' => '<a href="mailto:' . e(SITE_EMAIL) . '">' . e(SITE_EMAIL) . '</a>',
+    '{form}' => '<a href="' . e(url('/kontakt/')) . '">' . e(t('a11y.feedback.form')) . '</a>',
+];
 ?>
 
 <body>
@@ -30,30 +33,28 @@ $mail = '<a href="mailto:' . e(SITE_EMAIL) . '">' . e(SITE_EMAIL) . '</a>';
             <div class="wrap">
                 <div class="legal">
                     <h2><?= e(t('a11y.status.title')) ?></h2>
-                    <p><?= e(t('a11y.status.text')) ?><?= todo('Aussage zur Vereinbarkeit (z. B. „weitgehend vereinbar“) nach eigener Prüfung bestätigen', ' ') ?></p>
+                    <p><?= e(t('a11y.status.1')) ?></p>
 
                     <h2><?= e(t('a11y.done.title')) ?></h2>
                     <ul>
-                        <?php foreach ([1, 2, 3, 4, 5, 6] as $n): ?>
-                            <li><?= e(t("a11y.done.$n")) ?><?= $n === 3 ? todo('Kontraste im dunklen Modus prüfen', ' ') : '' ?></li>
+                        <?php foreach ([1, 2, 3, 4, 5] as $n): ?>
+                            <li><?= e(t("a11y.done.$n")) ?></li>
                         <?php endforeach; ?>
                     </ul>
 
-                    <?php // Einschränkungen und Prüfmethode liefert der Inhaber nach seiner Prüfung (live erscheinen die Abschnitte erst mit Inhalt) ?>
-                    <?php if ($limits = todo('Bekannte Einschränkungen, z. B. ältere Projekt-Screenshots ohne ausführliche Beschreibung')): ?>
-                        <h2><?= e(t('a11y.limits.title')) ?></h2>
-                        <p><?= $limits ?></p>
-                    <?php endif; ?>
-
-                    <?php if ($method = todo('Werkzeuge und Datum, z. B. axe DevTools, WAVE, Lighthouse, Tastatur, Screenreader NVDA/VoiceOver')): ?>
-                        <h2><?= e(t('a11y.method.title')) ?></h2>
-                        <p><?= $method ?></p>
-                    <?php endif; ?>
+                    <h2><?= e(t('a11y.unchecked.title')) ?></h2>
+                    <ul>
+                        <?php foreach ([1, 2, 3] as $n): ?>
+                            <li><?= e(t("a11y.unchecked.$n")) ?></li>
+                        <?php endforeach; ?>
+                    </ul>
 
                     <h2><?= e(t('a11y.feedback.title')) ?></h2>
-                    <p><?= str_replace('{link}', $mail, e(t('a11y.feedback.text'))) ?></p>
+                    <p><?= strtr(e(t('a11y.feedback.text')), $replace) ?></p>
 
-                    <?php if ($date = todo('Datum der Erklärung')): ?><p class="legal__date"><?= e(t('a11y.date')) ?> <?= $date ?></p><?php endif; ?>
+                    <p><?= e(t('a11y.voluntary')) ?></p>
+                    <?php // Festes Datum: bei jeder inhaltlichen Änderung der Erklärung aktualisieren ?>
+                    <p class="legal__date"><?= e(t('a11y.date')) ?> <time datetime="2026-11"><?= e(t('a11y.date.value')) ?></time></p>
                 </div>
             </div>
         </section>

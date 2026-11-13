@@ -3,24 +3,19 @@
 return [
   'home.hero.name'      => 'Karsten Weng',
   'home.hero.role'      => 'Web Designer & Frontend Developer in Berlin',
-  'home.hero.lead'      => 'I design websites and build them myself: accessible, fast and maintainable.',
-  'home.hero.sub'       => 'Over 20 years of practice, two decades of it at STRATO. Self-employed full time since 2025.',
+  'home.hero.lead'      => 'Design and development from a single source: accessible, fast and maintainable websites. For over 20 years, for clients like Park-Klinik Birkenwerder.',
   'home.hero.cta_projects' => 'View projects',
   'home.hero.cta_contact'  => 'Get in touch',
   'home.hero.portrait_alt' => 'Portrait of Karsten Weng',
-  'home.hero.badge_since'  => 'since 2017',
-  'home.hero.badge_for'    => 'for Park-Klinik Birkenwerder',
 
   'home.projects.eyebrow' => 'Projects',
-  'home.projects.title'   => 'Selected work',
+  'home.projects.title'   => 'Current projects',
   'home.projects.all'     => 'View all projects',
-  'project.read'          => 'Read the case study',
+  'project.read'          => 'View the project',
 
   'project.pk.name'   => 'Park-Klinik Birkenwerder',
   'project.pk.meta'   => 'Client since 2017 · Concept, design, development, maintenance',
   'project.pk.text'   => 'Relaunch of the clinic’s bilingual website (DE/EN) – from UX concept to implementation in PHP, SQLite and vanilla JavaScript.',
-  'project.pk.r1'     => 'Core Web Vitals passed on mobile for all tracked URLs',
-  'project.pk.r2'     => 'Around 30 reusable components with a living style guide',
   'project.pk.alt'    => 'Home page of Park-Klinik Birkenwerder',
 
   'project.lisa.name' => 'Prof. Dr. Lisa Y. Haller',
@@ -28,25 +23,12 @@ return [
   'project.lisa.role' => 'Design & development',
   'project.lisa.alt'  => 'Home page of the website of Prof. Dr. Lisa Y. Haller',
   'project.lisa.year' => '2024',
-  'project.lisa.text' => 'Modernisation of the existing WordPress website (Elementor). Starting point: a PageSpeed score of around 60 % on both desktop and mobile.',
-  'project.lisa.r1'   => 'PageSpeed performance: from around 60 % to 100 % on desktop and 93 % on mobile',
-  'project.lisa.r2'   => 'Lighthouse accessibility and SEO: 100 out of 100 (desktop and mobile)',
+  'project.lisa.text' => 'Modernisation of the WordPress website. PageSpeed before: around 60; now 100 (desktop) and 93 (mobile).',
 
   'project.bsv.name'  => 'Berlin Street View',
-  'project.bsv.meta'  => 'Personal project · 2026 · Full stack',
-  'project.bsv.text'  => 'Full-stack app with a map, login and its own database – final project of my training at neue fische.',
   'project.bsv.alt'   => 'Berlin Street View: map with street view',
 
-  'home.exp.eyebrow'  => 'Experience',
-  'home.exp.title'    => 'Experience you can verify',
-  'home.exp.1.value'  => '20 years',
-  'home.exp.1.text'   => 'at STRATO (IONOS Group), employed 2005–2025 – most recently senior in the shop platform team.',
-  'home.exp.2.value'  => 'Design lead',
-  'home.exp.2.text'   => 'for the switch to responsive web design: all mobile designs, focused on the checkout process.',
-  'home.exp.3.value'  => 'approx. 90 %',
-  'home.exp.3.text'   => 'accessibility score, reached systematically in the shop team.',
-  'home.exp.4.value'  => 'since 2017',
-  'home.exp.4.text'   => 'I have been looking after Park-Klinik Birkenwerder – from concept to relaunch.',
+  'home.clients.label' => 'Clients',
 
   'home.services.eyebrow' => 'Services',
   'home.services.title'   => 'From the first sketch to going live',
@@ -63,11 +45,13 @@ return [
 
   'home.about.eyebrow' => 'About me',
   'home.about.title'   => 'A communication designer who writes his own code',
-  'home.about.text'    => 'I studied communication design and have worked on the web for over 20 years – two decades of it at STRATO. I always looked after my own clients on the side, and since 2025 full time. Right now I am deliberately broadening my profile towards backend and AI-assisted development.',
+  'home.about.text'    => 'I studied communication design and have been building websites for over 20 years: two decades at STRATO, and always for my own clients on the side. Since 2025 I do this full time. Right now I am deepening my backend skills so that I can build projects all the way down to the database myself.',
   'home.about.more'    => 'More about me',
   'home.about.photo_alt' => 'Karsten Weng pointing at a screen with code at a desk while a colleague looks on',
 
   'home.quote.label'   => 'Client testimonial',
-  // PLATZHALTER-Zitat (erfunden, nur lokal sichtbar) – durch das echte Zitat von Prof. Haller ersetzen, sobald sie es freigibt.
-  'home.quote.text'    => 'Karsten Weng has made my website not only more attractive but also much faster and easier to understand. Working with him was straightforward and reliable.',
+  'home.quote.text'    => 'I’m absolutely thrilled with your work.',
+  'home.quote.name'    => 'Dr. med. Ursula Tanzella',
+  'home.quote.role'    => 'Chief physician, Park-Klinik Birkenwerder (translated from German)',
+  'home.quote.date'    => '23 October 2026',
 ];

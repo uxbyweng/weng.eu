@@ -5,10 +5,10 @@ declare(strict_types=1);
  * render_text_blocks($prefix, $replace, $after)
  * Gibt fortlaufende Texte aus den Sprachdateien als <p> bzw. <ul> aus: $prefix.1, $prefix.2, …
  * - Ein Eintrag, der mit "- " beginnt, ist ein Listenpunkt; aufeinanderfolgende Listenpunkte bilden eine Liste.
- * - Zeilenumbrüche innerhalb eines Eintrags werden zu <br> (Leichte Sprache: ein Satz pro Zeile).
+ * - Zeilenumbrüche innerhalb eines Eintrags werden zu <br> (Einfache Sprache: ein Satz pro Zeile).
  * - $replace: Platzhalter => bereits sicheres HTML (z. B. ['{email}' => '<a href="mailto:…">…</a>']).
  * - $after($i): optional, liefert HTML, das direkt nach Eintrag $i eingefügt wird (z. B. eine Anschrift).
- * Genutzt von der Datenschutzerklärung und der Seite in Leichter Sprache.
+ * Genutzt von der Datenschutzerklärung und der Seite in Einfacher Sprache.
  */
 function render_text_blocks(string $prefix, array $replace = [], ?callable $after = null): string {
   $html = '';

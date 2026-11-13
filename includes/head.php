@@ -10,7 +10,7 @@
 function render_head(array $meta = [], ?string $cspNonce = null): string
 {
     $lang = current_lang();
-    $theme = ($_COOKIE['theme'] ?? '') === 'dark' ? 'dark' : 'light';
+    $theme = 'light'; // Das Inline-Skript unten setzt den Modus aus localStorage bzw. der Systemeinstellung (es gibt kein Theme-Cookie)
     $nonce = $cspNonce ? ' nonce="' . e($cspNonce) . '"' : '';
 
     // schema.org: Startseite = Person, Unterseiten = BreadcrumbList

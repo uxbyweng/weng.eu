@@ -28,3 +28,13 @@ test/
 README.md
 yolo.txt
 _deploy/
+
+# Unbenutztes Material: bleibt im Repo, gehört aber nicht auf den Server
+assets/img/home/weng_profile_home*
+assets/img/projects/park-klinik/*_2026.*
+assets/img/projects/park-klinik/*(1).webp
+assets/img/projects/die-holzbaeser/
+assets/img/projects/pitayo/
+assets/img/projects/toma/*.mp4
+assets/img/projects/toma/*.swf
+assets/swf/

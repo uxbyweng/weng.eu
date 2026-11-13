@@ -1102,7 +1102,8 @@ article:hover .image-wrapper img {
     transition: transform 0.9s ease;
 }
 
-article:hover svg {
+/* nur alte Seiten (<main class="page-wrapper">): im neuen Design färbte die Regel jedes SVG in jedem <article> beim Hover rot */
+.page-wrapper article:hover svg {
     color: var(--wng-accent);
 }
 

@@ -22,69 +22,73 @@ $picture = function (string $base, bool $hasXs, string $alt, int $w, int $h, boo
         . ($lazy ? ' loading="lazy"' : '') . ' decoding="async"></picture>';
 };
 
-// Zeile unter dem Bild: Kategorie-Badge + Meta (Jahr, Rolle). $metaHtml ist bereits escaped.
-$metaLine = fn(string $cat, string $metaHtml): string =>
-    '<p class="project-meta project-meta--badge"><span class="badge badge--' . $cat . '">' . e(t("projects.badge.$cat")) . '</span><span>' . $metaHtml . '</span></p>';
-
 $link = fn(string $href, string $labelKey, string $nameKey): string =>
     '<a class="project-link" href="' . e(url($href)) . '">' . e(t($labelKey)) .
-    '<span class="visually-hidden">: ' . e(t($nameKey)) . '</span> <span aria-hidden="true">→</span></a>';
+    '<span class="visually-hidden">: ' . e(t($nameKey)) . '</span> ' . chevron_icon() . '</a>';
 
-$chips = fn(array $items): string =>
-    '<ul class="chip-list">' . implode('', array_map(fn($c) => '<li class="chip">' . e($c) . '</li>', $items)) . '</ul>';
-
-$result = fn(string $html): string => '<p class="result">' . $html . '</p>';
-
-// Reihenfolge wie im Entwurf. cat = Filter-Kategorie (client | employed | own).
+// Reihenfolge: laufende Kunden zuerst (Park-Klinik seit 2017, Pangolin seit 2015), dann Haller, STRATO, eigenes Projekt.
 $projects = [
     [
-        'cat' => 'client',
         'img' => $picture('park-klinik/screen-startseite-redesign-park-klinik-birkenwerder', true, t('project.pk.alt'), 1200, 800, false),
         'meta' => e(t('projects.pk.meta')),
         'name' => t('project.pk.name'),
         'text' => e(t('projects.pk.text')),
-        'extra' => $result(e(t('project.pk.r1'))),
+        'href' => '/projekte/park-klinik/',
         'link' => $link('/projekte/park-klinik/', 'project.read', 'project.pk.name'),
     ],
     [
-        'cat' => 'employed',
-        'img' => $picture('strato/screen-startseite-strato-april-2024', true, t('projects.strato.alt'), 1200, 800, false),
-        'meta' => e(t('projects.strato.meta')),
-        'name' => t('projects.strato.name'),
-        'text' => e(t('projects.strato.text')),
-        'extra' => $result(e(t('projects.strato.r1'))),
-        'link' => $link('/projekte/strato/', 'project.read', 'projects.strato.name'),
+        'img' => $picture('pangolin-doxx/screen-startseite-pangolin-doxx', true, t('projects.pd.alt'), 1200, 800, false),
+        'meta' => e(t('projects.pd.meta')),
+        'name' => t('projects.pd.name'),
+        'text' => e(t('projects.pd.text')),
+        'href' => '/projekte/pangolin-doxx/',
+        'link' => $link('/projekte/pangolin-doxx/', 'projects.view', 'projects.pd.name'),
     ],
     [
-        'cat' => 'client',
         'img' => $picture('lisa/screen-startseite-lisa-yashodhara-haller', true, t('project.lisa.alt'), 1200, 800),
         'meta' => e(t('project.lisa.year')) . ' · ' . e(t('project.lisa.role')),
         'name' => t('project.lisa.name'),
         'text' => e(t('project.lisa.text')),
-        'extra' => $result(e(t('project.lisa.r1'))),
+        'href' => '/projekte/lisa/',
         'link' => $link('/projekte/lisa/', 'project.read', 'project.lisa.name'),
     ],
     [
-        'cat' => 'own',
+        'img' => $picture('strato/screen-startseite-strato-april-2024', true, t('projects.strato.alt'), 1200, 800),
+        'meta' => e(t('projects.strato.meta')),
+        'name' => t('projects.strato.name'),
+        'text' => e(t('projects.strato.text')),
+        'href' => '/projekte/strato/',
+        'link' => $link('/projekte/strato/', 'project.read', 'projects.strato.name'),
+    ],
+    [
         'img' => $picture('berlin-street-view/teaser-berlin-street-view', false, t('project.bsv.alt'), 600, 400),
         'meta' => e(t('projects.bsv.meta')),
         'name' => t('project.bsv.name'),
         'text' => e(t('projects.bsv.text')),
-        'extra' => $chips(['Next.js', 'TypeScript', 'MongoDB', 'OAuth', 'MapLibre']),
+        'href' => '/projekte/berlin-street-view/',
         'link' => $link('/projekte/berlin-street-view/', 'projects.view', 'project.bsv.name'),
     ],
+];
+
+// Archiv: ältere Arbeiten
+$archive = [
     [
-        'cat' => 'client',
-        'img' => $picture('pangolin-doxx/screen-startseite-pangolin-doxx', true, t('projects.pd.alt'), 1200, 800),
-        'meta' => e(t('projects.pd.meta')),
-        'name' => t('projects.pd.name'),
-        'text' => e(t('projects.pd.text')),
-        // Ergebnis liefert der Inhaber (live bleibt die Zeile leer, siehe todo())
-        'extra' => ($todo = todo('Ergebnis, z. B. Lighthouse oder Laufzeit der Betreuung')) ? $result($todo) : '',
-        'link' => $link('/projekte/pangolin-doxx/', 'projects.view', 'projects.pd.name'),
+        'img' => $picture('circus-schatzinsel/teaser-campzeitung-2018', false, t('projects.circus.alt'), 600, 400),
+        'href' => '/projekte/circus-schatzinsel/',
+        'meta' => e(t('projects.circus.meta')),
+        'name' => t('projects.circus.name'),
+        'text' => e(t('projects.circus.text')),
+        'link' => $link('/projekte/circus-schatzinsel/', 'projects.view', 'projects.circus.name'),
+    ],
+    [
+        'img' => $picture('toma/screen-website-toma-multivision-2004', true, t('projects.toma.alt'), 1200, 800),
+        'href' => '/projekte/toma-multivision/',
+        'meta' => e(t('projects.toma.meta')),
+        'name' => t('projects.toma.name'),
+        'text' => e(t('projects.toma.text')),
+        'link' => $link('/projekte/toma-multivision/', 'projects.view', 'projects.toma.name'),
     ],
 ];
-$total = count($projects);
 ?>
 
 <body>
@@ -98,15 +102,6 @@ $total = count($projects);
                 <p class="eyebrow"><?= e(t('projects.eyebrow')) ?></p>
                 <h1 id="projects-title"><?= e(t('projects.title')) ?></h1>
                 <p class="lead"><?= e(t('projects.lead')) ?></p>
-
-                <?php /* Filter nur mit JS (project-filter.ts blendet ihn ein). Ohne JS sind alle Projekte sichtbar. */ ?>
-                <div class="filter" role="group" aria-label="<?= e(t('projects.filter.label')) ?>" data-project-filter hidden>
-                    <?php foreach (['all', 'client', 'employed', 'own'] as $i => $key): ?>
-                        <button class="filter__button" type="button" data-filter="<?= $key ?>" aria-pressed="<?= $i === 0 ? 'true' : 'false' ?>"><?= e(t("projects.filter.$key")) ?></button>
-                    <?php endforeach; ?>
-                    <p class="visually-hidden" role="status" data-filter-status
-                        data-template="<?= e(t('projects.filter.status')) ?>" data-total="<?= $total ?>"></p>
-                </div>
             </div>
         </section>
 
@@ -114,24 +109,34 @@ $total = count($projects);
             <div class="wrap">
                 <div class="grid project-grid project-grid--page">
                     <?php foreach ($projects as $p): ?>
-                        <article class="project-card" data-category="<?= $p['cat'] ?>">
-                            <?= $p['img'] ?>
-                            <?= $metaLine($p['cat'], $p['meta']) ?>
+                        <article class="project-card">
+                            <a class="project-media-link" href="<?= e(url($p['href'])) ?>" tabindex="-1" aria-hidden="true"><?= $p['img'] ?></a>
+                            <p class="project-meta"><?= $p['meta'] ?></p>
                             <h2><?= e($p['name']) ?></h2>
                             <p><?= $p['text'] ?></p>
-                            <?= $p['extra'] ?>
                             <?= $p['link'] ?>
                         </article>
                     <?php endforeach; ?>
                 </div>
 
-                <div class="archive">
-                    <h2 class="archive__title"><?= e(t('projects.archive.title')) ?></h2>
-                    <a class="archive__row" href="<?= e(url('/projekte/circus-schatzinsel/')) ?>">
-                        <span class="archive__name"><?= e(t('projects.archive.name')) ?></span>
-                        <span class="archive__meta"><?= e(t('projects.archive.meta')) ?></span>
-                    </a>
-                </div>
+                <?php // Archiv: eingeklappt, der Inhalt bleibt bis zum Aufklappen verborgen ?>
+                <details class="archive">
+                    <summary class="archive__summary">
+                        <h2 class="archive__title"><?= e(t('projects.archive.title')) ?></h2>
+                        <svg class="archive__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+                    </summary>
+                    <div class="grid project-grid project-grid--page">
+                        <?php foreach ($archive as $p): ?>
+                            <article class="project-card">
+                                <a class="project-media-link" href="<?= e(url($p['href'])) ?>" tabindex="-1" aria-hidden="true"><?= $p['img'] ?></a>
+                                <p class="project-meta"><?= $p['meta'] ?></p>
+                                <h3><?= e($p['name']) ?></h3>
+                                <p><?= $p['text'] ?></p>
+                                <?= $p['link'] ?>
+                            </article>
+                        <?php endforeach; ?>
+                    </div>
+                </details>
             </div>
         </section>
     </main>

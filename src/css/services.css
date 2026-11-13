@@ -1,4 +1,4 @@
-/* Leistungen: drei Schwerpunkte mit Trennlinien, Ablauf in vier Karten */
+/* Leistungen: drei Schwerpunkte mit Trennlinien dazwischen (keine nach dem letzten), Ablauf in vier Karten */
 
 .page-head--services h1 {
     max-width: 14em;
@@ -7,10 +7,6 @@
 /* ---- Schwerpunkte ---- */
 .offers {
     padding-bottom: var(--section-space);
-}
-
-.offers__list {
-    border-bottom: 1px solid var(--color-line);
 }
 
 .offer {

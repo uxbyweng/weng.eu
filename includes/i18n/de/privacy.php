@@ -1,7 +1,7 @@
 <?php
 // Datenschutzerklärung (/datenschutz/). Entwurf, abgeleitet aus der tatsächlichen Technik der Website (Stand Nov. 2026):
 // Session-Cookie nur auf der Kontaktseite, Theme im localStorage, Sprache aus der URL, keine CDN-/Tracking-Dienste,
-// Hosting bei STRATO, Kontaktformular per E-Mail. TODO Inhaber: anwaltlich prüfen lassen.
+// Hosting bei STRATO, Kontaktformular per E-Mail (ohne Bestätigungsmail; E-Mails werden an ein Gmail-Postfach weitergeleitet), keine eingebundenen Fremdinhalte (kein iframe). TODO Inhaber: anwaltlich prüfen lassen.
 //
 // Aufbau: Pro Abschnitt privacy.<id>.title und fortlaufend privacy.<id>.1, .2, … Beginnt ein Eintrag mit "- ", ist er ein
 // Listenpunkt (aufeinanderfolgende Listenpunkte bilden eine Liste). Platzhalter: {email}, {imprint}, {berlin}, {list}.
@@ -12,6 +12,7 @@ return [
   // Hinweis zur maßgeblichen Fassung: nur in der englischen Datei gefüllt, in der deutschen leer (wird dann nicht angezeigt)
   'privacy.notice'     => '',
   'privacy.date'       => 'Stand:',
+  'privacy.date.value' => '13.11.2026',
 
   'privacy.link.imprint' => 'Impressum',
   'privacy.link.berlin'  => 'Berliner Beauftragte für Datenschutz und Informationsfreiheit',
@@ -35,6 +36,7 @@ return [
   'privacy.hosting.6' => '- Referrer-URL (zuvor besuchte Seite), sofern Ihr Browser sie übermittelt',
   'privacy.hosting.7' => '- Angaben zu Browser und Betriebssystem (User-Agent)',
   'privacy.hosting.8' => 'Zweck ist die Auslieferung der Website sowie die Gewährleistung von Sicherheit und Stabilität, etwa zur Abwehr von Angriffen. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Mein berechtigtes Interesse liegt in einem sicheren und fehlerfreien Betrieb der Website.',
+  'privacy.hosting.9' => 'Die Erhebung dieser Daten erfolgt auf dem Server meines Hosting-Anbieters STRATO GmbH, Otto-Ostrowski-Straße 7, 10249 Berlin. STRATO speichert die IP-Adressen der Besucher aus Sicherheitsgründen, zur Erkennung und Abwehr von Angriffen, höchstens 7 Tage. Mir selbst stehen im Kundenbereich des Hosters nur anonymisierte Access-Logs der letzten 6 Wochen zur Verfügung, die keinen Rückschluss auf konkrete Personen erlauben. Eine Zusammenführung dieser Daten mit anderen Datenquellen, die einen Personenbezug herstellen würden, erfolgt nicht.',
 
   'privacy.cookies.title' => 'Cookies und lokale Speicherung',
   'privacy.cookies.1' => 'Ich setze keine Cookies zu Analyse- oder Werbezwecken. Gespeichert werden nur technisch erforderliche Daten, für die keine Einwilligung nötig ist (§ 25 Abs. 2 Nr. 2 TDDDG):',
@@ -43,21 +45,21 @@ return [
   'privacy.cookies.4' => 'Die Sprache (Deutsch oder Englisch) ergibt sich aus der Adresse der Seite und wird nicht gespeichert. Rechtsgrundlage für die genannten Vorgänge ist Art. 6 Abs. 1 lit. f DSGVO.',
 
   'privacy.contact.title' => 'Kontaktformular und E-Mail',
-  'privacy.contact.1' => 'Wenn Sie mir über das Kontaktformular oder per E-Mail schreiben, verarbeite ich Ihren Namen, Ihre E-Mail-Adresse und Ihre Nachricht, um Ihre Anfrage zu beantworten. Das Formular wird per E-Mail an mich übermittelt, und Sie erhalten automatisch eine Bestätigung an die angegebene Adresse. Name, E-Mail-Adresse und Nachricht sind Pflichtangaben, damit ich Ihnen antworten kann.',
-  'privacy.contact.2' => 'Als Schutz vor Spam enthält das Formular ein unsichtbares Zusatzfeld (Honeypot) und ein Sicherheits-Token (siehe Session-Cookie oben). Daraus werden keine Profile gebildet.',
+  'privacy.contact.1' => 'Wenn Sie mir über das Kontaktformular oder per E-Mail schreiben, verarbeite ich Ihren Namen, Ihre E-Mail-Adresse und Ihre Nachricht, um Ihre Anfrage zu beantworten. Das Formular wird per E-Mail an mich übermittelt. Name, E-Mail-Adresse und Nachricht sind Pflichtangaben, damit ich Ihnen antworten kann.',
+  'privacy.contact.2' => 'Als Schutz vor Spam enthält das Formular ein unsichtbares Zusatzfeld (Honeypot) und ein Sicherheits-Token (siehe Session-Cookie oben). Daraus werden keine Profile gebildet. Außerdem begrenze ich die Zahl der Anfragen pro IP-Adresse: Dafür speichert der Server höchstens zwei Stunden lang nur einen Hash der IP-Adresse mit einem Zähler, keine Klartext-IP.',
   'privacy.contact.3' => 'Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO, soweit Ihre Anfrage auf einen Vertrag oder vorvertragliche Maßnahmen gerichtet ist, andernfalls Art. 6 Abs. 1 lit. f DSGVO (mein berechtigtes Interesse, Anfragen zu beantworten).',
-  'privacy.contact.4' => 'Ich lösche Ihre Angaben, sobald die Anfrage abschließend bearbeitet ist und keine gesetzlichen Aufbewahrungspflichten entgegenstehen, etwa für Geschäftskorrespondenz. Eine Weitergabe an Dritte erfolgt nicht.',
+  'privacy.contact.4' => 'Ich lösche Ihre Angaben, sobald die Anfrage abschließend bearbeitet ist und keine gesetzlichen Aufbewahrungspflichten entgegenstehen, etwa für Geschäftskorrespondenz. Eine Weitergabe an Dritte erfolgt nicht, abgesehen von der Weiterleitung an mein Postfach (siehe Abschnitt „Empfänger, Drittländer und Speicherdauer“).',
 
-  'privacy.external.title' => 'Externe Links und eingebundene Inhalte',
+  'privacy.external.title' => 'Externe Links',
   'privacy.external.1' => 'Diese Website enthält Links zu anderen Websites, etwa zu LinkedIn, GitHub und zu Projekten meiner Kundinnen und Kunden. Erst wenn Sie einen Link anklicken, werden Daten wie Ihre IP-Adresse an den jeweiligen Betreiber übertragen. Für dessen Datenverarbeitung gilt die dortige Datenschutzerklärung.',
-  'privacy.external.2' => 'Auf der Projektseite „mur.art“ ist die Website mur-art.de per iframe eingebunden. Beim Aufruf dieser Seite wird Ihre IP-Adresse an den Server von mur-art.de übermittelt. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO (mein Interesse, das Projekt direkt vorzustellen).',
 
   'privacy.tls.title' => 'SSL/TLS-Verschlüsselung',
   'privacy.tls.1' => 'Diese Website verwendet SSL/TLS-Verschlüsselung, damit übertragene Daten nicht von Dritten gelesen werden können. Eine verschlüsselte Verbindung erkennen Sie an „https://“ in der Adresszeile und am Schloss-Symbol Ihres Browsers.',
 
   'privacy.recipients.title' => 'Empfänger, Drittländer und Speicherdauer',
-  'privacy.recipients.1' => 'Empfänger Ihrer Daten ist ausschließlich der Hosting-Anbieter (STRATO GmbH) als Auftragsverarbeiter. Ich übermittle keine personenbezogenen Daten in Länder außerhalb der Europäischen Union bzw. des Europäischen Wirtschaftsraums.',
-  'privacy.recipients.2' => 'Server-Log-Dateien werden nach der beim Hosting-Anbieter üblichen Frist gelöscht, Kontaktanfragen wie oben beschrieben. Der Session-Cookie endet mit dem Schließen des Browsers.',
+  'privacy.recipients.1' => 'Empfänger Ihrer Daten ist der Hosting-Anbieter (STRATO GmbH) als Auftragsverarbeiter. Auch die E-Mail-Adresse {email} wird bei STRATO betrieben. E-Mails an diese Adresse, auch Nachrichten aus dem Kontaktformular, leite ich an mein persönliches Postfach bei Google (Gmail) weiter. Google ist damit für diese E-Mails ein weiterer Empfänger.',
+  'privacy.recipients.2' => 'Dabei können Daten in die USA übermittelt werden. Grundlage ist der Angemessenheitsbeschluss der EU-Kommission zum EU-U.S. Data Privacy Framework. Darüber hinaus übermittle ich keine personenbezogenen Daten in Länder außerhalb der Europäischen Union bzw. des Europäischen Wirtschaftsraums.',
+  'privacy.recipients.3' => 'Die IP-Adressen in den Server-Log-Dateien werden nach höchstens 7 Tagen gelöscht (siehe Abschnitt Hosting), Kontaktanfragen wie oben beschrieben. Der Session-Cookie endet mit dem Schließen des Browsers.',
 
   'privacy.rights.title' => 'Ihre Rechte',
   'privacy.rights.1' => 'Sie haben mir gegenüber folgende Rechte in Bezug auf Ihre personenbezogenen Daten:',

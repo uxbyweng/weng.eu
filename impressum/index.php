@@ -4,23 +4,23 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/helpers.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/head.php';
 
 $meta = [
-    'title' => t('imprint.meta.title'),
-    'desc'  => t('imprint.meta.desc'),
+    'title'  => t('imprint.meta.title'),
+    'desc'   => t('imprint.meta.desc'),
+    'robots' => 'noindex, follow', // Impressum soll nicht in Suchergebnissen erscheinen
 ];
 $cspNonce = $_SERVER['CSP_NONCE'] ?? null;
 echo render_head($meta, $cspNonce);
 
 $mail = '<a href="mailto:' . e(SITE_EMAIL) . '">' . e(SITE_EMAIL) . '</a>';
-$logoLink = '<a href="https://teenck.design/" rel="noopener">Till Teenck</a>';
+$logoLink = '<a href="https://teenck.design/" target="_blank" rel="noopener noreferrer">Till Teenck' . new_window_hint() . '</a>';
 
-// Anschrift: Straße und Hausnummer liefert der Inhaber (live entfällt die Zeile, siehe todo())
-$address = array_filter([
+$address = [
     e(t('imprint.name')),
     e(t('imprint.trade')),
-    todo('Straße und Hausnummer'),
+    e(t('imprint.street')),
     e(t('imprint.city')),
     e(t('imprint.country')),
-]);
+];
 ?>
 
 <body>
@@ -42,7 +42,7 @@ $address = array_filter([
                     <p><?= implode('<br>', $address) ?></p>
 
                     <h2><?= e(t('imprint.contact.title')) ?></h2>
-                    <p><?= e(t('imprint.contact.email')) ?> <?= $mail ?><?php if ($phone = todo('Telefonnummer (optional)')): ?><br><?= e(t('imprint.contact.phone')) ?> <?= $phone ?><?php endif; ?></p>
+                    <p><?= e(t('imprint.contact.email')) ?> <?= $mail ?></p>
 
                     <h2><?= e(t('imprint.vat.title')) ?></h2>
                     <p><?= e(t('imprint.vat.text')) ?></p>
@@ -54,14 +54,15 @@ $address = array_filter([
                     <p><?= e(t('imprint.dispute.text')) ?></p>
 
                     <h2><?= e(t('imprint.copyright.title')) ?></h2>
-                    <?php if ($license = todo('Eine Variante wählen: „Alle Rechte vorbehalten“ oder CC BY-SA 4.0 – im Footer identisch')): ?><p><?= $license ?></p><?php endif; ?>
+                    <p><?= e(t('imprint.copyright.1')) ?></p>
+                    <p><?= e(t('imprint.copyright.2')) ?></p>
                     <p><?= str_replace('{link}', $logoLink, e(t('imprint.logo'))) ?></p>
 
                     <h2><?= e(t('imprint.hosting.title')) ?></h2>
                     <p><?= e(t('imprint.hosting.text')) ?></p>
 
-                    <?php // Festes Datum statt dynamischem "Stand": liefert der Inhaber nach der rechtlichen Prüfung ?>
-                    <?php if ($date = todo('Festes Datum der letzten Prüfung')): ?><p class="legal__date"><?= e(t('imprint.date')) ?> <?= $date ?></p><?php endif; ?>
+                    <?php // Festes Datum statt dynamischem "Stand": bei jeder inhaltlichen Änderung des Impressums aktualisieren ?>
+                    <p class="legal__date"><?= e(t('imprint.date')) ?> <time datetime="2026-11-13"><?= e(t('imprint.date.value')) ?></time></p>
                 </div>
             </div>
         </section>

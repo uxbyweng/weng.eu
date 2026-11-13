@@ -47,6 +47,11 @@ if (is_honeypot_triggered($_POST, $formId)) {
     out(['ok' => true, 'type' => 'success', 'message' => 'OK']);
 }
 
+/* Zweite Bot-Falle: unsichtbare Checkbox (Menschen sehen und füllen sie nicht) */
+if (isset($_POST['terms'])) {
+    out(['ok' => true, 'type' => 'success', 'message' => 'OK']);
+}
+
 /* Lock lösen – ab hier keine Session nötig */
 session_write_close();
 
@@ -54,7 +59,6 @@ session_write_close();
 $name       = trim($_POST['name']    ?? '');
 $email      = trim($_POST['email']   ?? '');
 $message    = trim($_POST['message'] ?? '');
-$terms      = isset($_POST['terms']); // unsichtbar, Bot-Falle
 
 /* === Validierung === */
 $fieldErrors = [];
@@ -75,6 +79,17 @@ if ($message === '') {
     }
 }
 
+/* Längenbegrenzung (gegen Missbrauch und sehr große Mails) */
+if (!isset($fieldErrors['name']) && mb_strlen($name) > 100) {
+    $fieldErrors['name'] = 'Please use 100 characters at most.';
+}
+if (!isset($fieldErrors['email']) && strlen($email) > 254) {
+    $fieldErrors['email'] = 'Please use 254 characters at most.';
+}
+if (!isset($fieldErrors['message']) && mb_strlen($message) > 5000) {
+    $fieldErrors['message'] = 'Please use 5000 characters at most.';
+}
+
 if ($fieldErrors) {
     out([
         'ok'          => false,
@@ -82,6 +97,11 @@ if ($fieldErrors) {
         'message'     => 'Please check your input.',
         'fieldErrors' => $fieldErrors
     ]);
+}
+
+/* Begrenzung pro IP-Adresse: höchstens 5 Anfragen pro Stunde */
+if (!rate_limit_ok('contact', 5, 3600)) {
+    out(['ok' => false, 'type' => 'danger', 'message' => 'Too many requests. Please try again later.']);
 }
 
 /* === Erfolgstext === */
@@ -106,16 +126,10 @@ $headers .= "Reply-To: {$email}\r\n";
 
 $sent = @mail($to, $subject, $body, $headers);
 
-/* Optionale Bestätigung an Absender */
-if ($sent && filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    $confirmSubj = 'Request received ' . date('Ymd\THi');
-    $confirmBody = "Hello {$name},\r\n\r\nThank you for your message. "
-        . "I will get back to you shortly.\r\n\r\nBest regards,\r\nKarsten Weng\r\n";
-    @mail($email, $confirmSubj, $confirmBody, "From: {$from}\r\nContent-Type: text/plain; charset=UTF-8\r\n");
-}
+/* Keine Bestätigungsmail an die eingegebene Adresse: sonst ließe sich über das Formular Mail an Dritte auslösen. Die Erfolgsmeldung erscheint auf der Seite. */
 
 if ($sent) {
     out(['ok' => true, 'type' => 'success', 'message' => $successHtml]);
 } else {
-    out(['ok' => false, 'type' => 'danger', 'message' => 'E-Mail konnte nicht gesendet werden. Bitte später erneut versuchen.']);
+    out(['ok' => false, 'type' => 'danger', 'message' => 'The email could not be sent. Please try again later.']);
 }

@@ -50,7 +50,7 @@ $services = [
                             </ul>
                             <p class="offer__examples"><?= e(t('services.example')) ?>
                                 <?php foreach ($service['examples'] as $k => [$href, $key]): ?>
-                                    <?= $k > 0 ? ' · ' : '' ?><a href="<?= e(url($href)) ?>"><?= e(t($key)) ?> <span aria-hidden="true">→</span></a>
+                                    <?= $k > 0 ? ' · ' : '' ?><a href="<?= e(url($href)) ?>"><?= e(t($key)) ?> <?= chevron_icon() ?></a>
                                 <?php endforeach; ?>
                             </p>
                         </div>

@@ -25,14 +25,33 @@
 
     &.button--secondary {
         background: transparent;
-        border-color: var(--color-petrol);
+        border-color: var(--color-heading);
         color: var(--color-heading);
 
         &:hover {
-            background: var(--color-petrol);
-            border-color: var(--color-petrol);
+            background: var(--color-heading);
+            border-color: var(--color-heading);
+            color: var(--color-bg);
+        }
+    }
+
+    /* Umriss in Akzentfarbe (rot), beim Überfahren gefüllt */
+    &.button--outline {
+        background: transparent;
+        border-color: var(--color-accent-link);
+        color: var(--color-accent-link);
+
+        &:hover {
+            background: var(--button-bg);
+            border-color: var(--button-bg);
             color: #fff;
         }
+    }
+
+    /* kleine Variante, z. B. im Kontakt-Band */
+    &.button--small {
+        padding: 8px 18px;
+        font-size: 15px;
     }
 
     &:disabled {
@@ -62,17 +81,17 @@
 
     /* "täglich" */
     &.chip--strong {
-        background: var(--color-petrol);
-        color: #fff;
+        background: var(--color-heading);
+        color: var(--color-bg);
     }
 
     /* "sicher" */
     &.chip--outline {
         background: transparent;
-        border: 1px solid var(--color-petrol);
+        border: 1px solid var(--color-heading);
     }
 
-    /* "lerne ich gerade" */
+    /* "lerne ich gerade" (nur noch in der Playground-Vorschau) */
     &.chip--learning {
         background: transparent;
         border: 1px dashed var(--color-muted);

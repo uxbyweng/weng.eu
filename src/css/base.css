@@ -47,6 +47,17 @@ h4 {
     text-wrap: balance;
 }
 
+/* Lange deutsche Komposita dürfen auf schmalen Viewports trennen, statt die Seite zu verbreitern */
+@media (max-width: 520px) {
+    h1,
+    h2,
+    h3,
+    h4 {
+        overflow-wrap: break-word;
+        hyphens: auto;
+    }
+}
+
 h1 {
     font-size: var(--text-h1);
     line-height: 1.04;
@@ -96,8 +107,8 @@ ol {
     left: 0;
     z-index: 1100;
     padding: 12px 20px;
-    background: var(--color-petrol);
-    color: #fff;
+    background: var(--color-heading);
+    color: var(--color-bg);
     font-weight: 600;
     transform: translateY(-120%);
 
@@ -117,4 +128,36 @@ ol {
     clip-path: inset(50%);
     white-space: nowrap;
     border: 0;
+}
+
+/* Icon „externer Link“ hinter dem Linktext (ext_icon() in includes/helpers.php) */
+.ext-icon {
+    display: inline-block;
+    flex: none;
+    width: 0.8em;
+    height: 0.8em;
+    margin-left: 0.1em;
+    fill: currentcolor;
+    vertical-align: -0.05em;
+}
+
+/* Chevron hinter Linktexten (chevron_icon() in includes/helpers.php): rückt beim Überfahren leicht nach rechts */
+.chevron-icon {
+    display: inline-block;
+    flex: none;
+    width: 0.85em;
+    height: 0.85em;
+    margin-left: 0.05em;
+    fill: none;
+    stroke: currentcolor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2.75;
+    vertical-align: -0.1em;
+    transition: transform 0.15s;
+}
+
+a:hover > .chevron-icon,
+a:focus-visible > .chevron-icon {
+    transform: translateX(3px);
 }

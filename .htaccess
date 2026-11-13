@@ -1,6 +1,26 @@
 # .htaccess (non-versioned assets)
 
+# Keine Verzeichnislisten (z. B. /assets/img/)
+Options -Indexes
+
 RewriteEngine On
+
+# === HTTPS UND HOSTNAME ===
+# Nur für weng.eu / www.weng.eu: http → https und www → ohne www (jeweils 301).
+# Hinter einem Proxy zählt der Header X-Forwarded-Proto, damit es keine Weiterleitungsschleife gibt.
+# Nach dem Deploy prüfen: curl -sI http://weng.eu/ und curl -sI https://www.weng.eu/ (je ein Sprung auf https://weng.eu/).
+RewriteCond %{HTTP_HOST} ^(www\.)?weng\.eu$ [NC]
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC]
+RewriteRule ^ https://weng.eu%{REQUEST_URI} [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^www\.weng\.eu$ [NC]
+RewriteRule ^ https://weng.eu%{REQUEST_URI} [R=301,L]
+
+# === ALTE ADRESSEN ===
+# Die frühere Kontakt-Altseite /about/ gibt es nicht mehr.
+RewriteRule ^en/about/?$ /en/kontakt/ [R=301,L]
+RewriteRule ^about/?$ /kontakt/ [R=301,L]
 
 # === SPRACHE ===
 # /en/… liefert dieselbe Datei wie die deutsche Seite (z. B. /en/kontakt/ → /kontakt/index.php).
@@ -9,6 +29,19 @@ RewriteRule ^en$ /en/ [R=301,L]
 RewriteCond %{DOCUMENT_ROOT}/$1 -d
 RewriteRule ^en/(.+[^/])$ /en/$1/ [R=301,L]
 RewriteRule ^en/(.*)$ /$1 [L]
+
+# === GESCHÜTZTE DATEIEN ===
+# Punkt-Dateien (.env, .git, .htaccess, .deployignore …) und typische Datei-Endungen für Konfiguration/Daten nie ausliefern.
+# Der Ordner includes/ ist zusätzlich über includes/.htaccess gesperrt.
+<FilesMatch "^\.|\.(env|sql|sqlite3?|db|bak|log|ini|lock|ya?ml)$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
 
 # === ERROR PAGES ===
 
@@ -58,17 +91,29 @@ SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png|webp|avif|ico|woff2?)$ no-gzip don
   Header always append Vary Accept-Encoding
 </IfModule>
 
+# === SICHERHEITS-HEADER ===
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+</IfModule>
+
 # === CACHING (ohne Expires-Module) ===
 
 <IfModule mod_headers.c>
-  # a) Statische Assets: 7 Tage, Revalidation möglich
-  <FilesMatch "\.(?:css|js|mjs|png|jpe?g|gif|webp|avif|svg|ico|woff2?|ttf|eot)$">
+  # a) CSS/JS (Build-Output mit Hash im Dateinamen) und Schriften: 1 Jahr
+  <FilesMatch "\.(?:css|js|mjs|woff2?|ttf|eot)$">
     Header always set Cache-Control "public, max-age=31536000, stale-while-revalidate=86400"
-    Header always set Expires "Thu, 31 Dec 2037 23:55:55 GMT" 
-    # Expires fix gesetzt, aber Cache-Control steuert die effektive TTL
   </FilesMatch>
 
-# b) HTML & PHP: nicht cachen
+  # b) Bilder (Dateinamen ohne Hash: ein ausgetauschtes Bild soll nach spätestens 30 Tagen sichtbar sein)
+  <FilesMatch "\.(?:png|jpe?g|gif|webp|avif|svg|ico)$">
+    Header always set Cache-Control "public, max-age=2592000, stale-while-revalidate=86400"
+  </FilesMatch>
+
+# c) HTML & PHP: nicht cachen
 
 <FilesMatch "\.(?:html?|php)$">
 Header always set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
@@ -76,13 +121,13 @@ Header always set Pragma "no-cache"
 Header always set Expires "0"
 </FilesMatch>
 
-# c) JSON/XML (falls genutzt): kurzlebig
+# d) JSON/XML (falls genutzt): kurzlebig
 
 <FilesMatch "\.(?:json|xml)$">
 Header always set Cache-Control "private, max-age=60, must-revalidate"
 </FilesMatch>
 
-# d) Vary für WebP bleibt (von deinem Block)
+# e) Vary für WebP bleibt (von deinem Block)
 
 Header append Vary Accept env=REDIRECT_accept
 </IfModule>

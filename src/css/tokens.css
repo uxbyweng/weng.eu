@@ -10,7 +10,6 @@
     --color-accent-hover: #b32400;
     --color-accent-dark: #9e1f00;
     --color-accent-link: #c42700; /* große Mail-Adresse im Kontakt-Band */
-    --color-petrol: #22373f;
 
     /* Primär-Button: weißer Text auf Rot, in beiden Themes gleich (Kontrast ≥ 4.5:1) */
     --button-bg: rgb(215 43 0);
@@ -24,10 +23,10 @@
 
     /* Flächen & Linien */
     --color-bg: #fff;
-    --color-surface: #f4f6f6;
-    --color-surface-2: #eef2f2;
-    --color-surface-3: #e4eded;
-    --color-warm: #fbf1ed; /* Kontakt-Band, Kategorie "Kundenprojekt" */
+    --color-surface: #f1f5f5; /* kühle Petrol-Tönung, hebt sich sichtbar vom weißen Grund ab */
+    --color-surface-2: #e8eeef;
+    --color-surface-3: #dde6e7;
+    --color-warm: #f4f2eb; /* warmes Stein-Grau (gelblich, nicht rosa): Kontakt-Band, Kategorie "Kundenprojekt" */
     --color-success-bg: #eef4f2;
     --color-success-line: #cfe0db;
     --color-line: #e3e7e7;
@@ -35,21 +34,23 @@
     --color-input-line: #b9c3c3;
     --color-dot: #d5dbdb;
 
-    /* Auf Petrol-Flächen (dunkle Bänder) */
-    --color-on-petrol-eyebrow: #a9cccc;
-    --color-on-petrol-text: #d5e3e3;
-    --color-on-petrol-strong: #eef3f3;
-    --color-on-petrol-line: rgb(255 255 255 / 0.22);
+    /* Dunkle Bänder (Erfahrung, Ergebnis, Weiterbildung): im hellen Theme die Überschriftenfarbe, im dunklen eine hellere Fläche */
+    --color-band: var(--color-heading);
+    --color-on-band-eyebrow: #b8c4c7;
+    --color-on-band-text: #d9e0e2;
+    --color-on-band-strong: #eef2f3;
+    --color-on-band-line: rgb(255 255 255 / 0.22);
 
     /* Fokus */
-    --color-focus: var(--color-petrol);
+    --color-focus: var(--color-heading);
     --focus-ring: 3px solid var(--color-focus);
 
     /* Typografie */
     --font-body: "Noto", system-ui, -apple-system, "Segoe UI", sans-serif;
     --font-heading: "Quicksand", "Noto", system-ui, sans-serif;
     --text-base: 17px;
-    --text-h1-home: clamp(48px, 7vw, 92px);
+    --text-h1-home: clamp(46px, 6.4vw, 84px);
+    --text-role: clamp(20px, 2vw, 26px); /* Rollenzeile unter dem Namen (Startseite) */
     --text-h1: clamp(40px, 5.4vw, 72px);
     --text-h1-case: clamp(36px, 4.6vw, 60px);
     --text-h2: clamp(32px, 3.8vw, 46px);
@@ -73,6 +74,11 @@
     --card-padding: clamp(24px, 3vw, 36px);
     --container-max: 1200px;
 
+    /* Das alte Sass-Stylesheet färbt den body mit --bg-body (#f5f7f1, gelblich) und !important –
+       beide Variablen auf den neuen Grund umleiten, bis das Legacy-CSS entfällt. */
+    --bg-body: var(--color-bg);
+    --bs-body-bg: var(--color-bg);
+
     color-scheme: light;
 }
 
@@ -93,7 +99,7 @@
     --color-surface: #2a3035;
     --color-surface-2: #30373c;
     --color-surface-3: #394146;
-    --color-warm: #2f2724;
+    --color-warm: var(--color-surface-2);
     --color-success-bg: #1f2e29;
     --color-success-line: #34504a;
     --color-line: #3a4247;
@@ -101,7 +107,7 @@
     --color-input-line: #5c6a70;
     --color-dot: #4a5359;
 
-    --color-petrol: #18262b; /* dunkle Bänder bleiben dunkler als der Seitenhintergrund */
+    --color-band: var(--color-surface-3);
     --color-focus: #fff;
 
     --shadow-frame: 0 30px 70px -36px rgb(0 0 0 / 0.7);

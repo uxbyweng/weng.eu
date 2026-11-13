@@ -54,7 +54,7 @@
     }
 }
 
-/* Leichte Sprache, Sprachumschalter: zurückhaltend */
+/* Einfache Sprache, Sprachumschalter: zurückhaltend */
 .site-nav__link--quiet {
     color: var(--color-muted);
     font-size: 14px;

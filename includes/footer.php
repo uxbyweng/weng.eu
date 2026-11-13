@@ -31,17 +31,17 @@
             <nav aria-labelledby="footer-more">
                 <p class="site-footer__label" id="footer-more"><?= e(t('footer.more')) ?></p>
                 <ul>
-                    <li><a href="<?= url('/leichte-sprache/') ?>"><?= e(t('nav.easy')) ?></a></li>
-                    <li><a href="/playground/library/"><?= e(t('footer.library')) ?></a></li>
-                    <li><a href="<?= e(SITE_LINKEDIN) ?>">LinkedIn</a></li>
-                    <li><a href="<?= e(SITE_GITHUB) ?>">GitHub</a></li>
+                    <li><a href="<?= url('/einfache-sprache/') ?>"><?= e(t('nav.easy')) ?></a></li>
+                    <li><a href="<?= url('/pattern-library/') ?>"><?= e(t('footer.library')) ?></a></li>
+                    <li><a href="<?= e(SITE_LINKEDIN) ?>" target="_blank" rel="noopener noreferrer">LinkedIn <?= ext_icon() ?><?= new_window_hint() ?></a></li>
+                    <li><a href="<?= e(SITE_GITHUB) ?>" target="_blank" rel="noopener noreferrer">GitHub <?= ext_icon() ?><?= new_window_hint() ?></a></li>
                 </ul>
             </nav>
         </div>
 
         <div class="site-footer__bottom">
             <p><?= e(t('footer.copy', ['year' => date('Y')])) ?></p>
-            <p><?= e(t('footer.built')) ?><?= todo('Lighthouse-Werte', ' · ') ?><?= todo('WCAG-2.2-AA-Prüfung bestätigt', ' · ') ?></p>
+            <p><?= e(t('footer.built')) ?></p>
         </div>
     </div>
 </footer>

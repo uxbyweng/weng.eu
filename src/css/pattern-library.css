@@ -1,0 +1,187 @@
+/* Pattern Library (/pattern-library/): die Bausteine des Designs, live mit denselben Klassen wie auf den Seiten */
+
+.pl-section {
+    h2 {
+        margin-bottom: 12px;
+    }
+}
+
+.pl-intro {
+    max-width: 44em;
+    margin: 0 0 clamp(24px, 3vw, 36px);
+    color: var(--color-muted);
+}
+
+.pl-label {
+    margin: clamp(24px, 3vw, 36px) 0 12px;
+    color: var(--color-muted);
+    font-family: var(--font-body);
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+
+    &:first-of-type {
+        margin-top: 0;
+    }
+}
+
+.pl-code {
+    margin: 10px 0 0;
+    color: var(--color-muted);
+    font-size: 13px;
+
+    .pl-tag {
+        padding: 2px 6px;
+        border-radius: 6px;
+    }
+}
+
+/* Klassen- und Tokennamen: eigenes Element statt <code>, weil das alte Sass-Stylesheet code { color: white !important } setzt */
+.pl-tag {
+    background: var(--color-surface-2);
+    color: var(--color-heading);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12.5px;
+}
+
+/* Rahmen um eine Vorführung */
+.pl-demo {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 16px;
+    align-items: center;
+    padding: clamp(20px, 3vw, 32px);
+    border: 1px dashed var(--color-line-2);
+    border-radius: var(--radius-card);
+    background: var(--color-bg);
+
+    &.pl-demo--block {
+        display: block;
+    }
+}
+
+/* Farben */
+.pl-swatches {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 190px), 1fr));
+}
+
+.pl-swatch {
+    overflow: hidden;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    background: var(--color-bg);
+}
+
+.pl-swatch__color {
+    height: 72px;
+    border-bottom: 1px solid var(--color-line);
+}
+
+.pl-swatch__meta {
+    padding: 12px 14px 14px;
+    font-size: 14px;
+    line-height: 1.4;
+
+    strong {
+        display: block;
+        color: var(--color-heading);
+    }
+
+    .pl-tag {
+        display: block;
+        margin: 4px 0 6px;
+        padding: 2px 6px;
+        border-radius: 6px;
+        width: fit-content;
+    }
+}
+
+/* Typografie */
+.pl-h2,
+.pl-h3 {
+    color: var(--color-heading);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    line-height: 1.15;
+}
+
+.pl-h2 {
+    font-size: var(--text-h2);
+}
+
+.pl-h3 {
+    font-size: 24px;
+}
+
+.pl-type {
+    > * {
+        margin-top: 0;
+    }
+
+    > * + * {
+        margin-top: 18px;
+    }
+}
+
+/* Raster mit Karten und Icons */
+.pl-grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+}
+
+.pl-icons {
+    display: grid;
+    gap: 14px;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 120px), 1fr));
+}
+
+.pl-icon {
+    display: grid;
+    gap: 10px;
+    place-items: center;
+    padding: 18px 10px 14px;
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    background: var(--color-bg);
+    color: var(--color-muted);
+    font-size: 12.5px;
+    text-align: center;
+
+    svg {
+        width: 28px;
+        height: 28px;
+        fill: none;
+        stroke: var(--color-accent);
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.75;
+    }
+}
+
+/* Abstände und Radien */
+.pl-spacing {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    align-items: flex-end;
+
+    div {
+        display: grid;
+        gap: 8px;
+        justify-items: center;
+        color: var(--color-muted);
+        font-size: 12.5px;
+    }
+
+    span {
+        display: block;
+        width: 72px;
+        height: 72px;
+        border: 1px solid var(--color-line-2);
+        background: var(--color-surface-2);
+    }
+}

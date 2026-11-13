@@ -52,3 +52,6 @@ function lang_url(string $lang): string {
 const SITE_EMAIL = 'karsten@weng.eu';
 const SITE_LINKEDIN = 'https://www.linkedin.com/in/kweng/';
 const SITE_GITHUB = 'https://github.com/uxbyweng';
+
+/** Feste Live-Adresse: Canonical, hreflang, Open Graph und JSON-LD nutzen sie, nie den Host aus der Anfrage (Host-Header lässt sich fälschen). */
+const SITE_URL = 'https://weng.eu';

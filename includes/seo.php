@@ -68,7 +68,7 @@ function person_json_ld(): array {
     '@type' => 'Person',
     'name' => 'Karsten Weng',
     'jobTitle' => t('meta.job_title'),
-    'url' => 'https://weng.eu' . url('/'),
+    'url' => SITE_URL . url('/'),
     'address' => ['@type' => 'PostalAddress', 'addressLocality' => 'Berlin', 'addressCountry' => 'DE'],
     'sameAs' => [SITE_LINKEDIN, SITE_GITHUB],
   ];

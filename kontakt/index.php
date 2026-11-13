@@ -59,7 +59,8 @@ $privacyLink = '<a href="' . e(url('/datenschutz/')) . '" target="_blank" rel="n
 
                         <div class="form-field">
                             <label for="cf-message"><?= e(t('contact.form.message')) ?> <span aria-hidden="true">*</span></label>
-                            <textarea id="cf-message" name="message" rows="7" required spellcheck="true" autocomplete="off"></textarea>
+                            <textarea id="cf-message" name="message" rows="7" required spellcheck="true" autocomplete="off" aria-describedby="message-hint"></textarea>
+                            <p class="form-hint" id="message-hint"><?= e(t('contact.form.hint')) ?></p>
                         </div>
 
                         <?php /* Bot-Falle (unsichtbar, nicht fokussierbar) */ ?>
@@ -67,10 +68,14 @@ $privacyLink = '<a href="' . e(url('/datenschutz/')) . '" target="_blank" rel="n
                             <input type="checkbox" name="terms" tabindex="-1" aria-hidden="true" autocomplete="off">
                         </div>
 
-                        <p class="form-note" id="privacy-note"><?= str_replace('{link}', $privacyLink, e(t('contact.form.privacy'))) ?><?= todo('Antwortzeit, z. B. „Ich antworte in der Regel innerhalb von zwei Werktagen.“', ' ') ?></p>
+                        <?php // Antwortzeit zuerst (das interessiert den Absender), dann Pflichtfelder und Datenschutz ?>
+                        <div class="form-notes">
+                            <p class="form-note" id="reply-note"><?= e(t('contact.form.reply')) ?></p>
+                            <p class="form-note" id="privacy-note"><?= str_replace('{link}', $privacyLink, e(t('contact.form.privacy'))) ?></p>
+                        </div>
 
                         <div class="form-actions">
-                            <button class="button" type="submit" aria-describedby="privacy-note"><?= e(t('contact.form.submit')) ?></button>
+                            <button class="button" type="submit" aria-describedby="reply-note privacy-note"><?= e(t('contact.form.submit')) ?></button>
                         </div>
                     </form>
                 </div>
@@ -85,15 +90,12 @@ $privacyLink = '<a href="' . e(url('/datenschutz/')) . '" target="_blank" rel="n
                     </div>
                     <dl class="contact-card__list">
                         <div><dt><?= e(t('contact.aside.email')) ?></dt><dd><a href="mailto:<?= e(SITE_EMAIL) ?>"><?= e(SITE_EMAIL) ?></a></dd></div>
-                        <?php if ($phone = todo('Telefonnummer (optional)')): ?>
-                            <div><dt><?= e(t('contact.aside.phone')) ?></dt><dd><?= $phone ?></dd></div>
-                        <?php endif; ?>
                         <div><dt><?= e(t('contact.aside.place')) ?></dt><dd><?= e(t('band.place')) ?></dd></div>
                         <div>
                             <dt><?= e(t('contact.aside.profiles')) ?></dt>
                             <dd class="contact-card__profiles">
-                                <a href="<?= e(SITE_LINKEDIN) ?>" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a>
-                                <a href="<?= e(SITE_GITHUB) ?>" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+                                <a href="<?= e(SITE_LINKEDIN) ?>" target="_blank" rel="noopener noreferrer">LinkedIn <?= ext_icon() ?><?= new_window_hint() ?></a>
+                                <a href="<?= e(SITE_GITHUB) ?>" target="_blank" rel="noopener noreferrer">GitHub <?= ext_icon() ?><?= new_window_hint() ?></a>
                             </dd>
                         </div>
                     </dl>

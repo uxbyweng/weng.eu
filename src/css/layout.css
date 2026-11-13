@@ -17,9 +17,9 @@
 
     /* Dunkles Band (Erfahrung, Ergebnis, Weiterbildung) */
     &.section--band {
-        background: var(--color-petrol);
+        background: var(--color-band);
         border-top: 0;
-        color: var(--color-on-petrol-text);
+        color: var(--color-on-band-text);
 
         h2,
         h3 {
@@ -27,7 +27,7 @@
         }
 
         .eyebrow {
-            color: var(--color-on-petrol-eyebrow);
+            color: var(--color-on-band-eyebrow);
         }
     }
 }

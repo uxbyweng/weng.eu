@@ -13,7 +13,7 @@ return [
   'services.1.title' => 'Web design & UX/UI',
   'services.1.text'  => 'Concept, information architecture and design of responsive interfaces – focused on usability and brand identity.',
   'services.1.i1'    => 'Concept and information architecture',
-  'services.1.i2'    => 'Responsive design in Figma',
+  'services.1.i2'    => 'Responsive design',
   'services.1.i3'    => 'Design systems and living style guides',
   'services.1.i4'    => 'Clickable prototypes',
   'services.1.e1'    => 'Park-Klinik Birkenwerder',
@@ -45,5 +45,5 @@ return [
   'services.process.3.t' => 'Implementation',
   'services.process.3.x' => 'Development from reusable components, checked for accessibility and performance.',
   'services.process.4.t' => 'Go-live & support',
-  'services.process.4.x' => 'Launch, handover and ongoing maintenance on request – for Park-Klinik since 2017.',
+  'services.process.4.x' => 'Launch, handover and ongoing maintenance on request.',
 ];

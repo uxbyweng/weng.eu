@@ -1,0 +1,9 @@
+# Der Ordner includes/ enthält nur PHP-Bausteine und Texte und wird nie direkt aufgerufen.
+# (PHP bindet die Dateien über das Dateisystem ein, das ist von dieser Sperre nicht betroffen.)
+<IfModule mod_authz_core.c>
+  Require all denied
+</IfModule>
+<IfModule !mod_authz_core.c>
+  Order allow,deny
+  Deny from all
+</IfModule>

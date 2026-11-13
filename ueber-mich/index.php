@@ -12,9 +12,8 @@ echo render_head($meta, $cspNonce);
 
 // Werkzeuge: Gruppe => [chip-Variante, Einträge]
 $tools = [
-    'daily'    => ['chip--strong', ['HTML5', 'CSS3 / SCSS', 'JavaScript', 'Figma', 'WordPress', 'PHP', 'Git']],
-    'solid'    => ['chip--outline', ['React', 'Next.js', 'TypeScript', 'Bootstrap', 'Eleventy', 'Nunjucks', 'MySQL', 'Photoshop', 'Illustrator']],
-    'learning' => ['chip--learning', ['Node.js', 'SQL & Prisma', 'Auth', 'WebSockets', 'LangChain']],
+    'daily'    => ['chip--strong', ['HTML5', 'CSS3 / SCSS', 'JavaScript', 'WordPress', 'PHP', 'Git', 'Bootstrap', 'SQLite', 'Photoshop']],
+    'solid'    => ['chip--outline', ['Figma', 'React', 'Next.js', 'TypeScript', 'Eleventy', 'Nunjucks', 'MySQL', 'Illustrator']],
 ];
 ?>
 
@@ -33,37 +32,16 @@ $tools = [
                     <p class="lead"><?= e(t('about.lead1')) ?></p>
                     <p class="lead"><?= e(t('about.lead2')) ?></p>
                     <dl class="case-facts case-facts--compact">
-                        <?php foreach (['place', 'exp', 'focus', 'lang'] as $key): ?>
+                        <?php foreach (['place', 'focus'] as $key): ?>
                             <div><dt><?= e(t("about.facts.$key")) ?></dt><dd><?= e(t("about.facts.$key.v")) ?></dd></div>
                         <?php endforeach; ?>
                     </dl>
-                    <?php if ($portraitTodo = todo('Aktuelles Porträt (hochformatig) – hier steht noch das Foto der Startseite')): ?><p><?= $portraitTodo ?></p><?php endif; ?>
                 </div>
                 <figure class="about-hero__figure">
                     <img src="/assets/img/home/weng_profile_1040x1300.webp"
                         srcset="/assets/img/home/weng_profile_520x650.webp 520w, /assets/img/home/weng_profile_1040x1300.webp 1040w"
                         sizes="(max-width: 460px) 100vw, 460px" alt="<?= e(t('about.portrait.alt')) ?>" width="1040" height="1300" fetchpriority="high" decoding="async">
                 </figure>
-            </div>
-        </section>
-
-        <!-- Werdegang -->
-        <section class="section" aria-labelledby="career-title">
-            <div class="wrap">
-                <p class="eyebrow"><?= e(t('about.career.eyebrow')) ?></p>
-                <h2 id="career-title" class="about-section-title"><?= e(t('about.career.title')) ?></h2>
-                <ol class="timeline">
-                    <?php foreach ([1, 2, 3, 4, 5, 6] as $n): ?>
-                        <li class="timeline__item">
-                            <p class="timeline__period"><?= e(t("about.st.$n.p")) ?></p>
-                            <div class="timeline__body">
-                                <h3><?= e(t("about.st.$n.t")) ?></h3>
-                                <p class="timeline__org"><?= e(t("about.st.$n.o")) ?></p>
-                                <p class="timeline__text"><?= e(t("about.st.$n.x")) ?></p>
-                            </div>
-                        </li>
-                    <?php endforeach; ?>
-                </ol>
             </div>
         </section>
 
@@ -87,7 +65,7 @@ $tools = [
         <section class="section" aria-labelledby="tools-title">
             <div class="wrap">
                 <p class="eyebrow"><?= e(t('about.tools.eyebrow')) ?></p>
-                <h2 id="tools-title"><?= e(t('about.tools.title')) ?><?= todo('Einstufung der Werkzeuge prüfen', ' ') ?></h2>
+                <h2 id="tools-title"><?= e(t('about.tools.title')) ?></h2>
                 <div class="tools">
                     <?php foreach ($tools as $group => [$variant, $items]): ?>
                         <div class="tools__group">
@@ -98,28 +76,28 @@ $tools = [
                         </div>
                     <?php endforeach; ?>
                 </div>
+                <p class="tools__note"><?= e(t('about.tools.note')) ?>
+                    <a class="more-link" href="<?= e(url('/projekte/berlin-street-view/')) ?>"><?= e(t('about.tools.note.link')) ?> <?= chevron_icon() ?></a></p>
             </div>
         </section>
 
-        <!-- Weiterbildung (dunkles Band) -->
-        <section class="section section--band" aria-labelledby="training-title">
+        <!-- Werdegang -->
+        <section class="section section--surface" aria-labelledby="career-title">
             <div class="wrap">
-                <p class="eyebrow"><?= e(t('about.training.eyebrow')) ?></p>
-                <h2 id="training-title"><?= e(t('about.training.title')) ?></h2>
-                <p class="training__lead"><?= e(t('about.training.lead')) ?></p>
-                <div class="training">
-                    <article class="training__card">
-                        <p class="training__period"><?= e(t('about.training.1.p')) ?></p>
-                        <h3><?= e(t('about.training.1.t')) ?></h3>
-                        <p><?= e(t('about.training.1.x')) ?></p>
-                        <a class="training__link" href="<?= e(url('/projekte/berlin-street-view/')) ?>"><?= e(t('about.training.1.l')) ?> <span aria-hidden="true">→</span></a>
-                    </article>
-                    <article class="training__card">
-                        <p class="training__period"><?= e(t('about.training.2.p')) ?></p>
-                        <h3><?= e(t('about.training.2.t')) ?></h3>
-                        <p><?= e(t('about.training.2.x')) ?></p>
-                    </article>
-                </div>
+                <p class="eyebrow"><?= e(t('about.career.eyebrow')) ?></p>
+                <h2 id="career-title" class="about-section-title"><?= e(t('about.career.title')) ?></h2>
+                <ol class="timeline">
+                    <?php foreach ([1, 2, 3, 4, 5, 6] as $n): ?>
+                        <li class="timeline__item">
+                            <p class="timeline__period"><?= e(t("about.st.$n.p")) ?></p>
+                            <div class="timeline__body">
+                                <h3><?= e(t("about.st.$n.t")) ?></h3>
+                                <p class="timeline__org"><?= e(t("about.st.$n.o")) ?></p>
+                                <?php if (t("about.st.$n.x") !== ''): ?><p class="timeline__text"><?= e(t("about.st.$n.x")) ?></p><?php endif; ?>
+                            </div>
+                        </li>
+                    <?php endforeach; ?>
+                </ol>
             </div>
         </section>
 
@@ -129,7 +107,7 @@ $tools = [
                 <p class="about-closing__lead"><?= e(t('about.closing.lead')) ?></p>
                 <div class="about-closing__actions">
                     <a class="button" href="<?= e(url('/kontakt/')) ?>"><?= e(t('about.closing.contact')) ?></a>
-                    <a class="button button--secondary" href="<?= e(SITE_LINKEDIN) ?>" rel="noopener"><?= e(t('about.closing.linkedin')) ?> <span aria-hidden="true">↗</span></a>
+                    <a class="button button--secondary" href="<?= e(SITE_LINKEDIN) ?>" target="_blank" rel="noopener noreferrer"><?= e(t('about.closing.linkedin')) ?> <?= ext_icon() ?><?= new_window_hint() ?></a>
                 </div>
                 <p class="about-closing__note"><?= e(t('about.closing.note')) ?></p>
             </div>

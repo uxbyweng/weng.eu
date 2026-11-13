@@ -3,7 +3,7 @@
 return [
   // --- Meta / SEO ---
   'meta.default_title' => 'Karsten Weng – Webdesigner & Frontend-Entwickler in Berlin',
-  'meta.default_desc'  => 'Ich gestalte Websites und setze sie selbst um: barrierefrei, schnell und wartbar. Über 20 Jahre Praxis, seit 2025 hauptberuflich selbstständig in Berlin.',
+  'meta.default_desc'  => 'Ich gestalte Websites und setze sie selbst um: barrierefrei, schnell und wartbar. Über 20 Jahre Praxis, seit 2004 selbstständig, seit 2025 hauptberuflich, in Berlin.',
   'meta.suffix'        => 'Karsten Weng',
   'meta.job_title'     => 'Webdesigner & Frontend-Entwickler',
 
@@ -17,7 +17,7 @@ return [
   'nav.services'       => 'Leistungen',
   'nav.about'          => 'Über mich',
   'nav.contact'        => 'Kontakt',
-  'nav.easy'           => 'Leichte Sprache',
+  'nav.easy'           => 'Einfache Sprache',
   'nav.everyday'       => 'Alltagssprache',
   'nav.menu_open'      => 'Menü öffnen',
   'nav.menu_close'     => 'Menü schließen',
@@ -26,6 +26,21 @@ return [
   'lang.en'            => 'Englisch',
   'theme.activate'     => 'Dunkelmodus aktivieren',
   'theme.deactivate'   => 'Dunkelmodus deaktivieren',
+
+  'slider.prev'        => 'Vorheriges Bild',
+  'slider.next'        => 'Nächstes Bild',
+  'video.fallback'     => 'Das Video kann in diesem Browser nicht abgespielt werden.',
+  'video.download'     => 'MP4 herunterladen',
+  'case.jump'          => 'zu den Bildern weiter unten springen',
+  'error.404.meta'     => 'Seite nicht gefunden – Karsten Weng',
+  'error.404.title'    => 'Seite nicht gefunden',
+  'error.404.text'     => 'Diese Adresse gibt es nicht (mehr). Vielleicht hilft einer der Links unten weiter.',
+  'error.500.meta'     => 'Serverfehler – Karsten Weng',
+  'error.500.title'    => 'Da ist etwas schiefgelaufen',
+  'error.500.text'     => 'Auf dem Server ist ein Fehler aufgetreten. Bitte versuchen Sie es später noch einmal.',
+  'error.home'         => 'Zur Startseite',
+  'error.projects'     => 'Projekte ansehen',
+  'link.new_window'    => 'öffnet in neuem Fenster',
 
   // --- Breadcrumb ---
   'breadcrumb.label'   => 'Brotkrümelnavigation',
@@ -37,21 +52,21 @@ return [
   'crumb.impressum'    => 'Impressum',
   'crumb.datenschutz'  => 'Datenschutz',
   'crumb.barrierefreiheit' => 'Erklärung zur Barrierefreiheit',
-  'crumb.leichte-sprache'  => 'Leichte Sprache',
+  'crumb.einfache-sprache' => 'Einfache Sprache',
+  'crumb.pattern-library' => 'Pattern Library',
   'crumb.park-klinik'  => 'Park-Klinik Birkenwerder',
   'crumb.strato'       => 'STRATO',
   'crumb.lisa'         => 'Prof. Dr. Lisa Y. Haller',
   'crumb.berlin-street-view' => 'Berlin Street View',
-  'crumb.pangolin-doxx'      => 'Pangolin-Doxx',
+  'crumb.pangolin-doxx'      => 'Pangolin Doxx Film',
   'crumb.circus-schatzinsel' => 'Circus Schatzinsel',
-  'crumb.mur-art'            => 'Mur-Art',
   'crumb.toma-multivision'   => 'Toma Multivision',
 
   // --- Kontakt-Band ---
   'band.eyebrow'       => 'Kontakt',
   'band.title'         => 'Sie planen eine neue Website oder einen Relaunch?',
   'band.text'          => 'Schreiben Sie mir. Eine kurze Nachricht ist oft der beste Start.',
-  'band.form'          => 'Zum Kontaktformular',
+  'band.form'          => 'Kontakt aufnehmen',
   'band.place'         => 'Berlin',
 
   // --- Footer ---

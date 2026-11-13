@@ -10,13 +10,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Rest, wenn der Browser Zeit hat
     idle(async () => {
+        if (document.querySelector("[data-slider]")) {
+            const { initSlider } = await import("./modules/slider");
+            initSlider();
+        }
         if (document.querySelector("#contact-form")) {
             const { initContactForm } = await import("./modules/contact-form");
             initContactForm();
-        }
-        if (document.querySelector("[data-project-filter]")) {
-            const { initProjectFilter } = await import("./modules/project-filter");
-            initProjectFilter();
         }
     });
 });
