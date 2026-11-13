@@ -1,0 +1,49 @@
+/* Lokale Schriften (kein Google-Fonts-Request): Noto Sans für Fließtext, Quicksand für Überschriften */
+
+@font-face {
+    font-family: "Noto";
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+    src: url("/assets/vendor/googlefonts/noto/NotoSans-Regular.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Noto";
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+    src: url("/assets/vendor/googlefonts/noto/NotoSans-Regular-Italic.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Noto";
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+    src: url("/assets/vendor/googlefonts/noto/NotoSans-Medium.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Noto";
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+    src: url("/assets/vendor/googlefonts/noto/NotoSans-SemiBold.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Noto";
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+    src: url("/assets/vendor/googlefonts/noto/NotoSans-Bold.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Quicksand";
+    font-weight: 300 700;
+    font-style: normal;
+    font-display: swap;
+    src: url("/assets/vendor/googlefonts/quicksand/Quicksand-VariableFont_wght.woff2") format("woff2");
+}

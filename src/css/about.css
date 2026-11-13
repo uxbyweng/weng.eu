@@ -1,0 +1,181 @@
+/* Über mich: Hero mit Porträt, Zeitleiste, Arbeitsweise, Werkzeuge, Weiterbildung, Abschluss */
+
+/* ---- Hero ---- */
+.about-hero {
+    padding-block: clamp(24px, 3vw, 36px) clamp(56px, 8vw, 104px);
+}
+
+.about-hero__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start; /* Porträt beginnt auf Höhe der Überzeile, nicht mittig neben dem langen Text */
+    gap: 40px clamp(40px, 6vw, 88px);
+}
+
+.about-hero__text {
+    flex: 1 1 520px;
+    min-width: 0;
+
+    h1 {
+        line-height: 1.02;
+    }
+
+    .lead {
+        max-width: 34em;
+        margin: 16px 0 0;
+
+        &:first-of-type {
+            margin-top: 28px;
+        }
+    }
+}
+
+.about-hero__figure {
+    flex: 1 1 320px;
+    width: 100%;
+    min-width: 0;
+    max-width: 460px;
+    margin: 0 auto;
+
+    img {
+        width: 100%;
+        aspect-ratio: 4 / 5;
+        border-radius: var(--radius-portrait);
+        object-fit: cover;
+        object-position: top;
+    }
+}
+
+/* Steckbrief-Variante für schmaler Text (Über mich) */
+.case-facts--compact {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+    gap: 18px 32px;
+    max-width: 40em;
+    margin-top: 36px;
+}
+
+/* ---- Überschrift-Block für Sektionen ---- */
+.about-section-title {
+    margin-bottom: clamp(28px, 4vw, 48px);
+}
+
+/* ---- Zeitleiste ---- */
+.timeline {
+    margin: 0;
+    list-style: none;
+    border-bottom: 1px solid var(--color-line);
+}
+
+.timeline__item {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 40px;
+    padding-block: 28px;
+    border-top: 1px solid var(--color-line);
+}
+
+.timeline__period {
+    flex: 0 0 170px;
+    margin: 0;
+    color: var(--color-accent);
+    font-family: var(--font-heading);
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.timeline__body {
+    flex: 1 1 420px;
+    min-width: 0;
+
+    h3 {
+        font-size: 22px;
+        line-height: 1.25;
+    }
+}
+
+.timeline__org {
+    margin: 4px 0 0;
+    color: var(--color-muted);
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.timeline__text {
+    max-width: 44em;
+    margin: 10px 0 0;
+}
+
+/* ---- Arbeitsweise ---- */
+.approach {
+    --grid-min: 290px;
+    margin-top: clamp(36px, 5vw, 56px);
+
+    h3 {
+        font-size: 22px;
+        line-height: 1.25;
+    }
+
+    p {
+        margin: 12px 0 0;
+        font-size: 16px;
+    }
+}
+
+/* ---- Werkzeuge ---- */
+.tools {
+    display: grid;
+    gap: 36px 40px;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    margin-top: clamp(32px, 4vw, 48px);
+}
+
+.tools__group {
+    padding-top: 18px;
+    border-top: 2px solid var(--color-heading);
+
+    h3 {
+        margin-bottom: 14px;
+        font-family: var(--font-body);
+        font-size: 15px;
+        letter-spacing: normal;
+    }
+
+    .chip {
+        padding: 5px 12px;
+        font-size: 14px;
+    }
+}
+
+/* ---- Hinweis unter den Werkzeugen (Weiterbildung) ---- */
+.tools__note {
+    max-width: 46em;
+    margin: clamp(28px, 3vw, 40px) 0 0;
+}
+
+/* ---- Abschluss ---- */
+.about-closing__lead {
+    max-width: 22em;
+    margin: 0;
+    color: var(--color-heading);
+    font-family: var(--font-heading);
+    font-size: clamp(28px, 3.4vw, 44px);
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+    text-wrap: balance;
+}
+
+.about-closing__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 32px;
+}
+
+.about-closing__note {
+    max-width: 44em;
+    margin: 48px 0 0;
+    padding-top: 24px;
+    border-top: 1px solid var(--color-line);
+    color: var(--color-muted);
+}

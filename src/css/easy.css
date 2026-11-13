@@ -1,0 +1,111 @@
+/* Seite in Einfacher Sprache: größere Schrift, viel Luft, ein Satz pro Zeile, klare Abschnitte */
+
+.easy-text {
+    max-width: 30em;
+    font-size: clamp(20px, 1.8vw, 22px);
+    line-height: 1.8;
+
+    p {
+        margin: 0 0 1.1em;
+    }
+
+    ul {
+        margin: 0 0 1.1em;
+        padding: 0;
+        list-style: none;
+    }
+
+    li {
+        position: relative;
+        margin-bottom: 0.7em;
+        padding-left: 1.5em;
+
+        /* Quadrat als Aufzählungszeichen (wie bei den Ergebniszeilen) */
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0.72em;
+            left: 0;
+            width: 10px;
+            height: 10px;
+            border-radius: 2px;
+            background: var(--color-accent);
+        }
+    }
+
+    a {
+        font-weight: 600;
+    }
+}
+
+.easy-text--lead {
+    margin-top: 28px;
+}
+
+.easy-hero__link {
+    margin-top: 8px;
+}
+
+.easy-section h2 {
+    margin-bottom: 28px;
+    font-size: clamp(30px, 3.4vw, 42px);
+}
+
+/* Erklär-Kasten ("Was heißt barrierefrei?") */
+.easy-box {
+    max-width: 34em;
+    margin-top: clamp(32px, 4vw, 48px);
+    padding: clamp(24px, 3vw, 36px);
+    border-left: 6px solid var(--color-accent);
+    border-radius: 0 var(--radius-card) var(--radius-card) 0;
+    background: var(--color-surface);
+
+    h3 {
+        margin-bottom: 18px;
+        font-size: clamp(24px, 2.6vw, 30px);
+    }
+
+    .easy-text > :last-child {
+        margin-bottom: 0;
+    }
+}
+
+/* ---- Beispiele ---- */
+.easy-examples {
+    display: grid;
+    gap: clamp(40px, 5vw, 56px) clamp(32px, 4vw, 48px);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+}
+
+.easy-example {
+    display: flex;
+    flex-direction: column;
+
+    .project-media {
+        margin-bottom: 20px;
+    }
+
+    h3 {
+        margin-bottom: 14px;
+        font-size: 26px;
+    }
+
+    .easy-text {
+        font-size: 20px;
+    }
+
+    .project-link {
+        margin-top: auto;
+        font-size: 18px;
+    }
+}
+
+.easy-examples__note {
+    margin-top: clamp(32px, 4vw, 48px);
+    color: var(--color-muted);
+}
+
+/* ---- Kontakt ---- */
+.easy-contact a {
+    overflow-wrap: anywhere;
+}

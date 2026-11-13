@@ -2,104 +2,48 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/lang.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/helpers.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/head.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/case-study.php';
+
+// Aufbau wie der Master projekte/park-klinik/index.php (Bausteine: includes/case-study.php).
+$img = '/assets/img/projects/toma/';
 $meta = [
-    'title' => 'WENG.EU - Projekt: Toma Multivision - Flash Website',
-    'desc'  => 'Erstellung einer Flash Website. Konzeption, Screendesign, Animation, Programmierung.',
-    'og_image' => '',
+    'title'    => t('tomacase.meta.title'),
+    'desc'     => t('tomacase.meta.desc'),
+    'og_image' => $img . 'screen-website-toma-multivision-2004.jpg',
 ];
 $cspNonce = $_SERVER['CSP_NONCE'] ?? null;
 echo render_head($meta, $cspNonce);
-$isEn = is_en();
 ?>
 
 <body>
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/header.php'; ?>
 
-    <main class="page-wrapper project-layout" id="startMainContent">
-        <div class="container">
-            <div class="row">
+    <main id="main">
+        <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/breadcrumb.php'; ?>
 
-                <div class="project-main col-12 col-md-8 order-1">
+        <article aria-labelledby="case-title">
+            <?php
+            $shot = ['dir' => $img, 'base' => 'screen-website-toma-multivision-2004', 'alt' => t('tomacase.shot.alt'), 'caption' => t('tomacase.shot.caption')];
+            case_head(t('tomacase.eyebrow'), t('tomacase.title'), t('tomacase.lead'), [
+                [t('tomacase.facts.year'), e(t('tomacase.facts.year.v'))],
+                [t('tomacase.facts.role'), e(t('tomacase.facts.role.v'))],
+                [t('tomacase.facts.tech'), e(t('tomacase.facts.tech.v'))],
+            ], $shot);
 
-                    <!-- ### BREADCRUMB ### -->
-                    <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/breadcrumb.php'; ?>
+            case_start(t('tomacase.idea.title'), [t('tomacase.idea.1')], [], '', 'case-idea');
 
-                    <!-- ### STAGE ### -->
-                    <section class="px-3 px-md-0 py-2 py-md-5">
-                        <h1>
-                            <span class="font-accent">Toma</span> Multivision<br>
-                        </h1>
-                        <p class="fs-20 lh-1-3 my-3">
-                            <em>Weiterentwicklung und Pflege des Shop-Frontends – mit Fokus auf Usability, Performance und wartbarem Code in einem agilen, crossfunktionalen Team.</em>
-                        </p>
-                    </section>
+            case_steps(t('tomacase.steps.title'), array_map(
+                fn(int $n): array => ['t' => t("tomacase.steps.$n.t"), 'x' => t("tomacase.steps.$n.x")],
+                [1, 2, 3, 4]
+            ));
 
-                    <!-- ### CONTENT ### -->
-                    <section class="px-3 px-md-0 py-3">
-                        <!-- Video: Toma Multivision Intro -->
-                        <figure class="mb-4">
-                            <div class="ratio ratio-16x9">
-                                <video
-                                    class="rounded box-shadow"
-                                    controls
-                                    playsinline
-                                    muted
-                                    loop
-                                    preload="metadata"
-                                    poster="/assets/img/projects/toma/intro_toma_multivison_thumbnail.png"
-                                    aria-label="<?php echo $isEn ? 'Toma Multivision — website intro video' : 'Toma Multivision — Website-Intro-Video'; ?>">
-                                    <source src="/assets/video/intro_toma_multivision_website.mp4" type="video/mp4">
-                                    <?php if ($isEn): ?>
-                                        Your browser does not support HTML5 video.
-                                        <a href="/assets/video/intro_toma_multivision_website.mp4" class="text-link">Download MP4</a>.
-                                    <?php else: ?>
-                                        Ihr Browser unterstützt kein HTML5-Video.
-                                        <a href="/assets/video/intro_toma_multivision_website.mp4" class="text-link">MP4 herunterladen</a>.
-                                    <?php endif; ?>
-                                </video>
-                            </div>
-                            <figcaption class="mt-2 small text-muted">
-                                <?php echo $isEn ? 'Screen recording of the original Flash intro (2005–2015), restored as MP4.' : 'Screenrecording des ursprünglichen Flash-Intros (2005–2015), als MP4 wiederhergestellt.'; ?>
-                            </figcaption>
-                        </figure>
-                        <?php if (!empty($cspNonce)): ?>
-                            <script nonce="<?php echo e($cspNonce); ?>">
-                                (function() {
-                                    try {
-                                        var v = document.querySelector('video[playsinline]');
-                                        if (!v) return;
-                                        var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-                                        if (!prefersReduced) {
-                                            // Autoplay nur, wenn sichtbar
-                                            var io = new IntersectionObserver(function(entries) {
-                                                entries.forEach(function(e) {
-                                                    if (e.isIntersecting) v.play().catch(function() {});
-                                                    else v.pause();
-                                                });
-                                            }, {
-                                                threshold: 0.25
-                                            });
-                                            io.observe(v);
-                                        } else {
-                                            v.removeAttribute('autoplay');
-                                        }
-                                    } catch (e) {}
-                                })();
-                            </script>
-                        <?php endif; ?>
-                    </section>
+            case_slider(t('tomacase.slider.label'), $img, [case_shot_slide($shot)]);
 
-                </div>
+            case_start(t('tomacase.today.title'), [t('tomacase.today.1')], [], '', 'case-today');
 
-                <!-- ### SIDEBAR ### -->
-                <aside class="project-sidebar col-12 col-md-7 order-2">
-                    <!-- Deine Sidebar-Boxen (Info, Tech-Stack, Services, URL, Zeitraum) -->
-                </aside>
-
-            </div>
-        </div>
+            case_video(t('tomacase.video.label'), '/assets/video/intro_toma_multivision_website.mp4', $img . 'intro-toma-multivision-poster', t('tomacase.video.caption'));
+            ?>
+        </article>
     </main>
 
-    <?php
-    include($_SERVER["DOCUMENT_ROOT"] . "/includes/footer.php");
-    ?>
+    <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/footer.php'; ?>

@@ -83,30 +83,35 @@ export function initContactForm(): void {
     const emailField = form.querySelector<HTMLInputElement>('[name="email"]');
     const messageField = form.querySelector<HTMLTextAreaElement>('[name="message"]');
 
+    /** Erfolg als role="status" (höflich), Fehler als role="alert" (sofort vorgelesen). */
     function showAlert(type: AlertType, html: string): void {
-        if (messages) messages.innerHTML = `<div class="alert alert-${type}" role="alert">${html}</div>`;
+        if (!messages) return;
+        const role = type === "success" || type === "info" ? "status" : "alert";
+        messages.innerHTML = `<div class="form-status form-status--${type}" role="${role}">${html}</div>`;
     }
 
     function setError(field: HTMLElement, msg: string): void {
         // Jedes Feld braucht eine ID, damit die Fehlermeldung per aria-describedby verbunden werden kann.
         if (!field.id) field.id = `f_${Math.random().toString(36).slice(2)}`;
         field.setAttribute("aria-invalid", "true");
-        field.classList.add("is-invalid");
 
         // Alte Fehlermeldung entfernen, damit es keine Duplikate gibt.
-        if (field.nextElementSibling?.classList.contains("invalid-feedback")) field.nextElementSibling.remove();
+        if (field.nextElementSibling?.classList.contains("field-error")) field.nextElementSibling.remove();
 
         const feedback = document.createElement("div");
-        feedback.className = "invalid-feedback";
+        feedback.className = "field-error";
         feedback.id = `${field.id}_err`;
         feedback.textContent = msg;
+        field.setAttribute("aria-describedby", feedback.id);
         field.after(feedback);
     }
 
     function clearErrors(): void {
-        for (const el of form?.querySelectorAll("[aria-invalid='true']") ?? []) el.removeAttribute("aria-invalid");
-        for (const el of form?.querySelectorAll(".invalid-feedback") ?? []) el.remove();
-        for (const el of form?.querySelectorAll(".is-invalid") ?? []) el.classList.remove("is-invalid");
+        for (const el of form?.querySelectorAll("[aria-invalid='true']") ?? []) {
+            el.removeAttribute("aria-invalid");
+            el.removeAttribute("aria-describedby");
+        }
+        for (const el of form?.querySelectorAll(".field-error") ?? []) el.remove();
     }
 
     // --- Live-Validierung für das Nachrichtenfeld (zeigt erst nach Interaktion etwas an) ---
@@ -128,12 +133,12 @@ export function initContactForm(): void {
         }
 
         const isValid = messageField.checkValidity();
-        // Styling nur anzeigen, wenn das Feld berührt wurde oder schon Inhalt hat (z. B. Autofill).
-        if (messageTouched || val) {
-            messageField.classList.toggle("is-invalid", !isValid);
-            messageField.classList.toggle("is-valid", isValid);
-        } else {
-            messageField.classList.remove("is-invalid", "is-valid");
+        // Zustand nur anzeigen, wenn das Feld berührt wurde oder schon Inhalt hat (z. B. Autofill).
+        if ((messageTouched || val) && !isValid) {
+            messageField.setAttribute("aria-invalid", "true");
+        } else if (!messageField.nextElementSibling?.classList.contains("field-error")) {
+            // Eine vom Absenden gesetzte Fehlermeldung bleibt bis zum nächsten Versuch stehen.
+            messageField.removeAttribute("aria-invalid");
         }
     }
 
@@ -214,7 +219,7 @@ export function initContactForm(): void {
 
             if (data.ok) {
                 // Bei Erfolg Felder und Button entfernen, nur die Erfolgsmeldung bleibt sichtbar.
-                for (const el of form.querySelectorAll(".form-group, button")) el.remove();
+                for (const el of form.querySelectorAll(".form-field, .form-note, .form-actions")) el.remove();
             } else if (submitBtn) {
                 submitBtn.disabled = false;
             }

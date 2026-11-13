@@ -1,0 +1,145 @@
+/* Kleine Komponenten: Buttons, Chips, Kategorie-Badges, Ergebnis-Marker */
+
+/* ---- Buttons ---- */
+.button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 24px;
+    border: 1.5px solid var(--button-bg);
+    border-radius: var(--radius-control);
+    background: var(--button-bg);
+    color: #fff;
+    font: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.2;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover {
+        background: var(--button-bg-hover);
+        border-color: var(--button-bg-hover);
+        color: #fff;
+    }
+
+    &.button--secondary {
+        background: transparent;
+        border-color: var(--color-heading);
+        color: var(--color-heading);
+
+        &:hover {
+            background: var(--color-heading);
+            border-color: var(--color-heading);
+            color: var(--color-bg);
+        }
+    }
+
+    /* Umriss in Akzentfarbe (rot), beim Überfahren gefüllt */
+    &.button--outline {
+        background: transparent;
+        border-color: var(--color-accent-link);
+        color: var(--color-accent-link);
+
+        &:hover {
+            background: var(--button-bg);
+            border-color: var(--button-bg);
+            color: #fff;
+        }
+    }
+
+    /* kleine Variante, z. B. im Kontakt-Band */
+    &.button--small {
+        padding: 8px 18px;
+        font-size: 15px;
+    }
+
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+}
+
+/* ---- Chips / Tags ---- */
+.chip-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.chip {
+    display: inline-block;
+    padding: 4px 11px;
+    border-radius: var(--radius-pill);
+    background: var(--color-surface-2);
+    color: var(--color-heading);
+    font-size: 13.5px;
+    line-height: 1.4;
+
+    /* "täglich" */
+    &.chip--strong {
+        background: var(--color-heading);
+        color: var(--color-bg);
+    }
+
+    /* "sicher" */
+    &.chip--outline {
+        background: transparent;
+        border: 1px solid var(--color-heading);
+    }
+
+    /* "lerne ich gerade" (nur noch in der Playground-Vorschau) */
+    &.chip--learning {
+        background: transparent;
+        border: 1px dashed var(--color-muted);
+        color: var(--color-chip-text);
+    }
+}
+
+/* ---- Kategorie-Badges (Projekte) ---- */
+.badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: var(--radius-pill);
+    font-size: 12.5px;
+    font-weight: 600;
+    line-height: 1.5;
+
+    &.badge--client {
+        background: var(--color-warm);
+        color: var(--color-accent-dark);
+    }
+
+    &.badge--employed {
+        background: var(--color-surface-3);
+        color: var(--color-heading);
+    }
+
+    &.badge--own {
+        border: 1px dashed var(--color-muted);
+        color: var(--color-chip-text);
+    }
+}
+
+/* ---- Ergebniszeile: kleines Quadrat vor dem Text ---- */
+.result {
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+    margin: 0;
+    color: var(--color-heading);
+    font-weight: 500;
+
+    &::before {
+        content: "";
+        flex: none;
+        width: 8px;
+        height: 8px;
+        border-radius: 2px;
+        background: var(--color-accent);
+        transform: translateY(-1px);
+    }
+}

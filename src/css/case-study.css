@@ -1,0 +1,374 @@
+/* Projektseiten (Master: park-klinik; Bausteine in includes/case-study.php): Kopf mit Screenshot, Auf einen Blick, Ausgangslage, Vorgehen, Slider */
+
+/* ---- Steckbrief ---- */
+.case-facts {
+    display: grid;
+    gap: 18px 28px;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr));
+    margin: 40px 0 0;
+
+    > div {
+        padding-top: 12px;
+        border-top: 1px solid var(--color-line);
+    }
+
+    dt {
+        color: var(--color-muted);
+        font-size: 12.5px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+    }
+
+    dd {
+        margin: 4px 0 0;
+        color: var(--color-heading);
+        font-weight: 500;
+    }
+}
+
+/* ---- Kopf: Text links, Screenshot rechts (50 : 50) ---- */
+.case-hero {
+    display: grid;
+    gap: clamp(28px, 4vw, 48px) clamp(32px, 5vw, 64px);
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+
+    @media (min-width: 900px) {
+        &.case-hero--shot {
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        }
+    }
+}
+
+.case-hero__text {
+    min-width: 0;
+}
+
+/* Steckbrief: eigene Zeile über die volle Breite; den Abstand nach oben liefert der Rasterabstand (auf dem Smartphone vor dem Screenshot) */
+.case-hero > .case-facts {
+    grid-column: 1 / -1;
+    margin-top: 0;
+}
+
+@media (max-width: 899px) {
+    .case-hero--shot .case-hero__figure {
+        order: 1;
+    }
+}
+
+/* Mit Screenshot ist der Textblock nur halb so breit: Headline und Einleitung etwas kleiner */
+.case-hero--shot .case-hero__text {
+    h1 {
+        font-size: clamp(30px, 3.3vw, 44px);
+        line-height: 1.12;
+    }
+
+    .lead {
+        font-size: 18px;
+    }
+}
+
+.case-hero__figure {
+    margin-top: 6px;
+
+    .case-hero__link {
+        display: block;
+        border-radius: var(--radius-card);
+
+        &:focus-visible {
+            outline: 2px solid var(--color-focus);
+            outline-offset: 4px;
+        }
+
+        &:hover img {
+            border-color: var(--color-accent);
+        }
+    }
+
+    figcaption {
+        margin-top: 10px;
+        font-size: 13px;
+    }
+}
+
+.case-figure {
+    margin: 0;
+
+    img,
+    video {
+        width: 100%;
+        border: 1px solid var(--color-line-2);
+        border-radius: var(--radius-card);
+        box-shadow: var(--shadow-frame);
+    }
+
+    figcaption {
+        margin-top: 14px;
+        color: var(--color-muted);
+        font-size: 14px;
+    }
+}
+
+/* Video (z. B. Intro einer alten Flash-Seite) */
+.case-video {
+    max-width: 960px;
+
+    video {
+        display: block;
+        height: auto;
+        aspect-ratio: 16 / 9;
+        background: #000;
+    }
+}
+
+/* Ziel des Sprungs aus dem Kopf: nicht unter dem festen Seitenkopf verschwinden */
+.slider-section {
+    scroll-margin-top: 96px;
+}
+
+/* ---- Horizontaler Slider (Scroll-Snap): Bilder mit gleicher Höhe, Pfeile per JS ---- */
+.slider {
+    --slider-height: clamp(260px, 42vw, 560px);
+}
+
+.slider__track {
+    position: relative; /* offsetLeft der Slides in slider.ts */
+    display: flex;
+    gap: clamp(20px, 3vw, 40px);
+    padding-bottom: 6px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-color: var(--color-line-2) transparent;
+    scrollbar-width: thin;
+
+    &:focus-visible {
+        outline: 2px solid var(--color-focus);
+        outline-offset: 4px;
+    }
+}
+
+.slider__slide {
+    flex: none;
+    scroll-snap-align: start;
+
+    img {
+        display: block;
+        width: auto;
+        max-width: none;
+        height: var(--slider-height);
+    }
+
+    /* Geräte-Mockup mit transparenten Ecken: kein Rahmen, kein Schatten */
+    &.slider__slide--bare img {
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    /* Die Bildunterschrift soll die Breite des Bildes nicht bestimmen */
+    figcaption {
+        width: 0;
+        min-width: 100%;
+    }
+}
+
+/* Pfeile über dem Slider, rechtsbündig – in der Farbe der Buttons */
+.slider__controls {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+
+    &[hidden] {
+        display: none;
+    }
+}
+
+.slider__button {
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    padding: 0;
+    border: 1.5px solid var(--button-bg);
+    border-radius: var(--radius-pill);
+    background: var(--button-bg);
+    --chevron: #fff;
+    cursor: pointer;
+    transition: background-color 0.15s, border-color 0.15s, transform 0.15s;
+
+    /* Strichfarbe über eigene Variable statt currentColor: die alte Sass-Regel „article:hover svg“ färbt sonst jedes SVG rot,
+       sobald die Maus irgendwo im Artikel ist (rot auf rotem Button). */
+    svg {
+        width: 22px;
+        height: 22px;
+        fill: none;
+        stroke: var(--chevron);
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 2.25;
+    }
+
+    &:hover:not(:disabled) {
+        background: var(--button-bg-hover);
+        border-color: var(--button-bg-hover);
+    }
+
+    &:active:not(:disabled) {
+        transform: scale(0.95);
+    }
+
+    /* Am Anfang/Ende: Umriss statt Füllung, deutlich zurückgenommen */
+    &:disabled {
+        --chevron: var(--color-muted);
+        border-color: var(--color-line-2);
+        background: transparent;
+        cursor: default;
+        opacity: 0.6;
+    }
+}
+
+/* ---- Auf einen Blick: dunkles Band mit vier Eckdaten, Icons und Tech-Stack ---- */
+.glance__title {
+    margin-bottom: clamp(24px, 3vw, 36px);
+    font-size: clamp(24px, 2.6vw, 30px);
+}
+
+.glance__list {
+    display: grid;
+    gap: 28px clamp(20px, 3vw, 40px);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 210px), 1fr));
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.glance__item {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: flex-start;
+}
+
+.glance__icon {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--color-on-band-line);
+    border-radius: 12px;
+    background: rgb(255 255 255 / 0.06);
+    --icon: var(--color-accent);
+
+    /* Eigene Variable statt currentColor, siehe .slider__button (alte Regel „article:hover svg“) */
+    svg {
+        width: 22px;
+        height: 22px;
+        fill: none;
+        stroke: var(--icon);
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 1.75;
+    }
+}
+
+.glance__value {
+    margin: 0 0 4px;
+    color: var(--color-on-band-strong);
+    font-family: var(--font-heading);
+    font-size: clamp(19px, 1.9vw, 22px);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.glance__text {
+    margin: 0;
+    font-size: 15.5px;
+    line-height: 1.5;
+}
+
+.glance__note {
+    max-width: 60em;
+    margin: clamp(24px, 3vw, 32px) 0 0;
+    font-size: 14.5px;
+}
+
+.glance__stack {
+    margin-top: clamp(28px, 3.5vw, 40px);
+    padding-top: clamp(20px, 2.5vw, 26px);
+    border-top: 1px solid var(--color-on-band-line);
+
+    .chip {
+        background: rgb(255 255 255 / 0.1);
+        color: var(--color-on-band-strong);
+    }
+}
+
+.glance__label {
+    margin: 0 0 12px;
+    color: var(--color-on-band-eyebrow);
+    font-family: var(--font-body);
+    font-size: 12.5px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+/* ---- Einleitungsabsatz vor den Karten (Park-Klinik: Ausgangslage) ---- */
+.case-intro {
+    max-width: 44em;
+    margin: 18px 0 0;
+}
+
+/* ---- Vorgehen: nummerierte Schritte ---- */
+.steps {
+    margin: 24px 0 0;
+    list-style: none;
+    border-bottom: 1px solid var(--color-line);
+}
+
+.step {
+    display: grid;
+    gap: 4px 16px;
+    grid-template-columns: 44px minmax(0, 1fr);
+    padding-block: 22px;
+    border-top: 1px solid var(--color-line);
+
+    h3 {
+        margin-bottom: 6px;
+        font-size: 21px;
+    }
+
+    p {
+        margin: 0;
+        font-size: 16px;
+    }
+}
+
+.step__num {
+    color: var(--color-accent);
+    font-family: var(--font-heading);
+    font-size: 16px;
+    font-weight: 700;
+}
+
+/* ---- Liste mit Zielen (Ausgangslage) ---- */
+.case-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 20px 0 0;
+    padding-left: 20px;
+
+    &.case-intro {
+        margin-top: 14px;
+        padding-left: 22px;
+    }
+}
+
+/* ---- Kundenstimme auf der Case Study (Abstand oben wie bei Sektionen) ---- */
+.case-quote {
+    padding-top: var(--section-space);
+}

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Gleich wieder da | Karsten Weng</title>
+<style>
+  :root {
+    color-scheme: light dark;
+    --bg: #f7f6f3;
+    --text: #1c1c1a;
+    --muted: #5c5b57;
+    --accent: #a8320f;
+    --line: #d9d7d0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #161614;
+      --text: #f1efe9;
+      --muted: #b0aea6;
+      --accent: #ff8a63;
+      --line: #3a3935;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { font-size: 112.5%; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 2rem 1.25rem;
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+  }
+  main { width: 100%; max-width: 34rem; }
+  .name {
+    margin: 0 0 2.5rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  h1 {
+    margin: 0 0 1rem;
+    font-size: clamp(1.9rem, 6vw, 2.6rem);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  p { margin: 0 0 1rem; }
+  a {
+    color: var(--accent);
+    text-underline-offset: 0.2em;
+  }
+  a:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  section + section {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+  }
+  section[lang="en"] { color: var(--muted); }
+  section[lang="en"] h2 {
+    margin: 0 0 0.5rem;
+    font-size: 1.15rem;
+    color: var(--text);
+  }
+</style>
+</head>
+<body>
+<main>
+  <p class="name">Karsten Weng · Webdesign &amp; Frontend-Entwicklung</p>
+
+  <section>
+    <h1>Gleich wieder da.</h1>
+    <p>Ich stelle gerade eine neue Version dieser Website online. In etwa einer Stunde ist sie wieder erreichbar.</p>
+    <p>Bis dahin erreichen Sie mich per E-Mail: <a href="mailto:karsten@weng.eu">karsten@weng.eu</a></p>
+  </section>
+
+  <section lang="en">
+    <h2>Back shortly.</h2>
+    <p>A new version of this website is going live right now. It will be back in about an hour.</p>
+    <p>Until then, you can reach me by email: <a href="mailto:karsten@weng.eu">karsten@weng.eu</a></p>
+  </section>
+</main>
+</body>
+</html>

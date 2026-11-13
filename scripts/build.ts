@@ -14,7 +14,7 @@ import { createHash } from "node:crypto";
 import { mkdir, readdir, rm } from "node:fs/promises";
 import { basename, join } from "node:path";
 import browserslist from "browserslist";
-import { browserslistToTargets, transform } from "lightningcss";
+import { browserslistToTargets, bundle, transform } from "lightningcss";
 import * as sass from "sass";
 import pkg from "../package.json" with { type: "json" };
 
@@ -94,7 +94,26 @@ export async function buildCss({ dev = false }: BuildOptions = {}): Promise<Mani
     });
     await Bun.write(join(DIST, "critical.min.css"), critical.code);
 
-    return { "styles.css": `${DIST_URL}/${file}` };
+    return { "styles.css": `${DIST_URL}/${file}`, ...(await buildMainCss({ dev })) };
+}
+
+/** Neues Design: reines CSS (src/css/main.css, @imports werden gebündelt, Nesting & Co. für ältere Browser umgeschrieben). */
+export async function buildMainCss({ dev = false }: BuildOptions = {}): Promise<Manifest> {
+    const bundled = bundle({
+        filename: join(ROOT, "src/css/main.css"),
+        minify: !dev,
+        targets,
+        sourceMap: dev,
+    });
+
+    let css = bundled.code.toString();
+    if (dev && bundled.map) {
+        css += `\n/*# sourceMappingURL=data:application/json;base64,${Buffer.from(bundled.map).toString("base64")} */`;
+    }
+
+    const file = `main.${shortHash(css)}.css`;
+    await Bun.write(join(DIST, file), css);
+    return { "main.css": `${DIST_URL}/${file}` };
 }
 
 /** Löscht Dateien aus assets/dist, die nicht (mehr) im Manifest stehen. */

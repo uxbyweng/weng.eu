@@ -1,0 +1,109 @@
+/* Leistungen: drei Schwerpunkte mit Trennlinien dazwischen (keine nach dem letzten), Ablauf in vier Karten */
+
+.page-head--services h1 {
+    max-width: 14em;
+}
+
+/* ---- Schwerpunkte ---- */
+.offers {
+    padding-bottom: var(--section-space);
+}
+
+.offer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px clamp(32px, 5vw, 80px);
+    padding-block: clamp(32px, 4vw, 48px);
+    border-top: 1px solid var(--color-line);
+}
+
+.offer__main {
+    flex: 1 1 400px;
+    min-width: 0;
+
+    h2 {
+        margin-top: 8px;
+        font-size: clamp(28px, 3vw, 38px);
+        line-height: 1.15;
+    }
+
+    p {
+        max-width: 32em;
+        margin: 14px 0 0;
+    }
+}
+
+.offer__num {
+    margin: 0;
+    color: var(--color-accent);
+    font-family: var(--font-heading);
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.offer__aside {
+    flex: 1 1 340px;
+    min-width: 0;
+
+    ul {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin: 0;
+        padding-left: 20px;
+    }
+}
+
+.offer__label {
+    margin-bottom: 12px;
+    color: var(--color-muted);
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    line-height: 1.4;
+    text-transform: uppercase;
+}
+
+.offer__examples {
+    margin: 18px 0 0;
+    color: var(--color-muted);
+    font-size: 15px;
+
+    a {
+        font-weight: 600;
+    }
+}
+
+/* ---- Ablauf ---- */
+.process {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+    margin: clamp(36px, 5vw, 56px) 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.process__step {
+    padding: 28px;
+
+    h3 {
+        margin-top: 16px;
+        font-size: 21px;
+    }
+
+    p {
+        margin: 8px 0 0;
+        font-size: 16px;
+    }
+}
+
+.process__num {
+    margin: 0;
+    color: var(--color-accent);
+    font-family: var(--font-heading);
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1;
+}

@@ -1,6 +1,10 @@
 <?php
 declare(strict_types=1);
 
+require_once __DIR__ . '/config.php';
+require_once __DIR__ . '/i18n.php';
+require_once __DIR__ . '/seo.php';
+
 /**
  * e()
  * Sichere HTML-Ausgabe: wandelt Sonderzeichen in HTML-Entities um.
@@ -8,29 +12,29 @@ declare(strict_types=1);
  */
 function e(string $s): string { return htmlspecialchars($s, ENT_QUOTES, 'UTF-8'); }
 
+/** Chevron-Pfeil nach rechts hinter dem Text eines Links („Projekt ansehen“). Dekorativ (aria-hidden); gleiche Form wie die Pfeile des Sliders. */
+function chevron_icon(): string {
+  return '<svg class="chevron-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 18 6-6-6-6"/></svg>';
+}
+
+/** Icon „externer Link“ (Bootstrap Icons: box-arrow-up-right, gleiche Form wie fa-external-link). Dekorativ; der Hinweis für Screenreader kommt aus new_window_hint(). */
+function ext_icon(): string {
+  return '<svg class="ext-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">'
+    . '<path fill-rule="evenodd" d="M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z"/>'
+    . '<path fill-rule="evenodd" d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z"/>'
+    . '</svg>';
+}
+
+/** Hinweis für Screenreader hinter dem Text eines Links, der in einem neuen Fenster öffnet (WCAG 3.2.5 / G201). */
+function new_window_hint(): string { return '<span class="visually-hidden"> (' . e(t('link.new_window')) . ')</span>'; }
+
 
 /* ============================================================
  * Sprache / Locale
  * ============================================================
  */
 
-/**
- * current_lang()
- * Liefert die aktuell gesetzte Sprache als ISO-Code ('de' | 'en').
- * Reihenfolge: Session (wenn aktiv) > Cookie 'sprache' > Fallback 'de'.
- */
-function current_lang(): string {
-  if (session_status() === PHP_SESSION_ACTIVE && !empty($_SESSION['sprache'])) {
-    return $_SESSION['sprache'];
-  }
-  return $_COOKIE['sprache'] ?? 'de';
-}
-
-/**
- * is_en()
- * Bequeme Abfrage, ob die aktuelle Sprache Englisch ist.
- */
-function is_en(): bool { return current_lang() === 'en'; }
+/* current_lang(), is_en(), url() u. a.: siehe config.php */
 
 
 /* ============================================================
@@ -40,27 +44,23 @@ function is_en(): bool { return current_lang() === 'en'; }
 
 /**
  * abs_url($path)
- * Macht aus einem relativen Pfad eine absolute URL (inkl. http/https + Host).
+ * Macht aus einem relativen Pfad eine absolute URL mit der festen Live-Adresse (SITE_URL).
  * Lässt bereits absolute http(s)-URLs unverändert.
- * Beispiel: abs_url('/img/a.png') -> https://www.weng.eu/img/a.png
+ * Beispiel: abs_url('/img/a.png') -> https://weng.eu/img/a.png
  */
 function abs_url(string $path): string {
   if (preg_match('#^https?://#', $path)) return $path;
-  $scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
-  $host   = $_SERVER['HTTP_HOST'] ?? 'www.weng.eu';
-  return $scheme.'://'.$host.$path;
+  return SITE_URL . $path;
 }
 
 /**
  * page_url()
  * Liefert die absolute URL der aktuellen Seite OHNE Query-String.
- * Beispiel: /projekte/?q=foo -> https://www.weng.eu/projekte/
+ * Beispiel: /projekte/?q=foo -> https://weng.eu/projekte/
  */
 function page_url(): string {
-  $scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
-  $host   = $_SERVER['HTTP_HOST'] ?? 'www.weng.eu';
-  $path   = strtok($_SERVER['REQUEST_URI'] ?? '/', '?');
-  return $scheme.'://'.$host.$path;
+  $path = strtok($_SERVER['REQUEST_URI'] ?? '/', '?');
+  return SITE_URL . $path;
 }
 
 
@@ -131,17 +131,19 @@ function critical_css_inline(?string $nonce = null): string {
  */
 function meta_tags(array $meta): string {
   $defaults = [
-    'title'    => 'WENG.EU | Frontend & UX/UI Design – Built for People.',
-    'desc'     => 'Production-Ready Websites. Schnell. Barrierefrei. Responsiv. Entwickelt mit semantischem HTML, skalierbarem CSS und modernen Frontend-Workflows.',
-    'og_image' => '/assets/img/logo/logo-light.svg',
+    'title'    => t('meta.default_title'),
+    'desc'     => t('meta.default_desc'),
+    'og_image' => '/assets/img/og/og-default.jpg', // 1200 × 630
+    'og_type'  => 'website',
     'robots'   => 'index, follow',
   ];
   $cleanMeta = array_filter($meta, fn($v) => !is_null($v) && !(is_string($v) && trim($v) === ''));
   $m = array_merge($defaults, $cleanMeta);
 
-  $ogImg   = abs_url($m['og_image']);
-  $url     = page_url();
-  $updated = gmdate('c', @filemtime($_SERVER['SCRIPT_FILENAME']) ?: time());
+  $ogImg    = abs_url($m['og_image']);
+  $url      = page_url();
+  $locale   = current_lang() === 'en' ? 'en_US' : 'de_DE';
+  $updated  = gmdate('c', @filemtime($_SERVER['SCRIPT_FILENAME']) ?: time());
 
   ob_start(); ?>
   <title><?= e($m['title']) ?></title>
@@ -149,8 +151,9 @@ function meta_tags(array $meta): string {
     <meta name="robots" content="<?= e($m['robots']) ?>">
     <meta property="og:title" content="<?= e($m['title']) ?>">
     <meta property="og:description" content="<?= e($m['desc']) ?>">
-    <meta property="og:site_name" content="WENG.EU">
-    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="weng.eu">
+    <meta property="og:type" content="<?= e($m['og_type']) ?>">
+    <meta property="og:locale" content="<?= e($locale) ?>">
     <meta property="og:image" content="<?= e($ogImg) ?>">
     <meta property="og:url" content="<?= e($url) ?>">
     <meta property="og:updated_time" content="<?= e($updated) ?>">
@@ -202,6 +205,28 @@ function verify_csrf(?string $token, string $formId = 'default'): bool {
 }
 
 /**
+ * rate_limit_ok($bucket, $max, $window)
+ * Einfaches Limit pro IP-Adresse ohne Datenbank: zählt Aufrufe je Zeitfenster in einer Datei im Temp-Verzeichnis.
+ * Der Dateiname enthält nur einen Hash aus IP und Zeitfenster (keine Klartext-IP); Zähler älter als zwei Fenster werden gelöscht.
+ * Kann das Temp-Verzeichnis nicht beschrieben werden, wird nicht begrenzt (lieber eine Anfrage zu viel als ein kaputtes Formular).
+ */
+function rate_limit_ok(string $bucket, int $max, int $window = 3600): bool {
+  $ip = $_SERVER['REMOTE_ADDR'] ?? '';
+  if ($ip === '') return true;
+  $dir = sys_get_temp_dir();
+  if (!is_writable($dir)) return true;
+  $slot = intdiv(time(), $window);
+  $file = $dir . '/weng_rl_' . $bucket . '_' . hash('sha256', $ip . '|' . $slot) . '.cnt';
+  foreach (glob($dir . '/weng_rl_' . $bucket . '_*.cnt') ?: [] as $old) {
+    if (@filemtime($old) < time() - 2 * $window) @unlink($old);
+  }
+  $count = is_file($file) ? (int)@file_get_contents($file) : 0;
+  if ($count >= $max) return false;
+  @file_put_contents($file, (string)($count + 1), LOCK_EX);
+  return true;
+}
+
+/**
  * get_honeypot_name($formId)
  * Liefert den (zufälligen) Namen des Honeypot-Feldes für ein Formular.
  * Dieses Feld als verstecktes/unsichtbares Feld ausgeben – Bots füllen es oft aus.
@@ -235,10 +260,11 @@ function is_honeypot_triggered(array $post, string $formId = 'default'): bool {
  * current_path()
  * Liefert den aktuellen Pfad-Teil der URL (ohne Domain/Query), ohne trailing Slash.
  * Ausnahme: die Startseite bleibt als "/" erhalten.
- * Beispiel: /projekte/ -> "/projekte"
+ * Das Sprachpräfix /en wird entfernt. Beispiel: /en/projekte/ -> "/projekte"
  */
 function current_path(): string {
   $path = parse_url(page_url(), PHP_URL_PATH) ?? '/';
+  $path = preg_replace('#^/en(?=/|$)#', '', $path); // Sprachpräfix gehört nicht zum Seitenpfad
   $path = rtrim($path, '/');
   return $path === '' ? '/' : $path;
 }

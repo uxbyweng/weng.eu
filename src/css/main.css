@@ -1,0 +1,20 @@
+/*
+ * Einstieg für das neue Design (Relaunch) – reines CSS, gebündelt von Lightning CSS (scripts/build.ts).
+ * Natives Nesting und moderne Features werden anhand der browserslist in package.json umgeschrieben.
+ */
+@import "./fonts.css";
+@import "./tokens.css";
+@import "./base.css";
+@import "./layout.css";
+@import "./components.css";
+@import "./site-header.css";
+@import "./site-footer.css";
+@import "./home.css";
+@import "./case-study.css";
+@import "./projects.css";
+@import "./services.css";
+@import "./about.css";
+@import "./contact.css";
+@import "./legal.css";
+@import "./easy.css";
+@import "./pattern-library.css";

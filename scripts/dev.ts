@@ -41,13 +41,19 @@ function broadcast(event: string, data = ""): void {
     for (const c of clients) c.enqueue(`event: ${event}\ndata: ${data}\n\n`);
 }
 
+// Die Live-Reload-Verbindung muss beim Verlassen der Seite geschlossen werden: Sonst bleiben nach einigen Seitenwechseln
+// alle 6 Browser-Verbindungen zum Host belegt, und neue Seiten laden ~60 s nicht fertig (Schriften/Bilder warten).
 const CLIENT_JS = `
 const es = new EventSource("/__dev/events");
+addEventListener("pagehide", () => es.close());
 es.addEventListener("reload", () => location.reload());
 es.addEventListener("css", e => {
-    for (const link of document.querySelectorAll('link[rel="stylesheet"][href*="/assets/dist/styles."]')) {
+    const urls = JSON.parse(e.data);
+    for (const link of document.querySelectorAll('link[rel="stylesheet"]')) {
+        const name = ["styles", "main"].find(n => link.href.includes("/assets/dist/" + n + "."));
+        if (!name || !urls[name + ".css"]) continue;
         const next = link.cloneNode();
-        next.href = e.data;
+        next.href = urls[name + ".css"];
         next.onload = () => link.remove();
         link.after(next);
     }
@@ -134,11 +140,11 @@ const onChange = debounce(async (file: string) => {
         if (file.endsWith(".ts")) {
             await rebuild("js");
             broadcast("reload");
-        } else if (file.endsWith(".scss") || file.endsWith(`css${sep}critical.css`)) {
+        } else if (file.endsWith(".scss") || (file.endsWith(".css") && file.startsWith(`src${sep}css${sep}`))) {
             await rebuild("css");
             // critical.css ist inline im HTML → braucht einen echten Reload, Stylesheets nicht
             if (file.endsWith("critical.css")) broadcast("reload");
-            else broadcast("css", manifest["styles.css"] ?? "");
+            else broadcast("css", JSON.stringify(manifest));
         } else if (file.endsWith(".php")) {
             broadcast("reload");
         }
