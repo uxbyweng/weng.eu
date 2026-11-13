@@ -111,7 +111,7 @@ $successHtml = 'Hello ' . htmlspecialchars($name, ENT_QUOTES, 'UTF-8') . ',<br><
     . 'Best regards,<br>Karsten Weng';
 
 /* === Mailversand === */
-$to       = env('MAIL_TO', 'info@weng.eu');
+$to       = env('MAIL_TO', SITE_EMAIL);
 $from     = env('MAIL_FROM', 'info@weng.eu');
 $subject  = 'Anfrage ' . date('Ymd\THi');
 $body     = "Gesendet über weng.eu/kontakt/\r\n\r\n"

@@ -16,6 +16,7 @@ bun.lock
 bunfig.toml
 tsconfig.json
 biome.json
+postcss.config.js
 .bun-version
 
 # Lokale Entwicklung
@@ -26,6 +27,7 @@ _psd/
 docs/
 test/
 README.md
+CLAUDE.md
 yolo.txt
 _deploy/
 
