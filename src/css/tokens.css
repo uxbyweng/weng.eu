@@ -23,10 +23,10 @@
 
     /* Flächen & Linien */
     --color-bg: #fff;
-    --color-surface: #f1f5f5; /* kühle Petrol-Tönung, hebt sich sichtbar vom weißen Grund ab */
+    --color-surface: #f6f8f8; /* kühle Petrol-Tönung, sehr hell, hebt sich dezent vom weißen Grund ab */
     --color-surface-2: #e8eeef;
     --color-surface-3: #dde6e7;
-    --color-warm: #f4f2eb; /* warmes Stein-Grau (gelblich, nicht rosa): Kontakt-Band, Kategorie "Kundenprojekt" */
+    --color-warm: #edebe2; /* warmes Stein-Grau (gelblich, nicht rosa): Kontakt-Band, Kategorie "Kundenprojekt" */
     --color-success-bg: #eef4f2;
     --color-success-line: #cfe0db;
     --color-line: #e3e7e7;

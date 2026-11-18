@@ -11,8 +11,20 @@ $projectLink = fn(string $href, string $nameKey): string =>
     '<a class="project-link" href="' . e(url($href)) . '">' . e(t('project.read')) .
     '<span class="visually-hidden">: ' . e(t($nameKey)) . '</span> ' . chevron_icon() . '</a>';
 
-// Kundenzeile (Namen sind in beiden Sprachen gleich)
-$clients = [t('project.pk.name'), t('project.lisa.name'), 'Hausarztpraxis Mengel & Roggan', 'Pangolin Doxx Film', 'STRATO (2005–2025)'];
+// Kundenzeile: Name, Logo (Datei, Breite, Höhe, Anzeigehöhe in px) – ohne Logo erscheint der Name als Text
+$clients = [
+    [t('project.pk.name'), 'park-klinik.webp', 350, 85, 40],
+    [t('project.lisa.name'), 'lisa-haller.svg', 385, 73, 34],
+    ['Hausarztpraxis Mengel & Roggan', 'hausarztpraxis-mengel.webp', 420, 120, 44],
+    ['Pangolin Doxx Film', 'pangolin-doxx.png', 220, 98, 44],
+    ['STRATO (2005–2025)', 'strato.svg', 531, 114, 30],
+    ['Die Holzbläser', 'die-holzblaeser.png', 120, 150, 56],
+    ['PITYAO', null, 0, 0, 0],
+    ['Emoree', 'emoree.jpg', 300, 131, 44],
+    ['Mira-Beau', null, 0, 0, 0],
+    ['Circus Schatzinsel', 'circus-schatzinsel.png', 600, 51, 22],
+    ['Toma Multivision', 'toma.gif', 110, 110, 44],
+];
 ?>
 
 <body>
@@ -83,9 +95,20 @@ $clients = [t('project.pk.name'), t('project.lisa.name'), 'Hausarztpraxis Mengel
         <!-- Kunden -->
         <section class="clients" aria-labelledby="clients-title">
             <div class="wrap">
-                <p class="clients__label" id="clients-title"><?= e(t('home.clients.label')) ?></p>
+                <p class="clients__label" id="clients-title">
+                    <?= e(t('home.clients.label')) ?>
+                </p>
                 <ul class="clients__list">
-                    <?php foreach ($clients as $client): ?><li><?= e($client) ?></li><?php endforeach; ?>
+                    <?php foreach ($clients as [$name, $logo, $w, $h, $show]): ?>
+                        <li>
+                            <?php if ($logo): ?>
+                                <img class="clients__logo" src="/assets/img/clients/<?= e($logo) ?>" alt="<?= e($name) ?>" width="<?= $w ?>" height="<?= $h ?>"
+                                    style="--logo-h: <?= $show ?>px" loading="lazy" decoding="async">
+                            <?php else: ?>
+                                <span class="clients__name"><?= e($name) ?></span>
+                            <?php endif; ?>
+                        </li>
+                    <?php endforeach; ?>
                 </ul>
             </div>
         </section>

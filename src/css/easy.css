@@ -58,7 +58,7 @@
     padding: clamp(24px, 3vw, 36px);
     border-left: 6px solid var(--color-accent);
     border-radius: 0 var(--radius-card) var(--radius-card) 0;
-    background: var(--color-surface);
+    background: var(--color-bg);
 
     h3 {
         margin-bottom: 18px;

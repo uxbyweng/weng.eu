@@ -1,12 +1,75 @@
 /* Kopfbereich: Logo, Navigation, Theme-Schalter, mobiles Menü */
 
 .site-header {
+    --service-bar-h: 37px;
+
     background: var(--color-bg);
     border-bottom: 1px solid var(--color-line);
-    padding-block: 18px;
+    /* Fester Kopf (position: sticky, critical.css): die Service-Leiste scrollt weg, die Hauptnavigation bleibt stehen */
+    /* 2 px Zugabe: sonst bleibt durch Rundung der Unterstrich (DE/EN) am Rand sichtbar */
+    top: calc(-1 * var(--service-bar-h) - 2px);
+}
+
+/* Sprung- und Fokusziele nicht unter dem festen Kopf verstecken (WCAG 2.4.11) */
+html {
+    scroll-padding-top: 96px;
+}
+
+/* Service-Leiste: Einfache Sprache, DE/EN, Theme-Schalter (Varianten der ganzen Seite) */
+.service-bar {
+    box-sizing: border-box;
+    height: var(--service-bar-h);
+    border-bottom: 1px solid var(--color-line);
+    background: var(--color-surface-2);
+    font-size: 13px;
+}
+
+.service-bar__inner {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+}
+
+.service-bar__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0 20px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    .icon-button {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+.service-bar__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding-block: 8px;
+    border-bottom: 2px solid transparent;
+    color: var(--color-muted);
+    text-decoration: none;
+
+    &:hover {
+        color: var(--color-heading);
+        border-bottom-color: var(--color-accent);
+    }
+
+    &[aria-current="true"] {
+        color: var(--color-heading);
+        font-weight: 600;
+        border-bottom-color: var(--color-accent);
+    }
 }
 
 .site-header__inner {
+    padding-block: 18px;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -32,14 +95,15 @@
     margin: 0;
     padding: 0;
     list-style: none;
-    font-size: 15.5px;
+    font-size: 17px;
+    font-weight: 500;
 }
 
 .site-nav__link {
     display: inline-block;
     padding-block: 4px;
     border-bottom: 2px solid transparent;
-    color: var(--color-text);
+    color: var(--color-heading);
     text-decoration: none;
 
     &:hover {
@@ -49,15 +113,9 @@
 
     &[aria-current="page"] {
         color: var(--color-heading);
-        font-weight: 600;
+        font-weight: 700;
         border-bottom-color: var(--color-accent);
     }
-}
-
-/* Einfache Sprache, Sprachumschalter: zurückhaltend */
-.site-nav__link--quiet {
-    color: var(--color-muted);
-    font-size: 14px;
 }
 
 /* Kontakt: Pill, aktiv = gefüllt */
@@ -77,20 +135,7 @@
 
 .lang-switch {
     display: flex;
-    gap: 8px;
-
-    [aria-current="true"] {
-        color: var(--color-heading);
-        font-weight: 600;
-        border-bottom-color: var(--color-accent);
-    }
-}
-
-/* Werkzeuge rechts: Theme-Schalter, mobil zusätzlich Menü-Button */
-.site-header__tools {
-    display: flex;
-    align-items: center;
-    gap: 4px;
+    gap: 12px;
 }
 
 .icon-button {
@@ -182,6 +227,12 @@
     .site-nav__link--cta {
         margin-block: 10px;
         text-align: center;
+    }
+
+    /* Offenes Menü bleibt auch in niedrigen Fenstern erreichbar */
+    .site-nav.is-open {
+        max-height: calc(100dvh - 90px);
+        overflow-y: auto;
     }
 
     .site-nav[data-js]:not(.is-open) {

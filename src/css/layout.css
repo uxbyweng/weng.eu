@@ -7,9 +7,13 @@
     padding-inline: var(--gutter);
 }
 
+/* Inhaltsbereich: ein einheitlicher Grund, Karten und Boxen heben sich mit --color-bg ab */
+main {
+    background: var(--color-surface);
+}
+
 .section {
     padding-block: var(--section-space);
-    border-top: 1px solid var(--color-line);
 
     &.section--surface {
         background: var(--color-surface);

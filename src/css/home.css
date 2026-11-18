@@ -185,7 +185,7 @@
 /* ---- Kundenzeile ---- */
 .clients {
     padding-block: clamp(28px, 4vw, 44px);
-    border-block: 1px solid var(--color-line);
+    background: var(--color-warm);
 }
 
 .clients__label {
@@ -197,23 +197,54 @@
     text-transform: uppercase;
 }
 
+/* Logoliste: Graustufen, bei Hover/Fokus in Farbe. Logos ohne Datei erscheinen als Text. */
 .clients__list {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px 0;
+    align-items: center;
+    gap: 20px clamp(28px, 4vw, 56px);
     margin: 0;
     padding: 0;
-    color: var(--color-heading);
+    list-style: none;
+}
+
+.clients__logo {
+    display: block;
+    width: auto;
+    height: var(--logo-h, 40px);
+    max-width: 100%;
+    filter: grayscale(1) contrast(1.2);
+    opacity: 0.9;
+    mix-blend-mode: multiply; /* weißer Logo-Grund (JPG/PNG) verschwindet auf dem warmen Band */
+    transition: filter 0.2s, opacity 0.2s;
+
+    &:hover {
+        filter: none;
+        opacity: 1;
+    }
+}
+
+.clients__name {
+    color: var(--color-muted);
     font-family: var(--font-heading);
     font-size: clamp(17px, 1.8vw, 21px);
     font-weight: 600;
-    list-style: none;
+    letter-spacing: 0.04em;
+}
 
-    /* Trennpunkt hinter dem Namen: bricht die Liste um, steht er am Zeilenende statt am Anfang der nächsten Zeile */
-    li:not(:last-child)::after {
-        content: "·";
-        margin-inline: 0.6em;
-        color: var(--color-muted);
+/* Dunkles Theme: Logos auf heller Kachel, sonst sind dunkle Schriftzüge unlesbar */
+:root[data-bs-theme="dark"] .clients__logo {
+    box-sizing: content-box;
+    padding: 8px 12px;
+    border-radius: var(--radius-control);
+    background: #fff;
+    mix-blend-mode: normal;
+    opacity: 0.9;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .clients__logo {
+        transition: none;
     }
 }
 
