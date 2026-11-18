@@ -61,6 +61,9 @@ return [
   'crumb.pangolin-doxx'      => 'Pangolin Doxx Film',
   'crumb.circus-schatzinsel' => 'Circus Schatzinsel',
   'crumb.toma-multivision'   => 'Toma Multivision',
+  'crumb.emoree'            => 'Emoree',
+  'crumb.ttz-bremerhaven'   => 'TTZ Bremerhaven',
+  'crumb.mira-beau'         => 'Mira-Beau',
 
   // --- Contact band ---
   'band.eyebrow'       => 'Contact',

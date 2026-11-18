@@ -8,6 +8,9 @@
     /* Fester Kopf (position: sticky, critical.css): die Service-Leiste scrollt weg, die Hauptnavigation bleibt stehen */
     /* 2 px Zugabe: sonst bleibt durch Rundung der Unterstrich (DE/EN) am Rand sichtbar */
     top: calc(-1 * var(--service-bar-h) - 2px);
+    /* kein Weichzeichner: er würde das mobile Vollbild-Menü (position: fixed) an den Kopf binden */
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
 }
 
 /* Sprung- und Fokusziele nicht unter dem festen Kopf verstecken (WCAG 2.4.11) */
@@ -189,6 +192,12 @@ html {
     }
 }
 
+/* Service-Elemente im Menü: nur mobil sichtbar (am Desktop stehen sie in der Service-Leiste) */
+.site-nav__service,
+.site-nav__external {
+    display: none;
+}
+
 /* Desktop: Logo | Navigation | Werkzeuge in einer Zeile */
 @media (min-width: 768px) {
     .nav-toggle {
@@ -203,39 +212,130 @@ html {
         flex-basis: 100%;
     }
 
+    /* Hauptpunkte: groß und gut tippbar */
     .site-nav__list {
         flex-direction: column;
         align-items: stretch;
         gap: 0;
-        font-size: 18px;
+        font-family: var(--font-heading);
+        font-size: 28px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
 
         li {
             border-bottom: 1px solid var(--color-line);
         }
 
         li:last-child {
+            margin-top: 24px;
             border-bottom: 0;
         }
     }
 
     .site-nav__link {
         display: block;
-        padding-block: 14px;
+        padding-block: 13px;
         border-bottom: 0;
     }
 
-    .site-nav__link--cta {
-        margin-block: 10px;
+    /* Aktiver Punkt: roter Unterstrich unter dem Text (nicht über die ganze Zeile) */
+    .site-nav__link[aria-current="page"]:not(.site-nav__link--cta) {
+        text-decoration: underline;
+        text-decoration-color: var(--color-accent);
+        text-decoration-thickness: 3px;
+        text-underline-offset: 8px;
+    }
+
+    /* Kontakt: gefüllter Button über die ganze Breite (der Rahmen darf nicht von .site-nav__link überschrieben werden) */
+    .site-nav__link.site-nav__link--cta {
+        padding: 16px 24px;
+        border: 1.5px solid var(--button-bg);
+        background: var(--button-bg);
+        color: #fff;
+        font-family: var(--font-body);
+        font-size: 18px;
         text-align: center;
     }
 
-    /* Offenes Menü bleibt auch in niedrigen Fenstern erreichbar */
+    /* Externe Profile */
+    .site-nav__external {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        margin: 20px 0 0;
+        padding: 0;
+        list-style: none;
+        font-size: 20px;
+
+        a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding-block: 10px;
+            color: var(--color-heading);
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        .ext-icon {
+            width: 14px;
+            height: 14px;
+            fill: currentColor;
+        }
+    }
+
+    /* Service-Leiste entfällt, ihre Elemente stehen unten im Menü */
+    .service-bar {
+        display: none;
+    }
+
+    .site-header {
+        top: 0;
+    }
+
+    /* Geöffnet: Menü über den ganzen Bildschirm. Logo und Menü-Button bleiben darüber sichtbar. */
+    .site-header__logo,
+    .nav-toggle {
+        position: relative;
+        z-index: 2;
+    }
+
     .site-nav.is-open {
-        max-height: calc(100dvh - 90px);
+        position: fixed;
+        inset: 0;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 88px var(--gutter) 28px;
         overflow-y: auto;
+        background: var(--color-bg);
+    }
+
+    .site-nav__service {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 4px 16px;
+        margin-top: auto; /* im Vollbild-Menü nach unten */
+        padding-top: 20px;
+        border-top: 1px solid var(--color-line);
+        font-size: 15px;
+
+        .service-bar__link {
+            padding-block: 10px;
+        }
     }
 
     .site-nav[data-js]:not(.is-open) {
         display: none;
     }
+}
+
+/* Seite hinter dem geöffneten Vollbild-Menü nicht scrollen */
+html.menu-open {
+    overflow: hidden;
 }

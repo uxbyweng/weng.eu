@@ -3,7 +3,7 @@
  *
  * Markup (includes/header.php): <button class="nav-toggle" hidden aria-controls="site-nav" …> und <nav id="site-nav">.
  * Ohne JS bleibt der Button versteckt und die Navigation sichtbar. Mit JS wird der Button eingeblendet
- * und die Navigation auf kleinen Bildschirmen eingeklappt (CSS: .site-nav[data-js]:not(.is-open)).
+ * und die Navigation auf kleinen Bildschirmen eingeklappt (CSS: .site-nav[data-js]:not(.is-open)). Geöffnet füllt das Menü den ganzen Bildschirm.
  */
 const DESKTOP_QUERY = "(min-width: 768px)";
 const SCROLL_DELTA = 10;
@@ -17,6 +17,7 @@ export function initNavToggle(): void {
 
     const setOpen = (open: boolean): void => {
         nav.classList.toggle("is-open", open);
+        document.documentElement.classList.toggle("menu-open", open); // CSS: html.menu-open sperrt das Scrollen der Seite dahinter
         button.setAttribute("aria-expanded", String(open));
         button.setAttribute("aria-label", (open ? button.dataset.labelClose : button.dataset.labelOpen) ?? "");
     };

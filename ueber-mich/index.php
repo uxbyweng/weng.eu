@@ -26,9 +26,16 @@ $tools = [
         <!-- Hero: Text + Porträt -->
         <section class="about-hero" aria-labelledby="about-title">
             <div class="wrap about-hero__inner">
-                <div class="about-hero__text">
+                <div class="about-hero__head">
                     <p class="eyebrow"><?= e(t('about.eyebrow')) ?></p>
                     <h1 id="about-title"><?= e(t('about.title')) ?></h1>
+                </div>
+                <figure class="about-hero__figure">
+                    <img src="/assets/img/home/weng_profile_1040x1300.webp"
+                        srcset="/assets/img/home/weng_profile_520x650.webp 520w, /assets/img/home/weng_profile_1040x1300.webp 1040w"
+                        sizes="(max-width: 460px) 100vw, 460px" alt="<?= e(t('about.portrait.alt')) ?>" width="1040" height="1300" fetchpriority="high" decoding="async">
+                </figure>
+                <div class="about-hero__text">
                     <p class="lead"><?= e(t('about.lead1')) ?></p>
                     <p class="lead"><?= e(t('about.lead2')) ?></p>
                     <dl class="case-facts case-facts--compact">
@@ -37,11 +44,6 @@ $tools = [
                         <?php endforeach; ?>
                     </dl>
                 </div>
-                <figure class="about-hero__figure">
-                    <img src="/assets/img/home/weng_profile_1040x1300.webp"
-                        srcset="/assets/img/home/weng_profile_520x650.webp 520w, /assets/img/home/weng_profile_1040x1300.webp 1040w"
-                        sizes="(max-width: 460px) 100vw, 460px" alt="<?= e(t('about.portrait.alt')) ?>" width="1040" height="1300" fetchpriority="high" decoding="async">
-                </figure>
             </div>
         </section>
 

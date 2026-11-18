@@ -43,3 +43,19 @@ CLAUDE.md
 # Nur lokal: Design-Unterlagen und Experimente
 docs/
 test/
+
+# TTZ Bremerhaven: private Unterlagen (Verträge, Angebote, Mails) nie committen; nur index.php der Projektseite
+projekte/ttz-bremerhaven/Mails/
+projekte/ttz-bremerhaven/*.doc
+projekte/ttz-bremerhaven/*.DOC
+projekte/ttz-bremerhaven/*.pdf
+projekte/ttz-bremerhaven/*.png
+*.msg
+
+# Private Unterlagen in Projektordnern (Rechnungen, Mails als PDF/Word) nie committen oder deployen
+projekte/*/*.pdf
+projekte/*/*.doc
+projekte/*/*.docx
+
+# Mira-Beau: Roh-Screenshot (Kopie liegt in assets/img/projects/mira-beau/)
+projekte/mira-beau/image.png

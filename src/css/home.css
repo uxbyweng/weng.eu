@@ -10,21 +10,56 @@
     color: var(--color-text);
 }
 
+/* Mobil: Titel, Foto, Lead, Buttons untereinander. Ab 860 px: Text links, Foto rechts über alle Zeilen. */
 .hero__inner {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 48px clamp(32px, 6vw, 88px);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+        "title"
+        "figure"
+        "lead"
+        "actions";
+    align-items: start;
+    column-gap: clamp(32px, 6vw, 88px);
 }
 
 .hero__text {
-    flex: 1 1 480px;
+    display: contents; /* Titel, Lead und Buttons sind direkte Grid-Elemente, damit das Foto dazwischen stehen kann */
+}
+
+.hero__title {
+    grid-area: title;
+}
+
+.hero__lead {
+    grid-area: lead;
+}
+
+.hero__actions {
+    grid-area: actions;
 }
 
 .hero__figure {
-    flex: 1 1 260px;
+    grid-area: figure;
+    width: 100%;
     max-width: 320px;
-    margin: 0;
+    margin: 28px auto 0; /* mobil horizontal zentriert */
+}
+
+@media (min-width: 860px) {
+    .hero__inner {
+        grid-template-columns: minmax(0, 1fr) minmax(260px, 320px);
+        grid-template-areas:
+            "title figure"
+            "lead figure"
+            "actions figure";
+        grid-template-rows: auto auto 1fr;
+    }
+
+    .hero__figure {
+        align-self: center;
+        margin: 0;
+    }
 }
 
 /* Ein <h1>, zwei Stufen: Name groß, Rolle darunter */
@@ -139,11 +174,11 @@
 
     .project-media {
         display: block;
-        transition: border-color 0.15s;
+        transition: box-shadow 0.2s;
     }
 
     &:hover .project-media {
-        border-color: var(--color-accent);
+        box-shadow: var(--shadow-hover);
     }
 }
 

@@ -24,6 +24,7 @@ $clients = [
     ['Mira-Beau', null, 0, 0, 0],
     ['Circus Schatzinsel', 'circus-schatzinsel.png', 600, 51, 22],
     ['Toma Multivision', 'toma.gif', 110, 110, 44],
+    ['TTZ Bremerhaven', 'ttz-bremerhaven.png', 158, 140, 52],
 ];
 ?>
 

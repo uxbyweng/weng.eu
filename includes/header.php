@@ -6,14 +6,10 @@ $navItems = [
     ['/ueber-mich/', 'nav.about', false],
 ];
 $onEasy = str_starts_with(current_path(), '/einfache-sprache');
-?>
-<a class="skip-link" href="#main"><?= e(t('skip')) ?></a>
 
-<header class="site-header">
-    <?php /* Service-Leiste: Varianten der ganzen Seite (Einfache Sprache, Sprache, Darstellung). Auf jeder Seite an derselben Stelle. */ ?>
-    <div class="service-bar">
-        <div class="wrap service-bar__inner">
-            <ul class="service-bar__list">
+// Service-Elemente (Einfache Sprache, Sprache, Darstellung): einmal in der Service-Leiste (Desktop) und einmal im Menü (mobil).
+// Die jeweils nicht sichtbare Fassung ist per CSS display:none und damit auch für Screenreader und Tastatur aus dem Weg. $themeId: id nur einmal vergeben.
+$serviceItems = function (string $themeId) use ($onEasy): void { ?>
                 <li>
                     <?php if ($onEasy): ?>
                         <a class="service-bar__link" href="<?= url('/') ?>"><?= e(t('nav.everyday')) ?></a>
@@ -33,7 +29,7 @@ $onEasy = str_starts_with(current_path(), '/einfache-sprache');
                     <?php endforeach; ?>
                 </li>
                 <li>
-                    <button id="toggleTheme" class="icon-button theme-toggle" type="button" aria-pressed="false"
+                    <button <?= $themeId ?> class="icon-button theme-toggle" data-theme-toggle type="button" aria-pressed="false"
                         aria-label="<?= e(t('theme.activate')) ?>"
                         data-label-activate="<?= e(t('theme.activate')) ?>"
                         data-label-deactivate="<?= e(t('theme.deactivate')) ?>">
@@ -46,6 +42,16 @@ $onEasy = str_starts_with(current_path(), '/einfache-sprache');
                         </svg>
                     </button>
                 </li>
+<?php };
+?>
+<a class="skip-link" href="#main"><?= e(t('skip')) ?></a>
+
+<header class="site-header">
+    <?php /* Service-Leiste (nur Desktop): Varianten der ganzen Seite. Auf jeder Seite an derselben Stelle. */ ?>
+    <div class="service-bar">
+        <div class="wrap service-bar__inner">
+            <ul class="service-bar__list">
+                <?php $serviceItems('id="toggleTheme"'); ?>
             </ul>
         </div>
     </div>
@@ -61,6 +67,15 @@ $onEasy = str_starts_with(current_path(), '/einfache-sprache');
                     <li><a class="site-nav__link" href="<?= url($href) ?>" <?= aria_current($href, $prefix) ?>><?= e(t($key)) ?></a></li>
                 <?php endforeach; ?>
                 <li><a class="site-nav__link site-nav__link--cta" href="<?= url('/kontakt/') ?>" <?= aria_current('/kontakt/', false) ?>><?= e(t('nav.contact')) ?></a></li>
+            </ul>
+            <?php /* Mobil, nur im Vollbild-Menü: externe Profile (öffnen in neuem Fenster) */ ?>
+            <ul class="site-nav__external">
+                <li><a href="<?= e(SITE_LINKEDIN) ?>" target="_blank" rel="noopener noreferrer">LinkedIn <?= ext_icon() ?><?= new_window_hint() ?></a></li>
+                <li><a href="<?= e(SITE_GITHUB) ?>" target="_blank" rel="noopener noreferrer">GitHub <?= ext_icon() ?><?= new_window_hint() ?></a></li>
+            </ul>
+            <?php /* Mobil: Service-Elemente im ausgeklappten Menü statt in der Leiste */ ?>
+            <ul class="site-nav__service service-bar__list">
+                <?php $serviceItems(''); ?>
             </ul>
         </nav>
 

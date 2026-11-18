@@ -88,6 +88,30 @@ $archive = [
         'text' => e(t('projects.toma.text')),
         'link' => $link('/projekte/toma-multivision/', 'projects.view', 'projects.toma.name'),
     ],
+    [
+        'img' => $picture('emoree/screen-startseite-emoree', true, t('projects.emoree.alt'), 1200, 800),
+        'href' => '/projekte/emoree/',
+        'meta' => e(t('projects.emoree.meta')),
+        'name' => t('projects.emoree.name'),
+        'text' => e(t('projects.emoree.text')),
+        'link' => $link('/projekte/emoree/', 'projects.view', 'projects.emoree.name'),
+    ],
+    [
+        'img' => $picture('ttz-bremerhaven/screen-iwapil', true, t('projects.ttz.alt'), 1200, 800),
+        'href' => '/projekte/ttz-bremerhaven/',
+        'meta' => e(t('projects.ttz.meta')),
+        'name' => t('projects.ttz.name'),
+        'text' => e(t('projects.ttz.text')),
+        'link' => $link('/projekte/ttz-bremerhaven/', 'projects.view', 'projects.ttz.name'),
+    ],
+    [
+        'img' => $picture('mira-beau/screen-aktuelles-mira-beau', true, t('projects.mira.alt'), 1200, 840),
+        'href' => '/projekte/mira-beau/',
+        'meta' => e(t('projects.mira.meta')),
+        'name' => t('projects.mira.name'),
+        'text' => e(t('projects.mira.text')),
+        'link' => $link('/projekte/mira-beau/', 'projects.view', 'projects.mira.name'),
+    ],
 ];
 ?>
 

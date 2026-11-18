@@ -40,3 +40,23 @@ assets/img/projects/pitayo/
 assets/img/projects/toma/*.mp4
 assets/img/projects/toma/*.swf
 assets/swf/
+
+# Rohmaterial und private Unterlagen in Projektordnern (nur Seitenquelle index.php gehört auf den Server)
+projekte/emoree/logo_emoree/
+projekte/emoree/emoree_*
+projekte/emoree/screen_startseite-emoree.png
+projekte/*/*.pdf
+projekte/*/*.psd
+projekte/*/*.zip
+
+# TTZ Bremerhaven: Verträge, Angebote, Mails und Rohdateien (nur index.php gehört auf den Server)
+projekte/ttz-bremerhaven/Mails/
+projekte/ttz-bremerhaven/*.doc
+projekte/ttz-bremerhaven/*.DOC
+projekte/ttz-bremerhaven/*.pdf
+projekte/ttz-bremerhaven/*.png
+projekte/*/*.doc
+projekte/*/*.docx
+
+# Mira-Beau: Roh-Screenshot (Kopie liegt in assets/img/projects/mira-beau/)
+projekte/mira-beau/image.png
