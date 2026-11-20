@@ -15,11 +15,11 @@ $projectLink = fn(string $href, string $nameKey): string =>
 $clients = [
     [t('project.pk.name'), 'park-klinik.webp', 350, 85, 40],
     [t('project.lisa.name'), 'lisa-haller.svg', 385, 73, 34],
-    ['Hausarztpraxis Mengel & Roggan', 'hausarztpraxis-mengel.webp', 420, 120, 44],
+    ['Hausarztpraxis Mengel & Roggan', 'hausarztpraxis-mengel.webp', 308, 88, 44],
     ['Pangolin Doxx Film', 'pangolin-doxx.png', 220, 98, 44],
     ['STRATO (2005–2025)', 'strato.svg', 531, 114, 30],
     ['Die Holzbläser', 'die-holzblaeser.png', 120, 150, 56],
-    ['PITAYO', 'pitayo.png', 360, 252, 56],
+    ['PITAYO', 'pitayo.png', 160, 112, 56],
     ['Emoree', 'emoree.jpg', 300, 131, 44],
     ['Mira-Beau', 'mira-beau.png', 300, 80, 40],
     ['Circus Schatzinsel', 'circus-schatzinsel.png', 600, 51, 22],
@@ -50,8 +50,8 @@ $clients = [
                 </div>
                 <figure class="hero__figure portrait">
                     <img src="/assets/img/home/weng_profile_square_640.webp"
-                        srcset="/assets/img/home/weng_profile_square_320.webp 320w, /assets/img/home/weng_profile_square_640.webp 640w, /assets/img/home/weng_profile_square_960.webp 960w"
-                        sizes="(max-width: 320px) 100vw, 320px" alt="<?= e(t('home.hero.portrait_alt')) ?>" width="640" height="640" fetchpriority="high" decoding="async">
+                        srcset="/assets/img/home/weng_profile_square_320.webp 320w, /assets/img/home/weng_profile_square_480.webp 480w, /assets/img/home/weng_profile_square_640.webp 640w, /assets/img/home/weng_profile_square_960.webp 960w"
+                        sizes="(max-width: 859px) 250px, 320px" alt="<?= e(t('home.hero.portrait_alt')) ?>" width="640" height="640" fetchpriority="high" decoding="async">
                 </figure>
             </div>
         </section>
@@ -71,7 +71,7 @@ $clients = [
                     <article class="project-card">
                         <h3><?= e(t('project.pk.name')) ?></h3>
                         <a class="project-media-link" href="<?= e(url('/projekte/park-klinik/')) ?>" tabindex="-1" aria-hidden="true">
-                            <?= project_picture('park-klinik/screen-startseite-redesign-park-klinik-birkenwerder', true, t('project.pk.alt'), 1200, 800) ?>
+                            <?= project_picture('park-klinik/screen-startseite-redesign-park-klinik-birkenwerder', t('project.pk.alt'), 1200, 800) ?>
                         </a>
                         <p class="project-meta"><?= e(t('project.pk.meta')) ?></p>
                         <p><?= e(t('project.pk.text')) ?></p>
@@ -81,7 +81,7 @@ $clients = [
                     <article class="project-card">
                         <h3><?= e(t('project.lisa.name')) ?></h3>
                         <a class="project-media-link" href="<?= e(url('/projekte/lisa/')) ?>" tabindex="-1" aria-hidden="true">
-                            <?= project_picture('lisa/screen-startseite-lisa-yashodhara-haller', true, t('project.lisa.alt'), 1200, 800) ?>
+                            <?= project_picture('lisa/screen-startseite-lisa-yashodhara-haller', t('project.lisa.alt'), 1200, 800) ?>
                         </a>
                         <p class="project-meta"><?= e(t('project.lisa.kind')) ?> · <?= e(t('project.lisa.year')) ?> · <?= e(t('project.lisa.role')) ?></p>
                         <p><?= e(t('project.lisa.text')) ?></p>
@@ -142,7 +142,7 @@ $clients = [
             <div class="wrap teaser">
                 <figure class="teaser__photo">
                     <img src="/assets/img/home/weng_at_work_1400x1120.webp"
-                        srcset="/assets/img/home/weng_at_work_700x560.webp 700w, /assets/img/home/weng_at_work_1400x1120.webp 1400w"
+                        srcset="/assets/img/home/weng_at_work_480x384.webp 480w, /assets/img/home/weng_at_work_700x560.webp 700w, /assets/img/home/weng_at_work_1400x1120.webp 1400w"
                         sizes="(min-width: 1000px) 480px, 100vw" alt="<?= e(t('home.about.photo_alt')) ?>"
                         width="1400" height="1120" loading="lazy" decoding="async">
                 </figure>

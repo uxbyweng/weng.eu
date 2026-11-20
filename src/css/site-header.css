@@ -18,6 +18,23 @@ html {
     scroll-padding-top: 96px;
 }
 
+/* Wenig Höhe (Querformat am Handy, 400 % Zoom am Desktop): der Kopf scrollt mit, statt einen großen Teil des Bildschirms dauerhaft zu belegen.
+   Mit geöffnetem Menü bleibt er oben, damit der Menü-Button erreichbar ist. */
+@media (max-height: 520px) {
+    .site-header {
+        position: static;
+    }
+
+    html {
+        scroll-padding-top: 0;
+    }
+
+    html.menu-open .site-header {
+        position: sticky;
+        top: 0;
+    }
+}
+
 /* Service-Leiste: Einfache Sprache, DE/EN, Theme-Schalter (Varianten der ganzen Seite) */
 .service-bar {
     box-sizing: border-box;

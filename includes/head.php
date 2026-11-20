@@ -9,6 +9,11 @@
  */
 function render_head(array $meta = [], ?string $cspNonce = null): string
 {
+    // Nonce pro Anfrage (nur die Kontaktseite startet über session.php schon einen); danach die CSP senden
+    $cspNonce = $cspNonce ?: ($_SERVER['CSP_NONCE'] ?? '') ?: bin2hex(random_bytes(16));
+    $_SERVER['CSP_NONCE'] = $cspNonce;
+    send_csp_header($cspNonce);
+
     $lang = current_lang();
     $theme = 'light'; // Das Inline-Skript unten setzt den Modus aus localStorage bzw. der Systemeinstellung (es gibt kein Theme-Cookie)
     $nonce = $cspNonce ? ' nonce="' . e($cspNonce) . '"' : '';

@@ -98,6 +98,11 @@ SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png|webp|avif|ico|woff2?)$ no-gzip don
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
   Header always set X-Frame-Options "SAMEORIGIN"
   Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+  # HSTS: Browser nutzen die Domain nur noch über HTTPS. Mit 30 Tagen gestartet, nach einem fehlerfreien Monat auf 31536000 (1 Jahr) erhöhen.
+  Header always set Strict-Transport-Security "max-age=2592000"
+  # Fenster, die diese Seite öffnet oder von ihr geöffnet werden, teilen sich keinen Browsing-Kontext mit fremden Seiten
+  Header always set Cross-Origin-Opener-Policy "same-origin"
+  # Die Content-Security-Policy (mit Nonce pro Anfrage) sendet PHP: includes/head.php → send_csp_header()
 </IfModule>
 
 # === CACHING (ohne Expires-Module) ===

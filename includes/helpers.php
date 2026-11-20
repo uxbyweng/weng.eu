@@ -116,16 +116,46 @@ function critical_css_inline(?string $nonce = null): string {
 }
 
 /**
- * project_picture($base, $hasXs, $alt, $w, $h, $lazy)
- * Projekt-Screenshot als <picture>: WebP (mit kleiner Variante _xs, falls vorhanden), JPG nur als Fallback.
- * $base = Pfad relativ zu /assets/img/projects/ ohne Endung, z. B. 'lisa/screen-startseite-lisa'.
+ * send_csp_header($nonce)
+ * Content-Security-Policy mit Nonce für das Inline-Skript und das Critical CSS im <head>. Alles andere kommt von der eigenen Domain.
+ * - style-src-attr 'unsafe-inline': nur für style="--logo-h: …" an den Kundenlogos (Attribute, keine <style>-Blöcke).
+ * - Kein Trusted-Types-Zwang: contact-form.ts setzt Server-HTML per innerHTML (dafür bräuchte es erst eine Trusted-Types-Richtlinie).
  */
-function project_picture(string $base, bool $hasXs, string $alt, int $w, int $h, bool $lazy = true): string {
-  $dir  = '/assets/img/projects/';
-  $webp = $hasXs
-    ? $dir . $base . '_xs.webp 600w, ' . $dir . $base . '.webp 1200w'
-    : $dir . $base . '.webp ' . $w . 'w';
-  return '<picture><source type="image/webp" srcset="' . e($webp) . '" sizes="(min-width: 800px) 40vw, 100vw">'
+function send_csp_header(string $nonce): void {
+  if (headers_sent()) return;
+  $n = "'nonce-" . $nonce . "'";
+  header('Content-Security-Policy: ' . implode('; ', [
+    "default-src 'self'",
+    "script-src 'self' $n",
+    "style-src 'self' $n",
+    "style-src-attr 'unsafe-inline'",
+    "img-src 'self' data:",
+    "font-src 'self'",
+    "connect-src 'self'",
+    "media-src 'self'",
+    "object-src 'none'",
+    "base-uri 'self'",
+    "form-action 'self'",
+    "frame-ancestors 'self'",
+  ]));
+}
+
+/**
+ * project_picture($base, $alt, $w, $h, $lazy)
+ * Projekt-Screenshot als <picture>: WebP, JPG nur als Fallback. $base = Pfad relativ zu /assets/img/projects/ ohne Endung,
+ * $w = Breite der Hauptdatei (<base>.webp). Kleinere Varianten <base>_xs.webp (600 px) und <base>_md.webp (900 px)
+ * werden nur ins srcset aufgenommen, wenn die Datei existiert.
+ */
+function project_picture(string $base, string $alt, int $w, int $h, bool $lazy = true): string {
+  $dir = '/assets/img/projects/';
+  $candidates = [];
+  foreach ([600 => '_xs', 900 => '_md'] as $width => $suffix) {
+    if ($width < $w && is_file($_SERVER['DOCUMENT_ROOT'] . $dir . $base . $suffix . '.webp')) {
+      $candidates[] = $dir . $base . $suffix . '.webp ' . $width . 'w';
+    }
+  }
+  $candidates[] = $dir . $base . '.webp ' . $w . 'w';
+  return '<picture><source type="image/webp" srcset="' . e(implode(', ', $candidates)) . '" sizes="(min-width: 800px) 40vw, 100vw">'
     . '<img class="project-media" src="' . e($dir . $base) . '.jpg" alt="' . e($alt) . '" width="' . $w . '" height="' . $h . '"'
     . ($lazy ? ' loading="lazy"' : '') . ' decoding="async"></picture>';
 }
