@@ -24,6 +24,7 @@ $clients = [
     ['Emoree', 'emoree', null, null, 44],
     ['Mira-Beau', 'mira-beau', null, null, 40],
     ['Circus Schatzinsel', 'circus-schatzinsel', null, null, 22],
+    ['Mimi Venezia', 'mimivenezia', null, null, 40],
     ['Toma Multivision', 'toma.gif', 110, 110, 44],
     ['TTZ Bremerhaven', 'ttz-bremerhaven', null, null, 52],
 ];
