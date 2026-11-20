@@ -1,7 +1,7 @@
 /*
  * Design-Tokens (Quelle: docs/…/design_handoff_weng_relaunch/README.md → "Design Tokens")
  * Helles Theme ist der Standard. Das dunkle Theme wird über data-bs-theme="dark" am <html> geschaltet
- * (setzt theme-toggle.ts; Attributname bleibt vorerst, bis die Altseiten migriert sind).
+ * (setzt theme-toggle.ts; der Attributname stammt noch aus der Bootstrap-Zeit).
  */
 
 :root {
@@ -74,11 +74,6 @@
     --section-space: clamp(64px, 9vw, 120px);
     --card-padding: clamp(24px, 3vw, 36px);
     --container-max: 1200px;
-
-    /* Das alte Sass-Stylesheet färbt den body mit --bg-body (#f5f7f1, gelblich) und !important –
-       beide Variablen auf den neuen Grund umleiten, bis das Legacy-CSS entfällt. */
-    --bg-body: var(--color-bg);
-    --bs-body-bg: var(--color-bg);
 
     color-scheme: light;
 }

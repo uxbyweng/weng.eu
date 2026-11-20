@@ -1,19 +1,21 @@
 :root {
-    --font-body: "Noto";
-    --font-headline: "Quicksand";
-    --bg-body: #f5f7f1;
-    --bs-body-bg: #f5f7f1;
-    --bs-body-color: #333;
+    /* Gleiche Namen und Werte wie in tokens.css – hier nur der Teil, den das erste Rendering braucht */
+    --font-body: "Noto", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-heading: "Quicksand", "Noto", system-ui, sans-serif;
+    --color-bg: #fff;
+    --color-text: #333;
+    --color-heading: #1f2b30;
 }
 [data-bs-theme="dark"] {
-    --bg-body: #212529;
-    --bs-body-bg: #212529;
-    --bs-body-color: #eee;
+    --color-bg: #212529;
+    --color-text: #eee;
+    --color-heading: #f4f6f6;
 }
 html,
 body {
+    background: var(--color-bg);
     font-family: var(--font-body);
-    color: var(--bs-body-color);
+    color: var(--color-text);
     line-height: 1.6;
     margin: 0;
     padding: 0;
@@ -27,9 +29,9 @@ body {
     transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
 }
 h1 {
-    font-family: var(--font-headline);
+    font-family: var(--font-heading);
     font-weight: 500;
-    color: var(--bs-body-color);
+    color: var(--color-heading);
     font-size: clamp(2rem, 5vw, 3rem);
     line-height: 1.2;
 }
