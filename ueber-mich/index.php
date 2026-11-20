@@ -102,18 +102,6 @@ $tools = [
                 </ol>
             </div>
         </section>
-
-        <!-- Zusammenarbeit -->
-        <section class="section" aria-label="<?= e(t('about.closing.contact')) ?>">
-            <div class="wrap">
-                <p class="about-closing__lead"><?= e(t('about.closing.lead')) ?></p>
-                <div class="about-closing__actions">
-                    <a class="button" href="<?= e(url('/kontakt/')) ?>"><?= e(t('about.closing.contact')) ?></a>
-                    <a class="button button--secondary" href="<?= e(SITE_LINKEDIN) ?>" target="_blank" rel="noopener noreferrer"><?= e(t('about.closing.linkedin')) ?> <?= ext_icon() ?><?= new_window_hint() ?></a>
-                </div>
-                <p class="about-closing__note"><?= e(t('about.closing.note')) ?></p>
-            </div>
-        </section>
     </main>
 
     <?php include $_SERVER['DOCUMENT_ROOT'] . '/includes/footer.php'; ?>

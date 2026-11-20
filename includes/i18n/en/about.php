@@ -57,9 +57,4 @@ return [
   'about.tools.solid'    => 'Depending on the project',
   'about.tools.note'     => 'Right now I am deepening my backend skills (Node.js, SQL, auth) in a further training at neue fische, so that I can build projects from the interface down to the database myself. The first round produced Berlin Street View, a web app for Berlin street art built with Next.js and TypeScript.',
   'about.tools.note.link' => 'View Berlin Street View',
-
-  'about.closing.lead'     => 'I like working closely with teams, as an external partner or as part of the team.',
-  'about.closing.contact'  => 'Get in touch',
-  'about.closing.linkedin' => 'LinkedIn profile',
-  'about.closing.note'     => 'Away from websites I take photographs and occasionally design print, such as the camp newspaper of the International Circus Camp 2018.',
 ];

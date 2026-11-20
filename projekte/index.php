@@ -134,9 +134,9 @@ $archive = [
                 <div class="grid project-grid project-grid--page">
                     <?php foreach ($projects as $p): ?>
                         <article class="project-card">
+                            <h2><?= e($p['name']) ?></h2>
                             <a class="project-media-link" href="<?= e(url($p['href'])) ?>" tabindex="-1" aria-hidden="true"><?= $p['img'] ?></a>
                             <p class="project-meta"><?= $p['meta'] ?></p>
-                            <h2><?= e($p['name']) ?></h2>
                             <p><?= $p['text'] ?></p>
                             <?= $p['link'] ?>
                         </article>
@@ -152,9 +152,9 @@ $archive = [
                     <div class="grid project-grid project-grid--page">
                         <?php foreach ($archive as $p): ?>
                             <article class="project-card">
+                                <h3><?= e($p['name']) ?></h3>
                                 <a class="project-media-link" href="<?= e(url($p['href'])) ?>" tabindex="-1" aria-hidden="true"><?= $p['img'] ?></a>
                                 <p class="project-meta"><?= $p['meta'] ?></p>
-                                <h3><?= e($p['name']) ?></h3>
                                 <p><?= $p['text'] ?></p>
                                 <?= $p['link'] ?>
                             </article>

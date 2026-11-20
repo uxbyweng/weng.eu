@@ -57,9 +57,4 @@ return [
   'about.tools.solid'    => 'Je nach Projekt',
   'about.tools.note'     => 'Zurzeit vertiefe ich Backend-Entwicklung (Node.js, SQL, Auth) in einer Weiterbildung bei neue fische, damit ich Projekte vom Interface bis zur Datenbank selbst umsetzen kann. Aus der ersten Runde ist Berlin Street View entstanden, eine Web-App für Berliner Street Art mit Next.js und TypeScript.',
   'about.tools.note.link' => 'Berlin Street View ansehen',
-
-  'about.closing.lead'     => 'Ich arbeite gern eng mit Teams zusammen, als externer Partner oder fest im Team.',
-  'about.closing.contact'  => 'Kontakt aufnehmen',
-  'about.closing.linkedin' => 'LinkedIn-Profil',
-  'about.closing.note'     => 'Abseits von Websites fotografiere ich und gestalte gelegentlich Print, etwa die Campzeitung des Internationalen Circuscamps 2018.',
 ];

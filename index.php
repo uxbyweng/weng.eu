@@ -69,23 +69,23 @@ $clients = [
 
                 <div class="grid project-grid">
                     <article class="project-card">
+                        <h3><?= e(t('project.pk.name')) ?></h3>
                         <a class="project-media-link" href="<?= e(url('/projekte/park-klinik/')) ?>" tabindex="-1" aria-hidden="true">
                             <img class="project-media" src="/assets/img/projects/park-klinik/screen-startseite-redesign-park-klinik-birkenwerder.jpg"
                                 alt="<?= e(t('project.pk.alt')) ?>" width="1200" height="800" loading="lazy" decoding="async">
                         </a>
                         <p class="project-meta"><?= e(t('project.pk.meta')) ?></p>
-                        <h3><?= e(t('project.pk.name')) ?></h3>
                         <p><?= e(t('project.pk.text')) ?></p>
                         <?= $projectLink('/projekte/park-klinik/', 'project.pk.name') ?>
                     </article>
 
                     <article class="project-card">
+                        <h3><?= e(t('project.lisa.name')) ?></h3>
                         <a class="project-media-link" href="<?= e(url('/projekte/lisa/')) ?>" tabindex="-1" aria-hidden="true">
                             <img class="project-media" src="/assets/img/projects/lisa/screen-startseite-lisa-yashodhara-haller.jpg"
                                 alt="<?= e(t('project.lisa.alt')) ?>" width="1200" height="800" loading="lazy" decoding="async">
                         </a>
                         <p class="project-meta"><?= e(t('project.lisa.kind')) ?> · <?= e(t('project.lisa.year')) ?> · <?= e(t('project.lisa.role')) ?></p>
-                        <h3><?= e(t('project.lisa.name')) ?></h3>
                         <p><?= e(t('project.lisa.text')) ?></p>
                         <?= $projectLink('/projekte/lisa/', 'project.lisa.name') ?>
                     </article>
