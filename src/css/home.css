@@ -264,6 +264,11 @@
     list-style: none;
 }
 
+/* <picture> (WebP mit Fallback) soll das Layout nicht beeinflussen */
+.clients__list picture {
+    display: contents;
+}
+
 .clients__logo {
     display: block;
     width: auto;

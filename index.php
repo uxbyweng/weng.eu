@@ -19,9 +19,9 @@ $clients = [
     ['Pangolin Doxx Film', 'pangolin-doxx.png', 220, 98, 44],
     ['STRATO (2005–2025)', 'strato.svg', 531, 114, 30],
     ['Die Holzbläser', 'die-holzblaeser.png', 120, 150, 56],
-    ['PITYAO', null, 0, 0, 0],
+    ['PITAYO', 'pitayo.png', 360, 252, 56],
     ['Emoree', 'emoree.jpg', 300, 131, 44],
-    ['Mira-Beau', null, 0, 0, 0],
+    ['Mira-Beau', 'mira-beau.png', 300, 80, 40],
     ['Circus Schatzinsel', 'circus-schatzinsel.png', 600, 51, 22],
     ['Toma Multivision', 'toma.gif', 110, 110, 44],
     ['TTZ Bremerhaven', 'ttz-bremerhaven.png', 158, 140, 52],
@@ -100,9 +100,15 @@ $clients = [
                 <ul class="clients__list">
                     <?php foreach ($clients as [$name, $logo, $w, $h, $show]): ?>
                         <li>
-                            <?php if ($logo): ?>
+                            <?php if ($logo):
+                                // PNG/JPG/GIF: WebP bevorzugen (falls vorhanden), die Originaldatei bleibt Fallback. SVG und WebP-Logos unverändert.
+                                $webp = preg_match('/\.(png|jpe?g|gif)$/i', $logo) ? preg_replace('/\.\w+$/', '.webp', $logo) : null;
+                                $hasWebp = $webp && is_file($_SERVER['DOCUMENT_ROOT'] . '/assets/img/clients/' . $webp);
+                            ?>
+                                <?php if ($hasWebp): ?><picture><source type="image/webp" srcset="/assets/img/clients/<?= e($webp) ?>"><?php endif; ?>
                                 <img class="clients__logo" src="/assets/img/clients/<?= e($logo) ?>" alt="<?= e($name) ?>" width="<?= $w ?>" height="<?= $h ?>"
                                     style="--logo-h: <?= $show ?>px" loading="lazy" decoding="async">
+                                <?php if ($hasWebp): ?></picture><?php endif; ?>
                             <?php else: ?>
                                 <span class="clients__name"><?= e($name) ?></span>
                             <?php endif; ?>
