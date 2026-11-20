@@ -16,7 +16,6 @@ bun.lock
 bunfig.toml
 tsconfig.json
 biome.json
-postcss.config.js
 .bun-version
 
 # Lokale Entwicklung

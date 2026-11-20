@@ -8,8 +8,8 @@ Last update: 04.11.2026
 
 ## Stack
 
--   Frontend: TypeScript (strict, ES modules, code splitting), Bootstrap 5 (Sass), no jQuery
--   Tooling: [Bun](https://bun.sh) (runtime, package manager, JS bundler), Dart Sass, Lightning CSS (prefixes + minify), Biome (lint/format), `tsc` (typecheck)
+-   Frontend: TypeScript (strict, ES modules, code splitting), plain CSS (no framework), no jQuery
+-   Tooling: [Bun](https://bun.sh) (runtime, package manager, JS bundler), Lightning CSS (prefixes + minify), Biome (lint/format), `tsc` (typecheck)
 -   Backend: PHP 8+ (router-based includes/partials)
 -   Deployment: GitHub Actions → SFTP (on every push to `main`)
 
@@ -23,9 +23,9 @@ bun run dev      # → http://localhost:3000
 `bun run dev` (VS Code: `Shift + W`) is a single process that
 
 1. starts the PHP dev server on `127.0.0.1:8000` (`router.php`, `WENG_DEV=1`),
-2. watches `src/` and rebuilds TypeScript and Sass on every change,
+2. watches `src/` and rebuilds TypeScript and CSS on every change,
 3. runs a small proxy on `localhost:3000` that injects live reload:
-    - `.scss` → stylesheet is swapped without a page reload
+    - `.css` → stylesheet is swapped without a page reload
     - `.ts` / `.php` → full reload
 
 ## Scripts
@@ -45,7 +45,7 @@ bun run dev      # → http://localhost:3000
 PHP resolves the hashed URL through the `asset()` helper in `includes/helpers.php`:
 
 ```php
-<link rel="stylesheet" href="<?= asset('styles.css') ?>">
+<link rel="stylesheet" href="<?= asset('main.css') ?>">
 <script type="module" src="<?= asset('site.js') ?>"></script>
 ```
 
@@ -72,15 +72,14 @@ Required in GitHub → Settings → Secrets and variables → Actions (repositor
 ```text
 src/
 ├─ ts/              # TypeScript (site.ts = entry, modules/ = lazy-loaded features)
-├─ scss/            # Bootstrap Sass + custom styles
-└─ css/             # critical.css (inlined in <head>)
+└─ css/             # plain CSS (main.css bundles the partials; critical.css is inlined in <head>)
 scripts/
-├─ build.ts         # production/dev build (Bun.build, Sass, Lightning CSS, manifest)
+├─ build.ts         # production/dev build (Bun.build, Lightning CSS, manifest)
 └─ dev.ts           # PHP server + watcher + live-reload proxy
 assets/
 ├─ dist/            # build output (git-ignored)
 ├─ img/             # optimized images
-├─ vendor/          # local libraries (fonts, Bootstrap CSS/icons)
+├─ vendor/          # local libraries (fonts)
 └─ video/           # mp4 videos
 includes/           # PHP partials
 kontakt/            # contact form
@@ -91,7 +90,7 @@ router.php          # routing for the PHP dev server
 ## Status
 
 -   Nov 2026: tooling migrated to Bun + TypeScript (strict), jQuery removed, automatic deployment via GitHub Actions.
--   Next: relaunch (design handoff in `docs/`), then trimming the Bootstrap CSS to what is actually used.
+-   Next: relaunch (design handoff in `docs/`), Bootstrap/Sass removed (Nov 2026), site runs on plain CSS only.
 
 ## License
 

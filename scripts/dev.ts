@@ -50,10 +50,9 @@ es.addEventListener("reload", () => location.reload());
 es.addEventListener("css", e => {
     const urls = JSON.parse(e.data);
     for (const link of document.querySelectorAll('link[rel="stylesheet"]')) {
-        const name = ["styles", "main"].find(n => link.href.includes("/assets/dist/" + n + "."));
-        if (!name || !urls[name + ".css"]) continue;
+        if (!link.href.includes("/assets/dist/main.") || !urls["main.css"]) continue;
         const next = link.cloneNode();
-        next.href = urls[name + ".css"];
+        next.href = urls["main.css"];
         next.onload = () => link.remove();
         link.after(next);
     }
@@ -140,7 +139,7 @@ const onChange = debounce(async (file: string) => {
         if (file.endsWith(".ts")) {
             await rebuild("js");
             broadcast("reload");
-        } else if (file.endsWith(".scss") || (file.endsWith(".css") && file.startsWith(`src${sep}css${sep}`))) {
+        } else if (file.endsWith(".css") && file.startsWith(`src${sep}css${sep}`)) {
             await rebuild("css");
             // critical.css ist inline im HTML → braucht einen echten Reload, Stylesheets nicht
             if (file.endsWith("critical.css")) broadcast("reload");

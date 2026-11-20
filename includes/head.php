@@ -22,9 +22,6 @@ function render_head(array $meta = [], ?string $cspNonce = null): string
         $jsonld[] = breadcrumb_json_ld(breadcrumb_trail());
     }
 
-    // Icon-Schrift der Altseiten: Versions-Hash für Cache-Busting (Vendor-Datei, nicht vom Build gehasht)
-    $iconsV = @filemtime($_SERVER['DOCUMENT_ROOT'] . '/assets/vendor/bootstrap/bootstrap-icons/bootstrap-icons.min.css') ?: time();
-
     ob_start(); ?>
 <!DOCTYPE html>
 <html lang="<?= $lang === 'en' ? 'en' : 'de' ?>" data-bs-theme="<?= e($theme) ?>">
@@ -57,9 +54,6 @@ function render_head(array $meta = [], ?string $cspNonce = null): string
     <meta name="theme-color" content="#ffffff">
     <?= critical_css_inline($cspNonce) ?>
 
-    <?php /* Altseiten (Bootstrap): styles.css + Icon-Schrift. Entfällt, sobald alle Seiten im neuen Design sind. */ ?>
-    <link rel="stylesheet" href="/assets/vendor/bootstrap/bootstrap-icons/bootstrap-icons.min.css?v=<?= $iconsV ?>">
-    <link rel="stylesheet" href="<?= asset('styles.css') ?>">
     <?php /* Neues Design */ ?>
     <link rel="stylesheet" href="<?= asset('main.css') ?>">
 

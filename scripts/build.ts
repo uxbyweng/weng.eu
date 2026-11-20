@@ -6,7 +6,7 @@
  *
  * Ausgabe: assets/dist/
  *   site.<hash>.js, <chunk>-<hash>.js   TypeScript-Bundle (ESM, Code-Splitting)
- *   styles.<hash>.css                   Sass → Lightning CSS (Prefixes laut browserslist, Minify)
+ *   main.<hash>.css                     src/css/main.css gebündelt (Lightning CSS: Prefixes laut browserslist, Minify)
  *   critical.min.css                    wird von PHP inline ins <head> geschrieben
  *   manifest.json                       Logischer Name → gehashte URL (liest includes/helpers.php)
  */
@@ -15,7 +15,6 @@ import { mkdir, readdir, rm } from "node:fs/promises";
 import { basename, join } from "node:path";
 import browserslist from "browserslist";
 import { browserslistToTargets, bundle, transform } from "lightningcss";
-import * as sass from "sass";
 import pkg from "../package.json" with { type: "json" };
 
 const ROOT = join(import.meta.dir, "..");
@@ -61,30 +60,6 @@ export async function buildJs({ dev = false }: BuildOptions = {}): Promise<Manif
 }
 
 export async function buildCss({ dev = false }: BuildOptions = {}): Promise<Manifest> {
-    const compiled = sass.compile(join(ROOT, "src/scss/styles.scss"), {
-        loadPaths: [join(ROOT, "node_modules")],
-        quietDeps: true,
-        sourceMap: dev,
-        sourceMapIncludeSources: dev,
-    });
-
-    const processed = transform({
-        filename: "styles.css",
-        code: Buffer.from(compiled.css),
-        minify: !dev,
-        targets,
-        sourceMap: dev,
-        inputSourceMap: compiled.sourceMap ? JSON.stringify(compiled.sourceMap) : undefined,
-    });
-
-    let css = processed.code.toString();
-    if (dev && processed.map) {
-        css += `\n/*# sourceMappingURL=data:application/json;base64,${Buffer.from(processed.map).toString("base64")} */`;
-    }
-
-    const file = `styles.${shortHash(css)}.css`;
-    await Bun.write(join(DIST, file), css);
-
     // Critical CSS: wird inline ins <head> geschrieben, braucht keinen Hash
     const critical = transform({
         filename: "critical.css",
@@ -94,10 +69,10 @@ export async function buildCss({ dev = false }: BuildOptions = {}): Promise<Mani
     });
     await Bun.write(join(DIST, "critical.min.css"), critical.code);
 
-    return { "styles.css": `${DIST_URL}/${file}`, ...(await buildMainCss({ dev })) };
+    return buildMainCss({ dev });
 }
 
-/** Neues Design: reines CSS (src/css/main.css, @imports werden gebündelt, Nesting & Co. für ältere Browser umgeschrieben). */
+/** Stylesheet: reines CSS (src/css/main.css, @imports werden gebündelt, Nesting & Co. für ältere Browser umgeschrieben). */
 export async function buildMainCss({ dev = false }: BuildOptions = {}): Promise<Manifest> {
     const bundled = bundle({
         filename: join(ROOT, "src/css/main.css"),
