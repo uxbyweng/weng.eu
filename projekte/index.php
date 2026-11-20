@@ -100,6 +100,14 @@ $archive = [
         'text' => e(t('projects.mira.text')),
         'link' => $link('/projekte/mira-beau/', 'projects.view', 'projects.mira.name'),
     ],
+    [
+        'img' => project_picture('mimivenezia/screen_mimivenezia_homepage', t('projects.mimi.alt')),
+        'href' => '/projekte/mimivenezia/',
+        'meta' => e(t('projects.mimi.meta')),
+        'name' => t('projects.mimi.name'),
+        'text' => e(t('projects.mimi.text')),
+        'link' => $link('/projekte/mimivenezia/', 'projects.view', 'projects.mimi.name'),
+    ],
 ];
 ?>
 

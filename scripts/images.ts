@@ -33,6 +33,8 @@ interface Options {
     max?: number;
     /** false = nur WebP (kein JPG/PNG-Fallback) */
     fallback?: boolean;
+    /** true = Fallback immer als JPG (auch aus PNG-Quelle, z. B. große Screenshots ohne Transparenz) */
+    jpg?: boolean;
 }
 interface Rule extends Options {
     /** Bildschlüssel = Pfad relativ zu src/img ohne Endung, z. B. "projects/lisa/screen-start" */
@@ -50,6 +52,7 @@ const RULES: Rule[] = [
     { match: /^clients\/hausarztpraxis-mengel$/, max: 308, fallback: false },
     { match: /^clients\/park-klinik$/, max: 330, fallback: false },
     { match: /^clients\//, fallback: true },
+    { match: /^projects\/mimivenezia\/screen_/, widths: [600, 700, 900], jpg: true },
     { match: /^projects\/berlin-street-view\/berlin-street-view-mobile/, max: 600 },
     { match: /^projects\//, widths: [600, 700, 900] },
 ];
@@ -134,7 +137,7 @@ async function processImage(file: string, key: string, rule: Options, hash: stri
     // Fallback: JPG neu kodiert (bei Bedarf verkleinert), PNG unverändert (z. B. Logos mit Transparenz)
     let fallback: ImageEntry["fallback"] = null;
     if (rule.fallback !== false && ext !== ".webp") {
-        if (ext === ".png") {
+        if (ext === ".png" && !rule.jpg) {
             await Bun.write(`${outBase}.png`, bytes);
             fallback = "png";
         } else {
@@ -171,7 +174,7 @@ export async function buildImages(): Promise<ImageManifest> {
         for (let file = queue.shift(); file; file = queue.shift()) {
             const key = posix(relative(SRC, file)).replace(/\.[^.]+$/, "");
             const found = RULES.find(r => r.match.test(key));
-            const rule: Options = { widths: found?.widths, max: found?.max, fallback: found?.fallback };
+            const rule: Options = { widths: found?.widths, max: found?.max, fallback: found?.fallback, jpg: found?.jpg };
             const bytes = await Bun.file(file).bytes();
             const hash = createHash("sha1")
                 .update(bytes)

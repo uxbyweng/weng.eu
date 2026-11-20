@@ -64,6 +64,7 @@ return [
   'crumb.emoree'            => 'Emoree',
   'crumb.ttz-bremerhaven'   => 'TTZ Bremerhaven',
   'crumb.mira-beau'         => 'Mira-Beau',
+  'crumb.mimivenezia'       => 'Mimi Venezia',
 
   // --- Kontakt-Band ---
   'band.eyebrow'       => 'Kontakt',

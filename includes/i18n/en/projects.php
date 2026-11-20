@@ -46,4 +46,8 @@ return [
   'projects.mira.meta'     => '2019 · Logo, concept, design, implementation',
   'projects.mira.text'     => 'Logo and website for a specialist in plastic and aesthetic surgery, with range of services, online appointment booking and search engine optimisation.',
   'projects.mira.alt'      => 'News page of the Mira-Beau website',
+  'projects.mimi.name'     => 'Mimi Venezia',
+  'projects.mimi.meta'     => '2007–2008 · Logo, website, print',
+  'projects.mimi.text'     => 'Logo, website, business cards, flyers and posters for a maker of Venetian-style glass jewellery from New Zealand.',
+  'projects.mimi.alt'      => 'Home page of the Mimi Venezia website with a photo of colourful glass beads',
 ];

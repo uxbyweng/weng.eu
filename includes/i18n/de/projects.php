@@ -47,4 +47,8 @@ return [
   'projects.mira.meta'     => '2019 · Logo, Konzept, Design, Umsetzung',
   'projects.mira.text'     => 'Logo und Website für eine Fachärztin für Plastische und Ästhetische Chirurgie, mit Leistungsspektrum, Online-Terminbuchung und Suchmaschinen-Optimierung.',
   'projects.mira.alt'      => 'Seite „Aktuelles“ der Mira-Beau-Website',
+  'projects.mimi.name'     => 'Mimi Venezia',
+  'projects.mimi.meta'     => '2007–2008 · Logo, Website, Printmedien',
+  'projects.mimi.text'     => 'Logo, Website, Visitenkarten, Flyer und Plakate für einen Hersteller von venezianischem Glasschmuck aus Neuseeland.',
+  'projects.mimi.alt'      => 'Startseite der Mimi-Venezia-Website mit Foto bunter Glasperlen',
 ];
