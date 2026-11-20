@@ -163,7 +163,7 @@
 /* ---- Projekte ---- */
 .project-media {
     width: 100%;
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 3 / 2; /* wie die Screenshots (1200 × 800), sonst schneidet object-fit: cover oben/unten ab */
     object-fit: cover;
     border: 1px solid var(--color-line);
     border-radius: var(--radius-image);
