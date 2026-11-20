@@ -167,7 +167,7 @@ html {
     display: none;
 }
 
-:root[data-bs-theme="dark"] {
+:root[data-theme="dark"] {
     .theme-toggle__moon {
         display: none;
     }

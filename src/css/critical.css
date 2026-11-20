@@ -6,7 +6,7 @@
     --color-text: #333;
     --color-heading: #1f2b30;
 }
-[data-bs-theme="dark"] {
+[data-theme="dark"] {
     --color-bg: #212529;
     --color-text: #eee;
     --color-heading: #f4f6f6;

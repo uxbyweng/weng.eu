@@ -289,7 +289,7 @@
 }
 
 /* Dunkles Theme: Logos auf heller Kachel, sonst sind dunkle Schriftzüge unlesbar */
-:root[data-bs-theme="dark"] .clients__logo {
+:root[data-theme="dark"] .clients__logo {
     box-sizing: content-box;
     padding: 8px 12px;
     border-radius: var(--radius-control);

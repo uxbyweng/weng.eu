@@ -6,7 +6,7 @@ function isTheme(value: string | null): value is Theme {
     return value === "light" || value === "dark";
 }
 
-/** Dunkelmodus-Schalter (Buttons mit [data-theme-toggle]: Service-Leiste und mobiles Menü). Das Icon wechselt per CSS anhand von data-bs-theme. */
+/** Dunkelmodus-Schalter (Buttons mit [data-theme-toggle]: Service-Leiste und mobiles Menü). Das Icon wechselt per CSS anhand von data-theme. */
 export function initThemeToggle(): void {
     const html = document.documentElement;
     const buttons = document.querySelectorAll<HTMLButtonElement>("[data-theme-toggle]");
@@ -14,7 +14,7 @@ export function initThemeToggle(): void {
 
     function applyTheme(theme: Theme): void {
         const isDark = theme === "dark";
-        html.setAttribute("data-bs-theme", theme);
+        html.setAttribute("data-theme", theme);
         for (const button of buttons) {
             button.setAttribute("aria-pressed", String(isDark));
             button.setAttribute("aria-label", (isDark ? button.dataset.labelDeactivate : button.dataset.labelActivate) ?? "");
@@ -23,7 +23,7 @@ export function initThemeToggle(): void {
 
     for (const button of buttons) {
         button.addEventListener("click", () => {
-            const next: Theme = html.getAttribute("data-bs-theme") === "dark" ? "light" : "dark";
+            const next: Theme = html.getAttribute("data-theme") === "dark" ? "light" : "dark";
             try {
                 localStorage.setItem(STORAGE_KEY, next);
             } catch {

@@ -1,7 +1,7 @@
 /*
  * Design-Tokens (Quelle: docs/…/design_handoff_weng_relaunch/README.md → "Design Tokens")
- * Helles Theme ist der Standard. Das dunkle Theme wird über data-bs-theme="dark" am <html> geschaltet
- * (setzt theme-toggle.ts; der Attributname stammt noch aus der Bootstrap-Zeit).
+ * Helles Theme ist der Standard. Das dunkle Theme wird über data-theme="dark" am <html> geschaltet
+ * (setzt theme-toggle.ts).
  */
 
 :root {
@@ -80,7 +80,7 @@
 
 /* Dunkles Theme – Werte abgeleitet aus der Pattern Library (Text #eee, Hintergrund #212529).
    TODO Inhaber: Kontraste und Optik prüfen, der Entwurf zeigt nur den hellen Modus. */
-:root[data-bs-theme="dark"] {
+:root[data-theme="dark"] {
     --color-accent: #ff6b45; /* auf dunklem Grund heller, damit Text-Kontrast ≥ 4.5:1 */
     --color-accent-hover: #ff8a6b;
     --color-accent-dark: #ff8a6b;

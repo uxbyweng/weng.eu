@@ -24,7 +24,7 @@ function render_head(array $meta = [], ?string $cspNonce = null): string
 
     ob_start(); ?>
 <!DOCTYPE html>
-<html lang="<?= $lang === 'en' ? 'en' : 'de' ?>" data-bs-theme="<?= e($theme) ?>">
+<html lang="<?= $lang === 'en' ? 'en' : 'de' ?>" data-theme="<?= e($theme) ?>">
 
 <head>
     <meta charset="UTF-8">
@@ -39,7 +39,7 @@ function render_head(array $meta = [], ?string $cspNonce = null): string
             var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
             var theme = stored ? stored : (prefersDark ? 'dark' : 'light');
             var de = document.documentElement;
-            de.setAttribute('data-bs-theme', theme);
+            de.setAttribute('data-theme', theme);
             de.style.backgroundColor = theme === 'dark' ? '#212529' : '#ffffff';
         })();
     </script>
