@@ -66,6 +66,7 @@ return [
   'crumb.mira-beau'         => 'Mira-Beau',
   'crumb.mimivenezia'       => 'Mimi Venezia',
   'crumb.holzblaeser'       => 'Die Holzbläser',
+  'crumb.effectiveinenglish' => 'EffectiveINenglish',
 
   // --- Contact band ---
   'band.eyebrow'       => 'Contact',

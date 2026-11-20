@@ -26,6 +26,7 @@ return [
   'projects.pd.alt'   => 'Home page of the Pangolin Doxx Film website',
 
   'projects.archive.title' => 'Archive',
+  'projects.archive.meta'  => '%d projects · 2004–2022',
   'projects.circus.name'    => 'Camp newspaper Circus Schatzinsel',
   'projects.circus.meta'    => '2018 · Layout, typography, print preparation',
   'projects.circus.text'    => 'Editorial design for a 16-page camp newspaper for the International Circus Camp.',
@@ -52,6 +53,10 @@ return [
   'projects.holz.name'     => 'Die Holzbläser',
   'projects.holz.meta'     => '2012–2022 · Website, shopfront, newsletters',
   'projects.holz.text'     => 'Website redesign and ten years of maintenance, window film for the shopfront and newsletters for a Berlin specialist shop for wind instruments.',
+  'projects.eie.name'      => 'EffectiveINenglish',
+  'projects.eie.meta'      => '2012 · Layout, WordPress implementation',
+  'projects.eie.text'      => 'Layout and WordPress website for the company EffectiveINenglish, which the owner could then maintain himself.',
+  'projects.eie.alt'       => 'Home page of the EffectiveINenglish website with slider',
   'projects.holz.alt'      => 'Home page of the Holzbläser website with a workshop photo',
   'projects.mimi.alt'      => 'Home page of the Mimi Venezia website with a photo of colourful glass beads',
 ];

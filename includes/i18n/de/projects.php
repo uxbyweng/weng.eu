@@ -27,6 +27,7 @@ return [
   'projects.pd.alt'   => 'Startseite der Website von Pangolin Doxx Film',
 
   'projects.archive.title' => 'Archiv',
+  'projects.archive.meta'  => '%d Projekte · 2004–2022',
   'projects.circus.name'    => 'Campzeitung Circus Schatzinsel',
   'projects.circus.meta'    => '2018 · Layout, Typografie, Druckaufbereitung',
   'projects.circus.text'    => 'Editorial Design für eine 16-seitige Campzeitung zum Internationalen Circuscamp.',
@@ -53,6 +54,10 @@ return [
   'projects.holz.name'     => 'Die Holzbläser',
   'projects.holz.meta'     => '2012–2022 · Website, Fassade, Newsletter',
   'projects.holz.text'     => 'Website-Redesign und Betreuung über zehn Jahre, Schaufensterfolie für die Fassade und Newsletter für ein Berliner Fachgeschäft für Blasinstrumente.',
+  'projects.eie.name'      => 'EffectiveINenglish',
+  'projects.eie.meta'      => '2012 · Layout, WordPress-Umsetzung',
+  'projects.eie.text'      => 'Layout und WordPress-Website für die Firma EffectiveINenglish, die der Inhaber anschließend selbst pflegen konnte.',
+  'projects.eie.alt'       => 'Startseite der Website von EffectiveINenglish mit Slider',
   'projects.holz.alt'      => 'Startseite der Website der Holzbläser mit Werkstattfoto',
   'projects.mimi.alt'      => 'Startseite der Mimi-Venezia-Website mit Foto bunter Glasperlen',
 ];

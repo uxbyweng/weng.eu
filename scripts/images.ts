@@ -54,6 +54,7 @@ const RULES: Rule[] = [
     { match: /^clients\//, fallback: true },
     { match: /^projects\/holzblaeser\/screen_holzblaeser_fassade_/, widths: [600, 700, 900, 1400], max: 2400, jpg: true },
     { match: /^projects\/holzblaeser\/screen_/, widths: [600, 700, 900], jpg: true },
+    { match: /^projects\/effectiveinenglish\/screen_/, widths: [600, 700, 900], jpg: true },
     { match: /^projects\/mimivenezia\/screen_/, widths: [600, 700, 900], jpg: true },
     { match: /^projects\/berlin-street-view\/berlin-street-view-mobile/, max: 600 },
     { match: /^projects\//, widths: [600, 700, 900] },

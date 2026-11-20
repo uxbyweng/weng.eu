@@ -58,8 +58,16 @@ $projects = [
     ],
 ];
 
-// Archiv: ältere Arbeiten
+// Archiv: ältere Arbeiten, nach Projektbeginn sortiert (neueste zuerst)
 $archive = [
+    [
+        'img' => project_picture('mira-beau/screen-aktuelles-mira-beau', t('projects.mira.alt')),
+        'href' => '/projekte/mira-beau/',
+        'meta' => e(t('projects.mira.meta')),
+        'name' => t('projects.mira.name'),
+        'text' => e(t('projects.mira.text')),
+        'link' => $link('/projekte/mira-beau/', 'projects.view', 'projects.mira.name'),
+    ],
     [
         'img' => project_picture('circus-schatzinsel/teaser-campzeitung-2018', t('projects.circus.alt')),
         'href' => '/projekte/circus-schatzinsel/',
@@ -67,14 +75,6 @@ $archive = [
         'name' => t('projects.circus.name'),
         'text' => e(t('projects.circus.text')),
         'link' => $link('/projekte/circus-schatzinsel/', 'projects.view', 'projects.circus.name'),
-    ],
-    [
-        'img' => project_picture('toma/screen-website-toma-multivision-2004', t('projects.toma.alt')),
-        'href' => '/projekte/toma-multivision/',
-        'meta' => e(t('projects.toma.meta')),
-        'name' => t('projects.toma.name'),
-        'text' => e(t('projects.toma.text')),
-        'link' => $link('/projekte/toma-multivision/', 'projects.view', 'projects.toma.name'),
     ],
     [
         'img' => project_picture('emoree/screen-startseite-emoree', t('projects.emoree.alt')),
@@ -85,20 +85,20 @@ $archive = [
         'link' => $link('/projekte/emoree/', 'projects.view', 'projects.emoree.name'),
     ],
     [
-        'img' => project_picture('ttz-bremerhaven/screen-iwapil', t('projects.ttz.alt')),
-        'href' => '/projekte/ttz-bremerhaven/',
-        'meta' => e(t('projects.ttz.meta')),
-        'name' => t('projects.ttz.name'),
-        'text' => e(t('projects.ttz.text')),
-        'link' => $link('/projekte/ttz-bremerhaven/', 'projects.view', 'projects.ttz.name'),
+        'img' => project_picture('holzblaeser/screen_holzblaeser_website_startseite_2015', t('projects.holz.alt')),
+        'href' => '/projekte/holzblaeser/',
+        'meta' => e(t('projects.holz.meta')),
+        'name' => t('projects.holz.name'),
+        'text' => e(t('projects.holz.text')),
+        'link' => $link('/projekte/holzblaeser/', 'projects.view', 'projects.holz.name'),
     ],
     [
-        'img' => project_picture('mira-beau/screen-aktuelles-mira-beau', t('projects.mira.alt')),
-        'href' => '/projekte/mira-beau/',
-        'meta' => e(t('projects.mira.meta')),
-        'name' => t('projects.mira.name'),
-        'text' => e(t('projects.mira.text')),
-        'link' => $link('/projekte/mira-beau/', 'projects.view', 'projects.mira.name'),
+        'img' => project_picture('effectiveinenglish/screen_effectiveinenglish_wordpress_website_01', t('projects.eie.alt')),
+        'href' => '/projekte/effectiveinenglish/',
+        'meta' => e(t('projects.eie.meta')),
+        'name' => t('projects.eie.name'),
+        'text' => e(t('projects.eie.text')),
+        'link' => $link('/projekte/effectiveinenglish/', 'projects.view', 'projects.eie.name'),
     ],
     [
         'img' => project_picture('mimivenezia/screen_mimivenezia_homepage', t('projects.mimi.alt')),
@@ -109,12 +109,20 @@ $archive = [
         'link' => $link('/projekte/mimivenezia/', 'projects.view', 'projects.mimi.name'),
     ],
     [
-        'img' => project_picture('holzblaeser/screen_holzblaeser_website_startseite_2015', t('projects.holz.alt')),
-        'href' => '/projekte/holzblaeser/',
-        'meta' => e(t('projects.holz.meta')),
-        'name' => t('projects.holz.name'),
-        'text' => e(t('projects.holz.text')),
-        'link' => $link('/projekte/holzblaeser/', 'projects.view', 'projects.holz.name'),
+        'img' => project_picture('ttz-bremerhaven/screen-iwapil', t('projects.ttz.alt')),
+        'href' => '/projekte/ttz-bremerhaven/',
+        'meta' => e(t('projects.ttz.meta')),
+        'name' => t('projects.ttz.name'),
+        'text' => e(t('projects.ttz.text')),
+        'link' => $link('/projekte/ttz-bremerhaven/', 'projects.view', 'projects.ttz.name'),
+    ],
+    [
+        'img' => project_picture('toma/screen-website-toma-multivision-2004', t('projects.toma.alt')),
+        'href' => '/projekte/toma-multivision/',
+        'meta' => e(t('projects.toma.meta')),
+        'name' => t('projects.toma.name'),
+        'text' => e(t('projects.toma.text')),
+        'link' => $link('/projekte/toma-multivision/', 'projects.view', 'projects.toma.name'),
     ],
 ];
 ?>
@@ -150,7 +158,10 @@ $archive = [
                 <?php // Archiv: eingeklappt, der Inhalt bleibt bis zum Aufklappen verborgen ?>
                 <details class="archive">
                     <summary class="archive__summary">
-                        <h2 class="archive__title"><?= e(t('projects.archive.title')) ?></h2>
+                        <span class="archive__head">
+                            <h2 class="archive__title"><?= e(t('projects.archive.title')) ?></h2>
+                            <span class="archive__meta"><?= e(sprintf(t('projects.archive.meta'), count($archive))) ?></span>
+                        </span>
                         <svg class="archive__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
                     </summary>
                     <div class="grid project-grid project-grid--page">
