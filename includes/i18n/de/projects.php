@@ -50,5 +50,9 @@ return [
   'projects.mimi.name'     => 'Mimi Venezia',
   'projects.mimi.meta'     => '2007–2008 · Logo, Website, Printmedien',
   'projects.mimi.text'     => 'Logo, Website, Visitenkarten, Flyer und Plakate für einen Hersteller von venezianischem Glasschmuck aus Neuseeland.',
+  'projects.holz.name'     => 'Die Holzbläser',
+  'projects.holz.meta'     => '2012–2022 · Website, Fassade, Newsletter',
+  'projects.holz.text'     => 'Website-Redesign und Betreuung über zehn Jahre, Schaufensterfolie für die Fassade und Newsletter für ein Berliner Fachgeschäft für Blasinstrumente.',
+  'projects.holz.alt'      => 'Startseite der Website der Holzbläser mit Werkstattfoto',
   'projects.mimi.alt'      => 'Startseite der Mimi-Venezia-Website mit Foto bunter Glasperlen',
 ];

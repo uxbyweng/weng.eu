@@ -183,6 +183,20 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://weng.eu/projekte/mimivenezia/"/>
   </url>
   <url>
+    <loc>https://weng.eu/projekte/holzblaeser/</loc>
+    <lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="de" href="https://weng.eu/projekte/holzblaeser/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://weng.eu/en/projekte/holzblaeser/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://weng.eu/projekte/holzblaeser/"/>
+  </url>
+  <url>
+    <loc>https://weng.eu/en/projekte/holzblaeser/</loc>
+    <lastmod>2026-11-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="de" href="https://weng.eu/projekte/holzblaeser/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://weng.eu/en/projekte/holzblaeser/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://weng.eu/projekte/holzblaeser/"/>
+  </url>
+  <url>
     <loc>https://weng.eu/leistungen/</loc>
     <lastmod>2026-11-13</lastmod>
     <xhtml:link rel="alternate" hreflang="de" href="https://weng.eu/leistungen/"/>

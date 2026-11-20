@@ -108,6 +108,14 @@ $archive = [
         'text' => e(t('projects.mimi.text')),
         'link' => $link('/projekte/mimivenezia/', 'projects.view', 'projects.mimi.name'),
     ],
+    [
+        'img' => project_picture('holzblaeser/screen_holzblaeser_website_startseite_2015', t('projects.holz.alt')),
+        'href' => '/projekte/holzblaeser/',
+        'meta' => e(t('projects.holz.meta')),
+        'name' => t('projects.holz.name'),
+        'text' => e(t('projects.holz.text')),
+        'link' => $link('/projekte/holzblaeser/', 'projects.view', 'projects.holz.name'),
+    ],
 ];
 ?>
 

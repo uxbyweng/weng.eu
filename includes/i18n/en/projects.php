@@ -49,5 +49,9 @@ return [
   'projects.mimi.name'     => 'Mimi Venezia',
   'projects.mimi.meta'     => '2007–2008 · Logo, website, print',
   'projects.mimi.text'     => 'Logo, website, business cards, flyers and posters for a maker of Venetian-style glass jewellery from New Zealand.',
+  'projects.holz.name'     => 'Die Holzbläser',
+  'projects.holz.meta'     => '2012–2022 · Website, shopfront, newsletters',
+  'projects.holz.text'     => 'Website redesign and ten years of maintenance, window film for the shopfront and newsletters for a Berlin specialist shop for wind instruments.',
+  'projects.holz.alt'      => 'Home page of the Holzbläser website with a workshop photo',
   'projects.mimi.alt'      => 'Home page of the Mimi Venezia website with a photo of colourful glass beads',
 ];

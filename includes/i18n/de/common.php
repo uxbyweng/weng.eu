@@ -65,6 +65,7 @@ return [
   'crumb.ttz-bremerhaven'   => 'TTZ Bremerhaven',
   'crumb.mira-beau'         => 'Mira-Beau',
   'crumb.mimivenezia'       => 'Mimi Venezia',
+  'crumb.holzblaeser'       => 'Die Holzbläser',
 
   // --- Kontakt-Band ---
   'band.eyebrow'       => 'Kontakt',
