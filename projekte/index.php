@@ -10,18 +10,6 @@ $meta = [
 $cspNonce = $_SERVER['CSP_NONCE'] ?? null;
 echo render_head($meta, $cspNonce);
 
-$dir = '/assets/img/projects/';
-
-// Screenshot als <picture>: WebP (mit kleiner Variante, falls vorhanden) und JPG als Fallback
-$picture = function (string $base, bool $hasXs, string $alt, int $w, int $h, bool $lazy = true) use ($dir): string {
-    $webp = $hasXs
-        ? $dir . $base . '_xs.webp 600w, ' . $dir . $base . '.webp 1200w'
-        : $dir . $base . '.webp ' . $w . 'w';
-    return '<picture><source type="image/webp" srcset="' . e($webp) . '" sizes="(min-width: 800px) 40vw, 100vw">'
-        . '<img class="project-media" src="' . e($dir . $base) . '.jpg" alt="' . e($alt) . '" width="' . $w . '" height="' . $h . '"'
-        . ($lazy ? ' loading="lazy"' : '') . ' decoding="async"></picture>';
-};
-
 $link = fn(string $href, string $labelKey, string $nameKey): string =>
     '<a class="project-link" href="' . e(url($href)) . '">' . e(t($labelKey)) .
     '<span class="visually-hidden">: ' . e(t($nameKey)) . '</span> ' . chevron_icon() . '</a>';
@@ -29,7 +17,7 @@ $link = fn(string $href, string $labelKey, string $nameKey): string =>
 // Reihenfolge: laufende Kunden zuerst (Park-Klinik seit 2017, Pangolin seit 2015), dann Haller, STRATO, eigenes Projekt.
 $projects = [
     [
-        'img' => $picture('park-klinik/screen-startseite-redesign-park-klinik-birkenwerder', true, t('project.pk.alt'), 1200, 800, false),
+        'img' => project_picture('park-klinik/screen-startseite-redesign-park-klinik-birkenwerder', true, t('project.pk.alt'), 1200, 800, false),
         'meta' => e(t('projects.pk.meta')),
         'name' => t('project.pk.name'),
         'text' => e(t('projects.pk.text')),
@@ -37,7 +25,7 @@ $projects = [
         'link' => $link('/projekte/park-klinik/', 'project.read', 'project.pk.name'),
     ],
     [
-        'img' => $picture('pangolin-doxx/screen-startseite-pangolin-doxx', true, t('projects.pd.alt'), 1200, 800, false),
+        'img' => project_picture('pangolin-doxx/screen-startseite-pangolin-doxx', true, t('projects.pd.alt'), 1200, 800, false),
         'meta' => e(t('projects.pd.meta')),
         'name' => t('projects.pd.name'),
         'text' => e(t('projects.pd.text')),
@@ -45,7 +33,7 @@ $projects = [
         'link' => $link('/projekte/pangolin-doxx/', 'projects.view', 'projects.pd.name'),
     ],
     [
-        'img' => $picture('lisa/screen-startseite-lisa-yashodhara-haller', true, t('project.lisa.alt'), 1200, 800),
+        'img' => project_picture('lisa/screen-startseite-lisa-yashodhara-haller', true, t('project.lisa.alt'), 1200, 800),
         'meta' => e(t('project.lisa.year')) . ' · ' . e(t('project.lisa.role')),
         'name' => t('project.lisa.name'),
         'text' => e(t('project.lisa.text')),
@@ -53,7 +41,7 @@ $projects = [
         'link' => $link('/projekte/lisa/', 'project.read', 'project.lisa.name'),
     ],
     [
-        'img' => $picture('strato/screen-startseite-strato-april-2024', true, t('projects.strato.alt'), 1200, 800),
+        'img' => project_picture('strato/screen-startseite-strato-april-2024', true, t('projects.strato.alt'), 1200, 800),
         'meta' => e(t('projects.strato.meta')),
         'name' => t('projects.strato.name'),
         'text' => e(t('projects.strato.text')),
@@ -61,7 +49,7 @@ $projects = [
         'link' => $link('/projekte/strato/', 'project.read', 'projects.strato.name'),
     ],
     [
-        'img' => $picture('berlin-street-view/teaser-berlin-street-view', false, t('project.bsv.alt'), 600, 400),
+        'img' => project_picture('berlin-street-view/teaser-berlin-street-view', false, t('project.bsv.alt'), 600, 400),
         'meta' => e(t('projects.bsv.meta')),
         'name' => t('project.bsv.name'),
         'text' => e(t('projects.bsv.text')),
@@ -73,7 +61,7 @@ $projects = [
 // Archiv: ältere Arbeiten
 $archive = [
     [
-        'img' => $picture('circus-schatzinsel/teaser-campzeitung-2018', false, t('projects.circus.alt'), 600, 400),
+        'img' => project_picture('circus-schatzinsel/teaser-campzeitung-2018', false, t('projects.circus.alt'), 600, 400),
         'href' => '/projekte/circus-schatzinsel/',
         'meta' => e(t('projects.circus.meta')),
         'name' => t('projects.circus.name'),
@@ -81,7 +69,7 @@ $archive = [
         'link' => $link('/projekte/circus-schatzinsel/', 'projects.view', 'projects.circus.name'),
     ],
     [
-        'img' => $picture('toma/screen-website-toma-multivision-2004', true, t('projects.toma.alt'), 1200, 800),
+        'img' => project_picture('toma/screen-website-toma-multivision-2004', true, t('projects.toma.alt'), 1200, 800),
         'href' => '/projekte/toma-multivision/',
         'meta' => e(t('projects.toma.meta')),
         'name' => t('projects.toma.name'),
@@ -89,7 +77,7 @@ $archive = [
         'link' => $link('/projekte/toma-multivision/', 'projects.view', 'projects.toma.name'),
     ],
     [
-        'img' => $picture('emoree/screen-startseite-emoree', true, t('projects.emoree.alt'), 1200, 800),
+        'img' => project_picture('emoree/screen-startseite-emoree', true, t('projects.emoree.alt'), 1200, 800),
         'href' => '/projekte/emoree/',
         'meta' => e(t('projects.emoree.meta')),
         'name' => t('projects.emoree.name'),
@@ -97,7 +85,7 @@ $archive = [
         'link' => $link('/projekte/emoree/', 'projects.view', 'projects.emoree.name'),
     ],
     [
-        'img' => $picture('ttz-bremerhaven/screen-iwapil', true, t('projects.ttz.alt'), 1200, 800),
+        'img' => project_picture('ttz-bremerhaven/screen-iwapil', true, t('projects.ttz.alt'), 1200, 800),
         'href' => '/projekte/ttz-bremerhaven/',
         'meta' => e(t('projects.ttz.meta')),
         'name' => t('projects.ttz.name'),
@@ -105,7 +93,7 @@ $archive = [
         'link' => $link('/projekte/ttz-bremerhaven/', 'projects.view', 'projects.ttz.name'),
     ],
     [
-        'img' => $picture('mira-beau/screen-aktuelles-mira-beau', true, t('projects.mira.alt'), 1200, 840),
+        'img' => project_picture('mira-beau/screen-aktuelles-mira-beau', true, t('projects.mira.alt'), 1200, 840),
         'href' => '/projekte/mira-beau/',
         'meta' => e(t('projects.mira.meta')),
         'name' => t('projects.mira.name'),
