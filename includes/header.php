@@ -22,11 +22,14 @@ $serviceItems = function (string $themeId) use ($onEasy): void { ?>
                         </a>
                     <?php endif; ?>
                 </li>
-                <li class="lang-switch" role="group" aria-label="<?= e(t('lang.label')) ?>">
-                    <?php foreach (['de' => 'DE', 'en' => 'EN'] as $code => $label): ?>
-                        <a class="service-bar__link" href="<?= e(lang_url($code)) ?>" hreflang="<?= $code ?>" lang="<?= $code ?>"
-                            <?= current_lang() === $code ? 'aria-current="true"' : '' ?>><?= $label ?></a>
-                    <?php endforeach; ?>
+                <?php /* role="group" gehört auf ein inneres Element: ein <li> mit eigener Rolle ist kein Listenelement mehr (Lighthouse: "Listen enthalten nicht nur <li>") */ ?>
+                <li>
+                    <div class="lang-switch" role="group" aria-label="<?= e(t('lang.label')) ?>">
+                        <?php foreach (['de' => 'DE', 'en' => 'EN'] as $code => $label): ?>
+                            <a class="service-bar__link" href="<?= e(lang_url($code)) ?>" hreflang="<?= $code ?>" lang="<?= $code ?>"
+                                <?= current_lang() === $code ? 'aria-current="true"' : '' ?>><?= $label ?></a>
+                        <?php endforeach; ?>
+                    </div>
                 </li>
                 <li>
                     <button <?= $themeId ?> class="icon-button theme-toggle" data-theme-toggle type="button" aria-pressed="false"
