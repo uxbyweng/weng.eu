@@ -7,6 +7,16 @@
  */
 const DESKTOP_QUERY = "(min-width: 768px)";
 const SCROLL_DELTA = 10;
+const KEEP_OPEN_KEY = "menu-keep-open";
+
+/** sessionStorage kann blockiert sein (Privatmodus, Einstellungen) → Fehler schlucken, das Menü funktioniert auch ohne. */
+function storage(action: () => void): void {
+    try {
+        action();
+    } catch {
+        // ignorieren
+    }
+}
 
 export function initNavToggle(): void {
     const button = document.querySelector<HTMLButtonElement>(".nav-toggle");
@@ -28,10 +38,28 @@ export function initNavToggle(): void {
 
     button.addEventListener("click", () => setOpen(button.getAttribute("aria-expanded") !== "true"));
 
-    // Link im Menü angeklickt → schließen
+    // Sprachwechsel lädt eine neue Seite: Menü dort wieder öffnen (wie beim Dunkelmodus-Schalter, der das Menü nicht schließt)
+    const langLink = (target: EventTarget | null): boolean => !!(target as Element | null)?.closest(".lang-switch a");
+
+    // Link im Menü angeklickt → schließen (Sprachwechsel ausgenommen)
     nav.addEventListener("click", e => {
+        if (langLink(e.target)) {
+            storage(() => sessionStorage.setItem(KEEP_OPEN_KEY, "1"));
+            return;
+        }
         if ((e.target as Element | null)?.closest("a")) setOpen(false);
     });
+
+    // Nach dem Sprachwechsel: Menü wieder öffnen und den Fokus auf die aktive Sprache setzen
+    let keepOpen = false;
+    storage(() => {
+        keepOpen = sessionStorage.getItem(KEEP_OPEN_KEY) === "1";
+        sessionStorage.removeItem(KEEP_OPEN_KEY);
+    });
+    if (keepOpen && !desktop.matches) {
+        setOpen(true);
+        nav.querySelector<HTMLElement>(".lang-switch [aria-current]")?.focus();
+    }
 
     // Escape schließt und gibt den Fokus an den Button zurück
     document.addEventListener("keydown", e => {
