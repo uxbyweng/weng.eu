@@ -119,7 +119,7 @@ function critical_css_inline(?string $nonce = null): string {
  * send_csp_header($nonce)
  * Content-Security-Policy mit Nonce für das Inline-Skript und das Critical CSS im <head>. Alles andere kommt von der eigenen Domain.
  * - style-src-attr 'unsafe-inline': nur für style="--logo-h: …" an den Kundenlogos (Attribute, keine <style>-Blöcke).
- * - Kein Trusted-Types-Zwang: contact-form.ts setzt Server-HTML per innerHTML (dafür bräuchte es erst eine Trusted-Types-Richtlinie).
+ * - Trusted Types: nur die Richtlinie "weng-html" (contact-form.ts, einzige innerHTML-Stelle) ist erlaubt.
  */
 function send_csp_header(string $nonce): void {
   if (headers_sent()) return;
@@ -137,19 +137,21 @@ function send_csp_header(string $nonce): void {
     "base-uri 'self'",
     "form-action 'self'",
     "frame-ancestors 'self'",
+    "require-trusted-types-for 'script'",
+    "trusted-types weng-html",
   ]));
 }
 
 /**
  * project_picture($base, $alt, $w, $h, $lazy)
  * Projekt-Screenshot als <picture>: WebP, JPG nur als Fallback. $base = Pfad relativ zu /assets/img/projects/ ohne Endung,
- * $w = Breite der Hauptdatei (<base>.webp). Kleinere Varianten <base>_xs.webp (600 px) und <base>_md.webp (900 px)
+ * $w = Breite der Hauptdatei (<base>.webp). Kleinere Varianten <base>_xs.webp (600 px), <base>_sm.webp (700 px) und <base>_md.webp (900 px)
  * werden nur ins srcset aufgenommen, wenn die Datei existiert.
  */
 function project_picture(string $base, string $alt, int $w, int $h, bool $lazy = true): string {
   $dir = '/assets/img/projects/';
   $candidates = [];
-  foreach ([600 => '_xs', 900 => '_md'] as $width => $suffix) {
+  foreach ([600 => '_xs', 700 => '_sm', 900 => '_md'] as $width => $suffix) {
     if ($width < $w && is_file($_SERVER['DOCUMENT_ROOT'] . $dir . $base . $suffix . '.webp')) {
       $candidates[] = $dir . $base . $suffix . '.webp ' . $width . 'w';
     }

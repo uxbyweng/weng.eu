@@ -13,7 +13,7 @@ $projectLink = fn(string $href, string $nameKey): string =>
 
 // Kundenzeile: Name, Logo (Datei, Breite, Höhe, Anzeigehöhe in px) – ohne Logo erscheint der Name als Text
 $clients = [
-    [t('project.pk.name'), 'park-klinik.webp', 350, 85, 40],
+    [t('project.pk.name'), 'park-klinik.webp', 330, 80, 40],
     [t('project.lisa.name'), 'lisa-haller.svg', 385, 73, 34],
     ['Hausarztpraxis Mengel & Roggan', 'hausarztpraxis-mengel.webp', 308, 88, 44],
     ['Pangolin Doxx Film', 'pangolin-doxx.png', 220, 98, 44],

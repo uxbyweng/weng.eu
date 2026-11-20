@@ -60,6 +60,19 @@ function countWords(value: string): number {
     return value.split(/\s+/).filter(Boolean).length;
 }
 
+/**
+ * Trusted Types: Die CSP (require-trusted-types-for 'script', siehe includes/helpers.php) erlaubt innerHTML nur mit einem
+ * TrustedHTML-Objekt. Die einzige Stelle ist showAlert(): Der Text stammt aus festen Texten dieses Moduls oder vom eigenen
+ * Server (kontakt/kontakt.{de,en}.php). Browser ohne Trusted Types bekommen den String unverändert.
+ */
+const htmlPolicy = (() => {
+    try {
+        return window.trustedTypes?.createPolicy("weng-html", { createHTML: (html: string) => html });
+    } catch {
+        return undefined; // z. B. Richtlinie mit diesem Namen existiert schon
+    }
+})();
+
 function toAlertType(type: string | undefined, ok: boolean | undefined): AlertType {
     return ALERT_TYPES.find(t => t === type) ?? (ok ? "success" : "danger");
 }
@@ -87,7 +100,8 @@ export function initContactForm(): void {
     function showAlert(type: AlertType, html: string): void {
         if (!messages) return;
         const role = type === "success" || type === "info" ? "status" : "alert";
-        messages.innerHTML = `<div class="form-status form-status--${type}" role="${role}">${html}</div>`;
+        const markup = `<div class="form-status form-status--${type}" role="${role}">${html}</div>`;
+        messages.innerHTML = (htmlPolicy?.createHTML(markup) ?? markup) as string;
     }
 
     function setError(field: HTMLElement, msg: string): void {
