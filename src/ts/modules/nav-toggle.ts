@@ -69,13 +69,15 @@ export function initNavToggle(): void {
         }
     });
 
-    // Beim Runterscrollen schließen (nur mobil)
-    let lastY = window.scrollY;
+    // Beim Runterscrollen schließen (nur mobil). scrollY wird erst beim Scrollen gelesen: Ein Zugriff beim Start würde nach den
+    // DOM-Änderungen oben ein sofortiges Layout erzwingen (Lighthouse: "Erzwungener dynamischer Umbruch").
+    let lastY: number | null = null;
     window.addEventListener(
         "scroll",
         () => {
-            const scrolledDown = window.scrollY > lastY + SCROLL_DELTA;
-            lastY = window.scrollY;
+            const y = window.scrollY;
+            const scrolledDown = lastY !== null && y > lastY + SCROLL_DELTA;
+            lastY = y;
             if (scrolledDown && !desktop.matches && button.getAttribute("aria-expanded") === "true") setOpen(false);
         },
         { passive: true },
