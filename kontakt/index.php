@@ -82,7 +82,7 @@ $privacyLink = '<a href="' . e(url('/datenschutz/')) . '" target="_blank" rel="n
 
                 <aside class="contact-card" aria-label="<?= e(t('contact.aside.label')) ?>">
                     <div class="contact-card__head">
-                        <img src="/assets/img/contact/img-contact_xs.jpg" alt="" width="72" height="72" loading="lazy" decoding="async">
+                        <?= img_picture('contact/img-contact', '', ['width' => 72, 'height' => 72, 'sizes' => '72px']) ?>
                         <div>
                             <p class="contact-card__name">Karsten Weng</p>
                             <p class="contact-card__role"><?= e(t('meta.job_title')) ?></p>

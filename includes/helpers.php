@@ -142,24 +142,68 @@ function send_csp_header(string $nonce): void {
   ]));
 }
 
-/**
- * project_picture($base, $alt, $w, $h, $lazy)
- * Projekt-Screenshot als <picture>: WebP, JPG nur als Fallback. $base = Pfad relativ zu /assets/img/projects/ ohne Endung,
- * $w = Breite der Hauptdatei (<base>.webp). Kleinere Varianten <base>_xs.webp (600 px), <base>_sm.webp (700 px) und <base>_md.webp (900 px)
- * werden nur ins srcset aufgenommen, wenn die Datei existiert.
+/* ============================================================
+ * Bilder (Build-Pipeline: scripts/images.ts)
+ * ============================================================
+ * Originale liegen in src/img/. `bun run build` erzeugt daraus unter /assets/dist/img/ WebP-Varianten (<name>.webp, <name>_<breite>.webp),
+ * einen Fallback (<name>.jpg oder .png) und manifest.json. Ein Bild wird über seinen Schlüssel angesprochen: Pfad ab src/img ohne Endung,
+ * z. B. 'projects/lisa/screen-startseite-lisa-yashodhara-haller'.
  */
-function project_picture(string $base, string $alt, int $w, int $h, bool $lazy = true): string {
-  $dir = '/assets/img/projects/';
-  $candidates = [];
-  foreach ([600 => '_xs', 700 => '_sm', 900 => '_md'] as $width => $suffix) {
-    if ($width < $w && is_file($_SERVER['DOCUMENT_ROOT'] . $dir . $base . $suffix . '.webp')) {
-      $candidates[] = $dir . $base . $suffix . '.webp ' . $width . 'w';
-    }
+
+/** Inhalt von assets/dist/img/manifest.json: Schlüssel => ['w' => Breite, 'h' => Höhe, 'widths' => [Breiten der Varianten], 'fallback' => 'jpg'|'png'|null] */
+function img_manifest(): array {
+  static $manifest = null;
+  if ($manifest === null) {
+    $file = $_SERVER['DOCUMENT_ROOT'] . '/assets/dist/img/manifest.json';
+    $manifest = is_file($file) ? (json_decode((string) file_get_contents($file), true) ?: []) : [];
   }
-  $candidates[] = $dir . $base . '.webp ' . $w . 'w';
-  return '<picture><source type="image/webp" srcset="' . e(implode(', ', $candidates)) . '" sizes="(min-width: 800px) 40vw, 100vw">'
-    . '<img class="project-media" src="' . e($dir . $base) . '.jpg" alt="' . e($alt) . '" width="' . $w . '" height="' . $h . '"'
-    . ($lazy ? ' loading="lazy"' : '') . ' decoding="async"></picture>';
+  return $manifest;
+}
+
+/** URL einer erzeugten Datei, z. B. img_url('projects/lisa/x', '.jpg') oder img_url('home/weng_at_work', '_480.webp'). */
+function img_url(string $key, string $suffix = '.webp'): string {
+  return '/assets/dist/img/' . $key . $suffix;
+}
+
+/**
+ * img_picture($key, $alt, $opts)
+ * <picture> mit WebP (alle Breiten im srcset) und Fallback-Bild; ohne Fallback ein einfaches <img> (WebP).
+ * Optionen: class, sizes, lazy (Standard true), priority ('high' für das LCP-Bild), width/height (überschreiben die Maße aus dem Manifest), style,
+ * small_below (Pixel: bis zu dieser Viewport-Breite die kleinste Variante nehmen, sonst die große, z. B. für Slider mit fester Höhe).
+ */
+function img_picture(string $key, string $alt, array $opts = []): string {
+  $info = img_manifest()[$key] ?? null;
+  if (!$info) return '<!-- Bild fehlt im Manifest (bun run build): ' . e($key) . ' -->';
+
+  $candidates = [];
+  foreach ($info['widths'] as $width) $candidates[] = img_url($key, "_{$width}.webp") . " {$width}w";
+  $candidates[] = img_url($key) . " {$info['w']}w";
+  $multi = count($candidates) > 1;
+  $srcset = $multi ? e(implode(', ', $candidates)) : e(img_url($key));
+  $sizes = $multi && !empty($opts['sizes']) ? ' sizes="' . e($opts['sizes']) . '"' : '';
+
+  $attrs = ' src="' . e($info['fallback'] ? img_url($key, '.' . $info['fallback']) : img_url($key)) . '"';
+  if (!$info['fallback'] && $multi && empty($opts['small_below'])) $attrs .= ' srcset="' . $srcset . '"' . $sizes;
+  $attrs .= ' alt="' . e($alt) . '" width="' . (int) ($opts['width'] ?? $info['w']) . '" height="' . (int) ($opts['height'] ?? $info['h']) . '"';
+  if (!empty($opts['class'])) $attrs = ' class="' . e($opts['class']) . '"' . $attrs;
+  if (($opts['lazy'] ?? true)) $attrs .= ' loading="lazy"';
+  if (!empty($opts['priority'])) $attrs .= ' fetchpriority="' . e($opts['priority']) . '"';
+  if (!empty($opts['style'])) $attrs .= ' style="' . e($opts['style']) . '"';
+  $attrs .= ' decoding="async"';
+
+  $small = '';
+  if (!empty($opts['small_below']) && $info['widths']) {
+    $small = '<source type="image/webp" media="(max-width: ' . (int) $opts['small_below'] . 'px)" srcset="' . e(img_url($key, "_{$info['widths'][0]}.webp")) . '">';
+    $srcset = e(img_url($key)); // die große Variante für alle breiteren Fenster
+    $sizes = '';
+  }
+  if (!$info['fallback'] && !$small) return '<img' . $attrs . '>';
+  return '<picture>' . $small . '<source type="image/webp" srcset="' . $srcset . '"' . $sizes . '><img' . $attrs . '></picture>';
+}
+
+/** Projekt-Screenshot für Kacheln (Startseite, Projektübersicht). $base = Schlüssel ab projects/. */
+function project_picture(string $base, string $alt, bool $lazy = true): string {
+  return img_picture('projects/' . $base, $alt, ['class' => 'project-media', 'sizes' => '(min-width: 800px) 40vw, 100vw', 'lazy' => $lazy]);
 }
 
 

@@ -24,7 +24,6 @@ $examples = [
     ['lisa',   'lisa/screen-startseite-lisa-yashodhara-haller',                   '/projekte/lisa/'],
     ['strato', 'strato/screen-startseite-strato-april-2024',                      '/projekte/strato/'],
 ];
-$dir = '/assets/img/projects/';
 ?>
 
 <body>
@@ -45,9 +44,7 @@ $dir = '/assets/img/projects/';
                     <p class="easy-hero__link"><a class="more-link" href="<?= e(url('/')) ?>"><?= e(t('easy.normal')) ?> <?= chevron_icon() ?></a></p>
                 </div>
                 <figure class="about-hero__figure">
-                    <img src="/assets/img/home/weng_profile_1040x1300.webp"
-                        srcset="/assets/img/home/weng_profile_520x650.webp 520w, /assets/img/home/weng_profile_1040x1300.webp 1040w"
-                        sizes="(max-width: 460px) 100vw, 460px" alt="<?= e(t('easy.portrait.alt')) ?>" width="1040" height="1300" fetchpriority="high" decoding="async">
+                    <?= img_picture('home/weng_profile', t('easy.portrait.alt'), ['sizes' => '(max-width: 460px) 100vw, 460px', 'lazy' => false, 'priority' => 'high']) ?>
                 </figure>
             </div>
         </section>
@@ -80,10 +77,7 @@ $dir = '/assets/img/projects/';
                 <div class="easy-examples">
                     <?php foreach ($examples as [$id, $image, $href]): ?>
                         <article class="easy-example">
-                            <picture>
-                                <source type="image/webp" srcset="<?= e($dir . $image) ?>_xs.webp 600w, <?= e($dir . $image) ?>.webp 1200w" sizes="(min-width: 800px) 40vw, 100vw">
-                                <img class="project-media" src="<?= e($dir . $image) ?>.jpg" alt="<?= e(t("easy.ex.$id.alt")) ?>" width="1200" height="800" loading="lazy" decoding="async">
-                            </picture>
+                            <?= project_picture($image, t("easy.ex.$id.alt")) ?>
                             <h3><?= e(t("easy.ex.$id.title")) ?></h3>
                             <div class="easy-text"><?= render_text_blocks("easy.ex.$id", $replace) ?></div>
                             <a class="project-link" href="<?= e(url($href)) ?>"><?= e(t('easy.examples.link')) ?><span class="visually-hidden">: <?= e(t("easy.ex.$id.title")) ?></span> <?= chevron_icon() ?></a>

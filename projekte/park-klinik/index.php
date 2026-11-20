@@ -5,11 +5,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/head.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/case-study.php';
 
 // MASTER für alle Projektseiten: Aufbau und Bausteine stehen in includes/case-study.php.
-$img = '/assets/img/projects/park-klinik/';
+$img = 'projects/park-klinik/';
 $meta = [
     'title'    => t('pkcase.meta.title'),
     'desc'     => t('pkcase.meta.desc'),
-    'og_image' => $img . 'screen-startseite-redesign-park-klinik-birkenwerder.jpg',
+    'og_image' => img_url($img . 'screen-startseite-redesign-park-klinik-birkenwerder', '.jpg'),
 ];
 $cspNonce = $_SERVER['CSP_NONCE'] ?? null;
 echo render_head($meta, $cspNonce);
@@ -48,10 +48,10 @@ echo render_head($meta, $cspNonce);
             ));
 
             case_slider(t('pkcase.slider.label'), $img, array_merge([case_shot_slide($shot)], [
-                ['base' => 'screen-startseite-mobile-redesign-park-klinik-birkenwerder', 'alt' => t('pkcase.mobile.alt'), 'caption' => t('pkcase.mobile.caption'), 'w' => 600, 'h' => 1338],
-                ['base' => 'screen-brustvergroesserung-eigenfett-park-klinik-birkenwerder', 'alt' => t('pkcase.treatment.alt'), 'caption' => t('pkcase.treatment.caption'), 'w' => 1400, 'h' => 933, 'xs' => true],
-                ['base' => 'screen-newsbeitrag-dgpraec-park-klinik-birkenwerder', 'alt' => t('pkcase.news.alt'), 'caption' => t('pkcase.news.caption'), 'w' => 1400, 'h' => 933, 'xs' => true],
-                ['base' => 'screen-living-styleguide-park-klinik-birkenwerder', 'alt' => t('pkcase.guide.alt'), 'caption' => t('pkcase.guide.caption'), 'w' => 1400, 'h' => 788, 'xs' => true],
+                ['base' => 'screen-startseite-mobile-redesign-park-klinik-birkenwerder', 'alt' => t('pkcase.mobile.alt'), 'caption' => t('pkcase.mobile.caption')],
+                ['base' => 'screen-brustvergroesserung-eigenfett-park-klinik-birkenwerder', 'alt' => t('pkcase.treatment.alt'), 'caption' => t('pkcase.treatment.caption')],
+                ['base' => 'screen-newsbeitrag-dgpraec-park-klinik-birkenwerder', 'alt' => t('pkcase.news.alt'), 'caption' => t('pkcase.news.caption')],
+                ['base' => 'screen-living-styleguide-park-klinik-birkenwerder', 'alt' => t('pkcase.guide.alt'), 'caption' => t('pkcase.guide.caption')],
             ]));
             ?>
 

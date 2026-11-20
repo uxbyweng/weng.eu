@@ -5,11 +5,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/head.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/case-study.php';
 
 // Aufbau wie der Master projekte/park-klinik/index.php (Bausteine: includes/case-study.php). Archiv-Projekt.
-$img = '/assets/img/projects/ttz-bremerhaven/';
+$img = 'projects/ttz-bremerhaven/';
 $meta = [
     'title'    => t('ttz.meta.title'),
     'desc'     => t('ttz.meta.desc'),
-    'og_image' => $img . 'screen-iwapil.jpg',
+    'og_image' => img_url($img . 'screen-iwapil', '.jpg'),
 ];
 $cspNonce = $_SERVER['CSP_NONCE'] ?? null;
 echo render_head($meta, $cspNonce);
@@ -43,7 +43,7 @@ echo render_head($meta, $cspNonce);
             ));
 
             // Reihenfolge wie die Texte oben; IWAPIL steht schon im Kopf und ist hier die erste Folie nach case_shot_slide
-            $slide = fn(string $id): array => ['base' => "screen-$id", 'alt' => t("ttz.slide.$id.alt"), 'caption' => t("ttz.slide.$id.cap"), 'w' => 1200, 'h' => 800];
+            $slide = fn(string $id): array => ['base' => "screen-$id", 'alt' => t("ttz.slide.$id.alt"), 'caption' => t("ttz.slide.$id.cap")];
             case_slider(t('ttz.slider.label'), $img, array_map($slide, ['iwapil', 'inasoop', 'inawab', 'wacosys', 'ladas']));
             ?>
         </article>

@@ -9,6 +9,7 @@
  *   main.<hash>.css                     src/css/main.css gebündelt (Lightning CSS: Prefixes laut browserslist, Minify)
  *   critical.min.css                    wird von PHP inline ins <head> geschrieben
  *   manifest.json                       Logischer Name → gehashte URL (liest includes/helpers.php)
+ *   img/                                Bilder aus src/img: WebP-Varianten, Fallbacks und img/manifest.json (siehe scripts/images.ts)
  */
 import { createHash } from "node:crypto";
 import { mkdir, readdir, rm } from "node:fs/promises";
@@ -16,6 +17,7 @@ import { basename, join } from "node:path";
 import browserslist from "browserslist";
 import { browserslistToTargets, bundle, transform } from "lightningcss";
 import pkg from "../package.json" with { type: "json" };
+import { buildImages } from "./images";
 
 const ROOT = join(import.meta.dir, "..");
 const DIST = join(ROOT, "assets", "dist");
@@ -97,6 +99,7 @@ async function prune(manifest: Manifest): Promise<void> {
     keep.add("manifest.json");
     keep.add("critical.min.css");
     for (const file of await readdir(DIST)) {
+        if (file === "img") continue; // Bildausgabe: verwaltet scripts/images.ts
         // Sourcemaps gehören zur jeweiligen JS-Datei
         if (!keep.has(file) && !keep.has(file.replace(/\.map$/, ""))) await rm(join(DIST, file), { force: true });
     }
@@ -109,7 +112,7 @@ export async function writeManifest(manifest: Manifest): Promise<void> {
 
 export async function build(options: BuildOptions = {}): Promise<Manifest> {
     await mkdir(DIST, { recursive: true });
-    const [js, css] = await Promise.all([buildJs(options), buildCss(options)]);
+    const [js, css] = await Promise.all([buildJs(options), buildCss(options), buildImages()]);
     const manifest = { ...js, ...css };
     await writeManifest(manifest);
     return manifest;

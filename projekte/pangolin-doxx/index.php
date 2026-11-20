@@ -5,11 +5,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/head.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/case-study.php';
 
 // Aufbau wie der Master projekte/park-klinik/index.php (Bausteine: includes/case-study.php).
-$img = '/assets/img/projects/pangolin-doxx/';
+$img = 'projects/pangolin-doxx/';
 $meta = [
     'title'    => t('pdcase.meta.title'),
     'desc'     => t('pdcase.meta.desc'),
-    'og_image' => $img . 'screen-startseite-pangolin-doxx.jpg',
+    'og_image' => img_url($img . 'screen-startseite-pangolin-doxx', '.jpg'),
 ];
 $cspNonce = $_SERVER['CSP_NONCE'] ?? null;
 echo render_head($meta, $cspNonce);
@@ -48,8 +48,8 @@ echo render_head($meta, $cspNonce);
             ));
 
             case_slider(t('pdcase.slider.label'), $img, array_merge([case_shot_slide($shot)], [
-                ['base' => 'screen-filmseite-sleepless-birds-pangolin-doxx', 'alt' => t('pdcase.film.alt'), 'caption' => t('pdcase.film.caption'), 'w' => 1200, 'h' => 800],
-                ['base' => 'screen-blog-admin-php-sqlite-pangolin-doxx', 'alt' => t('pdcase.admin.alt'), 'caption' => t('pdcase.admin.caption'), 'w' => 1200, 'h' => 800],
+                ['base' => 'screen-filmseite-sleepless-birds-pangolin-doxx', 'alt' => t('pdcase.film.alt'), 'caption' => t('pdcase.film.caption')],
+                ['base' => 'screen-blog-admin-php-sqlite-pangolin-doxx', 'alt' => t('pdcase.admin.alt'), 'caption' => t('pdcase.admin.caption')],
             ]));
             ?>
 

@@ -5,11 +5,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/head.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/case-study.php';
 
 // Aufbau wie der Master projekte/park-klinik/index.php (Bausteine: includes/case-study.php). Archiv-Projekt.
-$img = '/assets/img/projects/mira-beau/';
+$img = 'projects/mira-beau/';
 $meta = [
     'title'    => t('mira.meta.title'),
     'desc'     => t('mira.meta.desc'),
-    'og_image' => $img . 'screen-aktuelles-mira-beau.jpg',
+    'og_image' => img_url($img . 'screen-aktuelles-mira-beau', '.jpg'),
 ];
 $cspNonce = $_SERVER['CSP_NONCE'] ?? null;
 echo render_head($meta, $cspNonce);
@@ -23,7 +23,7 @@ echo render_head($meta, $cspNonce);
 
         <article aria-labelledby="case-title">
             <?php
-            $shot = ['dir' => $img, 'base' => 'screen-aktuelles-mira-beau', 'alt' => t('mira.shot.alt'), 'caption' => t('mira.shot.caption'), 'w' => 1200, 'h' => 840];
+            $shot = ['dir' => $img, 'base' => 'screen-aktuelles-mira-beau', 'alt' => t('mira.shot.alt'), 'caption' => t('mira.shot.caption')];
             case_head(t('mira.eyebrow'), t('mira.title'), t('mira.lead'), [
                 [t('mira.facts.year'), e(t('mira.facts.year.v'))],
                 [t('mira.facts.role'), e(t('mira.facts.role.v'))],
@@ -43,7 +43,7 @@ echo render_head($meta, $cspNonce);
             ?>
             <div class="wrap">
                 <figure class="case-figure case-figure--logo">
-                    <img src="<?= e($img) ?>logo-mira-beau.png" alt="<?= e(t('mira.logo.alt')) ?>" width="300" height="80" loading="lazy" decoding="async">
+                    <?= img_picture($img . 'logo-mira-beau', t('mira.logo.alt')) ?>
                     <figcaption><?= e(t('mira.logo.caption')) ?></figcaption>
                 </figure>
             </div>

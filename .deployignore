@@ -18,6 +18,9 @@ tsconfig.json
 biome.json
 .bun-version
 
+# Zwischenspeicher der Bild-Pipeline (scripts/images.ts)
+assets/dist/img/.cache.json
+
 # Lokale Entwicklung
 router.php
 .env

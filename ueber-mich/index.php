@@ -31,9 +31,7 @@ $tools = [
                     <h1 id="about-title"><?= e(t('about.title')) ?></h1>
                 </div>
                 <figure class="about-hero__figure">
-                    <img src="/assets/img/home/weng_profile_1040x1300.webp"
-                        srcset="/assets/img/home/weng_profile_520x650.webp 520w, /assets/img/home/weng_profile_1040x1300.webp 1040w"
-                        sizes="(max-width: 460px) 100vw, 460px" alt="<?= e(t('about.portrait.alt')) ?>" width="1040" height="1300" fetchpriority="high" decoding="async">
+                    <?= img_picture('home/weng_profile', t('about.portrait.alt'), ['sizes' => '(max-width: 460px) 100vw, 460px', 'lazy' => false, 'priority' => 'high']) ?>
                 </figure>
                 <div class="about-hero__text">
                     <p class="lead"><?= e(t('about.lead1')) ?></p>

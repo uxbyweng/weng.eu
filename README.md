@@ -51,6 +51,15 @@ PHP resolves the hashed URL through the `asset()` helper in `includes/helpers.ph
 
 The critical CSS (`src/css/critical.css`) is minified into `assets/dist/critical.min.css` and inlined in the `<head>`.
 
+### Images
+
+Put **one original** (PNG, JPG or WebP) per image into `src/img/` (same subfolders as the page, e.g. `src/img/projects/lisa/screen-start.jpg`).
+`bun run build` (`scripts/images.ts`, uses `Bun.Image`, no extra dependency) writes to `assets/dist/img/`:
+`<name>.webp`, smaller widths as `<name>_<width>.webp`, a JPG/PNG fallback and `manifest.json`. Widths, maximum size and fallback are set per image
+in the `RULES` list of `scripts/images.ts`. PHP builds the `<picture>` from the manifest with `img_picture('projects/lisa/screen-start', $alt, [...])`
+(`includes/helpers.php`); the key is the path below `src/img/` without extension. Existing outputs are skipped unless the source or rule changed.
+SVGs, favicons, logos, the video poster and other static files stay in `assets/img/` and are referenced directly.
+
 ## Deployment
 
 `.github/workflows/deploy.yml`:
@@ -71,14 +80,16 @@ Required in GitHub → Settings → Secrets and variables → Actions (repositor
 
 ```text
 src/
+├─ img/             # original images (PNG/JPG/WebP); variants are generated into assets/dist/img
 ├─ ts/              # TypeScript (site.ts = entry, modules/ = lazy-loaded features)
 └─ css/             # plain CSS (main.css bundles the partials; critical.css is inlined in <head>)
 scripts/
 ├─ build.ts         # production/dev build (Bun.build, Lightning CSS, manifest)
+├─ images.ts        # image pipeline (src/img → assets/dist/img)
 └─ dev.ts           # PHP server + watcher + live-reload proxy
 assets/
 ├─ dist/            # build output (git-ignored)
-├─ img/             # optimized images
+├─ img/             # static images (SVG, icons, logos, video poster)
 ├─ vendor/          # local libraries (fonts)
 └─ video/           # mp4 videos
 includes/           # PHP partials

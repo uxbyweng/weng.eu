@@ -5,11 +5,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/head.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/case-study.php';
 
 // Aufbau wie der Master projekte/park-klinik/index.php (Bausteine: includes/case-study.php).
-$img = '/assets/img/projects/toma/';
+$img = 'projects/toma/';
 $meta = [
     'title'    => t('tomacase.meta.title'),
     'desc'     => t('tomacase.meta.desc'),
-    'og_image' => $img . 'screen-website-toma-multivision-2004.jpg',
+    'og_image' => img_url($img . 'screen-website-toma-multivision-2004', '.jpg'),
 ];
 $cspNonce = $_SERVER['CSP_NONCE'] ?? null;
 echo render_head($meta, $cspNonce);
@@ -41,7 +41,7 @@ echo render_head($meta, $cspNonce);
 
             case_start(t('tomacase.today.title'), [t('tomacase.today.1')], [], '', 'case-today');
 
-            case_video(t('tomacase.video.label'), '/assets/video/intro_toma_multivision_website.mp4', $img . 'intro-toma-multivision-poster', t('tomacase.video.caption'));
+            case_video(t('tomacase.video.label'), '/assets/video/intro_toma_multivision_website.mp4', '/assets/img/projects/toma/intro-toma-multivision-poster', t('tomacase.video.caption'));
             ?>
         </article>
     </main>

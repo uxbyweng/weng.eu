@@ -5,11 +5,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/head.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/case-study.php';
 
 // Aufbau wie der Master projekte/park-klinik/index.php (Bausteine: includes/case-study.php).
-$img = '/assets/img/projects/lisa/';
+$img = 'projects/lisa/';
 $meta = [
     'title'    => t('lisa.meta.title'),
     'desc'     => t('lisa.meta.desc'),
-    'og_image' => $img . 'screen-startseite-lisa-yashodhara-haller.jpg',
+    'og_image' => img_url($img . 'screen-startseite-lisa-yashodhara-haller', '.jpg'),
 ];
 $cspNonce = $_SERVER['CSP_NONCE'] ?? null;
 echo render_head($meta, $cspNonce);
@@ -45,7 +45,7 @@ echo render_head($meta, $cspNonce);
             ));
 
             case_slider(t('lisa.slider.label'), $img, array_merge([case_shot_slide($shot)], [
-                ['base' => 'screen-lisa-about-page', 'alt' => t('lisa.about.alt'), 'caption' => t('lisa.about.caption'), 'w' => 1200, 'h' => 800],
+                ['base' => 'screen-lisa-about-page', 'alt' => t('lisa.about.alt'), 'caption' => t('lisa.about.caption')],
             ]));
             ?>
             <?php // Kundenstimme: bewusst keine – das Zitat von 2023 war ein Dank vor Projektstart, kein Urteil über das Ergebnis ?>

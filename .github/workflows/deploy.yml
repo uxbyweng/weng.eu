@@ -71,13 +71,17 @@ jobs:
 
                   # 1) Große, selten geänderte Medien: nur nach Dateigröße vergleichen
                   mirror -R --ignore-time --parallel=4 _deploy/assets/img    "$REMOTE/assets/img"
+                  # Erzeugte Bilder (scripts/images.ts): bei jedem Build neu geschrieben, deshalb nur nach Größe vergleichen; verwaiste Varianten löschen
+                  mirror -R --ignore-time --delete --parallel=4 _deploy/assets/dist/img "$REMOTE/assets/dist/img"
+                  # Das Manifest immer hochladen (gleiche Größe bei geänderten Maßen wäre sonst unsichtbar)
+                  put -O "$REMOTE/assets/dist/img/" _deploy/assets/dist/img/manifest.json
                   mirror -R --ignore-time --parallel=4 _deploy/assets/video  "$REMOTE/assets/video"
                   mirror -R --ignore-time --parallel=4 _deploy/assets/vendor "$REMOTE/assets/vendor"
 
                   # 2) Alles andere (PHP, Build-Output, ...) – ohne --delete, damit .env & Co. auf dem Server unangetastet bleiben
-                  mirror -R --parallel=4 --exclude '^assets/(img|video|vendor)/' _deploy "$REMOTE"
+                  mirror -R --parallel=4 --exclude '^assets/(img|video|vendor|dist/img)/' _deploy "$REMOTE"
 
                   # 3) Alte gehashte Build-Dateien erst nach dem Upload der neuen entfernen
-                  mirror -R --delete --parallel=4 _deploy/assets/dist "$REMOTE/assets/dist"
+                  mirror -R --delete --parallel=4 --exclude '^img/' _deploy/assets/dist "$REMOTE/assets/dist"
                   bye
                   EOF

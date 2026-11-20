@@ -5,11 +5,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/head.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/case-study.php';
 
 // Aufbau wie der Master projekte/park-klinik/index.php (Bausteine: includes/case-study.php). Archiv-Projekt.
-$img = '/assets/img/projects/emoree/';
+$img = 'projects/emoree/';
 $meta = [
     'title'    => t('emoree.meta.title'),
     'desc'     => t('emoree.meta.desc'),
-    'og_image' => $img . 'screen-startseite-emoree.jpg',
+    'og_image' => img_url($img . 'screen-startseite-emoree', '.jpg'),
 ];
 $cspNonce = $_SERVER['CSP_NONCE'] ?? null;
 echo render_head($meta, $cspNonce);

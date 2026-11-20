@@ -5,11 +5,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/head.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/case-study.php';
 
 // Aufbau wie der Master projekte/park-klinik/index.php (Bausteine: includes/case-study.php).
-$img = '/assets/img/projects/circus-schatzinsel/';
+$img = 'projects/circus-schatzinsel/';
 $meta = [
     'title'    => t('circus.meta.title'),
     'desc'     => t('circus.meta.desc'),
-    'og_image' => $img . 'teaser-campzeitung-2018.jpg',
+    'og_image' => img_url($img . 'teaser-campzeitung-2018', '.jpg'),
 ];
 $cspNonce = $_SERVER['CSP_NONCE'] ?? null;
 echo render_head($meta, $cspNonce);
@@ -45,8 +45,8 @@ echo render_head($meta, $cspNonce);
             ));
 
             case_slider(t('circus.slider.label'), $img, [
-                ['base' => 'cover-campzeitung-2018', 'alt' => t('circus.cover.alt'), 'caption' => t('circus.cover.caption'), 'w' => 720, 'h' => 1022],
-                ['base' => 'teaser-campzeitung-2018', 'alt' => t('circus.spread.alt'), 'caption' => t('circus.spread.caption'), 'w' => 600, 'h' => 400],
+                ['base' => 'cover-campzeitung-2018', 'alt' => t('circus.cover.alt'), 'caption' => t('circus.cover.caption')],
+                ['base' => 'teaser-campzeitung-2018', 'alt' => t('circus.spread.alt'), 'caption' => t('circus.spread.caption')],
             ]);
             ?>
         </article>

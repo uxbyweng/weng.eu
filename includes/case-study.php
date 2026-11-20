@@ -50,8 +50,8 @@ function case_ext_link(string $url, string $label, bool $nofollow = false): stri
 /**
  * Kopf (über der Falz): links Überzeile, H1 und Einleitung, rechts der Screenshot (50 : 50; auf dem Smartphone darunter), darunter der Steckbrief über die volle Breite.
  * @param array<int, array{0:string, 1:string}> $facts [Beschriftung, Wert als sicheres HTML] – üblich: Zeitraum, Rolle, Live (optional Code)
- * @param array{dir?:string, base?:string, alt?:string, caption?:string, w?:int, h?:int} $shot optional: dir (Bildordner), base (Dateiname ohne Endung; erwartet
- *        <base>.jpg/.webp und <base>_xs.webp, enthält schon den Browser-Rahmen), alt, caption, w, h (Standard 1200 × 800)
+ * @param array{dir?:string, base?:string, alt?:string, caption?:string} $shot optional: dir (Bildschlüssel-Präfix, z. B. 'projects/lisa/'), base (Dateiname ohne Endung,
+ *        das Bild enthält schon den Browser-Rahmen), alt, caption. Maße und Varianten kommen aus dem Bild-Manifest (siehe img_picture() in helpers.php).
  */
 function case_head(string $eyebrow, string $title, string $lead, array $facts, array $shot = []): void {
   echo '<header class="page-head page-head--case"><div class="wrap case-hero' . ($shot ? ' case-hero--shot' : '') . '"><div class="case-hero__text">';
@@ -60,12 +60,10 @@ function case_head(string $eyebrow, string $title, string $lead, array $facts, a
   echo '<p class="lead">' . e($lead) . '</p>';
   echo '</div>';
   if ($shot) {
-    $base = e($shot['dir'] . $shot['base']);
     // Klick springt zum Slider weiter unten (dort steht derselbe Screenshot als erstes Bild)
-    echo '<figure class="case-figure case-hero__figure"><a class="case-hero__link" href="#case-slider" aria-label="' . e($shot['caption'] . ' – ' . t('case.jump')) . '"><picture>';
-    echo '<source type="image/webp" srcset="' . $base . '_xs.webp 600w, ' . $base . '.webp 1200w" sizes="(min-width: 900px) 540px, 100vw">';
-    echo '<img src="' . $base . '.jpg" alt="" width="' . ($shot['w'] ?? 1200) . '" height="' . ($shot['h'] ?? 800) . '" fetchpriority="high" decoding="async">';
-    echo '</picture></a><figcaption>' . e($shot['caption']) . '</figcaption></figure>';
+    echo '<figure class="case-figure case-hero__figure"><a class="case-hero__link" href="#case-slider" aria-label="' . e($shot['caption'] . ' – ' . t('case.jump')) . '">';
+    echo img_picture($shot['dir'] . $shot['base'], '', ['sizes' => '(min-width: 900px) 540px, 100vw', 'lazy' => false, 'priority' => 'high']);
+    echo '</a><figcaption>' . e($shot['caption']) . '</figcaption></figure>';
   }
   // Steckbrief über die volle Breite unter Text und Screenshot
   echo '<dl class="case-facts">';
@@ -77,7 +75,7 @@ function case_head(string $eyebrow, string $title, string $lead, array $facts, a
 
 /** Der Screenshot aus dem Kopf als erste Folie des Sliders (gleiche Struktur wie $shot in case_head, siehe case_slider). */
 function case_shot_slide(array $shot): array {
-  return ['base' => $shot['base'], 'alt' => $shot['alt'], 'caption' => $shot['caption'], 'w' => $shot['w'] ?? 1200, 'h' => $shot['h'] ?? 800, 'xs' => true];
+  return ['base' => $shot['base'], 'alt' => $shot['alt'], 'caption' => $shot['caption']];
 }
 
 /**
@@ -137,8 +135,9 @@ function case_steps(string $title, array $steps): void {
 
 /**
  * Bilder als horizontaler Slider (Scroll-Snap; Pfeile kommen per JS aus src/ts/modules/slider.ts).
- * Eine Folie ist ein Array: base (Dateiname ohne Endung), alt, caption, w, h; optional xs (true = <base>_xs.webp vorhanden), ext (Fallback-Format, Standard jpg), bare (true = ohne Rahmen/Schatten, z. B. Geräte-Mockup mit transparenten Ecken).
- * @param array<int, array{base:string, alt:string, caption:string, w:int, h:int, xs?:bool, ext?:string, bare?:bool}> $slides
+ * Eine Folie ist ein Array: base (Dateiname ohne Endung, Schlüssel = $dir . base, siehe img_picture() in helpers.php), alt, caption;
+ * optional bare (true = ohne Rahmen/Schatten, z. B. Geräte-Mockup mit transparenten Ecken). Maße, Varianten und Fallback kommen aus dem Bild-Manifest.
+ * @param array<int, array{base:string, alt:string, caption:string, bare?:bool}> $slides
  */
 function case_slider(string $label, string $dir, array $slides): void {
   echo '<section class="section slider-section" id="case-slider" aria-label="' . e($label) . '"><div class="wrap"><div class="slider" data-slider>';
@@ -149,12 +148,10 @@ function case_slider(string $label, string $dir, array $slides): void {
   echo '</div>';
   echo '<div class="slider__track" data-slider-track tabindex="0" role="region" aria-label="' . e($label) . '">';
   foreach ($slides as $slide) {
-    $base = e($dir . $slide['base']);
-    echo '<figure class="case-figure slider__slide' . (!empty($slide['bare']) ? ' slider__slide--bare' : '') . '"><picture>';
-    if (!empty($slide['xs'])) echo '<source type="image/webp" media="(max-width: 700px)" srcset="' . $base . '_xs.webp">';
-    echo '<source type="image/webp" srcset="' . $base . '.webp">';
-    echo '<img src="' . $base . '.' . e($slide['ext'] ?? 'jpg') . '" alt="' . e($slide['alt']) . '" width="' . $slide['w'] . '" height="' . $slide['h'] . '" loading="lazy" decoding="async">';
-    echo '</picture><figcaption>' . e($slide['caption']) . '</figcaption></figure>';
+    echo '<figure class="case-figure slider__slide' . (!empty($slide['bare']) ? ' slider__slide--bare' : '') . '">';
+    // Smartphone: kleinste Variante (die Folien sind dort ohnehin niedrig)
+    echo img_picture($dir . $slide['base'], $slide['alt'], ['small_below' => 700]);
+    echo '<figcaption>' . e($slide['caption']) . '</figcaption></figure>';
   }
   echo '</div></div></div></section>';
 }

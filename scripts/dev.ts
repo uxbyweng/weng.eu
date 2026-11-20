@@ -5,13 +5,14 @@
  *
  * Was passiert:
  *   1. PHP-Entwicklungsserver auf 127.0.0.1:8000 (router.php, WENG_DEV=1)
- *   2. Watcher baut bei Änderungen in src/ neu (TS → JS, SCSS → CSS)
+ *   2. Watcher baut bei Änderungen in src/ neu (TS → JS, CSS → main.css, Bilder → assets/dist/img)
  *   3. Proxy auf :3000 leitet an PHP weiter, fügt in HTML-Seiten das Live-Reload-Skript ein
  *      und schickt per Server-Sent-Events "reload" (JS/PHP) oder "css" (Stylesheet tauschen ohne Reload)
  */
 import { type FSWatcher, watch } from "node:fs";
 import { join, relative, sep } from "node:path";
 import { buildCss, buildJs, type Manifest, writeManifest } from "./build";
+import { buildImages } from "./images";
 
 const ROOT = join(import.meta.dir, "..");
 const PHP_PORT = 8000;
@@ -21,11 +22,12 @@ const PHP_ORIGIN = `http://127.0.0.1:${PHP_PORT}`;
 // ---------------------------------------------------------------- Build
 let manifest: Manifest = {};
 
-async function rebuild(what: "js" | "css" | "all"): Promise<void> {
+async function rebuild(what: "js" | "css" | "img" | "all"): Promise<void> {
     const start = performance.now();
     try {
-        if (what !== "css") manifest = { ...manifest, ...(await buildJs({ dev: true })) };
-        if (what !== "js") manifest = { ...manifest, ...(await buildCss({ dev: true })) };
+        if (what === "js" || what === "all") manifest = { ...manifest, ...(await buildJs({ dev: true })) };
+        if (what === "css" || what === "all") manifest = { ...manifest, ...(await buildCss({ dev: true })) };
+        if (what === "img" || what === "all") await buildImages();
         await writeManifest(manifest);
         console.log(`[build] ${what} in ${Math.round(performance.now() - start)} ms`);
     } catch (err) {
@@ -136,7 +138,10 @@ function debounce<A extends unknown[]>(fn: (...args: A) => void, ms: number) {
 
 const onChange = debounce(async (file: string) => {
     try {
-        if (file.endsWith(".ts")) {
+        if (file.startsWith(`src${sep}img${sep}`)) {
+            await rebuild("img");
+            broadcast("reload");
+        } else if (file.endsWith(".ts")) {
             await rebuild("js");
             broadcast("reload");
         } else if (file.endsWith(".css") && file.startsWith(`src${sep}css${sep}`)) {

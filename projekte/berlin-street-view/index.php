@@ -5,11 +5,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/head.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/includes/case-study.php';
 
 // Aufbau wie der Master projekte/park-klinik/index.php (Bausteine: includes/case-study.php).
-$img = '/assets/img/projects/berlin-street-view/';
+$img = 'projects/berlin-street-view/';
 $meta = [
     'title'    => t('bsv.meta.title'),
     'desc'     => t('bsv.meta.desc'),
-    'og_image' => $img . 'teaser-berlin-street-view.jpg',
+    'og_image' => img_url($img . 'teaser-berlin-street-view', '.jpg'),
 ];
 $cspNonce = $_SERVER['CSP_NONCE'] ?? null;
 echo render_head($meta, $cspNonce);
@@ -43,8 +43,8 @@ echo render_head($meta, $cspNonce);
             }
 
             case_slider(t('bsv.slider.label'), $img, [
-                ['base' => 'berlin-street-view-mobile-map-view', 'alt' => t('bsv.shot.alt'), 'caption' => t('bsv.shot.caption'), 'w' => 600, 'h' => 1189, 'ext' => 'png', 'bare' => true],
-                ['base' => 'teaser-berlin-street-view', 'alt' => t('bsv.home.alt'), 'caption' => t('bsv.home.caption'), 'w' => 600, 'h' => 400],
+                ['base' => 'berlin-street-view-mobile-map-view', 'alt' => t('bsv.shot.alt'), 'caption' => t('bsv.shot.caption'), 'bare' => true],
+                ['base' => 'teaser-berlin-street-view', 'alt' => t('bsv.home.alt'), 'caption' => t('bsv.home.caption')],
             ]);
             ?>
 
