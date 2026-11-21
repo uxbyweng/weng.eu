@@ -49,7 +49,8 @@ echo render_head($meta, $cspNonce);
 
             case_slider(t('pdcase.slider.label'), $img, array_merge([case_shot_slide($shot)], [
                 ['base' => 'screen-filmseite-sleepless-birds-pangolin-doxx', 'alt' => t('pdcase.film.alt'), 'caption' => t('pdcase.film.caption')],
-                ['base' => 'screen-blog-admin-php-sqlite-pangolin-doxx', 'alt' => t('pdcase.admin.alt'), 'caption' => t('pdcase.admin.caption')],
+                ['base' => 'screen-news-admin-eins-pangolin-doxx', 'alt' => t('pdcase.admin.alt'), 'caption' => t('pdcase.admin.caption')],
+                ['base' => 'screen-news-admin-zwei-pangolin-doxx', 'alt' => t('pdcase.admin2.alt'), 'caption' => t('pdcase.admin2.caption')],
             ]));
             ?>
 

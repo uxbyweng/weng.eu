@@ -52,6 +52,8 @@ return [
   'pdcase.slider.label'   => 'Bilder der Website von Pangolin Doxx Film: Filmseite und Blog-Admin',
   'pdcase.film.alt'       => 'Filmseite „Sleepless Birds“ auf der Website von Pangolin Doxx Film',
   'pdcase.film.caption'   => 'Filmseite mit Inhaltsangabe, Credits, Pressestimmen, Festivalauswahl, Trailer und Fotogalerie',
-  'pdcase.admin.alt'      => 'Blog-Admin der Website (PHP/SQLite): Beiträge verwalten',
-  'pdcase.admin.caption'  => 'Admin-Bereich auf PHP/SQLite-Basis: Beiträge anlegen, bearbeiten und löschen',
+  'pdcase.admin.alt'      => 'News-Admin der Website (PHP/SQLite): Übersicht aller Beiträge mit Bearbeiten und Löschen',
+  'pdcase.admin.caption'  => 'Admin-Bereich auf PHP/SQLite-Basis: Übersicht aller Beiträge der Seite „Aktuelles“',
+  'pdcase.admin2.alt'     => 'News-Admin der Website: Beitrag bearbeiten mit deutschem und englischem Titel und Bildauswahl',
+  'pdcase.admin2.caption' => 'Beitrag bearbeiten: zweisprachiger Titel, Bild aus der Liste oder per Upload, automatische Skalierung',
 ];
