@@ -56,6 +56,7 @@ const RULES: Rule[] = [
     { match: /^projects\/holzblaeser\/screen_/, widths: [600, 700, 900], jpg: true },
     { match: /^projects\/effectiveinenglish\/screen_/, widths: [600, 700, 900], jpg: true },
     { match: /^projects\/mimivenezia\/screen_/, widths: [600, 700, 900], jpg: true },
+    { match: /^projects\/pangolin-doxx\//, widths: [600, 700, 900], jpg: true },
     { match: /^projects\/berlin-street-view\/berlin-street-view-mobile/, max: 600 },
     { match: /^projects\//, widths: [600, 700, 900] },
 ];
